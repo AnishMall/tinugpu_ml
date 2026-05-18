@@ -49,3 +49,20 @@ See full register map in `../TinyGPU_ML_RTL_Implementation_Spec.md`
 5. Connected TinyGPU memory master to bus arbiter
 
 ### Bus Hierarchy:
+CPU + DMA → sys2a → TinyGPU arbiter → sys2 → Memory
+
+#TinyGPU DMA
+
+## How to Use
+
+1. Copy this entire `SoC/` folder into your NEORV32 project at `rtl/core/`
+2. Enable TinyGPU in your design: `IO_TINYGPU_EN => true`
+3. Synthesize with your FPGA tool (Vivado/Quartus/Gowin/etc.)
+4. Program registers at 0xFFEE0000 from software
+
+## Tested Configuration
+
+- **FPGA**: Sipeed Tang Nano 9K (Gowin GW1NR-9C)
+- **Clock**: 27 MHz
+- **Tool**: Gowin EDA v1.9.12.02
+- **Status**: ✅ Synthesis, Place & Route, Bitstream generation successful
