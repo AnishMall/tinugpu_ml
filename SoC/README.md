@@ -50,8 +50,8 @@ See full register map in `../TinyGPU_ML_RTL_Implementation_Spec.md`
 
 ### Bus Hierarchy:
 CPU + DMA → sys2a → TinyGPU arbiter → sys2 → Memory
-
-#TinyGPU DMA
+↑
+TinyGPU DMA
 
 ## How to Use
 
