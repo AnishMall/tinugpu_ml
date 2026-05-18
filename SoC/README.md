@@ -48,10 +48,7 @@ See full register map in `../TinyGPU_ML_RTL_Implementation_Spec.md`
 4. Added TinyGPU bus arbiter between `sys2a` and `sys2`
 5. Connected TinyGPU memory master to bus arbiter
 
-### Bus Hierarchy:
-CPU + DMA → sys2a → TinyGPU arbiter → sys2 → Memory
-↑
-TinyGPU DMA
+### Bus Hierarchy: 
 
 ## How to Use
 
