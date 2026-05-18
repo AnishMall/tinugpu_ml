@@ -11,7 +11,7 @@ module tinygpu_array4x4 import tinygpu_pkg::*; (
   input  logic [TILE_M-1:0]               row_mask,
   input  logic [TILE_N-1:0]               col_mask,
 
-  output logic signed [ACC_W-1:0]         c_tile [0:TILE_M-1][0:TILE_N-1]
+  output wire signed [ACC_W-1:0]          c_tile [0:TILE_M-1][0:TILE_N-1]
 );
 
   for (genvar r = 0; r < TILE_M; r++) begin : g_row
