@@ -10,7 +10,7 @@ use ieee.numeric_std.all;
 library neorv32;
 use neorv32.neorv32_package.all;
 
-entity tinygpu_regs is
+entity neorv32_tinygpu_wrapper is
   port (
     clk_i     : in  std_ulogic;
     rstn_i    : in  std_ulogic;
@@ -29,9 +29,9 @@ entity tinygpu_regs is
     
     irq_o     : out std_ulogic
   );
-end tinygpu_regs;
+end neorv32_tinygpu_wrapper;
 
-architecture tinygpu_regs_rtl of tinygpu_regs is
+architecture neorv32_tinygpu_wrapper_rtl of neorv32_tinygpu_wrapper is
 
   -- Component declaration for SystemVerilog module
   component tinygpu_top is
@@ -86,33 +86,33 @@ architecture tinygpu_regs_rtl of tinygpu_regs is
 begin
 
   -- Type conversions: std_ulogic -> std_logic
-  clk        <= to_stdulogic(clk_i);
-  rstn       <= to_stdulogic(rstn_i);
-  mmio_valid <= to_stdulogic(bus_req_i.stb);
-  mmio_we    <= to_stdulogic(bus_req_i.rw);
-  mmio_addr  <= to_stdulogicvector(bus_req_i.addr);
-  mmio_wdata <= to_stdulogicvector(bus_req_i.data);
+  clk        <= std_logic(clk_i);
+  rstn       <= std_logic(rstn_i);
+  mmio_valid <= std_logic(bus_req_i.stb);
+  mmio_we    <= std_logic(bus_req_i.rw);
+  mmio_addr  <= std_logic_vector(bus_req_i.addr);
+  mmio_wdata <= std_logic_vector(bus_req_i.data);
   
   -- Byte strobes (NEORV32 doesn't use strobes on reads, so default to all 1s)
   mmio_wstrb <= "1111" when bus_req_i.rw = '1' else "0000";
   
   -- Memory interface type conversions
-  mem_rdata  <= to_stdulogicvector(mem_rdata_i);
-  mem_ready  <= to_stdulogic(mem_ready_i);
-  mem_rvalid <= to_stdulogic(mem_rvalid_i);
+  mem_rdata  <= std_logic_vector(mem_rdata_i);
+  mem_ready  <= std_logic(mem_ready_i);
+  mem_rvalid <= std_logic(mem_rvalid_i);
   
   -- Type conversions: std_logic -> std_ulogic
-  bus_rsp_o.ack  <= to_stdulogic(mmio_ready) and bus_req_i.stb;
+  bus_rsp_o.ack  <= std_ulogic(mmio_ready) and bus_req_i.stb;
   bus_rsp_o.err  <= '0';
-  bus_rsp_o.data <= to_stdulogicvector(mmio_rdata);
+  bus_rsp_o.data <= std_ulogic_vector(mmio_rdata);
   
-  mem_req_o   <= to_stdulogic(mem_req);
-  mem_we_o    <= to_stdulogic(mem_we);
-  mem_addr_o  <= to_stdulogicvector(mem_addr);
-  mem_wdata_o <= to_stdulogicvector(mem_wdata);
-  mem_wstrb_o <= to_stdulogicvector(mem_wstrb);
+  mem_req_o   <= std_ulogic(mem_req);
+  mem_we_o    <= std_ulogic(mem_we);
+  mem_addr_o  <= std_ulogic_vector(mem_addr);
+  mem_wdata_o <= std_ulogic_vector(mem_wdata);
+  mem_wstrb_o <= std_ulogic_vector(mem_wstrb);
   
-  irq_o <= to_stdulogic(irq_int);
+  irq_o <= std_ulogic(irq_int);
 
   -- Instantiate the SystemVerilog TinyGPU top module
   tinygpu_top_inst: tinygpu_top
@@ -140,4 +140,4 @@ begin
       irq          => irq_int
     );
 
-end tinygpu_regs_rtl;
+end neorv32_tinygpu_wrapper_rtl;

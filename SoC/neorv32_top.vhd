@@ -84,13 +84,13 @@ entity neorv32_top is
     IMEM_EN             : boolean                        := false;         -- implement processor-internal instruction memory
     IMEM_BASE           : std_ulogic_vector(31 downto 0) := x"00000000";   -- base address of processor-internal instruction memory (naturally aligned)
     IMEM_SIZE           : natural                        := 16*1024;       -- size of processor-internal instruction memory in bytes (use a power of 2)
-    IMEM_OUTREG_EN      : boolean                        := false;         -- enable IMEM output register stage (for improved mapping/timing)
+    IMEM_OUTREG_EN      : boolean                        := true;          -- enable IMEM output register stage (for improved mapping/timing)
 
     -- Internal Data memory (DMEM) --
     DMEM_EN             : boolean                        := false;         -- implement processor-internal data memory
     DMEM_BASE           : std_ulogic_vector(31 downto 0) := x"80000000";   -- base address of processor-internal data memory (naturally aligned)
     DMEM_SIZE           : natural                        := 8*1024;        -- size of processor-internal data memory in bytes (use a power of 2)
-    DMEM_OUTREG_EN      : boolean                        := false;         -- enable DMEM output register stage (for improved mapping/timing)
+    DMEM_OUTREG_EN      : boolean                        := true;          -- enable DMEM output register stage (for improved mapping/timing)
 
     -- CPU Caches --
     ICACHE_EN           : boolean                        := false;         -- implement instruction cache (i-cache)
@@ -1054,7 +1054,7 @@ begin
     -- -------------------------------------------------------------------------------------------
     tinygpu_enabled: 
     if IO_TINYGPU_EN generate
-      tinygpu_regs_inst: entity neorv32.tinygpu_regs
+      tinygpu_wrapper_inst: entity neorv32.neorv32_tinygpu_wrapper
         port map (
           clk_i       => clk_i,
           rstn_i      => rstn_sys,

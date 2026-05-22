@@ -6,7 +6,8 @@ This folder contains the files needed to integrate TinyGPU-ML into the NEORV32 R
 
 ### VHDL Files (NEORV32 Integration)
 - **neorv32_top.vhd** - Modified NEORV32 SoC top-level with TinyGPU bus arbiter
-- **neorv32_tinygpu.vhd** - VHDL wrapper that connects TinyGPU to NEORV32 IO bus
+- **tinygpu_ml/tinygpu_regs.vhd** - Mixed-language VHDL wrapper that instantiates the real SystemVerilog `tinygpu_top`
+- **neorv32_tinygpu.vhd** - legacy stub example, not the main integration path
 
 ### SystemVerilog RTL (TinyGPU Core)
 - **tinygpu_ml/** - Complete TinyGPU-ML RTL implementation
@@ -55,10 +56,17 @@ TinyGPU DMA
 
 ## How to Use
 
-1. Copy this entire `SoC/` folder into your NEORV32 project at `rtl/core/`
-2. Enable TinyGPU in your design: `IO_TINYGPU_EN => true`
-3. Synthesize with your FPGA tool (Vivado/Quartus/Gowin/etc.)
-4. Program registers at 0xFFEE0000 from software
+1. Copy this entire `SoC/` folder into your NEORV32 project.
+2. Add `neorv32_top.vhd`, `tinygpu_ml/tinygpu_regs.vhd`, and every `tinygpu_ml/*.sv` file to the synthesis project explicitly.
+   You can use `tinygpu_ml/files.f` as the source manifest for the SystemVerilog side.
+3. Enable TinyGPU in your design: `IO_TINYGPU_EN => true`
+4. Synthesize with mixed-language support enabled in your FPGA tool.
+5. Program registers at 0xFFEE0000 from software
+
+## Important Integration Note
+
+The SoC integration uses the uniquely named VHDL wrapper `neorv32_tinygpu_wrapper`, which then instantiates the real SystemVerilog `tinygpu_top`.
+Do not rely on the legacy `neorv32_tinygpu.vhd` stub for the actual accelerator path.
 
 ## Tested Configuration
 
@@ -66,3 +74,8 @@ TinyGPU DMA
 - **Clock**: 27 MHz
 - **Tool**: Gowin EDA v1.9.12.02
 - **Status**: ✅ Synthesis, Place & Route, Bitstream generation successful
+
+## Timing Note
+
+The local `neorv32_top.vhd` copy now defaults `IMEM_OUTREG_EN` and `DMEM_OUTREG_EN` to `true` to help timing closure on the SoC side.
+If your board-level NEORV32 instantiation explicitly overrides these generics, that external generic map still wins.
