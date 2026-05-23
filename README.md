@@ -1,103 +1,81 @@
-# TinyGPU ML RTL
+# TinyGPU-ML NEORV32 SoC Integration
 
-Small SystemVerilog RTL project for a TinyGPU-style ML accelerator with a tiled `int8` GEMM/GEMV datapath, vector ops, MMIO control plane, local scratchpad, DMA path, and directed testbenches.
+This folder contains the files needed to integrate TinyGPU-ML into the NEORV32 RISC-V SoC.
 
-## What Is In The Repo
+## Files
 
-- `rtl/`
-  - `tinygpu_top.sv`: top-level shell
-  - `tinygpu_regs.sv`: MMIO register block
-  - `tinygpu_cmd_ctrl.sv`: command/control FSM
-  - `tinygpu_dma.sv`: external memory <-> scratchpad transfer engine
-  - `tinygpu_spm.sv`: scratchpad memory
-  - `tinygpu_array4x4.sv`: 4x4 output-stationary MAC array
-  - `tinygpu_pe.sv`: leaf processing element
-  - `tinygpu_epilogue.sv`: bias / ReLU / clamp / requant post-processing
-  - `tinygpu_vec_alu.sv`: vector execution path
-  - `tinygpu_counters.sv`: command counters
-  - `tinygpu_pkg.sv`: shared params, opcodes, states, flags
-- `tb/`
-  - unit, datapath, top-level directed, and randomized-latency testbenches
-- `TinyGPU_ML_RTL_Implementation_Spec.md`
-  - project implementation spec
-- `TinyGPU_SystemVerilog_Hierarchy_and_Controller_Skeleton.md`
-  - hierarchy notes and controller skeleton writeup
+### VHDL Files (NEORV32 Integration)
+- **neorv32_top.vhd** - Modified NEORV32 SoC top-level with TinyGPU bus arbiter
+- **tinygpu_ml/tinygpu_regs.vhd** - Mixed-language VHDL wrapper that instantiates the real SystemVerilog `tinygpu_top`
+- **neorv32_tinygpu.vhd** - legacy stub example, not the main integration path
 
-## Implemented Features
+### SystemVerilog RTL (TinyGPU Core)
+- **tinygpu_ml/** - Complete TinyGPU-ML RTL implementation
+  - tinygpu_top.sv - Top-level module
+  - tinygpu_pkg.sv - Package with parameters and opcodes
+  - tinygpu_regs.sv - MMIO register file
+  - tinygpu_cmd_ctrl.sv - Command controller FSM
+  - tinygpu_dma.sv - DMA engine
+  - tinygpu_spm.sv - Scratchpad memory
+  - tinygpu_array4x4.sv - 4×4 MAC array
+  - tinygpu_pe.sv - Processing element
+  - tinygpu_epilogue.sv - Bias, ReLU, requantization
+  - tinygpu_vec_alu.sv - Vector ALU
+  - tinygpu_counters.sv - Performance counters
 
-- Direct MMIO command mode
-- Descriptor command mode
-- `OP_GEMM`
-- `OP_GEMV`
-- `OP_VEC_ADD`
-- `OP_VEC_MUL`
-- `OP_RELU`
-- `OP_CLAMP`
-- `FLAG_BIAS_EN`
-- `FLAG_RELU_EN`
-- `FLAG_CLAMP_EN`
-- `FLAG_REQUANT_EN`
-- `FLAG_DST_INT8`
-- `FLAG_DST_INT32`
-- edge-tile masking on the 4x4 array
-- DMA-backed load/store path between external memory and scratchpad
-- command/accounting counters
+## MMIO Register Map
 
-## Descriptor Layout
+Base Address: **0xFFEE0000**
 
-Descriptor mode uses a fixed 14-word, 32-bit layout:
+| Offset | Register | Access | Description |
+|--------|----------|--------|-------------|
+| 0x00 | CTRL | R/W | Control (START, RESET, IRQ_EN) |
+| 0x04 | STATUS | R | Status (BUSY, DONE, ERROR) |
+| 0x10 | SRC0ADDR | R/W | Matrix A base address |
+| 0x14 | SRC1ADDR | R/W | Matrix B base address |
+| 0x1C | DSTADDR | R/W | Output matrix address |
+| 0x20 | DIM_M | R/W | M dimension (rows) |
+| 0x24 | DIM_N | R/W | N dimension (cols) |
+| 0x28 | DIM_K | R/W | K dimension (inner) |
 
-1. `opcode`
-2. `flags`
-3. `src0_addr`
-4. `src1_addr`
-5. `bias_addr`
-6. `dst_addr`
-7. `M`
-8. `N`
-9. `K`
-10. `stride0`
-11. `stride1`
-12. `stride_dst`
-13. `scale`
-14. `{shift, zero_point}`
+See full register map in `../TinyGPU_ML_RTL_Implementation_Spec.md`
 
-This layout is also exercised in the directed top-level regression.
+## Integration into NEORV32
 
-## Running The Tests
+### Changes to neorv32_top.vhd:
+1. Added `tinygpu_mem_req` / `tinygpu_mem_rsp` bus signals
+2. Added `sys2a` intermediate bus signals
+3. Modified DMA arbiter to output to `sys2a` instead of `sys2`
+4. Added TinyGPU bus arbiter between `sys2a` and `sys2`
+5. Connected TinyGPU memory master to bus arbiter
 
-If `iverilog` and `vvp` are available:
+### Bus Hierarchy: 
+CPU + DMA → sys2a → TinyGPU arbiter → sys2 → Memory
+↑
+TinyGPU DMA
 
-```bash
-make test
-```
+## How to Use
 
-In the current environment I ran:
+1. Copy this entire `SoC/` folder into your NEORV32 project.
+2. Add `neorv32_top.vhd`, `tinygpu_ml/tinygpu_regs.vhd`, and every `tinygpu_ml/*.sv` file to the synthesis project explicitly.
+   You can use `tinygpu_ml/files.f` as the source manifest for the SystemVerilog side.
+3. Enable TinyGPU in your design: `IO_TINYGPU_EN => true`
+4. Synthesize with mixed-language support enabled in your FPGA tool.
+5. Program registers at 0xFFEE0000 from software
 
-```bash
-conda run -n work make test VVP=/opt/homebrew/bin/vvp
-```
+## Important Integration Note
 
-## Current Testbenches
+The SoC integration uses the uniquely named VHDL wrapper `neorv32_tinygpu_wrapper`, which then instantiates the real SystemVerilog `tinygpu_top`.
+Do not rely on the legacy `neorv32_tinygpu.vhd` stub for the actual accelerator path.
 
-- `tb_tinygpu_pe_tb`
-- `tb_tinygpu_array4x4_tb`
-- `tb_tinygpu_dma_tb`
-- `tb_tinygpu_gemm_tile_tb`
-- `tb_tinygpu_regs_tb`
-- `tb_tinygpu_counters_tb`
-- `tb_tinygpu_cmd_ctrl_idle_tb`
-- `tb_tinygpu_top_gemm_tb`
-- `tb_tinygpu_top_edge_tiles_tb`
-- `tb_tinygpu_top_dst_int8_tb`
-- `tb_tinygpu_top_bias_relu_tb`
-- `tb_tinygpu_top_clamp_tb`
-- `tb_tinygpu_top_vector_tb`
-- `tb_tinygpu_top_directed_tb`
-- `tb_tinygpu_top_random_latency_tb`
+## Tested Configuration
 
-## Notes
+- **FPGA**: Sipeed Tang Nano 9K (Gowin GW1NR-9C)
+- **Clock**: 27 MHz
+- **Tool**: Gowin EDA v1.9.12.02
+- **Status**: ✅ Synthesis, Place & Route, Bitstream generation successful
 
-- The full regression is currently passing under `iverilog`.
-- Icarus still emits a few non-failing array sensitivity warnings in `tinygpu_cmd_ctrl.sv`.
-- `build/` is generated output and is ignored by Git.
+## Timing Note
+
+The local `neorv32_top.vhd` copy now defaults `IMEM_OUTREG_EN` and `DMEM_OUTREG_EN` to `true` to help timing closure on the SoC side.
+If your board-level NEORV32 instantiation explicitly overrides these generics, that external generic map still wins.
