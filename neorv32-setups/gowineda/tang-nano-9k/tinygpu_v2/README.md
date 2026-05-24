@@ -1,4 +1,4 @@
-# TinyGPU-ML Integration for Tang Nano 9K
+# TinyGPU-ML SoC Integration for Tang Nano 9K
 
 ## Project Status
 
