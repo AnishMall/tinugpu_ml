@@ -1,0 +1,3 @@
+Label: DSP_ICE
+Device: ICE40-HX8K
+Documentation: https://github.com/tvelliott/dsp_ice

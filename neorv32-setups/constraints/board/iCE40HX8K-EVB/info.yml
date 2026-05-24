@@ -1,0 +1,7 @@
+Label: Olimex iCE40HX8K-EVB
+Device: ICE40-HX8K
+Package: CT256
+Documentation: https://www.olimex.com/Products/FPGA/iCE40/iCE40HX8K-EVB/open-source-hardware
+Prog:
+  ID: "2341:8036"
+  Tools: iceprogduino

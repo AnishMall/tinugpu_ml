@@ -1,0 +1,9 @@
+Label: iCEBreaker bitsy v0
+Device: ICE40-UP5K
+Package: SG48
+Documentation:
+  "gh:icebreaker-fpga/icebreaker": https://github.com/icebreaker-fpga/icebreaker
+Prog:
+  ID: "1d50:6146"
+  Description: iCEBreaker bitsy v0
+  Tools: dfu-util

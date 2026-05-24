@@ -1,0 +1,12 @@
+Label: ButterStick-r1.0-85F
+Device: ECP5-85F
+Package: CABGA381
+Documentation:
+  "gh:butterstick-fpga/butterstick-hardware": https://github.com/butterstick-fpga/butterstick-hardware
+  "groupgets.com: ButterStick by Good Stuff Department": https://groupgets.com/campaigns/868-butterstick
+Prog:
+  ID: "1209:5af1"
+  Description: Butterstick (dfu v1.1)
+  Tools:
+    - openocd
+    - dfu-util
