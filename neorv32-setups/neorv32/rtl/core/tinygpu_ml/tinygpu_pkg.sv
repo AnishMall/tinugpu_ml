@@ -10,10 +10,10 @@ package tinygpu_pkg;
   parameter int TILE_K      = 4;
 
   parameter int NUM_PES     = TILE_M * TILE_N;
-  parameter int SPM_A_BYTES = 64;
-  parameter int SPM_B_BYTES = 64;
-  parameter int SPM_C_BYTES = 32;
-  parameter int MAX_BURST   = 4;
+  parameter int SPM_A_BYTES = 32;
+  parameter int SPM_B_BYTES = 32;
+  parameter int SPM_C_BYTES = 16;
+  parameter int MAX_BURST   = 2;
 
   localparam logic [7:0] OP_NOP     = 8'h00;
   localparam logic [7:0] OP_GEMM    = 8'h01;
