@@ -28,10 +28,10 @@ parameter int TILE_N      = 1;
 parameter int TILE_K      = 4;    // K-dimension tiles
 
 parameter int NUM_PES     = 1;    // TILE_M × TILE_N
-parameter int SPM_A_BYTES = 64;   // Scratchpad A size
-parameter int SPM_B_BYTES = 64;   // Scratchpad B size
-parameter int SPM_C_BYTES = 32;   // Scratchpad C size
-parameter int MAX_BURST   = 4;    // Maximum DMA burst
+parameter int SPM_A_BYTES = 32;   // Scratchpad A size
+parameter int SPM_B_BYTES = 32;   // Scratchpad B size
+parameter int SPM_C_BYTES = 16;   // Scratchpad C size
+parameter int MAX_BURST   = 2;    // Maximum DMA burst
 ```
 
 **Key Features**:
