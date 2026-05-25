@@ -31,6 +31,7 @@ package tinygpu_pkg;
   localparam int FLAG_DST_INT32    = 5;
   localparam int FLAG_SIGNED_MODE  = 6;
 
+  (* syn_encoding = "binary" *)
   typedef enum logic [4:0] {
     S_IDLE,
     S_VALIDATE,
@@ -47,6 +48,8 @@ package tinygpu_pkg;
     S_VEC_LOAD_X,
     S_VEC_LOAD_Y,
     S_VEC_EXEC,
+    S_VEC_EXEC2,  // <-- new pipeline state
+    S_VEC_EXEC3,
     S_VEC_STORE,
     S_NEXT_TILE_N,
     S_NEXT_TILE_M,

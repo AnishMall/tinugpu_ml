@@ -18,7 +18,7 @@ use neorv32.neorv32_package.all;
 entity neorv32_test_setup_bootloader is
   generic (
     -- adapt these for your setup --
-    CLOCK_FREQUENCY : natural := 27000000;  -- clock frequency of clk_i in Hz
+    CLOCK_FREQUENCY : natural := 100000000; -- clock frequency of clk_i in Hz
     IMEM_SIZE       : natural := 16*1024;   -- size of processor-internal instruction memory in bytes
     DMEM_SIZE       : natural := 8*1024     -- size of processor-internal data memory in bytes
   );
@@ -27,7 +27,7 @@ entity neorv32_test_setup_bootloader is
     clk_i       : in  std_ulogic; -- global clock, rising edge
     rstn_i      : in  std_ulogic; -- global reset, low-active, async
     -- GPIO --
-    gpio_o : out std_ulogic_vector(5 downto 0); -- parallel output
+    gpio_o      : out std_ulogic_vector(7 downto 0); -- parallel output
     -- UART0 --
     uart0_txd_o : out std_ulogic; -- UART0 send data
     uart0_rxd_i : in  std_ulogic  -- UART0 receive data
@@ -49,18 +49,18 @@ begin
     -- Boot Configuration --
     BOOT_MODE_SELECT => 0,                 -- 0 - boot via internal bootloader, 2 - boot IMEM image
     -- RISC-V CPU Extensions --
-    RISCV_ISA_C      => false,              -- implement compressed extension?
-    RISCV_ISA_M      => false,              -- implement mul/div extension?
-    RISCV_ISA_Zicntr => false,              -- implement base counters?
+    RISCV_ISA_C      => true,              -- implement compressed extension?
+    RISCV_ISA_M      => true,              -- implement mul/div extension?
+    RISCV_ISA_Zicntr => true,              -- implement base counters?
     -- Internal Instruction memory --
     IMEM_EN          => true,              -- implement processor-internal instruction memory
-    IMEM_SIZE        => 8*1024, -- size of processor-internal instruction memory in bytes
+    IMEM_SIZE        => IMEM_SIZE, -- size of processor-internal instruction memory in bytes
     -- Internal Data memory --
     DMEM_EN          => true,              -- implement processor-internal data memory
-    DMEM_SIZE        => 4*1024, -- size of processor-internal data memory in bytes
+    DMEM_SIZE        => DMEM_SIZE, -- size of processor-internal data memory in bytes
     -- Processor peripherals --
-    IO_GPIO_NUM       => 6,                 -- number of GPIO input/output pairs (0..32)
-    IO_CLINT_EN      => false,              -- implement core local interruptor (CLINT)?
+    IO_GPIO_NUM      => 8,                 -- number of GPIO input/output pairs (0..32)
+    IO_CLINT_EN      => true,              -- implement core local interruptor (CLINT)?
     IO_UART0_EN      => true,               -- implement primary universal asynchronous receiver/transmitter (UART0)?
     IO_TINYGPU_EN    => true                -- enable TinyGPU-ML accelerator
   )
@@ -76,7 +76,7 @@ begin
   );
 
   -- GPIO output --
-  gpio_o <= con_gpio_out(5 downto 0);
+  gpio_o <= con_gpio_out(7 downto 0);
 
 
 end architecture;
