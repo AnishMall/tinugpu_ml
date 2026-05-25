@@ -1,8 +1,12 @@
 module tb_tinygpu_dma_tb;
 
+  import tinygpu_pkg::*;
+
   localparam logic [1:0] DMA_OP_LOAD_I8   = 2'd0;
   localparam logic [1:0] DMA_OP_STORE_I32 = 2'd2;
   localparam logic [1:0] DMA_OP_STORE_I8  = 2'd3;
+  localparam int A_ROW_STRIDE = TILE_K;
+  localparam int C_ROW_STRIDE = TILE_N;
 
   logic clk;
   logic rst_n;
@@ -35,10 +39,10 @@ module tb_tinygpu_dma_tb;
   logic [3:0]  spm_wstrb;
   logic [31:0] spm_rdata;
 
-  logic [7:0]  a_rd_addr [0:3];
-  logic [7:0]  a_rd_data [0:3];
-  logic [7:0]  b_rd_addr [0:3];
-  logic [7:0]  b_rd_data [0:3];
+  logic [7:0]  a_rd_addr [0:TILE_M-1];
+  logic [7:0]  a_rd_data [0:TILE_M-1];
+  logic [7:0]  b_rd_addr [0:TILE_N-1];
+  logic [7:0]  b_rd_data [0:TILE_N-1];
   logic        c_wr_en;
   logic [7:0]  c_wr_addr;
   logic [31:0] c_wr_data;
@@ -148,6 +152,15 @@ module tb_tinygpu_dma_tb;
     end
   endtask
 
+  task automatic check_a_byte(input int unsigned addr, input logic [7:0] expected);
+    begin
+      a_rd_addr[0] = addr[7:0];
+      #1;
+      if (a_rd_data[0] !== expected)
+        $fatal(1, "DMA load failed addr %0d: got %h expected %h", addr, a_rd_data[0], expected);
+    end
+  endtask
+
   initial begin
     rst_n = 1'b0;
     start = 1'b0;
@@ -162,8 +175,10 @@ module tb_tinygpu_dma_tb;
     c_wr_addr = '0;
     c_wr_data = '0;
     c_rd_addr = '0;
-    for (int i = 0; i < 4; i++) begin
+    for (int i = 0; i < TILE_M; i++) begin
       a_rd_addr[i] = '0;
+    end
+    for (int i = 0; i < TILE_N; i++) begin
       b_rd_addr[i] = '0;
     end
 
@@ -190,15 +205,10 @@ module tb_tinygpu_dma_tb;
 
     wait_done();
 
-    a_rd_addr[0] = 8'd0;
-    a_rd_addr[1] = 8'd1;
-    a_rd_addr[2] = 8'd16;
-    a_rd_addr[3] = 8'd17;
-    #1;
-    if (a_rd_data[0] !== 8'h11) $fatal(1, "DMA load failed A[0][0]: %h", a_rd_data[0]);
-    if (a_rd_data[1] !== 8'h22) $fatal(1, "DMA load failed A[0][1]: %h", a_rd_data[1]);
-    if (a_rd_data[2] !== 8'h33) $fatal(1, "DMA load failed A[1][0]: %h", a_rd_data[2]);
-    if (a_rd_data[3] !== 8'h44) $fatal(1, "DMA load failed A[1][1]: %h", a_rd_data[3]);
+    check_a_byte(0,            8'h11);
+    check_a_byte(1,            8'h22);
+    check_a_byte(A_ROW_STRIDE, 8'h33);
+    check_a_byte(A_ROW_STRIDE + 1, 8'h44);
 
     @(negedge clk);
     c_wr_addr = 8'd0;
@@ -206,7 +216,7 @@ module tb_tinygpu_dma_tb;
     c_wr_en = 1'b1;
     @(posedge clk);
     @(negedge clk);
-    c_wr_addr = 8'd1;
+    c_wr_addr = C_ROW_STRIDE[7:0];
     c_wr_data = 32'h55667788;
     c_wr_en = 1'b1;
     @(posedge clk);
@@ -215,40 +225,8 @@ module tb_tinygpu_dma_tb;
 
     op_kind = DMA_OP_STORE_I32;
     base_addr = 32'h0000_0200;
-    rows = 16'd1;
-    cols = 16'd2;
-    stride_bytes = 16'd8;
-    spm_region = 2'd2;
-    spm_base = 9'd0;
-    start = 1'b1;
-    @(posedge clk);
-    @(negedge clk);
-    start = 1'b0;
-
-    wait_done();
-
-    if ({mem_bytes['h203], mem_bytes['h202], mem_bytes['h201], mem_bytes['h200]} !== 32'h11223344)
-      $fatal(1, "DMA store_i32 failed word0");
-    if ({mem_bytes['h207], mem_bytes['h206], mem_bytes['h205], mem_bytes['h204]} !== 32'h55667788)
-      $fatal(1, "DMA store_i32 failed word1");
-
-    @(negedge clk);
-    c_wr_addr = 8'd0;
-    c_wr_data = 32'h000000AA;
-    c_wr_en = 1'b1;
-    @(posedge clk);
-    @(negedge clk);
-    c_wr_addr = 8'd1;
-    c_wr_data = 32'h000000BB;
-    c_wr_en = 1'b1;
-    @(posedge clk);
-    @(negedge clk);
-    c_wr_en = 1'b0;
-
-    op_kind = DMA_OP_STORE_I8;
-    base_addr = 32'h0000_0300;
-    rows = 16'd1;
-    cols = 16'd2;
+    rows = 16'd2;
+    cols = 16'd1;
     stride_bytes = 16'd4;
     spm_region = 2'd2;
     spm_base = 9'd0;
@@ -259,10 +237,40 @@ module tb_tinygpu_dma_tb;
 
     wait_done();
 
-    if (mem_bytes['h300] !== 8'hAA)
-      $fatal(1, "DMA store_i8 failed byte0: %h", mem_bytes['h300]);
-    if (mem_bytes['h301] !== 8'hBB)
-      $fatal(1, "DMA store_i8 failed byte1: %h", mem_bytes['h301]);
+    if ({mem_bytes['h203], mem_bytes['h202], mem_bytes['h201], mem_bytes['h200]} !== 32'h11223344)
+      $fatal(1, "DMA store I32 row0 mismatch");
+    if ({mem_bytes['h207], mem_bytes['h206], mem_bytes['h205], mem_bytes['h204]} !== 32'h55667788)
+      $fatal(1, "DMA store I32 row1 mismatch");
+
+    @(negedge clk);
+    c_wr_addr = 8'd0;
+    c_wr_data = 32'h000000aa;
+    c_wr_en = 1'b1;
+    @(posedge clk);
+    @(negedge clk);
+    c_wr_addr = 8'd1;
+    c_wr_data = 32'h000000bb;
+    c_wr_en = 1'b1;
+    @(posedge clk);
+    @(negedge clk);
+    c_wr_en = 1'b0;
+
+    op_kind = DMA_OP_STORE_I8;
+    base_addr = 32'h0000_0300;
+    rows = 16'd1;
+    cols = 16'd2;
+    stride_bytes = 16'd2;
+    spm_region = 2'd2;
+    spm_base = 9'd0;
+    start = 1'b1;
+    @(posedge clk);
+    @(negedge clk);
+    start = 1'b0;
+
+    wait_done();
+
+    if (mem_bytes['h300] !== 8'haa) $fatal(1, "DMA store I8 byte0 mismatch");
+    if (mem_bytes['h301] !== 8'hbb) $fatal(1, "DMA store I8 byte1 mismatch");
 
     $display("tb_tinygpu_dma_tb PASS");
     $finish;

@@ -1,19 +1,20 @@
 IVERILOG ?= iverilog
 VVP ?= vvp
 BUILD_DIR ?= build
+TB_DIR ?= tb
 
 RTL_SRCS := \
-	rtl/tinygpu_pkg.sv \
-	rtl/tinygpu_pe.sv \
-	rtl/tinygpu_array4x4.sv \
-	rtl/tinygpu_spm.sv \
-	rtl/tinygpu_epilogue.sv \
-	rtl/tinygpu_dma.sv \
-	rtl/tinygpu_vec_alu.sv \
-	rtl/tinygpu_cmd_ctrl.sv \
-	rtl/tinygpu_counters.sv \
-	rtl/tinygpu_regs.sv \
-	rtl/tinygpu_top.sv
+	tinygpu_pkg.sv \
+	tinygpu_pe.sv \
+	tinygpu_array4x4.sv \
+	tinygpu_spm.sv \
+	tinygpu_epilogue.sv \
+	tinygpu_dma.sv \
+	tinygpu_vec_alu.sv \
+	tinygpu_cmd_ctrl.sv \
+	tinygpu_counters.sv \
+	tinygpu_regs.sv \
+	tinygpu_top.sv
 
 TB_NAMES := \
 	tb_tinygpu_pe_tb \
@@ -54,5 +55,5 @@ clean:
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-$(BUILD_DIR)/%.vvp: tb/%.sv | $(BUILD_DIR)
+$(BUILD_DIR)/%.vvp: $(TB_DIR)/%.sv | $(BUILD_DIR)
 	$(IVERILOG) -g2012 -Wall -o $@ -s $* $(RTL_SRCS) $<

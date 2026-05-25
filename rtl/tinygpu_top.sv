@@ -1,4 +1,6 @@
-module tinygpu_top import tinygpu_pkg::*; #(
+module tinygpu_top 
+import tinygpu_pkg::*;
+ #(
   parameter int ADDR_W = 32,
   parameter int DATA_W = 32
 )(
@@ -57,6 +59,21 @@ module tinygpu_top import tinygpu_pkg::*; #(
   logic [31:0] active_count_last;
   logic [31:0] stall_count_last;
   logic [31:0] cmd_count_total;
+
+  logic                 mem_req_raw;
+  logic                 mem_we_raw;
+  logic [ADDR_W-1:0]    mem_addr_raw;
+  logic [DATA_W-1:0]    mem_wdata_raw;
+  logic [DATA_W/8-1:0]  mem_wstrb_raw;
+  logic [DATA_W-1:0]    mem_rdata_stage_q;
+  logic                 mem_rvalid_stage_q;
+  logic                 mem_cmd_valid_q;
+  logic                 mem_cmd_we_q;
+  logic [ADDR_W-1:0]    mem_cmd_addr_q;
+  logic [DATA_W-1:0]    mem_cmd_wdata_q;
+  logic [DATA_W/8-1:0]  mem_cmd_wstrb_q;
+  logic                 mem_read_pending_q;
+  logic                 mem_stage_ready;
 
   tinygpu_regs u_regs (
     .clk                (clk),
@@ -134,14 +151,14 @@ module tinygpu_top import tinygpu_pkg::*; #(
     .cnt_busy           (cnt_busy),
     .cnt_active         (cnt_active),
     .cnt_stall          (cnt_stall),
-    .mem_req            (mem_req),
-    .mem_we             (mem_we),
-    .mem_addr           (mem_addr),
-    .mem_wdata          (mem_wdata),
-    .mem_wstrb          (mem_wstrb),
-    .mem_rdata          (mem_rdata),
-    .mem_ready          (mem_ready),
-    .mem_rvalid         (mem_rvalid)
+    .mem_req            (mem_req_raw),
+    .mem_we             (mem_we_raw),
+    .mem_addr           (mem_addr_raw),
+    .mem_wdata          (mem_wdata_raw),
+    .mem_wstrb          (mem_wstrb_raw),
+    .mem_rdata          (mem_rdata_stage_q),
+    .mem_ready          (mem_stage_ready),
+    .mem_rvalid         (mem_rvalid_stage_q)
   );
 
   tinygpu_counters u_counters (
@@ -158,6 +175,48 @@ module tinygpu_top import tinygpu_pkg::*; #(
     .cmd_count_o   (cmd_count_total)
   );
 
+  assign mem_stage_ready = !mem_cmd_valid_q && !mem_read_pending_q;
+
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      mem_rdata_stage_q  <= '0;
+      mem_rvalid_stage_q <= 1'b0;
+      mem_cmd_valid_q    <= 1'b0;
+      mem_cmd_we_q       <= 1'b0;
+      mem_cmd_addr_q     <= '0;
+      mem_cmd_wdata_q    <= '0;
+      mem_cmd_wstrb_q    <= '0;
+      mem_read_pending_q <= 1'b0;
+    end else begin
+      mem_rvalid_stage_q <= 1'b0;
+
+      if (mem_stage_ready && mem_req_raw) begin
+        mem_cmd_valid_q <= 1'b1;
+        mem_cmd_we_q    <= mem_we_raw;
+        mem_cmd_addr_q  <= mem_addr_raw;
+        mem_cmd_wdata_q <= mem_wdata_raw;
+        mem_cmd_wstrb_q <= mem_wstrb_raw;
+      end
+
+      if (mem_cmd_valid_q && mem_ready) begin
+        mem_cmd_valid_q <= 1'b0;
+        if (!mem_cmd_we_q)
+          mem_read_pending_q <= 1'b1;
+      end
+
+      if (mem_read_pending_q && mem_rvalid) begin
+        mem_read_pending_q <= 1'b0;
+        mem_rdata_stage_q  <= mem_rdata;
+        mem_rvalid_stage_q <= 1'b1;
+      end
+    end
+  end
+
+  assign mem_req   = mem_cmd_valid_q;
+  assign mem_we    = mem_cmd_we_q;
+  assign mem_addr  = mem_cmd_addr_q;
+  assign mem_wdata = mem_cmd_wdata_q;
+  assign mem_wstrb = mem_cmd_wstrb_q;
   assign irq = reg_irq_enable & reg_irq_pending;
 
 endmodule

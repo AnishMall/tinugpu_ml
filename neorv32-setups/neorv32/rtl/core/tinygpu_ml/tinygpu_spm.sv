@@ -1,6 +1,4 @@
-module tinygpu_spm 
-import tinygpu_pkg::*;
-#(
+module tinygpu_spm import tinygpu_pkg::*; #(
   parameter int A_BYTES = SPM_A_BYTES,
   parameter int B_BYTES = SPM_B_BYTES,
   parameter int C_BYTES = SPM_C_BYTES

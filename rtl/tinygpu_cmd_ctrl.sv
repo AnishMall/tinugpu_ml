@@ -1,4 +1,6 @@
-module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
+module tinygpu_cmd_ctrl 
+import tinygpu_pkg::*; 
+(
   input  logic         clk,
   input  logic         rst_n,
 
@@ -134,18 +136,14 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
   logic signed [ACC_W-1:0]  vec_result_raw;
   logic signed [ACC_W-1:0]  vec_result_post;
   logic signed [INT8_W-1:0] vec_result_i8;
+  logic [31:0]              vec_store_addr_q;
+  logic [31:0]              vec_store_wdata_q;
+  logic [3:0]               vec_store_wstrb_q;
 
   logic                     dma_start;
   logic                     dma_busy;
   logic                     dma_done;
   logic                     dma_error;
-  logic [1:0]               dma_op_kind;
-  logic [31:0]              dma_base_addr;
-  logic [15:0]              dma_rows;
-  logic [15:0]              dma_cols;
-  logic [15:0]              dma_stride_bytes;
-  logic [1:0]               dma_spm_region;
-  logic [8:0]               dma_spm_base;
   logic                     dma_mem_req;
   logic                     dma_mem_we;
   logic [31:0]              dma_mem_addr;
@@ -166,11 +164,22 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
   logic [31:0]              desc_mem_addr;
   logic [31:0]              desc_mem_wdata;
   logic [3:0]               desc_mem_wstrb;
+  logic                     dma_launch_pending_q;
+  logic                     dma_launch_pending_d;
+  logic [1:0]               dma_op_kind_q;
+  logic [31:0]              dma_base_addr_q;
+  logic [15:0]              dma_rows_q;
+  logic [15:0]              dma_cols_q;
+  logic [15:0]              dma_stride_bytes_q;
+  logic [1:0]               dma_spm_region_q;
+  logic [8:0]               dma_spm_base_q;
 
   logic        latch_cmd;
   logic        latch_cmd_addr;
   logic        clear_cmd_fields;
   logic        load_desc_word;
+  logic        latch_vec_store_cmd;
+  logic        latch_dma_cmd;
   logic        clear_status;
   logic        set_illegal_opcode;
   logic        set_shape_error;
@@ -211,6 +220,16 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
   logic [1:0]  vec_src0_lane_sel;
   logic [1:0]  vec_src1_lane_sel;
   logic [7:0]  vec_load_byte;
+  logic [31:0] vec_store_addr_next;
+  logic [31:0] vec_store_wdata_next;
+  logic [3:0]  vec_store_wstrb_next;
+  logic [1:0]  dma_op_kind_cmd_n;
+  logic [31:0] dma_base_addr_cmd_n;
+  logic [15:0] dma_rows_cmd_n;
+  logic [15:0] dma_cols_cmd_n;
+  logic [15:0] dma_stride_bytes_cmd_n;
+  logic [1:0]  dma_spm_region_cmd_n;
+  logic [8:0]  dma_spm_base_cmd_n;
 
   logic unused_c_rd_data;
 
@@ -278,6 +297,33 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
   assign vec_src0_lane_sel  = vec_src0_elem_addr[1:0];
   assign vec_src1_lane_sel  = vec_src1_elem_addr[1:0];
 
+  always @* begin
+    vec_store_addr_next = vec_store_aligned_addr;
+    vec_store_wdata_next = vec_result_post;
+    vec_store_wstrb_next = 4'b1111;
+
+    if (use_dst_i8) begin
+      case (vec_dst_elem_addr[1:0])
+        2'd0: begin
+          vec_store_wdata_next = {24'd0, vec_result_i8};
+          vec_store_wstrb_next = 4'b0001;
+        end
+        2'd1: begin
+          vec_store_wdata_next = {16'd0, vec_result_i8, 8'd0};
+          vec_store_wstrb_next = 4'b0010;
+        end
+        2'd2: begin
+          vec_store_wdata_next = {8'd0, vec_result_i8, 16'd0};
+          vec_store_wstrb_next = 4'b0100;
+        end
+        default: begin
+          vec_store_wdata_next = {vec_result_i8, 24'd0};
+          vec_store_wstrb_next = 4'b1000;
+        end
+      endcase
+    end
+  end
+
   tinygpu_spm u_spm (
     .clk        (clk),
     .rst_n      (rst_n),
@@ -305,13 +351,13 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
     .busy         (dma_busy),
     .done         (dma_done),
     .error        (dma_error),
-    .op_kind      (dma_op_kind),
-    .base_addr    (dma_base_addr),
-    .rows         (dma_rows),
-    .cols         (dma_cols),
-    .stride_bytes (dma_stride_bytes),
-    .spm_region   (dma_spm_region),
-    .spm_base     (dma_spm_base),
+    .op_kind      (dma_op_kind_q),
+    .base_addr    (dma_base_addr_q),
+    .rows         (dma_rows_q),
+    .cols         (dma_cols_q),
+    .stride_bytes (dma_stride_bytes_q),
+    .spm_region   (dma_spm_region_q),
+    .spm_base     (dma_spm_base_q),
     .mem_req      (dma_mem_req),
     .mem_we       (dma_mem_we),
     .mem_addr     (dma_mem_addr),
@@ -438,8 +484,19 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
       bias_inflight_q   <= 1'b0;
       vec_inflight_q    <= 1'b0;
       desc_inflight_q   <= 1'b0;
+      dma_launch_pending_q <= 1'b0;
+      dma_op_kind_q     <= '0;
+      dma_base_addr_q   <= '0;
+      dma_rows_q        <= '0;
+      dma_cols_q        <= '0;
+      dma_stride_bytes_q <= '0;
+      dma_spm_region_q  <= '0;
+      dma_spm_base_q    <= '0;
       vec_x_q           <= '0;
       vec_y_q           <= '0;
+      vec_store_addr_q  <= '0;
+      vec_store_wdata_q <= '0;
+      vec_store_wstrb_q <= '0;
       for (int c = 0; c < TILE_N; c++) begin
         bias_vec[c] <= '0;
       end
@@ -475,8 +532,19 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
       bias_inflight_q   <= 1'b0;
       vec_inflight_q    <= 1'b0;
       desc_inflight_q   <= 1'b0;
+      dma_launch_pending_q <= 1'b0;
+      dma_op_kind_q     <= '0;
+      dma_base_addr_q   <= '0;
+      dma_rows_q        <= '0;
+      dma_cols_q        <= '0;
+      dma_stride_bytes_q <= '0;
+      dma_spm_region_q  <= '0;
+      dma_spm_base_q    <= '0;
       vec_x_q           <= '0;
       vec_y_q           <= '0;
+      vec_store_addr_q  <= '0;
+      vec_store_wdata_q <= '0;
+      vec_store_wstrb_q <= '0;
       for (int c = 0; c < TILE_N; c++) begin
         bias_vec[c] <= '0;
       end
@@ -496,6 +564,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
       bias_inflight_q    <= bias_inflight_d;
       vec_inflight_q     <= vec_inflight_d;
       desc_inflight_q    <= desc_inflight_d;
+      dma_launch_pending_q <= dma_launch_pending_d;
 
       if (latch_cmd_addr)
         cmd_addr_q <= cmd_addr;
@@ -572,6 +641,22 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         vec_x_q <= $signed(vec_load_byte);
       if (load_vec_y_reg)
         vec_y_q <= $signed(vec_load_byte);
+
+      if (latch_vec_store_cmd) begin
+        vec_store_addr_q  <= vec_store_addr_next;
+        vec_store_wdata_q <= vec_store_wdata_next;
+        vec_store_wstrb_q <= vec_store_wstrb_next;
+      end
+
+      if (latch_dma_cmd) begin
+        dma_op_kind_q      <= dma_op_kind_cmd_n;
+        dma_base_addr_q    <= dma_base_addr_cmd_n;
+        dma_rows_q         <= dma_rows_cmd_n;
+        dma_cols_q         <= dma_cols_cmd_n;
+        dma_stride_bytes_q <= dma_stride_bytes_cmd_n;
+        dma_spm_region_q   <= dma_spm_region_cmd_n;
+        dma_spm_base_q     <= dma_spm_base_cmd_n;
+      end
     end
   end
 
@@ -802,6 +887,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
     bias_inflight_d        = bias_inflight_q;
     vec_inflight_d         = vec_inflight_q;
     desc_inflight_d        = desc_inflight_q;
+    dma_launch_pending_d   = dma_launch_pending_q;
 
     busy          = 1'b1;
     done          = 1'b0;
@@ -815,19 +901,14 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
     load_bias_reg   = 1'b0;
     load_vec_x_reg  = 1'b0;
     load_vec_y_reg  = 1'b0;
+    latch_vec_store_cmd = 1'b0;
+    latch_dma_cmd       = 1'b0;
 
     array_clear_acc = 1'b0;
     array_mac_en    = 1'b0;
     epi_start       = 1'b0;
 
     dma_start        = 1'b0;
-    dma_op_kind      = DMA_OP_LOAD_I8;
-    dma_base_addr    = '0;
-    dma_rows         = '0;
-    dma_cols         = '0;
-    dma_stride_bytes = '0;
-    dma_spm_region   = SPM_REGION_A;
-    dma_spm_base     = 9'd0;
 
     c_wr_en         = 1'b0;
     c_wr_addr       = '0;
@@ -848,6 +929,13 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
     desc_mem_we       = 1'b0;
     desc_mem_wdata    = '0;
     desc_mem_wstrb    = 4'b0000;
+    dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
+    dma_base_addr_cmd_n    = '0;
+    dma_rows_cmd_n         = '0;
+    dma_cols_cmd_n         = '0;
+    dma_stride_bytes_cmd_n = '0;
+    dma_spm_region_cmd_n   = SPM_REGION_A;
+    dma_spm_base_cmd_n     = 9'd0;
 
     case (state_q)
       S_IDLE: begin
@@ -856,6 +944,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         clear_status = start;
         if (start) begin
           latch_cmd_addr = 1'b1;
@@ -893,6 +982,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         if (!opcode_ok) begin
           set_illegal_opcode = 1'b1;
           state_d = S_ERROR;
@@ -912,6 +1002,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         if (is_vector_opcode)
           state_d = S_VEC_LOAD_X;
         else
@@ -923,31 +1014,39 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         clear_bias_regs = 1'b1;
         array_clear_acc = 1'b1;
         state_d = S_LOAD_A;
       end
 
       S_LOAD_A: begin
-        desc_inflight_d = 1'b0;
-        dma_op_kind      = DMA_OP_LOAD_I8;
-        dma_base_addr    = src0_addr_q + (m0_q * stride0_q) + k0_q;
-        dma_rows         = active_tile_m;
-        dma_cols         = active_tile_k;
-        dma_stride_bytes = stride0_q;
-        dma_spm_region   = SPM_REGION_A;
-        dma_spm_base     = 9'd0;
+        desc_inflight_d        = 1'b0;
+        dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
+        dma_base_addr_cmd_n    = src0_addr_q + (m0_q * stride0_q) + k0_q;
+        dma_rows_cmd_n         = active_tile_m;
+        dma_cols_cmd_n         = active_tile_k;
+        dma_stride_bytes_cmd_n = stride0_q;
+        dma_spm_region_cmd_n   = SPM_REGION_A;
+        dma_spm_base_cmd_n     = 9'd0;
 
-        if (!dma_inflight_q) begin
-          dma_start      = 1'b1;
-          dma_inflight_d = 1'b1;
-          cnt_stall      = 1'b1;
+        if (!dma_launch_pending_q && !dma_inflight_q) begin
+          latch_dma_cmd        = 1'b1;
+          dma_launch_pending_d = 1'b1;
+          cnt_stall            = 1'b1;
+        end else if (dma_launch_pending_q) begin
+          dma_start            = 1'b1;
+          dma_launch_pending_d = 1'b0;
+          dma_inflight_d       = 1'b1;
+          cnt_stall            = 1'b1;
         end else if (dma_error) begin
           set_memory_error = 1'b1;
-          dma_inflight_d = 1'b0;
+          dma_inflight_d       = 1'b0;
+          dma_launch_pending_d = 1'b0;
           state_d = S_ERROR;
         end else if (dma_done) begin
-          dma_inflight_d = 1'b0;
+          dma_inflight_d       = 1'b0;
+          dma_launch_pending_d = 1'b0;
           state_d = S_LOAD_B;
         end else begin
           cnt_stall = 1'b1;
@@ -955,25 +1054,32 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
       end
 
       S_LOAD_B: begin
-        desc_inflight_d = 1'b0;
-        dma_op_kind      = DMA_OP_LOAD_I8;
-        dma_base_addr    = src1_addr_q + (k0_q * stride1_q) + n0_q;
-        dma_rows         = active_tile_k;
-        dma_cols         = active_tile_n;
-        dma_stride_bytes = stride1_q;
-        dma_spm_region   = SPM_REGION_B;
-        dma_spm_base     = 9'd0;
+        desc_inflight_d        = 1'b0;
+        dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
+        dma_base_addr_cmd_n    = src1_addr_q + (k0_q * stride1_q) + n0_q;
+        dma_rows_cmd_n         = active_tile_k;
+        dma_cols_cmd_n         = active_tile_n;
+        dma_stride_bytes_cmd_n = stride1_q;
+        dma_spm_region_cmd_n   = SPM_REGION_B;
+        dma_spm_base_cmd_n     = 9'd0;
 
-        if (!dma_inflight_q) begin
-          dma_start      = 1'b1;
-          dma_inflight_d = 1'b1;
-          cnt_stall      = 1'b1;
+        if (!dma_launch_pending_q && !dma_inflight_q) begin
+          latch_dma_cmd        = 1'b1;
+          dma_launch_pending_d = 1'b1;
+          cnt_stall            = 1'b1;
+        end else if (dma_launch_pending_q) begin
+          dma_start            = 1'b1;
+          dma_launch_pending_d = 1'b0;
+          dma_inflight_d       = 1'b1;
+          cnt_stall            = 1'b1;
         end else if (dma_error) begin
           set_memory_error = 1'b1;
-          dma_inflight_d = 1'b0;
+          dma_inflight_d       = 1'b0;
+          dma_launch_pending_d = 1'b0;
           state_d = S_ERROR;
         end else if (dma_done) begin
-          dma_inflight_d = 1'b0;
+          dma_inflight_d       = 1'b0;
+          dma_launch_pending_d = 1'b0;
           state_d = S_COMPUTE_K;
         end else begin
           cnt_stall = 1'b1;
@@ -985,6 +1091,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         array_mac_en = 1'b1;
         if (kk_q + 16'd1 >= active_tile_k)
           state_d = S_NEXT_K;
@@ -995,6 +1102,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         if (more_k_tiles)
           state_d = S_LOAD_A;
         else if (flags_q[FLAG_BIAS_EN])
@@ -1007,6 +1115,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         dma_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         cnt_stall = 1'b1;
 
         if (!flags_q[FLAG_BIAS_EN]) begin
@@ -1029,6 +1138,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         if (!epi_busy && !epi_done)
           epi_start = 1'b1;
 
@@ -1047,24 +1157,31 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
           else
             c_wr_data = c_epi_i32[store_row_q[1:0]][store_col_q[1:0]];
         end else begin
-          dma_op_kind      = use_dst_i8 ? DMA_OP_STORE_I8 : DMA_OP_STORE_I32;
-          dma_base_addr    = dma_store_base_addr;
-          dma_rows         = active_tile_m;
-          dma_cols         = active_tile_n;
-          dma_stride_bytes = stride_dst_q;
-          dma_spm_region   = SPM_REGION_C;
-          dma_spm_base     = 9'd0;
+          dma_op_kind_cmd_n      = use_dst_i8 ? DMA_OP_STORE_I8 : DMA_OP_STORE_I32;
+          dma_base_addr_cmd_n    = dma_store_base_addr;
+          dma_rows_cmd_n         = active_tile_m;
+          dma_cols_cmd_n         = active_tile_n;
+          dma_stride_bytes_cmd_n = stride_dst_q;
+          dma_spm_region_cmd_n   = SPM_REGION_C;
+          dma_spm_base_cmd_n     = 9'd0;
 
-          if (!dma_inflight_q) begin
-            dma_start      = 1'b1;
-            dma_inflight_d = 1'b1;
-            cnt_stall      = 1'b1;
+          if (!dma_launch_pending_q && !dma_inflight_q) begin
+            latch_dma_cmd        = 1'b1;
+            dma_launch_pending_d = 1'b1;
+            cnt_stall            = 1'b1;
+          end else if (dma_launch_pending_q) begin
+            dma_start            = 1'b1;
+            dma_launch_pending_d = 1'b0;
+            dma_inflight_d       = 1'b1;
+            cnt_stall            = 1'b1;
           end else if (dma_error) begin
             set_memory_error = 1'b1;
-            dma_inflight_d = 1'b0;
+            dma_inflight_d       = 1'b0;
+            dma_launch_pending_d = 1'b0;
             state_d = S_ERROR;
           end else if (dma_done) begin
-            dma_inflight_d = 1'b0;
+            dma_inflight_d       = 1'b0;
+            dma_launch_pending_d = 1'b0;
             if (more_n_tiles)
               state_d = S_NEXT_TILE_N;
             else if (more_m_tiles)
@@ -1081,6 +1198,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         dma_inflight_d = 1'b0;
         bias_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         cnt_stall = 1'b1;
 
         vec_mem_we   = 1'b0;
@@ -1104,6 +1222,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         dma_inflight_d = 1'b0;
         bias_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         cnt_stall = 1'b1;
 
         vec_mem_we   = 1'b0;
@@ -1125,6 +1244,8 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
+        latch_vec_store_cmd = 1'b1;
         state_d = S_VEC_STORE;
       end
 
@@ -1132,35 +1253,14 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         dma_inflight_d = 1'b0;
         bias_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         cnt_stall = 1'b1;
 
         vec_mem_req  = 1'b1;
         vec_mem_we   = 1'b1;
-        vec_mem_addr = vec_store_aligned_addr;
-
-        if (use_dst_i8) begin
-          case (vec_dst_elem_addr[1:0])
-            2'd0: begin
-              vec_mem_wdata = {24'd0, vec_result_i8};
-              vec_mem_wstrb = 4'b0001;
-            end
-            2'd1: begin
-              vec_mem_wdata = {16'd0, vec_result_i8, 8'd0};
-              vec_mem_wstrb = 4'b0010;
-            end
-            2'd2: begin
-              vec_mem_wdata = {8'd0, vec_result_i8, 16'd0};
-              vec_mem_wstrb = 4'b0100;
-            end
-            default: begin
-              vec_mem_wdata = {vec_result_i8, 24'd0};
-              vec_mem_wstrb = 4'b1000;
-            end
-          endcase
-        end else begin
-          vec_mem_wdata = vec_result_post;
-          vec_mem_wstrb = 4'b1111;
-        end
+        vec_mem_addr = vec_store_addr_q;
+        vec_mem_wdata = vec_store_wdata_q;
+        vec_mem_wstrb = vec_store_wstrb_q;
 
         if (mem_ready) begin
           vec_inflight_d = 1'b0;
@@ -1178,6 +1278,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         state_d = S_CLEAR_ACC;
       end
 
@@ -1186,6 +1287,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         state_d = S_CLEAR_ACC;
       end
 
@@ -1197,6 +1299,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         state_d      = S_IDLE;
       end
 
@@ -1208,6 +1311,7 @@ module tinygpu_cmd_ctrl import tinygpu_pkg::*; (
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
         state_d = S_IDLE;
       end
 

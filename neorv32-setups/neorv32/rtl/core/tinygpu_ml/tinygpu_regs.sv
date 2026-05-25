@@ -1,6 +1,4 @@
-module tinygpu_regs 
-import tinygpu_pkg::*;
- (
+module tinygpu_regs import tinygpu_pkg::*; (
   input  logic         clk,
   input  logic         rst_n,
 
