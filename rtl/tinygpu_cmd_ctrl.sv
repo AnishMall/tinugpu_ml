@@ -51,6 +51,9 @@ import tinygpu_pkg::*;
   localparam logic [15:0] TILE_M_U16 = TILE_M;
   localparam logic [15:0] TILE_N_U16 = TILE_N;
   localparam logic [15:0] TILE_K_U16 = TILE_K;
+  localparam int TILE_M_SHIFT = (TILE_M <= 1) ? 0 : $clog2(TILE_M);
+  localparam int TILE_N_SHIFT = (TILE_N <= 1) ? 0 : $clog2(TILE_N);
+  localparam int TILE_K_SHIFT = (TILE_K <= 1) ? 0 : $clog2(TILE_K);
 
   localparam logic [1:0] DMA_OP_LOAD_I8   = 2'd0;
   localparam logic [1:0] DMA_OP_STORE_I32 = 2'd2;
@@ -139,6 +142,10 @@ import tinygpu_pkg::*;
   logic [31:0]              vec_store_addr_q;
   logic [31:0]              vec_store_wdata_q;
   logic [3:0]               vec_store_wstrb_q;
+  logic signed [ACC_W-1:0]  vec_result_raw_q;   // pipeline stage 1
+  logic signed [ACC_W-1:0]  vec_result_post_q;  // pipeline stage 2
+  logic signed [ACC_W-1:0]  vec_scaled_q;        // pipeline stage 3
+  logic signed [INT8_W-1:0] vec_result_i8_q;     // pipeline stage 4
 
   logic                     dma_start;
   logic                     dma_busy;
@@ -199,11 +206,35 @@ import tinygpu_pkg::*;
   logic        load_vec_x_reg;
   logic        load_vec_y_reg;
   logic        is_vector_opcode;
+  logic        is_vector_opcode_q;
   logic        vec_needs_y;
   logic        state_is_bias;
   logic        state_is_vec;
   logic        state_is_desc;
   logic [15:0] effective_n;
+  logic [15:0] effective_n_q;
+  logic [31:0] src0_row_base_q;
+  logic [31:0] src0_row_base_d;
+  logic [31:0] src1_k_base_q;
+  logic [31:0] src1_k_base_d;
+  logic [31:0] src1_n_offset_q;
+  logic [31:0] src1_n_offset_d;
+  logic [31:0] dst_row_base_q;
+  logic [31:0] dst_row_base_d;
+  logic [31:0] dst_n_offset_q;
+  logic [31:0] dst_n_offset_d;
+  logic [31:0] bias_base_q;
+  logic [31:0] bias_base_d;
+  logic [31:0] src0_m_step_q;
+  logic [31:0] src0_m_step_d;
+  logic [31:0] stride1_k_step_q;
+  logic [31:0] stride1_k_step_d;
+  logic [31:0] dst_m_step_q;
+  logic [31:0] dst_m_step_d;
+  logic [31:0] dst_n_step_q;
+  logic [31:0] dst_n_step_d;
+  logic [31:0] bias_n_step_q;
+  logic [31:0] bias_n_step_d;
 
   logic [31:0] dma_store_base_addr;
   logic [15:0] c_stage_addr;
@@ -262,20 +293,18 @@ import tinygpu_pkg::*;
   assign unused_c_rd_data   = ^c_rd_data;
 
   assign use_dst_i8     = flags_q[FLAG_DST_INT8];
-  assign is_vector_opcode = (opcode_q == OP_VEC_ADD) || (opcode_q == OP_VEC_MUL) ||
-                            (opcode_q == OP_RELU) || (opcode_q == OP_CLAMP);
+  assign is_vector_opcode = is_vector_opcode_q;
   assign vec_needs_y    = (opcode_q == OP_VEC_ADD) || (opcode_q == OP_VEC_MUL);
-  assign effective_n    = (opcode_q == OP_GEMV) ? 16'd1 : N_q;
+  assign effective_n    = effective_n_q;
   assign more_k_tiles   = ((k0_q + active_tile_k) < K_q);
   assign more_n_tiles   = ((n0_q + TILE_N_U16) < effective_n);
   assign more_m_tiles   = ((m0_q + TILE_M_U16) < M_q);
   assign store_stage_last = (store_row_q + 16'd1 >= active_tile_m) &&
                             (store_col_q + 16'd1 >= active_tile_n);
 
-  assign dma_store_base_addr = dst_addr_q + (m0_q * stride_dst_q) +
-                               (use_dst_i8 ? n0_q : (n0_q * 16'd4));
+  assign dma_store_base_addr = dst_row_base_q + dst_n_offset_q;
   assign c_stage_addr = (store_row_q * TILE_N_U16) + store_col_q;
-  assign bias_mem_addr = bias_addr_q + ((n0_q + bias_col_q) * 16'd4);
+  assign bias_mem_addr = bias_base_q + (bias_col_q << 2);
   assign desc_mem_addr = cmd_addr_q + {25'd0, desc_word_idx_q, 2'b00};
   assign state_is_bias = (state_q == S_LOAD_BIAS);
   assign state_is_vec  = (state_q == S_VEC_LOAD_X) || (state_q == S_VEC_LOAD_Y) || (state_q == S_VEC_STORE);
@@ -299,25 +328,25 @@ import tinygpu_pkg::*;
 
   always @* begin
     vec_store_addr_next = vec_store_aligned_addr;
-    vec_store_wdata_next = vec_result_post;
+    vec_store_wdata_next = vec_result_post_q;
     vec_store_wstrb_next = 4'b1111;
 
     if (use_dst_i8) begin
       case (vec_dst_elem_addr[1:0])
         2'd0: begin
-          vec_store_wdata_next = {24'd0, vec_result_i8};
+          vec_store_wdata_next = {24'd0, vec_result_i8_q};
           vec_store_wstrb_next = 4'b0001;
         end
         2'd1: begin
-          vec_store_wdata_next = {16'd0, vec_result_i8, 8'd0};
+          vec_store_wdata_next = {16'd0, vec_result_i8_q, 8'd0};
           vec_store_wstrb_next = 4'b0010;
         end
         2'd2: begin
-          vec_store_wdata_next = {8'd0, vec_result_i8, 16'd0};
+          vec_store_wdata_next = {8'd0, vec_result_i8_q, 16'd0};
           vec_store_wstrb_next = 4'b0100;
         end
         default: begin
-          vec_store_wdata_next = {vec_result_i8, 24'd0};
+          vec_store_wdata_next = {vec_result_i8_q, 24'd0};
           vec_store_wstrb_next = 4'b1000;
         end
       endcase
@@ -433,7 +462,7 @@ import tinygpu_pkg::*;
   end
 
   always @* begin
-    vec_result_post = vec_result_raw;
+    vec_result_post = vec_result_raw_q;
 
     if (flags_q[FLAG_RELU_EN] && (vec_result_post < 0))
       vec_result_post = 32'sd0;
@@ -443,11 +472,11 @@ import tinygpu_pkg::*;
 
     if (flags_q[FLAG_REQUANT_EN]) begin
       if ($signed(shift_q) >= 0)
-        vec_result_i8 = sat_i8(($signed(vec_result_post * $signed(scale_q)) >>> shift_q) + $signed(zero_point_q));
+        vec_result_i8 = sat_i8(($signed(vec_scaled_q) >>> shift_q) + $signed(zero_point_q));
       else
-        vec_result_i8 = sat_i8(($signed(vec_result_post * $signed(scale_q)) <<< (-$signed(shift_q))) + $signed(zero_point_q));
+        vec_result_i8 = sat_i8(($signed(vec_scaled_q) <<< (-$signed(shift_q))) + $signed(zero_point_q));
     end else begin
-      vec_result_i8 = sat_i8(vec_result_post);
+      vec_result_i8 = sat_i8(vec_result_post_q);  // use registered value
     end
   end
 
@@ -470,6 +499,7 @@ import tinygpu_pkg::*;
       scale_q           <= '0;
       shift_q           <= '0;
       zero_point_q      <= '0;
+      effective_n_q     <= '0;
       m0_q              <= '0;
       n0_q              <= '0;
       k0_q              <= '0;
@@ -494,6 +524,22 @@ import tinygpu_pkg::*;
       dma_spm_base_q    <= '0;
       vec_x_q           <= '0;
       vec_y_q           <= '0;
+      vec_result_raw_q  <= '0;
+      vec_result_post_q <= '0;
+      vec_scaled_q      <= '0;
+      vec_result_i8_q   <= '0;
+      is_vector_opcode_q <= 1'b0;
+      src0_row_base_q   <= '0;
+      src1_k_base_q     <= '0;
+      src1_n_offset_q   <= '0;
+      dst_row_base_q    <= '0;
+      dst_n_offset_q    <= '0;
+      bias_base_q       <= '0;
+      src0_m_step_q     <= '0;
+      stride1_k_step_q  <= '0;
+      dst_m_step_q      <= '0;
+      dst_n_step_q      <= '0;
+      bias_n_step_q     <= '0;
       vec_store_addr_q  <= '0;
       vec_store_wdata_q <= '0;
       vec_store_wstrb_q <= '0;
@@ -518,6 +564,7 @@ import tinygpu_pkg::*;
       scale_q           <= '0;
       shift_q           <= '0;
       zero_point_q      <= '0;
+      effective_n_q     <= '0;
       m0_q              <= '0;
       n0_q              <= '0;
       k0_q              <= '0;
@@ -545,6 +592,22 @@ import tinygpu_pkg::*;
       vec_store_addr_q  <= '0;
       vec_store_wdata_q <= '0;
       vec_store_wstrb_q <= '0;
+      vec_result_raw_q  <= '0;
+      vec_result_post_q <= '0;
+      vec_scaled_q      <= '0;
+      vec_result_i8_q   <= '0;
+      is_vector_opcode_q <= 1'b0;
+      src0_row_base_q   <= '0;
+      src1_k_base_q     <= '0;
+      src1_n_offset_q   <= '0;
+      dst_row_base_q    <= '0;
+      dst_n_offset_q    <= '0;
+      bias_base_q       <= '0;
+      src0_m_step_q     <= '0;
+      stride1_k_step_q  <= '0;
+      dst_m_step_q      <= '0;
+      dst_n_step_q      <= '0;
+      bias_n_step_q     <= '0;
       for (int c = 0; c < TILE_N; c++) begin
         bias_vec[c] <= '0;
       end
@@ -560,6 +623,17 @@ import tinygpu_pkg::*;
       vec_idx_q          <= vec_idx_d;
       desc_word_idx_q    <= desc_word_idx_d;
       store_stage_done_q <= store_stage_done_d;
+      src0_row_base_q    <= src0_row_base_d;
+      src1_k_base_q      <= src1_k_base_d;
+      src1_n_offset_q    <= src1_n_offset_d;
+      dst_row_base_q     <= dst_row_base_d;
+      dst_n_offset_q     <= dst_n_offset_d;
+      bias_base_q        <= bias_base_d;
+      src0_m_step_q      <= src0_m_step_d;
+      stride1_k_step_q   <= stride1_k_step_d;
+      dst_m_step_q       <= dst_m_step_d;
+      dst_n_step_q       <= dst_n_step_d;
+      bias_n_step_q      <= bias_n_step_d;
       dma_inflight_q     <= dma_inflight_d;
       bias_inflight_q    <= bias_inflight_d;
       vec_inflight_q     <= vec_inflight_d;
@@ -641,6 +715,14 @@ import tinygpu_pkg::*;
         vec_x_q <= $signed(vec_load_byte);
       if (load_vec_y_reg)
         vec_y_q <= $signed(vec_load_byte);
+      // vec ALU pipeline: staged to keep requant and packing off the critical path.
+      vec_result_raw_q  <= vec_result_raw;
+      vec_result_post_q <= vec_result_post;
+      vec_scaled_q      <= $signed(vec_result_post_q) * $signed(scale_q);
+      vec_result_i8_q   <= vec_result_i8;
+      is_vector_opcode_q <= (opcode_q == OP_VEC_ADD) || (opcode_q == OP_VEC_MUL) ||
+                            (opcode_q == OP_RELU)    || (opcode_q == OP_CLAMP);
+      effective_n_q      <= (opcode_q == OP_GEMV) ? 16'd1 : N_q;
 
       if (latch_vec_store_cmd) begin
         vec_store_addr_q  <= vec_store_addr_next;
@@ -751,6 +833,17 @@ import tinygpu_pkg::*;
     vec_idx_d          = vec_idx_q;
     desc_word_idx_d    = desc_word_idx_q;
     store_stage_done_d = store_stage_done_q;
+    src0_row_base_d    = src0_row_base_q;
+    src1_k_base_d      = src1_k_base_q;
+    src1_n_offset_d    = src1_n_offset_q;
+    dst_row_base_d     = dst_row_base_q;
+    dst_n_offset_d     = dst_n_offset_q;
+    bias_base_d        = bias_base_q;
+    src0_m_step_d      = src0_m_step_q;
+    stride1_k_step_d   = stride1_k_step_q;
+    dst_m_step_d       = dst_m_step_q;
+    dst_n_step_d       = dst_n_step_q;
+    bias_n_step_d      = bias_n_step_q;
 
     case (state_q)
       S_IDLE: begin
@@ -764,6 +857,17 @@ import tinygpu_pkg::*;
         vec_idx_d          = '0;
         desc_word_idx_d    = '0;
         store_stage_done_d = 1'b0;
+        src0_row_base_d    = '0;
+        src1_k_base_d      = '0;
+        src1_n_offset_d    = '0;
+        dst_row_base_d     = '0;
+        dst_n_offset_d     = '0;
+        bias_base_d        = '0;
+        src0_m_step_d      = '0;
+        stride1_k_step_d   = '0;
+        dst_m_step_d       = '0;
+        dst_n_step_d       = '0;
+        bias_n_step_d      = '0;
       end
 
       S_INIT_TILE: begin
@@ -775,6 +879,22 @@ import tinygpu_pkg::*;
         vec_idx_d          = '0;
         desc_word_idx_d    = '0;
         store_stage_done_d = 1'b0;
+      end
+
+      S_VALIDATE: begin
+        if (opcode_ok && dims_ok && dst_flags_ok) begin
+          src0_row_base_d  = src0_addr_q;
+          src1_k_base_d    = src1_addr_q;
+          src1_n_offset_d  = '0;
+          dst_row_base_d   = dst_addr_q;
+          dst_n_offset_d   = '0;
+          bias_base_d      = bias_addr_q;
+          src0_m_step_d    = ({16'd0, stride0_q} << TILE_M_SHIFT);
+          stride1_k_step_d = ({16'd0, stride1_q} << TILE_K_SHIFT);
+          dst_m_step_d     = ({16'd0, stride_dst_q} << TILE_M_SHIFT);
+          dst_n_step_d     = use_dst_i8 ? {16'd0, TILE_N_U16} : ({16'd0, TILE_N_U16} << 2);
+          bias_n_step_d    = ({16'd0, TILE_N_U16} << 2);
+        end
       end
 
       S_DESC_LOAD: begin
@@ -798,9 +918,10 @@ import tinygpu_pkg::*;
       end
 
       S_NEXT_K: begin
-        if (more_k_tiles)
+        if (more_k_tiles) begin
           k0_d = k0_q + TILE_K_U16;
-        else begin
+          src1_k_base_d = src1_k_base_q + stride1_k_step_q;
+        end else begin
           store_row_d        = '0;
           store_col_d        = '0;
           bias_col_d         = '0;
@@ -853,6 +974,10 @@ import tinygpu_pkg::*;
         bias_col_d         = '0;
         vec_idx_d          = '0;
         store_stage_done_d = 1'b0;
+        src1_k_base_d      = src1_addr_q;
+        src1_n_offset_d    = src1_n_offset_q + TILE_N_U16;
+        dst_n_offset_d     = dst_n_offset_q + dst_n_step_q;
+        bias_base_d        = bias_base_q + bias_n_step_q;
       end
 
       S_NEXT_TILE_M: begin
@@ -865,6 +990,12 @@ import tinygpu_pkg::*;
         bias_col_d         = '0;
         vec_idx_d          = '0;
         store_stage_done_d = 1'b0;
+        src0_row_base_d    = src0_row_base_q + src0_m_step_q;
+        src1_k_base_d      = src1_addr_q;
+        src1_n_offset_d    = '0;
+        dst_row_base_d     = dst_row_base_q + dst_m_step_q;
+        dst_n_offset_d     = '0;
+        bias_base_d        = bias_addr_q;
       end
 
       default: begin
@@ -895,7 +1026,8 @@ import tinygpu_pkg::*;
     cnt_cmd_start = 1'b0;
     cnt_cmd_done  = 1'b0;
     cnt_busy      = (state_q != S_IDLE) && (state_q != S_DONE) && (state_q != S_ERROR);
-    cnt_active    = (state_q == S_COMPUTE_K) || (state_q == S_VEC_EXEC);
+    cnt_active    = (state_q == S_COMPUTE_K) || (state_q == S_VEC_EXEC) ||
+                    (state_q == S_VEC_EXEC2) || (state_q == S_VEC_EXEC3);
     cnt_stall     = 1'b0;
     clear_bias_regs = 1'b0;
     load_bias_reg   = 1'b0;
@@ -1023,7 +1155,7 @@ import tinygpu_pkg::*;
       S_LOAD_A: begin
         desc_inflight_d        = 1'b0;
         dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
-        dma_base_addr_cmd_n    = src0_addr_q + (m0_q * stride0_q) + k0_q;
+        dma_base_addr_cmd_n    = src0_row_base_q + k0_q;
         dma_rows_cmd_n         = active_tile_m;
         dma_cols_cmd_n         = active_tile_k;
         dma_stride_bytes_cmd_n = stride0_q;
@@ -1056,7 +1188,7 @@ import tinygpu_pkg::*;
       S_LOAD_B: begin
         desc_inflight_d        = 1'b0;
         dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
-        dma_base_addr_cmd_n    = src1_addr_q + (k0_q * stride1_q) + n0_q;
+        dma_base_addr_cmd_n    = src1_k_base_q + src1_n_offset_q;
         dma_rows_cmd_n         = active_tile_k;
         dma_cols_cmd_n         = active_tile_n;
         dma_stride_bytes_cmd_n = stride1_q;
@@ -1239,13 +1371,43 @@ import tinygpu_pkg::*;
         end
       end
 
+      // AFTER (split into two cycles)
       S_VEC_EXEC: begin
         dma_inflight_d = 1'b0;
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
         dma_launch_pending_d = 1'b0;
-        latch_vec_store_cmd = 1'b1;
+        // do NOT latch here: just advance to the register stage
+        state_d = S_VEC_EXEC2;
+      end
+
+      S_VEC_EXEC2: begin
+        dma_inflight_d = 1'b0;
+        bias_inflight_d = 1'b0;
+        vec_inflight_d = 1'b0;
+        desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
+        // vec_result_post_q and vec_scaled_q are being registered this cycle
+        state_d = S_VEC_EXEC3;
+      end
+
+      S_VEC_EXEC3: begin
+        dma_inflight_d = 1'b0;
+        bias_inflight_d = 1'b0;
+        vec_inflight_d = 1'b0;
+        desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
+        state_d = S_VEC_EXEC4;
+      end
+
+      S_VEC_EXEC4: begin
+        dma_inflight_d = 1'b0;
+        bias_inflight_d = 1'b0;
+        vec_inflight_d = 1'b0;
+        desc_inflight_d = 1'b0;
+        dma_launch_pending_d = 1'b0;
+        latch_vec_store_cmd = 1'b1;  // vec_result_i8_q now stable for packing
         state_d = S_VEC_STORE;
       end
 
