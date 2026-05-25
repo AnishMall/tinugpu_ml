@@ -13,16 +13,16 @@ WARN  (EX2582) : Parameter 'SPM_A_BYTES' declared inside package 'tinygpu_pkg' s
 WARN  (EX2582) : Parameter 'SPM_B_BYTES' declared inside package 'tinygpu_pkg' shall be treated as localparam("C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pkg.sv":14)
 WARN  (EX2582) : Parameter 'SPM_C_BYTES' declared inside package 'tinygpu_pkg' shall be treated as localparam("C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pkg.sv":15)
 WARN  (EX2582) : Parameter 'MAX_BURST' declared inside package 'tinygpu_pkg' shall be treated as localparam("C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pkg.sv":16)
-Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pe.sv'
 Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_array4x4.sv'
-Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_spm.sv'
-Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_epilogue.sv'
-Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_dma.sv'
-Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_vec_alu.sv'
-Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_counters.sv'
-Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_regs.sv'
 Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_cmd_ctrl.sv'
+Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_counters.sv'
+Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_dma.sv'
+Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_epilogue.sv'
+Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pe.sv'
+Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_regs.sv'
+Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_spm.sv'
 Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_top.sv'
+Analyzing Verilog file 'C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_vec_alu.sv'
 Analyzing VHDL file 'C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_package.vhd'
 Analyzing package 'neorv32_package'("C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_package.vhd":15)
 Analyzing package body 'neorv32_package'("C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_package.vhd":1023)
@@ -267,6 +267,7 @@ Processing 'neorv32_bootrom_rom(awidth=16)(neorv32_bootrom_rom_rtl)'("C:\Users\D
 Processing 'neorv32_tinygpu_wrapper(neorv32_tinygpu_wrapper_rtl)'("C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_tinygpu_wrapper.vhd":13)
 Switching to Verilog mode to elaborate module 'tinygpu_top'("C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_tinygpu_wrapper.vhd":141)
 Compiling module 'tinygpu_top(ADDR_W=32'b00000000000000000000000000100000,DATA_W=32'b00000000000000000000000000100000)'("C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_top.sv":1)
+WARN  (EX2200) : Unknown fsm encoding '"binary"' ignored("C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pkg.sv":58)
 Compiling module 'tinygpu_regs'("C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_regs.sv":1)
 Compiling module 'tinygpu_cmd_ctrl'("C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_cmd_ctrl.sv":1)
 Compiling module 'tinygpu_spm'("C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_spm.sv":1)

@@ -291,7 +291,7 @@
         "SubInsts" : [
          {
           "InstFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_top.sv",
-          "InstLine" : 63,
+          "InstLine" : 78,
           "InstName" : "u_regs",
           "ModuleFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_regs.sv",
           "ModuleLine" : 1,
@@ -299,7 +299,7 @@
          },
          {
           "InstFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_top.sv",
-          "InstLine" : 106,
+          "InstLine" : 121,
           "InstName" : "u_cmd_ctrl",
           "ModuleFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv",
           "ModuleLine" : 1,
@@ -307,7 +307,7 @@
           "SubInsts" : [
            {
             "InstFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv",
-            "InstLine" : 283,
+            "InstLine" : 336,
             "InstName" : "u_spm",
             "ModuleFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_spm.sv",
             "ModuleLine" : 1,
@@ -315,7 +315,7 @@
            },
            {
             "InstFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv",
-            "InstLine" : 303,
+            "InstLine" : 356,
             "InstName" : "u_dma",
             "ModuleFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_dma.sv",
             "ModuleLine" : 1,
@@ -323,7 +323,7 @@
            },
            {
             "InstFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv",
-            "InstLine" : 333,
+            "InstLine" : 386,
             "InstName" : "u_array4x4",
             "ModuleFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_array4x4.sv",
             "ModuleLine" : 1,
@@ -341,7 +341,7 @@
            },
            {
             "InstFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv",
-            "InstLine" : 345,
+            "InstLine" : 398,
             "InstName" : "u_epilogue",
             "ModuleFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_epilogue.sv",
             "ModuleLine" : 1,
@@ -349,7 +349,7 @@
            },
            {
             "InstFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv",
-            "InstLine" : 363,
+            "InstLine" : 416,
             "InstName" : "u_vec_alu",
             "ModuleFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_vec_alu.sv",
             "ModuleLine" : 1,
@@ -359,7 +359,7 @@
          },
          {
           "InstFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_top.sv",
-          "InstLine" : 149,
+          "InstLine" : 164,
           "InstName" : "u_counters",
           "ModuleFile" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_counters.sv",
           "ModuleLine" : 1,

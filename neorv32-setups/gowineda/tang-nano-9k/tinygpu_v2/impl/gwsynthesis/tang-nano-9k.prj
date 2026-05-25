@@ -4,17 +4,17 @@
     <Version>beta</Version>
     <Device id="GW1NR-9C" package="QFN88P" speed="6" partNumber="GW1NR-LV9QN88PC6/I5"/>
     <FileList>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pe.sv" type="verilog"/>
         <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_array4x4.sv" type="verilog"/>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_spm.sv" type="verilog"/>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_epilogue.sv" type="verilog"/>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_dma.sv" type="verilog"/>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_vec_alu.sv" type="verilog"/>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_counters.sv" type="verilog"/>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_regs.sv" type="verilog"/>
         <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_cmd_ctrl.sv" type="verilog"/>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_top.sv" type="verilog"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_counters.sv" type="verilog"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_dma.sv" type="verilog"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_epilogue.sv" type="verilog"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pe.sv" type="verilog"/>
         <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_pkg.sv" type="verilog"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_regs.sv" type="verilog"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_spm.sv" type="verilog"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_top.sv" type="verilog"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\neorv32\rtl\core\tinygpu_ml\tinygpu_vec_alu.sv" type="verilog"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_bootrom.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_bootrom_image.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_bootrom_rom.vhd" type="vhdl"/>
@@ -63,6 +63,7 @@
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_spi.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_sys.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_sysinfo.vhd" type="vhdl"/>
+        <File path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_test_setup_bootloader.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_tinygpu.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_tinygpu_wrapper.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_top.vhd" type="vhdl"/>
@@ -73,7 +74,6 @@
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_uart.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_wdt.vhd" type="vhdl"/>
         <File library="neorv32" path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_xbus.vhd" type="vhdl"/>
-        <File path="C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-9k\tinygpu_v2\src\neorv32_test_setup_bootloader.vhd" type="vhdl"/>
     </FileList>
     <OptionList>
         <Option type="disable_insert_pad" value="0"/>
