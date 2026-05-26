@@ -25,7 +25,16 @@ import tinygpu_pkg::*;
   localparam logic signed [31:0] CLAMP_MIN_DFLT = -32'sd128;
   localparam logic signed [31:0] CLAMP_MAX_DFLT =  32'sd127;
 
-  logic busy_d;
+  typedef enum logic [1:0] {
+    EPI_IDLE,
+    EPI_POST,
+    EPI_SCALE,
+    EPI_WRITE
+  } epi_state_e;
+
+  epi_state_e state_q;
+  logic signed [ACC_W-1:0] post_q   [0:TILE_M-1][0:TILE_N-1];
+  logic signed [ACC_W-1:0] scaled_q [0:TILE_M-1][0:TILE_N-1];
 
   function automatic signed [INT8_W-1:0] sat_i8(input signed [31:0] x);
     begin
@@ -84,55 +93,81 @@ import tinygpu_pkg::*;
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      busy <= 1'b0;
-      done <= 1'b0;
+      state_q <= EPI_IDLE;
+      busy    <= 1'b0;
+      done    <= 1'b0;
       for (int r = 0; r < TILE_M; r++) begin
         for (int c = 0; c < TILE_N; c++) begin
+          post_q[r][c]    <= '0;
+          scaled_q[r][c]  <= '0;
           c_out_i32[r][c] <= '0;
           c_out_i8[r][c]  <= '0;
         end
       end
     end else begin
-      busy <= busy_d;
       done <= 1'b0;
 
-      if (start && !busy) begin
-        busy <= 1'b1;
-        for (int r = 0; r < TILE_M; r++) begin
-          for (int c = 0; c < TILE_N; c++) begin
-            logic signed [31:0] x_post;
-            logic signed [31:0] x_scaled;
-            logic signed [31:0] x_shifted;
-            logic               valid_elem;
-
-            valid_elem = row_mask[r] && col_mask[c];
-            x_post = postprocess_elem(c_in[r][c], bias[c], valid_elem, flags);
-
-            if (flags[FLAG_REQUANT_EN]) begin
-              x_scaled = x_post * scale;
-              if (shift >= 0)
-                x_shifted = (x_scaled >>> shift) + zero_point;
-              else
-                x_shifted = (x_scaled <<< (-shift)) + zero_point;
-            end else begin
-              x_shifted = x_post;
-            end
-
-            c_out_i32[r][c] <= x_post;
-            c_out_i8[r][c]  <= sat_i8(x_shifted);
+      case (state_q)
+        EPI_IDLE: begin
+          busy <= 1'b0;
+          if (start) begin
+            busy    <= 1'b1;
+            state_q <= EPI_POST;
           end
         end
-      end
 
-      if (busy)
-        done <= 1'b1;
+        EPI_POST: begin
+          for (int r = 0; r < TILE_M; r++) begin
+            for (int c = 0; c < TILE_N; c++) begin
+              logic valid_elem;
+              logic signed [31:0] x_post;
+              valid_elem = row_mask[r] && col_mask[c];
+              x_post = postprocess_elem(c_in[r][c], bias[c], valid_elem, flags);
+              post_q[r][c]    <= x_post;
+              c_out_i32[r][c] <= x_post;
+            end
+          end
+          state_q <= EPI_SCALE;
+        end
+
+        EPI_SCALE: begin
+          for (int r = 0; r < TILE_M; r++) begin
+            for (int c = 0; c < TILE_N; c++) begin
+              if (flags[FLAG_REQUANT_EN])
+                scaled_q[r][c] <= post_q[r][c] * scale;
+              else
+                scaled_q[r][c] <= post_q[r][c];
+            end
+          end
+          state_q <= EPI_WRITE;
+        end
+
+        EPI_WRITE: begin
+          for (int r = 0; r < TILE_M; r++) begin
+            for (int c = 0; c < TILE_N; c++) begin
+              logic signed [31:0] x_shifted;
+              if (flags[FLAG_REQUANT_EN]) begin
+                if (shift >= 0)
+                  x_shifted = (scaled_q[r][c] >>> shift) + zero_point;
+                else
+                  x_shifted = (scaled_q[r][c] <<< (-shift)) + zero_point;
+              end else begin
+                x_shifted = post_q[r][c];
+              end
+              c_out_i8[r][c] <= sat_i8(x_shifted);
+            end
+          end
+          busy    <= 1'b0;
+          done    <= 1'b1;
+          state_q <= EPI_IDLE;
+        end
+
+        default: begin
+          state_q <= EPI_IDLE;
+          busy    <= 1'b0;
+        end
+      endcase
     end
-  end
-
-  always_comb begin
-    busy_d = busy;
-    if (busy)
-      busy_d = 1'b0;
   end
 
 endmodule
