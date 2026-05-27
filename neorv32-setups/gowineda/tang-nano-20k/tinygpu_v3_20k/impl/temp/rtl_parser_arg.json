@@ -2,39 +2,7 @@
  "Device" : "GW2AR-18C",
  "Files" : [
   {
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_pkg.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_pe.sv",
-   "Type" : "verilog"
-  },
-  {
    "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_array4x4.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_spm.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_epilogue.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_dma.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_vec_alu.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_counters.sv",
-   "Type" : "verilog"
-  },
-  {
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_regs.sv",
    "Type" : "verilog"
   },
   {
@@ -42,7 +10,39 @@
    "Type" : "verilog"
   },
   {
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_counters.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_dma.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_epilogue.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_pe.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_pkg.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_regs.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_spm.sv",
+   "Type" : "verilog"
+  },
+  {
    "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_top.sv",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/neorv32/rtl/core/tinygpu_ml/tinygpu_vec_alu.sv",
    "Type" : "verilog"
   },
   {
@@ -286,6 +286,11 @@
    "Type" : "vhdl"
   },
   {
+   "Library" : "work",
+   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/gowineda/tang-nano-20k/tinygpu_v3_20k/src/neorv32_test_setup_bootloader.vhd",
+   "Type" : "vhdl"
+  },
+  {
    "Library" : "neorv32",
    "Path" : "C:/Users/Dell/Desktop/neorv32-setups/gowineda/tang-nano-20k/tinygpu_v3_20k/src/neorv32_tinygpu.vhd",
    "Type" : "vhdl"
@@ -333,11 +338,6 @@
   {
    "Library" : "neorv32",
    "Path" : "C:/Users/Dell/Desktop/neorv32-setups/gowineda/tang-nano-20k/tinygpu_v3_20k/src/neorv32_xbus.vhd",
-   "Type" : "vhdl"
-  },
-  {
-   "Library" : "work",
-   "Path" : "C:/Users/Dell/Desktop/neorv32-setups/gowineda/tang-nano-20k/tinygpu_v3_20k/src/neorv32_test_setup_bootloader.vhd",
    "Type" : "vhdl"
   }
  ],

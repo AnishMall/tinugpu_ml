@@ -65,7 +65,9 @@ begin
     -- Processor peripherals --
     IO_GPIO_NUM       => 6,                 -- number of GPIO input/output pairs (0..32)
     IO_CLINT_EN       => true,              -- implement core local interruptor (CLINT)?
-    IO_UART0_EN       => true               -- implement primary universal asynchronous receiver/transmitter (UART0)?
+    IO_UART0_EN       => true,               -- implement primary universal asynchronous receiver/transmitter (UART0)?
+    IO_TINYGPU_EN     => true                -- enable TinyGPU-ML accelerator
+
   )
   port map (
     -- Global control --

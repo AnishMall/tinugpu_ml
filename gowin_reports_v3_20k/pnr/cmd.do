@@ -1,0 +1,17 @@
+-d C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v3_20k\impl\gwsynthesis\tang-nano-20k.vg
+-p GW2AR-18C-QFN88-8
+-pn GW2AR-LV18QN88C8/I7
+-cst C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v3_20k\src\tang-nano-20k_test_setup_bootloader.cst
+-cfg C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v3_20k\impl\pnr\device.cfg
+-sdc C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v3_20k\src\tinygpu_20k.sdc
+-bit
+-tr
+-ph
+-timing
+-cst_error
+-place_option 0
+-route_option 0
+-clock_route_order 0
+-correct_hold 1
+-route_maxfan 23
+-global_freq 100.000
