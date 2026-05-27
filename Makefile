@@ -4,9 +4,11 @@ BUILD_DIR ?= build
 
 RTL_SRCS := \
 	rtl/tinygpu_pkg.sv \
+	rtl/tinygpu_shared_mul.sv \
 	rtl/tinygpu_pe.sv \
 	rtl/tinygpu_array4x4.sv \
 	rtl/tinygpu_spm.sv \
+	rtl/tinygpu_epilogue_shared.sv \
 	rtl/tinygpu_epilogue.sv \
 	rtl/tinygpu_dma.sv \
 	rtl/tinygpu_vec_alu.sv \
@@ -19,6 +21,7 @@ TB_NAMES := \
 	tb_tinygpu_pe_tb \
 	tb_tinygpu_array4x4_tb \
 	tb_tinygpu_dma_tb \
+	tb_tinygpu_epilogue_tb \
 	tb_tinygpu_gemm_tile_tb \
 	tb_tinygpu_regs_tb \
 	tb_tinygpu_counters_tb \

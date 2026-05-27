@@ -131,6 +131,9 @@ import tinygpu_pkg::*;
   logic                     epi_start;
   logic                     epi_busy;
   logic                     epi_done;
+  logic                     epi_mul_start;
+  logic signed [ACC_W-1:0]  epi_mul_a;
+  logic signed [31:0]       epi_mul_b;
   logic signed [ACC_W-1:0]  bias_vec [0:TILE_N-1];
   logic signed [ACC_W-1:0]  c_epi_i32 [0:TILE_M-1][0:TILE_N-1];
   logic signed [INT8_W-1:0] c_epi_i8  [0:TILE_M-1][0:TILE_N-1];
@@ -146,6 +149,16 @@ import tinygpu_pkg::*;
   logic signed [ACC_W-1:0]  vec_result_post_q;  // pipeline stage 2
   logic signed [ACC_W-1:0]  vec_scaled_q;        // pipeline stage 3
   logic signed [INT8_W-1:0] vec_result_i8_q;     // pipeline stage 4
+  logic                     vec_mul_start;
+  logic                     vec_mul_busy;
+  logic                     vec_mul_done;
+  logic signed [ACC_W-1:0]  vec_mul_product;
+  logic                     shared_mul_start;
+  logic                     shared_mul_busy;
+  logic                     shared_mul_done;
+  logic signed [ACC_W-1:0]  shared_mul_product;
+  logic signed [ACC_W-1:0]  shared_mul_a;
+  logic signed [31:0]       shared_mul_b;
 
   logic                     dma_start;
   logic                     dma_busy;
@@ -208,6 +221,10 @@ import tinygpu_pkg::*;
   logic        is_vector_opcode;
   logic        is_vector_opcode_q;
   logic        vec_needs_y;
+  logic        latch_vec_raw;
+  logic        latch_vec_post;
+  logic        latch_vec_scaled;
+  logic        latch_vec_i8;
   logic        state_is_bias;
   logic        state_is_vec;
   logic        state_is_desc;
@@ -334,19 +351,19 @@ import tinygpu_pkg::*;
     if (use_dst_i8) begin
       case (vec_dst_elem_addr[1:0])
         2'd0: begin
-          vec_store_wdata_next = {24'd0, vec_result_i8_q};
+          vec_store_wdata_next = {24'd0, vec_result_i8};
           vec_store_wstrb_next = 4'b0001;
         end
         2'd1: begin
-          vec_store_wdata_next = {16'd0, vec_result_i8_q, 8'd0};
+          vec_store_wdata_next = {16'd0, vec_result_i8, 8'd0};
           vec_store_wstrb_next = 4'b0010;
         end
         2'd2: begin
-          vec_store_wdata_next = {8'd0, vec_result_i8_q, 16'd0};
+          vec_store_wdata_next = {8'd0, vec_result_i8, 16'd0};
           vec_store_wstrb_next = 4'b0100;
         end
         default: begin
-          vec_store_wdata_next = {vec_result_i8_q, 24'd0};
+          vec_store_wdata_next = {vec_result_i8, 24'd0};
           vec_store_wstrb_next = 4'b1000;
         end
       endcase
@@ -415,7 +432,7 @@ import tinygpu_pkg::*;
     .c_tile    (c_tile)
   );
 
-  tinygpu_epilogue u_epilogue (
+  tinygpu_epilogue_shared u_epilogue (
     .clk        (clk),
     .rst_n      (rst_n),
     .start      (epi_start),
@@ -429,6 +446,12 @@ import tinygpu_pkg::*;
     .bias       (bias_vec),
     .row_mask   (row_mask),
     .col_mask   (col_mask),
+    .mul_start  (epi_mul_start),
+    .mul_a      (epi_mul_a),
+    .mul_b      (epi_mul_b),
+    .mul_busy   (shared_mul_busy),
+    .mul_done   (shared_mul_done),
+    .mul_product(shared_mul_product),
     .c_out_i32  (c_epi_i32),
     .c_out_i8   (c_epi_i8)
   );
@@ -439,6 +462,28 @@ import tinygpu_pkg::*;
     .y_i    (vec_y_q),
     .z_o    (vec_result_raw)
   );
+
+  tinygpu_shared_mul #(
+    .A_W   (ACC_W),
+    .B_W   (32),
+    .OUT_W (ACC_W)
+  ) u_shared_mul (
+    .clk       (clk),
+    .rst_n     (rst_n),
+    .start     (shared_mul_start),
+    .a_i       (shared_mul_a),
+    .b_i       (shared_mul_b),
+    .busy      (shared_mul_busy),
+    .done      (shared_mul_done),
+    .product_o (shared_mul_product)
+  );
+
+  assign shared_mul_start = epi_mul_start | vec_mul_start;
+  assign shared_mul_a     = epi_mul_start ? epi_mul_a : vec_result_post_q;
+  assign shared_mul_b     = epi_mul_start ? epi_mul_b : scale_q;
+  assign vec_mul_busy     = shared_mul_busy;
+  assign vec_mul_done     = shared_mul_done;
+  assign vec_mul_product  = shared_mul_product;
 
   always @* begin
     case (state_q)
@@ -715,11 +760,14 @@ import tinygpu_pkg::*;
         vec_x_q <= $signed(vec_load_byte);
       if (load_vec_y_reg)
         vec_y_q <= $signed(vec_load_byte);
-      // vec ALU pipeline: staged to keep requant and packing off the critical path.
-      vec_result_raw_q  <= vec_result_raw;
-      vec_result_post_q <= vec_result_post;
-      vec_scaled_q      <= $signed(vec_result_post_q) * $signed(scale_q);
-      vec_result_i8_q   <= vec_result_i8;
+      if (latch_vec_raw)
+        vec_result_raw_q <= vec_result_raw;
+      if (latch_vec_post)
+        vec_result_post_q <= vec_result_post;
+      if (latch_vec_scaled)
+        vec_scaled_q <= vec_mul_product;
+      if (latch_vec_i8)
+        vec_result_i8_q <= vec_result_i8;
       is_vector_opcode_q <= (opcode_q == OP_VEC_ADD) || (opcode_q == OP_VEC_MUL) ||
                             (opcode_q == OP_RELU)    || (opcode_q == OP_CLAMP);
       effective_n_q      <= (opcode_q == OP_GEMV) ? 16'd1 : N_q;
@@ -1035,12 +1083,17 @@ import tinygpu_pkg::*;
     load_vec_y_reg  = 1'b0;
     latch_vec_store_cmd = 1'b0;
     latch_dma_cmd       = 1'b0;
+    latch_vec_raw       = 1'b0;
+    latch_vec_post      = 1'b0;
+    latch_vec_scaled    = 1'b0;
+    latch_vec_i8        = 1'b0;
 
     array_clear_acc = 1'b0;
     array_mac_en    = 1'b0;
     epi_start       = 1'b0;
 
     dma_start        = 1'b0;
+    vec_mul_start    = 1'b0;
 
     c_wr_en         = 1'b0;
     c_wr_addr       = '0;
@@ -1371,14 +1424,13 @@ import tinygpu_pkg::*;
         end
       end
 
-      // AFTER (split into two cycles)
       S_VEC_EXEC: begin
         dma_inflight_d = 1'b0;
         bias_inflight_d = 1'b0;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
         dma_launch_pending_d = 1'b0;
-        // do NOT latch here: just advance to the register stage
+        latch_vec_raw = 1'b1;
         state_d = S_VEC_EXEC2;
       end
 
@@ -1388,8 +1440,11 @@ import tinygpu_pkg::*;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
         dma_launch_pending_d = 1'b0;
-        // vec_result_post_q and vec_scaled_q are being registered this cycle
-        state_d = S_VEC_EXEC3;
+        latch_vec_post = 1'b1;
+        if (flags_q[FLAG_REQUANT_EN])
+          state_d = S_VEC_EXEC3;
+        else
+          state_d = S_VEC_EXEC4;
       end
 
       S_VEC_EXEC3: begin
@@ -1398,7 +1453,17 @@ import tinygpu_pkg::*;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
         dma_launch_pending_d = 1'b0;
-        state_d = S_VEC_EXEC4;
+        if (flags_q[FLAG_REQUANT_EN]) begin
+          cnt_stall = 1'b1;
+          if (!vec_mul_busy && !vec_mul_done) begin
+            vec_mul_start = 1'b1;
+          end else if (vec_mul_done) begin
+            latch_vec_scaled = 1'b1;
+            state_d = S_VEC_EXEC4;
+          end
+        end else begin
+          state_d = S_VEC_EXEC4;
+        end
       end
 
       S_VEC_EXEC4: begin
@@ -1407,7 +1472,8 @@ import tinygpu_pkg::*;
         vec_inflight_d = 1'b0;
         desc_inflight_d = 1'b0;
         dma_launch_pending_d = 1'b0;
-        latch_vec_store_cmd = 1'b1;  // vec_result_i8_q now stable for packing
+        latch_vec_i8        = 1'b1;
+        latch_vec_store_cmd = 1'b1;
         state_d = S_VEC_STORE;
       end
 

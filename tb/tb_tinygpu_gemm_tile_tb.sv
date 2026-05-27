@@ -368,7 +368,7 @@ module tb_tinygpu_gemm_tile_tb;
     @(posedge clk);
     @(negedge clk);
     epi_start = 1'b0;
-    wait_epi_done(50);
+    wait_epi_done(200);
 
     if (c_epi_i32[0][0] !== 32'sd19) $fatal(1, "Epi c00 mismatch: %0d", c_epi_i32[0][0]);
     if (c_epi_i32[0][1] !== 32'sd22) $fatal(1, "Epi c01 mismatch: %0d", c_epi_i32[0][1]);

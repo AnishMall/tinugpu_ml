@@ -19,6 +19,8 @@ Implement a synthesizable RTL accelerator that supports:
 7. Requantization from `int32` accumulator values to `int8`
 8. Conv2D through software `im2col + GEMM`, not through a dedicated convolution datapath
 
+For larger tile configurations such as the standalone `4x4x16` RTL, the implementation may serialize the epilogue and reuse a shared multiplier for requantization in order to reduce FPGA area. The MAC array can remain parallel even if the postprocess path is multi-cycle.
+
 The hardware must expose:
 
 1. A memory-mapped register interface for NEORV32
@@ -251,6 +253,8 @@ rtl/
   tinygpu_spm.sv
   tinygpu_pe.sv
   tinygpu_array4x4.sv
+  tinygpu_shared_mul.sv
+  tinygpu_epilogue_shared.sv
   tinygpu_epilogue.sv
   tinygpu_vec_alu.sv
   tinygpu_counters.sv
@@ -270,6 +274,19 @@ tb/
   tinygpu_scoreboard.sv
   tinygpu_golden_pkg.sv
 ```
+
+### 7.1 Practical 4x4 Area Note
+
+The straightforward interpretation of this spec would instantiate a fully parallel `4x4` epilogue as well as the `4x4` MAC array. That is functionally fine, but expensive on smaller FPGAs.
+
+A practical implementation strategy is:
+
+- keep the `4x4` PE array parallel
+- stage the accumulated tile results
+- run a shared multi-cycle epilogue over one element at a time
+- reuse a shared multiplier block for requantization instead of instantiating 16 parallel requant multipliers
+
+That optimization changes latency, but not the software-visible behavior of the accelerator.
 
 ---
 

@@ -19,9 +19,31 @@ This folder contains the files needed to integrate TinyGPU-ML into the NEORV32 R
   - tinygpu_spm.sv - Scratchpad memory
   - tinygpu_array4x4.sv - 4×4 MAC array
   - tinygpu_pe.sv - Processing element
-  - tinygpu_epilogue.sv - Bias, ReLU, requantization
+  - tinygpu_shared_mul.sv - Shared signed multiplier for serialized requant paths
+  - tinygpu_epilogue_shared.sv - Multi-cycle shared epilogue for area-optimized 4×4 builds
+  - tinygpu_epilogue.sv - Wrapper around the shared epilogue
   - tinygpu_vec_alu.sv - Vector ALU
   - tinygpu_counters.sv - Performance counters
+
+## Root RTL Note
+
+The standalone root `rtl/` copy keeps the original `4x4x16` tile configuration, but its post-processing path is area-optimized:
+
+- the `4x4` int8 MAC array remains parallel
+- the epilogue runs as a multi-cycle shared unit instead of a 16-lane parallel requant block
+- the vector requant path and epilogue requant path share one physical multiplier instance inside the root controller path rather than keeping separate always-live multiply stages
+
+That reduces replicated arithmetic in the full-size RTL while keeping the software-visible behavior unchanged.
+
+## Running the Root SV Regression
+
+From the repo root:
+
+```bash
+make test
+```
+
+The regression now includes `tb_tinygpu_epilogue_tb` in addition to the existing unit, datapath, and top-level benches.
 
 ## MMIO Register Map
 

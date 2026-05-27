@@ -22,8 +22,10 @@ tinygpu_top
 │  ├─ tinygpu_spm
 │  ├─ tinygpu_array4x4
 │  │  └─ 16x tinygpu_pe
-│  ├─ tinygpu_epilogue
+│  ├─ tinygpu_epilogue_shared
+│  │  └─ tinygpu_shared_mul
 │  ├─ tinygpu_vec_alu
+│  ├─ tinygpu_shared_mul
 │  └─ tinygpu_counters
 └─ irq/status glue
 ```
@@ -177,7 +179,7 @@ Owns:
 - one signed int8 x int8 multiply
 - one signed int32 accumulator
 
-#### `tinygpu_epilogue.sv`
+#### `tinygpu_epilogue_shared.sv`
 
 Owns:
 
@@ -186,6 +188,16 @@ Owns:
 - requantization
 - zero-point add
 - int8 saturation
+
+This block is intentionally multi-cycle and processes one output element at a time with a shared multiplier instead of running 16 requant lanes in parallel.
+
+#### `tinygpu_shared_mul.sv`
+
+Owns:
+
+- one shared signed multiply resource
+- simple start/done handshake
+- reuse across serialized requant datapaths
 
 #### `tinygpu_vec_alu.sv`
 
@@ -196,7 +208,17 @@ Owns:
 - ReLU
 - clamp
 
-This can remain mostly independent of the 4x4 GEMM path.
+This can remain mostly independent of the 4x4 GEMM path. In the current root RTL, the vector requant/store path and the shared epilogue are driven from one physical shared multiplier in the controller path instead of keeping separate permanently parallel requant multiplies.
+
+### 1.2 Area-Optimized 4x4 Note
+
+The original architectural intent was a fully parallel `4x4x16` tile engine with a tile-wide epilogue. The implemented root `4x4x16` version now uses a more FPGA-friendly split:
+
+- the `4x4` MAC array remains parallel
+- the epilogue is serialized across tile elements
+- requantization uses a shared multiplier
+
+This preserves the identity of the design as a `4x4` GEMM accelerator while cutting a large amount of replicated postprocess logic.
 
 #### `tinygpu_counters.sv`
 
