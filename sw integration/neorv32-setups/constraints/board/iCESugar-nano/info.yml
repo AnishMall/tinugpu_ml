@@ -1,9 +1,0 @@
-Label: iCESugar-nano
-Device: ICE40-LP1K
-Package: CM36
-Documentation: https://github.com/wuxx/icesugar-nano
-Prog:
-  ID: "1d50:602b"
-  Tools:
-    - icesprog
-    - DAPLink

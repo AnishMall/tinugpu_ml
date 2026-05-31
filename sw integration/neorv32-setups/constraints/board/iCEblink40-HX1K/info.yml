@@ -1,7 +1,0 @@
-Label: iCEblink40-HX1K Evaluation Kit
-Device: ICE40-HX1K
-Package: VQ100
-Documentation: http://www.latticesemi.com/iCEblink40-HX1K
-Prog:
-  ID: "1443:0007"
-  Tools: iCEburn

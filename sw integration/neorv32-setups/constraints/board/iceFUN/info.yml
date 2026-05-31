@@ -1,7 +1,0 @@
-Label: iceFUN
-Device: ICE40-HX8K
-Package: CB132
-Documentation: https://www.robot-electronics.co.uk/icefun.html
-Prog:
-  ID: "04d8:ffee"
-  Tools: icefunprog

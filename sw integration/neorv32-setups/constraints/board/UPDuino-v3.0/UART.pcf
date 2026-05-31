@@ -1,6 +1,0 @@
-#| UPDuino-v3.0
-
-
-#> UART
-set_io UPDuinov30_TX 38
-set_io UPDuinov30_RX 28

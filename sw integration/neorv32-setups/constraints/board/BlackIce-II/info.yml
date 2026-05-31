@@ -1,8 +1,0 @@
-Label: myStorm BlackIce II
-Device: ICE40-HX8K
-Package: TQ144
-Documentation:
-  "gh:mystorm-org/BlackIce-II": https://github.com/mystorm-org/BlackIce-II
-Prog:
-  ID: "0483:5740"
-  Tools: blackiceprog

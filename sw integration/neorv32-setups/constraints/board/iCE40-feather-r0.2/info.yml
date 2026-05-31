@@ -1,6 +1,0 @@
-Label: iCE40 Feather r0.2
-Device: ICE40-UP5K
-Documentation:
-  - https://github.com/joshajohnson/iCE40-feather
-  - https://www.pcbway.com/project/gifts_detail/iCE40_Feather.html
-Prog: iceprog
