@@ -8,6 +8,10 @@ GHDL="${GHDL:-ghdl}"
 # GHDL build directory
 mkdir -p build
 
+# Compile IMEM image package FIRST (dependency order)
+ghdl -a --std=08 --workdir=build --ieee=standard --work=neorv32 \
+  ../rtl/core/neorv32_imem_image.vhd
+
 # GHDL import
 find ../rtl/core ../sim -type f -name '*.vhd' ! -path '*/tinygpu_ml/*' ! -name 'neorv32_tinygpu.vhd' -exec \
   ghdl -i --std=08 --workdir=build --ieee=standard --work=neorv32 {} \;

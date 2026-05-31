@@ -59,7 +59,7 @@ entity neorv32_tb is
     CPU_RF_ARCH_SEL   : natural range 0 to 3           := 0;           -- register file implementation style select
     IMEM_EN           : boolean                        := true;        -- implement processor-internal instruction memory
     IMEM_BASE         : std_ulogic_vector(31 downto 0) := x"00000000"; -- base address of processor-internal instruction memory (naturally aligned)
-    IMEM_SIZE         : natural                        := 32*1024;     -- size of processor-internal instruction memory in bytes (use a power of 2)
+    IMEM_SIZE         : natural                        := 8*1024;     -- size of processor-internal instruction memory in bytes (use a power of 2)
     DMEM_EN           : boolean                        := true;        -- implement processor-internal data memory
     DMEM_BASE         : std_ulogic_vector(31 downto 0) := x"80000000"; -- base address of processor-internal data memory (naturally aligned)
     DMEM_SIZE         : natural                        := 8*1024;      -- size of processor-internal data memory in bytes (use a power of 2)
@@ -376,7 +376,9 @@ begin
     -- Instruction Tracer (TRACER) --
     IO_TRACER_EN        => true,
     IO_TRACER_BUFFER    => 32,
-    IO_TRACER_SIMLOG_EN => TRACE_LOG_EN
+    IO_TRACER_SIMLOG_EN => TRACE_LOG_EN,
+    -- TinyGPU-ML Accelerator --
+    IO_TINYGPU_EN       => true
   )
   port map (
     -- Global control --

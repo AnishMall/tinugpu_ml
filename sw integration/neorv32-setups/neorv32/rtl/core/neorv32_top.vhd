@@ -78,7 +78,7 @@ entity neorv32_top is
 
     -- Hardware Performance Monitors (HPM) --
     HPM_NUM_CNTS        : natural range 0 to 13          := 13;             -- number of implemented HPM counters
-    HPM_CNT_WIDTH       : natural range 0 to 64          := 40;            -- total size of HPM counters
+    HPM_CNT_WIDTH       : natural range 0 to 64          := 64;            -- total size of HPM counters
 
     -- Internal Instruction memory (IMEM) --
     IMEM_EN             : boolean                        := false;         -- implement processor-internal instruction memory
@@ -141,7 +141,7 @@ entity neorv32_top is
     IO_TRACER_EN        : boolean                        := false;         -- implement instruction tracer
     IO_TRACER_BUFFER    : natural range 1 to 2**15       := 1;             -- trace buffer depth, has to be a power of two
     IO_TRACER_SIMLOG_EN : boolean                        := false;         -- write full trace log to file (simulation-only)
-    IO_TINYGPU_EN       : boolean                        := false          -- implement TinyGPU-ML accelerator
+    IO_TINYGPU_EN       : boolean                        := true          -- implement TinyGPU-ML accelerator
   );
   port (
     -- Global control --
