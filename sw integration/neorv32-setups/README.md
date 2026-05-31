@@ -1,251 +1,108 @@
-# The NEORV32 RISC-V Processor
+# Exemplary NEORV32 Setups and Projects
 
-[![datasheet (pdf)](https://img.shields.io/badge/Data%20Sheet-PDF-ffbd00?longCache=true&style=flat&logo=asciidoctor&colorA=273274)](https://github.com/stnolting/neorv32/releases/download/nightly_release/NEORV32-nightly.pdf)
-[![datasheet (html)](https://img.shields.io/badge/-HTML-ffbd00?longCache=true&style=flat)](https://stnolting.github.io/neorv32)
-[![userguide (pdf)](https://img.shields.io/badge/User%20Guide-PDF-ffbd00?longCache=true&style=flat&logo=asciidoctor&colorA=273274)](https://github.com/stnolting/neorv32/releases/download/nightly_release/NEORV32_UserGuide-nightly.pdf)
-[![userguide (html)](https://img.shields.io/badge/-HTML-ffbd00?longCache=true&style=flat)](https://stnolting.github.io/neorv32/ug)
-[![doxygen](https://img.shields.io/badge/SW_API-HTML-ffbd00?longCache=true&style=flat&logo=Doxygen&colorA=273274)](https://stnolting.github.io/neorv32/sw/files.html)
-[![license](https://img.shields.io/github/license/stnolting/neorv32?label=License&longCache=true&style=flat&logo=bsd)](https://github.com/stnolting/neorv32/blob/main/LICENSE)
+[![Containers](https://img.shields.io/github/actions/workflow/status/stnolting/neorv32-setups/Containers.yml?branch=main&longCache=true&style=flat-square&label=Containers&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/neorv32-setups/actions?query=workflow%3AContainers)
+[![Implementation](https://img.shields.io/github/actions/workflow/status/stnolting/neorv32-setups/Implementation.yml?branch=main&longCache=true&style=flat-square&label=Implementation&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/neorv32-setups/actions?query=workflow%3AImplementation)
+[![License](https://img.shields.io/github/license/stnolting/neorv32-setups?longCache=true&style=flat-square&label=License)](https://github.com/stnolting/neorv32-setups/blob/main/LICENSE)
 
-The NEORV32 Processor is a **customizable microcontroller-like system on chip (SoC)** built around the NEORV32
-[RISC-V](https://riscv.org/) CPU that is written in **platform-independent VHDL**. The processor is intended as auxiliary
-controller in larger SoC designs or as tiny and customized microcontroller. The project is intended to work _out of the box_
-and targets FPGA / RISC-V beginners as well as experienced users.
+* [**Community Projects** (hardware / software)](#community-projects)
+* [**Setups using Commercial Toolchains** (FPGA setups)](#setups-using-commercial-toolchains)
+* [**Setups using Open-Source Toolchains** (FPGA setups)](#setups-using-open-source-toolchains)
+* [Adding Your Project or Setup](#ADDING-YOUR-PROJECT-OR-SETUp)
+* [Setup-Specific NEORV32 Software Framework Modifications](#setup-specific-neorv32-software-framework-modifications)
 
-![neorv32 Overview](docs/figures/neorv32_processor.png)
+This repository provides community projects as well as exemplary setups for different FPGAs, platforms, boards
+and toolchains for the [**NEORV32 RISC-V Processor**](https://github.com/stnolting/neorv32).
+Project maintainers may make pull requests against this repository to add or link their setups and projects.
 
-### Key Features
-
-- [x] all-in-one package: **CPU** + **SoC** + **Software Framework** + **Test Infrastructure**
-- [x] fully self-contained - no external source dependencies
-- [x] completely described in behavioral, platform-independent VHDL - **no** primitives, macros, attributes, etc.
-- [x] technology friendly; e.g. all internal memories can be mapped to FPGA or ASIC primitives
-- [x] extensive CPU & SoC configuration options for adapting to application requirements
-- [x] aims to be as small as possible while being as RISC-V-compliant as possible
-- [x] optimized for high clock frequencies to ease integration and timing closure
-- [x] from zero to `printf("hello world");` - completely open-source and documented
-- [x] easy to use – intended to work _out of the box_
-
-* :recycle: Looking for an **all-Verilog** version? Have a look at the [auto-conversion setup](rtl/verilog).
-* :mag: [Continuous integration](#project-status) to check for regressions (including RISC-V ISA compatibility check using RISCOF).
-* :open_file_folder: [Exemplary setups](https://github.com/stnolting/neorv32-setups) and
-[community projects](https://github.com/stnolting/neorv32-setups/blob/main/README.md#Community-Projects)
-targeting various FPGA boards and toolchains to get started.
-* :package: The entire processor is also available as [Vivado IP Block](https://stnolting.github.io/neorv32/ug/#_packaging_the_processor_as_vivado_ip_block).
-* :kite: Upstream [Zephyr](https://docs.zephyrproject.org/latest/boards/others/neorv32/doc/index.html) and
-[FreeRTOS](https://github.com/stnolting/neorv32-freertos) operating system support.
-* :building_construction: [LiteX](https://github.com/enjoy-digital/litex/wiki/CPUs#risc-v---neorv32) SoC builder integration.
-* :gear: [MicroPython](https://github.com/stnolting/neorv32-micropython) port, [Ada](https://github.com/GNAT-Academic-Program/neorv32-hal) support, and
-[Rust](https://crates.io/crates/embassy-neorv32) integration via Embassy framework.
-* :desktop_computer: Pre-configured [Eclipse project](https://stnolting.github.io/neorv32/ug/#_eclipse_ide) for developing and debugging code using an IDE.
-* :label: The project's change log is available in [CHANGELOG.md](https://github.com/stnolting/neorv32/blob/main/CHANGELOG.md).
-* :rocket: Check out the [quick links below](#getting-started) and the
-[User Guide](https://stnolting.github.io/neorv32/ug/) to get started.
-* :books: For detailed information see the [online documentation](https://stnolting.github.io/neorv32/).
-
-### Project Status
-
-[![release](https://img.shields.io/github/v/release/stnolting/neorv32?longCache=true&style=flat&logo=GitHub)](https://github.com/stnolting/neorv32/releases)
-[![commits-since-latest-release](https://img.shields.io/github/commits-since/stnolting/neorv32/latest?longCache=true&style=flat&logo=GitHub)](https://github.com/stnolting/neorv32/activity)
-
-| Task | CI Status |
-|:-----|:----------|
-| GitHub pages         | [![GitHub Pages](https://img.shields.io/website.svg?label=stnolting.github.io%2Fneorv32&longCache=true&style=flat-square&url=http%3A%2F%2Fstnolting.github.io%2Fneorv32%2Findex.html&logo=GitHub)](https://stnolting.github.io/neorv32) |
-| Documentation        | [![Documentation](https://img.shields.io/github/actions/workflow/status/stnolting/neorv32/Documentation.yml?branch=main&longCache=true&style=flat-square&label=Documentation&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/neorv32/actions/workflows/Documentation.yml) |
-| Processor check      | [![Processor](https://img.shields.io/github/actions/workflow/status/stnolting/neorv32/Processor.yml?branch=main&longCache=true&style=flat-square&label=Processor%20Check&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/neorv32/actions/workflows/Processor.yml) |
-| Verilog conversion   | [![Verilog Conversion](https://img.shields.io/github/actions/workflow/status/stnolting/neorv32/Verilog.yml?branch=main&longCache=true&style=flat-square&label=Verilog%20Conversion&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/neorv32/actions/workflows/Verilog.yml)
-| RISC-V compatibility | [![riscv-arch-test](https://img.shields.io/github/actions/workflow/status/stnolting/neorv32/riscv-arch-test.yml?branch=main&longCache=true&style=flat-square&label=RISC-V%20Compatibility%20Test&logo=Github%20Actions&logoColor=fff)](https://github.com/stnolting/neorv32/actions/workflows/riscv-arch-test.yml) |
-
-The processor passes the official RISC-V architecture compatibility tests. It can successfully run _any_ C program
-including CoreMark and FreeRTOS and can be synthesized for _any_ target technology - [tested](https://github.com/stnolting/neorv32-setups)
-on AMD, Intel, Lattice, Microchip, Gowin and Cologne Chip FPGAs. The processor has also been taped out several times as an ASIC.
+> [!TIP]
+> **Ready-to-use bitstreams** for the provided _open source toolchain-based setups_ are available via the assets of the[Implementation Workflow](https://github.com/stnolting/neorv32-setups/actions/workflows/Implementation.yml).
 
 
-## Features
+## Community Projects
 
-The NEORV32 Processor provides a full-featured microcontroller-like SoC build around the NEORV32 CPU.
-By using generics the design is highly configurable and allows a flexible customization to tailor the
-setup according to your needs. Note that all of the following SoC modules are entirely _optional_.
+This list shows projects that focus on custom hard- or software modifications, specific applications, etc.
 
-**CPU Core(s)**
-
-* [![RISCV-ARCHID](https://img.shields.io/badge/RISC--V%20Architecture%20ID-19-000000.svg?longCache=true&style=flat-square&logo=riscv&colorA=273274&colorB=fbb517)](https://github.com/riscv/riscv-isa-manual/blob/master/marchid.md)
-* RISC-V 32-bit little-endian pipelined/multi-cycle modified-Harvard architecture
-* Single-core or SMP dual-core configuration
-* configurable instruction sets and extensions:
-\
-`RV32`
-[`I`](https://stnolting.github.io/neorv32/#_i_isa_extension)
-[`E`](https://stnolting.github.io/neorv32/#_e_isa_extension)
-[`M`](https://stnolting.github.io/neorv32/#_m_isa_extension)
-[`A`](https://stnolting.github.io/neorv32/#_a_isa_extension)
-[`C`](https://stnolting.github.io/neorv32/#_c_isa_extension)
-[`B`](https://stnolting.github.io/neorv32/#_b_isa_extension)
-[`U`](https://stnolting.github.io/neorv32/#_u_isa_extension)
-[`X`](https://stnolting.github.io/neorv32/#_x_isa_extension)
-[`Zaamo`](https://stnolting.github.io/neorv32/#_zaamo_isa_extension)
-[`Zalrsc`](https://stnolting.github.io/neorv32/#_zalrsc_isa_extension)
-[`Zcb`](https://stnolting.github.io/neorv32/#_zcb_isa_extension)
-[`Zba`](https://stnolting.github.io/neorv32/#_zba_isa_extension)
-[`Zbb`](https://stnolting.github.io/neorv32/#_zbb_isa_extension)
-[`Zbkb`](https://stnolting.github.io/neorv32/#_zbkb_isa_extension)
-[`Zbkc`](https://stnolting.github.io/neorv32/#_zbkc_isa_extension)
-[`Zbkx`](https://stnolting.github.io/neorv32/#_zbkx_isa_extension)
-[`Zbs`](https://stnolting.github.io/neorv32/#_zbs_isa_extension)
-[`Zfinx`](https://stnolting.github.io/neorv32/#_zfinx_isa_extension)
-[`Zibi`](https://stnolting.github.io/neorv32/#_zibi_isa_extension)
-[`Zicntr`](https://stnolting.github.io/neorv32/#_zicntr_isa_extension)
-[`Zicond`](https://stnolting.github.io/neorv32/#_zicond_isa_extension)
-[`Zicsr`](https://stnolting.github.io/neorv32/#_zicsr_isa_extension)
-[`Zifencei`](https://stnolting.github.io/neorv32/#_zifencei_isa_extension)
-[`Zihpm`](https://stnolting.github.io/neorv32/#_zihpm_isa_extension)
-[`Zimop`](https://stnolting.github.io/neorv32/#_zimop_isa_extension)
-[`Zkn`](https://stnolting.github.io/neorv32/#_zkn_isa_extension)
-[`Zknd`](https://stnolting.github.io/neorv32/#_zknd_isa_extension)
-[`Zkne`](https://stnolting.github.io/neorv32/#_zkne_isa_extension)
-[`Zknh`](https://stnolting.github.io/neorv32/#_zknh_isa_extension)
-[`Zkt`](https://stnolting.github.io/neorv32/#_zkt_isa_extension)
-[`Zks`](https://stnolting.github.io/neorv32/#_zks_isa_extension)
-[`Zksed`](https://stnolting.github.io/neorv32/#_zksed_isa_extension)
-[`Zksh`](https://stnolting.github.io/neorv32/#_zksh_isa_extension)
-[`Zmmul`](https://stnolting.github.io/neorv32/#_zmmul_isa_extension)
-[`Sdext`](https://stnolting.github.io/neorv32/#_sdext_isa_extension)
-[`Sdtrig`](https://stnolting.github.io/neorv32/#_sdtrig_isa_extension)
-[`Smcntrpmf`](https://stnolting.github.io/neorv32/#_smcntrpmf_isa_extension)
-[`Smpmp`](https://stnolting.github.io/neorv32/#_smpmp_isa_extension)
-[`Xcfu`](https://stnolting.github.io/neorv32/#_xcfu_isa_extension)
-* compatible to subsets of the RISC-V "Unprivileged ISA Specification" and "Privileged Architecture Specification"
-* `machine` and `user` privilege modes
-* implements **all** standard RISC-V exceptions and interrupts + 16 fast interrupt request channels as NEORV32-specific extension
-* custom functions unit ([CFU](https://stnolting.github.io/neorv32/#_custom_functions_unit_cfu) as custom `Xcfu` ISA extension)
-for **custom RISC-V instructions**
-
-**Memories**
-
-* tightly-coupled data and instruction memories ([DMEM](https://stnolting.github.io/neorv32/#_data_memory_dmem) &
-[IMEM](https://stnolting.github.io/neorv32/#_instruction_memory_imem)) and
-caches ([iCACHE](https://stnolting.github.io/neorv32/#_instruction_cache_icache) &
-[dCACHE](https://stnolting.github.io/neorv32/#_data_cache_dcache))
-* pre-installed bootloader ([BOOTLDROM](https://stnolting.github.io/neorv32/#_bootloader_rom_bootrom)) with serial user interface;
-allows booting application code via UART, I²C or SPI flash and SD card
-
-**Timers and Counters**
-
-* RISC-V-compatible core-local interruptor ([CLINT](https://stnolting.github.io/neorv32/#_core_local_interruptor_clint))
-* 32-bit general purpose timer ([GPTMR](https://stnolting.github.io/neorv32/#_general_purpose_timer_gptmr)) with up to 16 individual timer slices
-* watchdog timer ([WDT](https://stnolting.github.io/neorv32/#_watchdog_timer_wdt))
-
-**Input / Output**
-
-* standard serial interfaces: 2x [UART](https://stnolting.github.io/neorv32/#_primary_universal_asynchronous_receiver_and_transmitter_uart0),
-[SPI](https://stnolting.github.io/neorv32/#_serial_peripheral_interface_controller_spi) (SPI host),
-[SDI](https://stnolting.github.io/neorv32/#_serial_data_interface_controller_sdi) (SPI device),
-[TWI](https://stnolting.github.io/neorv32/#_two_wire_serial_interface_controller_twi) (I²C host),
-[TWD](https://stnolting.github.io/neorv32/#_two_wire_serial_device_controller_twd) (I²C device),
-[ONEWIRE](https://stnolting.github.io/neorv32/#_one_wire_serial_interface_controller_onewire) (1-wire host)
-* up to 32 general purpose IOs ([GPIO](https://stnolting.github.io/neorv32/#_general_purpose_input_and_output_port_gpio), interrupt-capable)
-and up to 32 individual [PWM](https://stnolting.github.io/neorv32/#_pulse_width_modulation_controller_pwm) channels
-* smart LED interface ([NEOLED](https://stnolting.github.io/neorv32/#_smart_led_interface_neoled)) to directly control NeoPixel(TM) LEDs
-
-**SoC Connectivity**
-
-* 32-bit external bus interface - Wishbone-compatible
-([XBUS](https://stnolting.github.io/neorv32/#_processor_external_bus_interface_xbus));
-[bridge](https://github.com/stnolting/neorv32/blob/main/rtl/system_integration) for AXI4-compatible interfaces
-* stream link interface with independent RX and TX channels - AXI4-Stream-compatible
-([SLINK](https://stnolting.github.io/neorv32/#_stream_link_interface_slink))
-
-**Advanced**
-
-* true-random number generator ([TRNG](https://stnolting.github.io/neorv32/#_true_random_number_generator_trng)) based
-on the [neoTRNG](https://github.com/stnolting/neoTRNG)
-* custom functions subsystem ([CFS](https://stnolting.github.io/neorv32/#_custom_functions_subsystem_cfs))
-for custom tightly-coupled co-processors, accelerators or interfaces
-* direct memory access controller ([DMA](https://stnolting.github.io/neorv32/#_direct_memory_access_controller_dma)) for CPU-independent
-data transfers and conversions
-* RVFI-compatible [trace port](https://stnolting.github.io/neorv32/#_execution_trace_port)
-for advanced debugging, profiling or verification
-
-**Debugging**
-
-* on-chip debugger ([OCD](https://stnolting.github.io/neorv32/#_on_chip_debugger_ocd)) accessible via standard JTAG interface
-* compatible to the "Minimal RISC-V Debug Specification Version 1.0"
-* compatible with **OpenOCD**, **GDB** and **Segger Embedded Studio**
-* RISC-V [trigger module](https://stnolting.github.io/neorv32/#_trigger_module) for hardware-assisted break- and watchpoints
-* optional JTAG authentication module to implement custom security mechanisms
-* execution trace buffer ([TRACER](https://stnolting.github.io/neorv32/#_execution_trace_buffer_tracer))
-
-### Size ad Performance
-
-The NEORV32 processor is optimized for minimal size. However, the actual size (silicon area or FPGA resources)
-depends on the specific configuration. For example, an RTOS-capable setup based on a `rv32imc_Zicsr_Zicntr` CPU
-configuration requires about 2300 LUTs and 1000 FFs and can run at up to 130 MHz (implementation results for an
-Altera Cyclone IV E `EP4CE22F17C6` FPGA). This configuration provides a CoreMark score of 95.23 (0.9523 CoreMarks/MHz).
-
-More information regarding the CPU performance can be found in the
-[Data Sheet: Performance](https://stnolting.github.io/neorv32/#_performance).
+| Link | Description | Author(s) |
+|:-----|:------------|:----------|
+| :earth_africa: [github.com/motius](https://github.com/motius/neorv32/tree/add-custom-crc32-module) | **tutorial:** custom CRC32 processor module for the nexys-a7 boards | [motius](https://github.com/motius) ([ikstvn](https://github.com/ikstvn), [turbinenreiter](https://github.com/turbinenreiter)) |
+| :earth_africa: [neorv32-examples](https://github.com/emb4fun/neorv32-examples) | NEORV32 setups/projects for different Intel/Terasic boards | [emb4fun](https://github.com/emb4fun) |
+| :earth_africa: [neorv32-xmodem-bootloader](https://www.emb4fun.de/riscv/neorv32xboot/index.html) | A XModem Bootloader for the DE0-Nano board | [emb4fun](https://github.com/emb4fun) |
+| :earth_africa: [neorv32-xip-bootloader](https://github.com/betocool-prog/neorv32-xip-bootloader) | A XIP (eXecute In Place) Bootloader for the NEORV32| [betocool-prog](https://github.com/betocool-prog) |
+| :earth_africa: [FPGA-Based AI Accelerator with NEORV32 CFS](https://github.com/AbdulrahmanGhaleb/FPGA-Based-AI-Accelerator-) | Custom FPGA-based neural network inference accelerator integrated with the NEORV32 RISC-V soft-core via the Custom Functions Subsystem (CFS). | [Abdulrahman Ghaleb](https://github.com/AbdulrahmanGhaleb) |
 
 
-## Getting Started
 
-This overview provides some *quick links* to the most important sections of the
-[online Data Sheet](https://stnolting.github.io/neorv32) and the [online User Guide](https://stnolting.github.io/neorv32/ug).
+## Setups using Commercial Toolchains
 
-### :mag: [NEORV32 Project](https://stnolting.github.io/neorv32/#_overview) - An Introduction
+The setups using commercial toolchains provide pre-configured project files that can be opened with the according FPGA tools.
 
-* [Key Features](https://stnolting.github.io/neorv32/#_project_key_features) - what makes it special
-* [Structure](https://stnolting.github.io/neorv32/#_project_folder_structure) - folders, RTL files and compile order
-* [File-List Files](https://stnolting.github.io/neorv32/#_file_list_files) - to simplify HDL setup
-* [Metrics](https://stnolting.github.io/neorv32/#_performance) - FPGA implementation and performance evaluation
-* [RISC-V Compatibility](https://stnolting.github.io/neorv32/#_risc_v_compatibility) - what is compatible to the specs and what is not
-
-### :desktop_computer: [NEORV32 Processor](https://stnolting.github.io/neorv32/#_neorv32_processor_soc) - The SoC
-
-* [Top Entity - Signals](https://stnolting.github.io/neorv32/#_processor_top_entity_signals) - how to connect to the processor
-* [Top Entity - Generics](https://stnolting.github.io/neorv32/#_processor_top_entity_generics) - processor/CPU configuration options
-* [Address Space](https://stnolting.github.io/neorv32/#_address_space) - memory layout and address mapping
-* [Boot Configuration](https://stnolting.github.io/neorv32/#_boot_configuration) - how to make the processor start executing
-* [SoC Modules](https://stnolting.github.io/neorv32/#_processor_internal_modules) - IO/peripheral modules and memories
-* [On-Chip Debugger](https://stnolting.github.io/neorv32/#_on_chip_debugger_ocd) - in-system debugging via JTAG
-
-### :abacus: [NEORV32 CPU](https://stnolting.github.io/neorv32/#_neorv32_central_processing_unit_cpu) - The Core
-
-* [Architecture](https://stnolting.github.io/neorv32/#_architecture) - a look under the hood
-* [Full Virtualization](https://stnolting.github.io/neorv32/#_full_virtualization) - execution safety
-* [ISA and Extensions](https://stnolting.github.io/neorv32/#_instruction_sets_and_extensions) - available (RISC-V) ISA extensions
-* [CSRs](https://stnolting.github.io/neorv32/#_control_and_status_registers_csrs) - control and status registers
-* [Traps](https://stnolting.github.io/neorv32/#_traps_exceptions_and_interrupts) - interrupts and exceptions
-
-### :floppy_disk: [Software Framework](https://stnolting.github.io/neorv32/#_software_framework) - The Software Ecosystem
-
-* [Example Programs](https://github.com/stnolting/neorv32/tree/main/sw/example) - examples how to use the processor's IO/peripheral modules
-* [Core Libraries](https://stnolting.github.io/neorv32/#_core_libraries) - high-level functions for accessing the processor's peripherals
-* [Software Framework Documentation](https://stnolting.github.io/neorv32/sw/files.html) - _doxygen_-based
-* [Application Makefile](https://stnolting.github.io/neorv32/#_application_makefile) - turning _your_ application into an executable
-* [Bootloader](https://stnolting.github.io/neorv32/#_bootloader) - the build-in NEORV32 bootloader
-* [Image Generator](https://stnolting.github.io/neorv32/#_executable_image_formats) - create (FPGA) memory initialization files from your application
-* [Semihosting](https://stnolting.github.io/neorv32/#_semihosting) - access files and system services on the host computer
-
-### :rocket: [User Guide](https://stnolting.github.io/neorv32/ug/) - Getting Started
-
-* [Toolchain Setup](https://stnolting.github.io/neorv32/ug/#_software_toolchain_setup) - install and set up the RISC-V GCC toolchain
-* [General Hardware Setup](https://stnolting.github.io/neorv32/ug/#_general_hardware_setup) - set up a new NEORV32 FPGA project
-* [Adding Custom Hardware Modules](https://stnolting.github.io/neorv32/ug/#_adding_custom_hardware_modules) - add _your_ custom hardware
-* [Convert to Verilog](https://stnolting.github.io/neorv32/ug/#_neorv32_in_verilog) - turn the NEORV32 into an all-Verilog design
-* [Package as Vivado IP block](https://stnolting.github.io/neorv32/ug/#_packaging_the_processor_as_vivado_ip_block) - turn the entire processor into an interactive AMD Vivado IP block
-* [Using Eclipse](https://stnolting.github.io/neorv32/ug/#_eclipse_ide) - use the Eclipse IDE for developing and debugging
-
-This is an open-source project that is free of charge and provided under an
-permissive [license](https://github.com/stnolting/neorv32/blob/main/LICENSE).
-See the [legal](https://stnolting.github.io/neorv32/#_legal) section for more information.
+| Setup | Toolchain | Board | FPGA | Author(s) |
+|:------|:----------|:------|:-----|:----------|
+| :file_folder: [`de0-nano-test-setup`](https://github.com/stnolting/neorv32-setups/tree/main/quartus/de0-nano-test-setup) | Intel Quartus Prime | [Terasic DE0-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=139&No=593)                     | Intel Cyclone IV `EP4CE22F17C6N`          | [stnolting](https://github.com/stnolting) |
+| :file_folder: [`de10-nano-test-setup`](https://github.com/stnolting/neorv32-setups/tree/main/quartus/de10-nano-test-setup) | Intel Quartus Prime | [Terasic DE10-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1046#contents)                     | Intel Cyclone V `5CSEBA6U23I7`          | [provoostkris](https://github.com/provoostkris) |
+| :file_folder: [`de0-nano-test-setup-qsys`](quartus/de0-nano-test-setup-qsys) | Intel Quartus Prime | [Terasic DE0-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=139&No=593)                     | Intel Cyclone IV `EP4CE22F17C6N`          | [torerams](https://github.com/torerams) |
+| :file_folder: [`de0-nano-test-setup-avalonmm`](quartus/de0-nano-test-setup-avalonmm-wrapper) | Intel Quartus Prime | [Terasic DE0-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=139&No=593)                     | Intel Cyclone IV `EP4CE22F17C6N`          | [torerams](https://github.com/torerams) |
+| :file_folder: [`terasic-cyclone-V-gx-starter-kit-test-setup`](https://github.com/stnolting/neorv32-setups/tree/main/quartus/terasic-cyclone-V-gx-starter-kit-test-setup) | Intel Quartus Prime | [Terasic Cyclone-V GX Starter Kit](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=830) | Intel Cyclone V `5CGXFC5C6F27C7N` | zs6mue |
+| :file_folder: [`UPduino_v3`](https://github.com/stnolting/neorv32-setups/tree/main/radiant/UPduino_v3)                   | Lattice Radiant     | [tinyVision.ai Inc. UPduino `v3.0`](https://www.tindie.com/products/tinyvision_ai/upduino-v30-low-cost-lattice-ice40-fpga-board/) | Lattice iCE40 UltraPlus `iCE40UP5K-SG48I` | [stnolting](https://github.com/stnolting) |
+| :file_folder: [`iCEBreaker`](https://github.com/stnolting/neorv32-setups/tree/main/radiant/iCEBreaker)                   | Lattice Radiant     | [iCEBreaker @ GitHub](https://github.com/icebreaker-fpga/icebreaker)                                                              | Lattice iCE40 UltraPlus `iCE40UP5K-SG48I` | [stnolting](https://github.com/stnolting) |
+| :file_folder: [`arty-a7-35-test-setup`](https://github.com/stnolting/neorv32-setups/tree/main/vivado/arty-a7-test-setup) | Xilinx Vivado       | [Digilent Arty A7-35](https://reference.digilentinc.com/reference/programmable-logic/arty-a7/start)                               | Xilinx Artix-7 `XC7A35TICSG324-1L`        | [stnolting](https://github.com/stnolting) |
+| :file_folder: [`nexys-a7-test-setup`](https://github.com/stnolting/neorv32-setups/tree/main/vivado/nexys-a7-test-setup)  | Xilinx Vivado       | [Digilent Nexys A7](https://reference.digilentinc.com/reference/programmable-logic/nexys-a7/start)                                | Xilinx Artix-7 `XC7A50TCSG324-1`          | [AWenzel83](https://github.com/AWenzel83) |
+| :file_folder: [`nexys-a7-test-setup`](https://github.com/stnolting/neorv32-setups/tree/main/vivado/nexys-a7-test-setup)  | Xilinx Vivado       | [Digilent Nexys 4 DDR](https://reference.digilentinc.com/reference/programmable-logic/nexys-4-ddr/start)                          | Xilinx Artix-7 `XC7A100TCSG324-1`         | [AWenzel83](https://github.com/AWenzel83) |
+| :file_folder: [`z7-nano-test-setup`](https://github.com/stnolting/neorv32-setups/tree/main/vivado/z7-nano-test-setup)  | Xilinx Vivado       | [Microphase Z7 Nano FPGA Board](https://github.com/MicroPhase/fpga-docs/blob/master/schematic/Z7-NANO_R21.pdf)                              | Xilinx ZynQ 7000 `c7z020clg400-2`        | [provoostkris](https://github.com/provoostkris) |
+| :file_folder: [`cora-z7-test-setup`](https://github.com/stnolting/neorv32-setups/tree/main/vivado/cora-z7-test-setup)  | Xilinx Vivado       | [Digilent Cora Z7](https://digilent.com/reference/programmable-logic/cora-z7/start)                              | Xilinx ZynQ 7000 `xc7z007sclg400-1`        | [eivindbergem](https://github.com/eivindbergem) |
+| :file_folder: [`on-chip-debugger-intel`](https://github.com/stnolting/neorv32-setups/tree/main/quartus/on-chip-debugger-intel) | Intel Quartus Prime | [Gecko4Education](https://gecko-wiki.ti.bfh.ch/gecko4education:start)                                                       | Intel Cyclone IV E `EP4CE15F23C8`         | [NikLeberg](https://github.com/NikLeberg) |
+| :file_folder: [`tang-nano-9k`](https://github.com/stnolting/neorv32-setups/tree/main/gowineda/tang-nano-9k)              | Gowin EDA           | [Sipeed Tang Nano 9K](https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/Nano-9K.html)                                         | Gowin LittleBee GW1NR-9 `GW1NR-LV9QN88PC6/I5` | [IvanVeloz](https://github.com/IvanVeloz)
+| :file_folder: [`tang-nano-20k`](https://github.com/stnolting/neorv32-setups/tree/main/gowineda/tang-nano-20k)              | Gowin EDA           | [Sipeed Tang Nano 20K](https://wiki.sipeed.com/hardware/en/tang/tang-nano-20k/nano-20k.html)                                         | Gowin Morningside GW2A-18 `GW2AR-LV18QN88C8/I7` | [duvitech-llc](https://github.com/duvitech-llc)
 
 
-## Contributing
+## Setups using Open-Source Toolchains
 
-Contributions are very welcome! If you’d like to improve something, fix a bug, or add a feature,
-feel free to open an issue or submit a pull request. See how to [contribute](CONTRIBUTING.md).
-A big **thank you** goes out to the community and all contributors who help improve this project:
+Most OSS setups using open-source toolchains are located in the
+[`osflow`](https://github.com/stnolting/neorv32-setups/tree/main/osflow) folder.
+See the [README](https://github.com/stnolting/neorv32-setups/blob/main/osflow/README.md)
+there for more information how to run a specific setup and how to add new targets.
 
-<a href="https://github.com/stnolting/neorv32/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=stnolting/neorv32" />
-</a>
+| Setup | Toolchain | Board | FPGA | Author(s) |
+|:------|:----------|:------|:-----|:----------|
+| :file_folder: [`UPDuino-v3.0`](https://github.com/stnolting/neorv32-setups/tree/main/osflow) | GHDL, Yosys, nextPNR | [UPduino v3.0](https://www.tindie.com/products/tinyvision_ai/upduino-v30-low-cost-lattice-ice40-fpga-board/) | Lattice iCE40 UltraPlus `iCE40UP5K-SG48I` | [tmeissner](https://github.com/tmeissner) |
+| :file_folder: [`FOMU`](https://github.com/stnolting/neorv32-setups/tree/main/osflow)        | GHDL, Yosys, nextPNR | [FOMU](https://tomu.im/fomu.html)                                                                             | Lattice iCE40 UltraPlus `iCE40UP5K-SG48I` | [umarcor](https://github.com/umarcor) |
+| :file_folder: [`iCESugar`](https://github.com/stnolting/neorv32-setups/tree/main/osflow)    | GHDL, Yosys, nextPNR | [iCESugar](https://github.com/wuxx/icesugar/blob/master/README_en.md)                                         | Lattice iCE40 UltraPlus `iCE40UP5K-SG48I` | [umarcor](https://github.com/umarcor) |
+| :file_folder: [`AlhambraII`](https://github.com/stnolting/neorv32-setups/tree/main/osflow)  | GHDL, Yosys, nextPNR | [AlhambraII](https://alhambrabits.com/alhambra/)                                                              | Lattice iCE40HX4K                         | [zipotron](https://github.com/zipotron) |
+| :file_folder: [`Orange Crab`](https://github.com/stnolting/neorv32-setups/tree/main/osflow) | GHDL, Yosys, nextPNR | [Orange Crab](https://github.com/gregdavill/OrangeCrab)                                                       | Lattice ECP5-25F                          | [umarcor](https://github.com/umarcor), [jeremyherbert](https://github.com/jeremyherbert) |
+| :file_folder: [`ULX3S`](https://github.com/stnolting/neorv32-setups/tree/main/osflow)       | GHDL, Yosys, nextPNR | [ULX3S](https://radiona.org/ulx3s/)                                                                           | Lattice ECP5 `LFE5U-85F-6BG381C`          | [zipotron](https://github.com/zipotron) |
+| :file_folder: [`GateMateA1-EVB`](https://github.com/stnolting/neorv32-setups/tree/main/cologne_chip/GateMateA1-EVB) | GHDL, Yosys, CC P_R | [GateMateA1-EVB(-2M)](https://www.olimex.com/Products/FPGA/GateMate/GateMateA1-EVB/)             | Cologne Chip GateMate `CCGM1A1`           | [stnolting](https://github.com/stnolting) |
+| :file_folder: ChipWhisperer [`iCE40CW312`](https://github.com/stnolting/neorv32-setups/tree/main/osflow) | GHDL, Yosys, nextPNR | [CW312T_ICE40UP](https://github.com/newaetech/chipwhisperer-target-cw308t/tree/main/CW312T_ICE40UP) | Lattice iCE40 UltraPlus `iCE40UP5K-UWG30` | [colinoflynn](https://github.com/colinoflynn) |
+| :earth_africa: [`ULX3S-SDRAM`](https://github.com/zipotron/neorv32-complex-setups)          | GHDL, Yosys, nextPNR | [ULX3S](https://radiona.org/ulx3s/)                                                                           | Lattice ECP5 `LFE5U-85F-6BG381C`          | [zipotron](https://github.com/zipotron) |
+| :file_folder: [`TangNano20k`](https://github.com/stnolting/neorv32-setups/tree/main/osflow) | GHDL, Yosys, nextPNR | [Tang Nano 20K](https://wiki.sipeed.com/hardware/en/tang/tang-nano-20k/nano-20k.html)                         | GOWIN GW2AR `GW2AR-18 QN88`          | [d-orthofer](https://github.com/d-orthofer) |
+
+
+------------------------------------------------------
+
+
+### Adding Your Project or Setup
+
+Please respect the following guidelines if you'd like to add or link your setup/project to the list:
+
+* check out the project's [code of conduct](https://github.com/stnolting/neorv32-setups/tree/master/CODE_OF_CONDUCT.md)
+* for FPGA- / board- / toolchain-specific **setups**:
+  * a "setup" is a wrapped (and maybe script-aided) implementation of the NEORV32 processor for a certain FPGA/board/toolchain
+  * add a link if the board you are using provides online documentation or can be purchased somewhere
+  * use the :file_folder: emoji (`:file_folder:`) if the setup is located in this repository; use the :earth_africa:
+emoji (`:earth_africa:`) if it is a link to your local project
+  * please add a `README.md` file to give some brief information about the setup and a `.gitignore` file to keep things clean
+  * for local setups you can add your setup to the [implementation](https://github.com/stnolting/neorv32-setups/blob/main/.github/generate-job-matrix.py)
+GitHub actions workflow to automatically generate up-to-date bitstreams for your setup
+* for **projects**:
+  * provide a link to your project (use the :earth_africa: (`:earth_africa:`) emoji)
+  * provide a short description
+  * further information should be provided by a project-local README
+
+
+### Setup-Specific NEORV32 Software Framework Modifications
+
+In order to use the features provided by the setups, minor *optional* changes can be made to the default NEORV32 setup.
+
+* To change the default data memory size take a look at the User Guide section
+[_General Software Framework Setup_](https://stnolting.github.io/neorv32/ug/#_general_software_framework_setup)
+* To modify the SPI flash base address for storing/booting software application see User Guide section
+[_Customizing the Internal Bootloader_](https://stnolting.github.io/neorv32/ug/#_customizing_the_internal_bootloader)

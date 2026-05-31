@@ -1,0 +1,10 @@
+#| Fomu-PVT
+
+
+#> SPI
+set_io --warn-no-port FomuPVT_SPI_MOSI F1
+set_io --warn-no-port FomuPVT_SPI_MISO E1
+set_io --warn-no-port FomuPVT_SPI_CLK D1
+set_io --warn-no-port FomuPVT_SPI_IO2 F2
+set_io --warn-no-port FomuPVT_SPI_IO3 B1
+set_io --warn-no-port FomuPVT_SPI_cs C1

@@ -1,0 +1,16 @@
+#| iCEstick
+
+
+#> LEDs
+#    D1
+# D4 D5 D2
+#    D3
+#
+# D1-D4: red
+# D5: green
+
+set_io --warn-no-port IceStick_LED1 99
+set_io --warn-no-port IceStick_LED2 98
+set_io --warn-no-port IceStick_LED3 97
+set_io --warn-no-port IceStick_LED4 96
+set_io --warn-no-port IceStick_LED5 95
