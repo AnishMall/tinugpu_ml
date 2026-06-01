@@ -1,4 +1,4 @@
-# TinyGPU demo on NEORV32
+# TinyGPU demo SW Integration on NEORV32
 
 This example runs the TinyGPU ML accelerator as a memory-mapped peripheral of NEORV32 and tests it in **GHDL simulation** using the standard NEORV32 testbench.
 
