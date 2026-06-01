@@ -19,20 +19,6 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
     Vtinygpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtinygpu_top___024root___settle__TOP__0\n"); );
     // Init
-    SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
-    IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata;
-    CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req;
-    CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req;
-    CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req;
-    CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req;
-    CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last;
-    IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr;
-    IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr;
-    IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr;
-    IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr;
-    IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_store_i32;
-    CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem;
-    CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem;
     IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__0__Vfuncout;
     IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__0__oldv;
     IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__0__newv;
@@ -171,24 +157,24 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__c_epi_i32[1U][1U] 
         = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vcellout__u_epilogue__c_out_i32
         [1U][1U];
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr 
         = ((vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__base_addr_q 
             + ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q) 
                * (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__stride_bytes_q))) 
            + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q));
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr 
         = ((vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__base_addr_q 
             + ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q) 
                * (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__stride_bytes_q))) 
            + ((2U == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q))
                ? ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q) 
                   << 2U) : (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q)));
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem 
         = (((0xffffU & ((IData)(1U) + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q))) 
             >= (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows_q)) 
            & ((0xffffU & ((IData)(1U) + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q))) 
               >= (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols_q)));
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_store_i32 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_store_i32 
         = ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_base_q) 
            + ((((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q) 
                 << 1U) + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q)) 
@@ -217,6 +203,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
         = (0xffU & ((IData)(1U) + (0x1feU & ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_q) 
                                              << 1U))));
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wstrb = 0U;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_busy = 1U;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wr_en = 0U;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__row_mask 
         = ((2U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__row_mask)) 
@@ -268,7 +255,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
     } else {
         vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_raw = 0U;
     }
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req = 0U;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req = 0U;
     __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__x 
         = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post_q;
     __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__Vfuncout 
@@ -306,13 +293,13 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                   ? (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_q)
                   : ((0x10U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)
                       ? 1U : 4U))));
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr 
         = (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_addr_q 
            + ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q) 
               * ((0U != (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0_q))
                   ? (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0_q)
                   : 1U)));
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr 
         = (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_addr_q 
            + ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q) 
               * ((0U != (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_q))
@@ -320,7 +307,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                   : 1U)));
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_region 
         = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_q;
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m 
         = ((2U <= (0xffffU & ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q) 
                               - (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_q))))
             ? 2U : (0xffffU & ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q) 
@@ -645,9 +632,9 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
         = (((0xcU == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)) 
             | (0xdU == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) 
            | (0x12U == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)));
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req = 0U;
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 0U;
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req = 0U;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req = 0U;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 0U;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req = 0U;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start = 0U;
     vlSelf->tinygpu_top__DOT__ctrl_busy = 1U;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_status = 0U;
@@ -664,14 +651,14 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wstrb = 1U;
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wr_en = 1U;
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wdata 
-                    = (0xffU & ((0U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr))
+                    = (0xffU & ((0U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr))
                                  ? vlSelf->tinygpu_top__DOT__mem_rdata_stage_q
-                                 : ((1U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr))
+                                 : ((1U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr))
                                      ? (vlSelf->tinygpu_top__DOT__mem_rdata_stage_q 
                                         >> 8U) : ((2U 
                                                    == 
                                                    (3U 
-                                                    & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr))
+                                                    & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr))
                                                    ? 
                                                   (vlSelf->tinygpu_top__DOT__mem_rdata_stage_q 
                                                    >> 0x10U)
@@ -735,30 +722,30 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
     }
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_load_byte 
         = (0xffU & ((0xdU == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))
-                     ? ((0U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr))
+                     ? ((0U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr))
                          ? vlSelf->tinygpu_top__DOT__mem_rdata_stage_q
-                         : ((1U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr))
+                         : ((1U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr))
                              ? (vlSelf->tinygpu_top__DOT__mem_rdata_stage_q 
                                 >> 8U) : ((2U == (3U 
-                                                  & tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr))
+                                                  & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr))
                                            ? (vlSelf->tinygpu_top__DOT__mem_rdata_stage_q 
                                               >> 0x10U)
                                            : (vlSelf->tinygpu_top__DOT__mem_rdata_stage_q 
                                               >> 0x18U))))
-                     : ((0U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr))
+                     : ((0U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr))
                          ? vlSelf->tinygpu_top__DOT__mem_rdata_stage_q
-                         : ((1U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr))
+                         : ((1U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr))
                              ? (vlSelf->tinygpu_top__DOT__mem_rdata_stage_q 
                                 >> 8U) : ((2U == (3U 
-                                                  & tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr))
+                                                  & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr))
                                            ? (vlSelf->tinygpu_top__DOT__mem_rdata_stage_q 
                                               >> 0x10U)
                                            : (vlSelf->tinygpu_top__DOT__mem_rdata_stage_q 
                                               >> 0x18U))))));
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_addr = 0U;
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last 
         = (((0xffffU & ((IData)(1U) + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_q))) 
-            >= (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m)) 
+            >= (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m)) 
            & ((0xffffU & ((IData)(1U) + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_q))) 
               >= (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n)));
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__set_illegal_opcode = 0U;
@@ -820,7 +807,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                             }
                         }
                         if ((1U & (~ (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_q)))) {
-                            tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req = 1U;
+                            vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req = 1U;
                         }
                     }
                     if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
@@ -943,7 +930,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                                 = (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_row_base_q 
                                    + vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_q);
                             vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_rows_cmd_n 
-                                = tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
+                                = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
                             vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_cols_cmd_n 
                                 = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n;
                         }
@@ -965,7 +952,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                                 }
                             }
                             if ((1U & (~ (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_q)))) {
-                                tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req = 1U;
+                                vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req = 1U;
                             }
                         }
                     }
@@ -1046,13 +1033,13 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                     = (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_row_base_q 
                        + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_q));
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_rows_cmd_n 
-                    = tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
+                    = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_cols_cmd_n 
                     = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k;
             }
         }
     }
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 0U;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 0U;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d 
         = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d 
@@ -1074,7 +1061,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                         vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wdata 
                             = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_q;
                         vlSelf->tinygpu_top__DOT__cnt_stall = 1U;
-                        tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
+                        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
                     }
                 }
                 if ((1U & (~ ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
@@ -1130,10 +1117,10 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                     vlSelf->tinygpu_top__DOT__cnt_stall = 1U;
                     if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
                         if ((1U & (~ (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q)))) {
-                            tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
+                            vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
                         }
                     } else if ((1U & (~ (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q)))) {
-                        tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
+                        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
                     }
                 }
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
@@ -1283,27 +1270,33 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
         }
     }
     if ((4U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
+        if ((2U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
+            vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_busy = 0U;
+        }
         if ((1U & (~ ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
                       >> 1U)))) {
             if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-                tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req = 1U;
+                vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req = 1U;
             }
         }
     } else if ((1U & (~ ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
                          >> 1U)))) {
+        if ((1U & (~ (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q)))) {
+            vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_busy = 0U;
+        }
         if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req = 1U;
+            vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req = 1U;
         }
     }
     vlSelf->tinygpu_top__DOT__mem_req_raw = ((2U == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))
-                                              ? (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req)
+                                              ? (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req)
                                               : ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_vec)
-                                                  ? (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req)
+                                                  ? (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req)
                                                   : 
                                                  ((9U 
                                                    == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))
-                                                   ? (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req)
-                                                   : (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req))));
+                                                   ? (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req)
+                                                   : (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req))));
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d 
         = vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q;
     vlSelf->mmio_rdata = 0U;
@@ -1615,19 +1608,19 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
             if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_we = 1U;
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_addr 
-                    = (0xfffffffcU & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr);
+                    = (0xfffffffcU & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr);
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wstrb 
                     = ((2U == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q))
-                        ? 0xfU : ((0U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
+                        ? 0xfU : ((0U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
                                    ? 1U : ((1U == (3U 
-                                                   & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
+                                                   & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
                                             ? 2U : 
                                            ((2U == 
-                                             (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
+                                             (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
                                              ? 4U : 8U))));
             }
             vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_addr 
-                = (0x1ffU & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_store_i32);
+                = (0x1ffU & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_store_i32);
         }
     } else {
         if ((2U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
@@ -1658,7 +1651,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
             if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_we = 0U;
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_addr 
-                    = (0xfffffffcU & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr);
+                    = (0xfffffffcU & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr);
             }
         }
     }
@@ -1766,7 +1759,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
     } else {
         __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_byte_region__21__Vfuncout = 0U;
     }
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
         = (((IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_byte_region__21__Vfuncout) 
             << 0x18U) | (((IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_byte_region__22__Vfuncout) 
                           << 0x10U) | (((IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_byte_region__23__Vfuncout) 
@@ -1926,8 +1919,8 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                               >> 1U)))) {
                     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_addr 
                         = ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))
-                            ? (0xfffffffcU & tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr)
-                            : (0xfffffffcU & tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr));
+                            ? (0xfffffffcU & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr)
+                            : (0xfffffffcU & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr));
                 }
                 if ((2U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
                     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 0U;
@@ -2061,14 +2054,14 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                                  >= (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n))) {
                                 if (((0xffffU & ((IData)(1U) 
                                                  + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_q))) 
-                                     < (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m))) {
+                                     < (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m))) {
                                     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d 
                                         = (0xffffU 
                                            & ((IData)(1U) 
                                               + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_q)));
                                 }
                             }
-                            if (tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last) {
+                            if (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last) {
                                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_d = 1U;
                                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d = 0U;
                                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d = 0U;
@@ -2269,16 +2262,16 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
                       >> 1U)))) {
             if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
                 if (vlSelf->tinygpu_top__DOT__mem_stage_ready) {
-                    if ((1U & (~ (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)))) {
-                        tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 1U;
+                    if ((1U & (~ (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)))) {
+                        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 1U;
                     }
                 }
             }
         }
     } else if ((2U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
         if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            if ((1U & (~ (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)))) {
-                tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 1U;
+            if ((1U & (~ (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)))) {
+                vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 1U;
             }
         }
     }
@@ -2286,7 +2279,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
          & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start))) {
         vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_d = 0U;
         vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_d = 0U;
-    } else if (tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem) {
+    } else if (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem) {
         vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_d 
             = (((0xffffU & ((IData)(1U) + (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q))) 
                 < (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols_q))
@@ -2308,7 +2301,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
         } else if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
             if (vlSelf->tinygpu_top__DOT__mem_stage_ready) {
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d 
-                    = ((IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)
+                    = ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)
                         ? 6U : 4U);
             }
         } else {
@@ -2319,24 +2312,24 @@ VL_ATTR_COLD void Vtinygpu_top___024root___settle__TOP__0(Vtinygpu_top___024root
             if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
                 vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wdata 
                     = ((2U == (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q))
-                        ? tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata
-                        : ((0U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
-                            ? (0xffU & tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata)
-                            : ((1U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
-                                ? (0xff00U & (tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
+                        ? vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata
+                        : ((0U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
+                            ? (0xffU & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata)
+                            : ((1U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
+                                ? (0xff00U & (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
                                               << 8U))
-                                : ((2U == (3U & tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
+                                : ((2U == (3U & vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr))
                                     ? (0xff0000U & 
-                                       (tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
+                                       (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
                                         << 0x10U)) : 
-                                   (tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
+                                   (vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
                                     << 0x18U)))));
             }
         }
     } else if ((2U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
         if ((1U & (IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
             vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d 
-                = ((IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)
+                = ((IData)(vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)
                     ? 6U : 1U);
         } else if (vlSelf->tinygpu_top__DOT__mem_rvalid_stage_q) {
             vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d = 3U;
@@ -2408,6 +2401,9 @@ VL_ATTR_COLD void Vtinygpu_top___024root___eval_settle(Vtinygpu_top___024root* v
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtinygpu_top___024root___eval_settle\n"); );
     // Body
     Vtinygpu_top___024root___settle__TOP__0(vlSelf);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
+    vlSelf->__Vm_traceActivity[1U] = 1U;
+    vlSelf->__Vm_traceActivity[0U] = 1U;
 }
 
 VL_ATTR_COLD void Vtinygpu_top___024root___final(Vtinygpu_top___024root* vlSelf) {
@@ -2539,6 +2535,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_q = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d = VL_RAND_RESET_I(1);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m = VL_RAND_RESET_I(16);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n = VL_RAND_RESET_I(16);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k = VL_RAND_RESET_I(16);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__row_mask = VL_RAND_RESET_I(2);
@@ -2573,6 +2570,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_addr = VL_RAND_RESET_I(9);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wdata = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wstrb = VL_RAND_RESET_I(4);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_en = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_addr = VL_RAND_RESET_I(8);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_data = VL_RAND_RESET_I(32);
@@ -2605,14 +2603,19 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_scaled_q = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8_q = VL_RAND_RESET_I(8);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start = VL_RAND_RESET_I(1);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_busy = VL_RAND_RESET_I(1);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_we = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_addr = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wdata = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wstrb = VL_RAND_RESET_I(4);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req = VL_RAND_RESET_I(1);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_we = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_addr = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wdata = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wstrb = VL_RAND_RESET_I(4);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_op_kind_q = VL_RAND_RESET_I(2);
@@ -2637,6 +2640,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_flags_ok = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__more_k_tiles = VL_RAND_RESET_I(1);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_bias_regs = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__load_bias_reg = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__load_vec_x_reg = VL_RAND_RESET_I(1);
@@ -2666,6 +2670,8 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_step_d = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_q = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_d = VL_RAND_RESET_I(32);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr = VL_RAND_RESET_I(32);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_elem_addr = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_load_byte = VL_RAND_RESET_I(8);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_next = VL_RAND_RESET_I(32);
@@ -2718,6 +2724,9 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
             vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vcellinp__u_epilogue__c_in[__Vi0][__Vi1] = VL_RAND_RESET_I(32);
         }
     }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk2__DOT__c = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk3__DOT__c = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk1__DOT__c = 0;
     for (int __Vi0=0; __Vi0<256; ++__Vi0) {
         vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_mem[__Vi0] = VL_RAND_RESET_I(8);
     }
@@ -2727,6 +2736,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
     for (int __Vi0=0; __Vi0<128; ++__Vi0) {
         vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_mem[__Vi0] = VL_RAND_RESET_I(8);
     }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk4__DOT__byte_idx = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk1__DOT__i = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk2__DOT__i = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk3__DOT__i = 0;
@@ -2745,6 +2755,11 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_d = VL_RAND_RESET_I(16);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q = VL_RAND_RESET_I(16);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_d = VL_RAND_RESET_I(16);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr = VL_RAND_RESET_I(32);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr = VL_RAND_RESET_I(32);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_store_i32 = VL_RAND_RESET_I(32);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = VL_RAND_RESET_I(1);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vcellout__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__acc_o = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vcellout__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__acc_o = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vcellout__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__acc_o = VL_RAND_RESET_I(32);
@@ -2760,9 +2775,17 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
             vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__scaled_q[__Vi0][__Vi1] = VL_RAND_RESET_I(32);
         }
     }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk3__DOT__r = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk3__DOT__unnamedblk4__DOT__c = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk3__DOT__unnamedblk4__DOT__unnamedblk5__DOT__valid_elem = VL_RAND_RESET_I(1);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk3__DOT__unnamedblk4__DOT__unnamedblk5__DOT__x_post = VL_RAND_RESET_I(32);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk6__DOT__r = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk6__DOT__unnamedblk7__DOT__c = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk8__DOT__r = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk8__DOT__unnamedblk9__DOT__c = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk8__DOT__unnamedblk9__DOT__unnamedblk10__DOT__x_shifted = VL_RAND_RESET_I(32);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk1__DOT__r = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk1__DOT__unnamedblk2__DOT__c = 0;
     vlSelf->tinygpu_top__DOT__u_counters__DOT__cycle_cur_q = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_counters__DOT__active_cur_q = VL_RAND_RESET_I(32);
     vlSelf->tinygpu_top__DOT__u_counters__DOT__stall_cur_q = VL_RAND_RESET_I(32);
@@ -2770,4 +2793,7 @@ VL_ATTR_COLD void Vtinygpu_top___024root___ctor_var_reset(Vtinygpu_top___024root
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__16__x = VL_RAND_RESET_I(32);
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__28__Vfuncout = VL_RAND_RESET_I(32);
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__28__x = VL_RAND_RESET_I(32);
+    for (int __Vi0=0; __Vi0<3; ++__Vi0) {
+        vlSelf->__Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);
+    }
 }

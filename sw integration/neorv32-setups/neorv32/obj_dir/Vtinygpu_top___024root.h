@@ -85,10 +85,15 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         CData/*3:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wstrb_q;
         CData/*7:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8_q;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start;
+        CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_busy;
+        CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_we;
         CData/*3:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wstrb;
+        CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req;
+        CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_we;
         CData/*3:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wstrb;
+        CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d;
         CData/*1:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_op_kind_q;
@@ -108,6 +113,7 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_flags_ok;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__more_k_tiles;
+        CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_bias_regs;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__load_bias_reg;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__load_vec_x_reg;
@@ -124,6 +130,8 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__error_q;
         CData/*1:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q;
         CData/*1:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_q;
+        CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem;
+        CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem;
         CData/*1:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__state_q;
         CData/*0:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk3__DOT__unnamedblk4__DOT__unnamedblk5__DOT__valid_elem;
         CData/*0:0*/ __Vclklast__TOP__clk;
@@ -137,6 +145,8 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         SData/*15:0*/ tinygpu_top__DOT__reg_shift;
         SData/*15:0*/ tinygpu_top__DOT__reg_zero_point;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q;
+    };
+    struct {
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__N_q;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__K_q;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0_q;
@@ -145,8 +155,6 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__shift_q;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__zero_point_q;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_q;
-    };
-    struct {
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_d;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_q;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_d;
@@ -162,6 +170,7 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_d;
+        SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n;
         SData/*15:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k;
         SData/*8:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_addr;
@@ -202,6 +211,8 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         IData/*31:0*/ tinygpu_top__DOT__mem_rdata_stage_q;
         IData/*31:0*/ tinygpu_top__DOT__mem_cmd_addr_q;
         IData/*31:0*/ tinygpu_top__DOT__mem_cmd_wdata_q;
+    };
+    struct {
         IData/*31:0*/ tinygpu_top__DOT__u_regs__DOT__ctrl_next_w;
         IData/*31:0*/ tinygpu_top__DOT__u_regs__DOT__direct_op_next_w;
         IData/*31:0*/ tinygpu_top__DOT__u_regs__DOT__dim_m_next_w;
@@ -211,8 +222,6 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         IData/*31:0*/ tinygpu_top__DOT__u_regs__DOT__stride1_next_w;
         IData/*31:0*/ tinygpu_top__DOT__u_regs__DOT__stride_dst_next_w;
         IData/*31:0*/ tinygpu_top__DOT__u_regs__DOT__shiftzp_next_w;
-    };
-    struct {
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__cmd_addr_q;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_addr_q;
@@ -221,6 +230,7 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_addr_q;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__scale_q;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wdata;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_data;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_raw;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post;
@@ -256,19 +266,38 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_step_d;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_q;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_d;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_elem_addr;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_next;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_base_addr_cmd_n;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk2__DOT__c;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk3__DOT__c;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk1__DOT__c;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk4__DOT__byte_idx;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk1__DOT__i;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk2__DOT__i;
+    };
+    struct {
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk3__DOT__i;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__base_addr_q;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__elem_addr;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__write_addr;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_store_i32;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vcellout__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__acc_o;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vcellout__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__acc_o;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vcellout__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__acc_o;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vcellout__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__acc_o;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk3__DOT__r;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk3__DOT__unnamedblk4__DOT__c;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk3__DOT__unnamedblk4__DOT__unnamedblk5__DOT__x_post;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk6__DOT__r;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk6__DOT__unnamedblk7__DOT__c;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk8__DOT__r;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk8__DOT__unnamedblk9__DOT__c;
         IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk8__DOT__unnamedblk9__DOT__unnamedblk10__DOT__x_shifted;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk1__DOT__r;
+        IData/*31:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk1__DOT__unnamedblk2__DOT__c;
         IData/*31:0*/ tinygpu_top__DOT__u_counters__DOT__cycle_cur_q;
         IData/*31:0*/ tinygpu_top__DOT__u_counters__DOT__active_cur_q;
         IData/*31:0*/ tinygpu_top__DOT__u_counters__DOT__stall_cur_q;
@@ -277,8 +306,6 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__28__Vfuncout;
         IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__28__x;
         VlUnpacked<CData/*7:0*/, 2> tinygpu_top__DOT__u_cmd_ctrl__DOT__a_rd_addr;
-    };
-    struct {
         VlUnpacked<CData/*7:0*/, 2> tinygpu_top__DOT__u_cmd_ctrl__DOT__a_rd_data;
         VlUnpacked<CData/*7:0*/, 2> tinygpu_top__DOT__u_cmd_ctrl__DOT__b_rd_addr;
         VlUnpacked<CData/*7:0*/, 2> tinygpu_top__DOT__u_cmd_ctrl__DOT__b_rd_data;
@@ -304,6 +331,7 @@ class Vtinygpu_top___024root final : public VerilatedModule {
         VlUnpacked<CData/*7:0*/, 128> tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_mem;
         VlUnpacked<VlUnpacked<IData/*31:0*/, 2>, 2> tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__post_q;
         VlUnpacked<VlUnpacked<IData/*31:0*/, 2>, 2> tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__scaled_q;
+        VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
     };
 
     // INTERNAL VARIABLES

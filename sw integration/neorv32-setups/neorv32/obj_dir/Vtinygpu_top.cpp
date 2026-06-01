@@ -3,6 +3,7 @@
 
 #include "Vtinygpu_top.h"
 #include "Vtinygpu_top__Syms.h"
+#include "verilated_vcd_c.h"
 
 //============================================================
 // Constructors
@@ -61,6 +62,7 @@ static void _eval_initial_loop(Vtinygpu_top__Syms* __restrict vlSymsp) {
     vlSymsp->__Vm_didInit = true;
     Vtinygpu_top___024root___eval_initial(&(vlSymsp->TOP));
     // Evaluate till stable
+    vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Initial loop\n"););
         Vtinygpu_top___024root___eval_settle(&(vlSymsp->TOP));
@@ -77,6 +79,7 @@ void Vtinygpu_top::eval_step() {
     // Initialize
     if (VL_UNLIKELY(!vlSymsp->__Vm_didInit)) _eval_initial_loop(vlSymsp);
     // Evaluate till stable
+    vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Clock loop\n"););
         Vtinygpu_top___024root___eval(&(vlSymsp->TOP));
@@ -104,3 +107,39 @@ VL_ATTR_COLD void Vtinygpu_top::final() {
 const char* Vtinygpu_top::hierName() const { return vlSymsp->name(); }
 const char* Vtinygpu_top::modelName() const { return "Vtinygpu_top"; }
 unsigned Vtinygpu_top::threads() const { return 1; }
+std::unique_ptr<VerilatedTraceConfig> Vtinygpu_top::traceConfig() const {
+    return std::unique_ptr<VerilatedTraceConfig>{new VerilatedTraceConfig{false, false, false}};
+};
+
+//============================================================
+// Trace configuration
+
+void Vtinygpu_top___024root__trace_init_top(Vtinygpu_top___024root* vlSelf, VerilatedVcd* tracep);
+
+VL_ATTR_COLD static void trace_init(void* voidSelf, VerilatedVcd* tracep, uint32_t code) {
+    // Callback from tracep->open()
+    Vtinygpu_top___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vtinygpu_top___024root*>(voidSelf);
+    Vtinygpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    if (!vlSymsp->_vm_contextp__->calcUnusedSigs()) {
+        VL_FATAL_MT(__FILE__, __LINE__, __FILE__,
+            "Turning on wave traces requires Verilated::traceEverOn(true) call before time 0.");
+    }
+    vlSymsp->__Vm_baseCode = code;
+    tracep->scopeEscape(' ');
+    tracep->pushNamePrefix(std::string{vlSymsp->name()} + ' ');
+    Vtinygpu_top___024root__trace_init_top(vlSelf, tracep);
+    tracep->popNamePrefix();
+    tracep->scopeEscape('.');
+}
+
+VL_ATTR_COLD void Vtinygpu_top___024root__trace_register(Vtinygpu_top___024root* vlSelf, VerilatedVcd* tracep);
+
+VL_ATTR_COLD void Vtinygpu_top::trace(VerilatedVcdC* tfp, int levels, int options) {
+    if (tfp->isOpen()) {
+        vl_fatal(__FILE__, __LINE__, __FILE__,"'Vtinygpu_top::trace()' shall not be called after 'VerilatedVcdC::open()'.");
+    }
+    if (false && levels && options) {}  // Prevent unused
+    tfp->spTrace()->addModel(this);
+    tfp->spTrace()->addInitCb(&trace_init, &(vlSymsp->TOP));
+    Vtinygpu_top___024root__trace_register(&(vlSymsp->TOP), tfp->spTrace());
+}
