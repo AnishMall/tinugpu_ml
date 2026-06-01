@@ -71,7 +71,7 @@ From the NEORV32 setup directory:
 ```bash
 cd /workspaces/lab_DHWA-main/neorv32-setups/neorv32
 
-verilator -Wall --Wno-fatal --cc \
+verilator -Wall --Wno-fatal --cc --trace \
   --language 1800-2017 \
   -O3 \
   -Mdir obj_dir \
@@ -93,7 +93,7 @@ verilator -Wall --Wno-fatal --cc \
 Notes:
 
 - `--Wno-fatal` keeps WIDTH/UNUSED/EOFNEWLINE warnings non-fatal so Verilator completes.
-- `tinygpu_spm.sv`: reset loops use blocking `=` instead of nonblocking `<=` in `for` loops to avoid `BLKLOOPINIT` errors.
+- `--trace` enables VCD tracing; the testbench writes `tinygpu_sim.vcd` for waveform debug.
 
 ---
 
@@ -111,52 +111,30 @@ make -f Vtinygpu_top.mk
 ./Vtinygpu_top
 ```
 
-The binary `./Vtinygpu_top` links the generated model with `sim/tb_tinygpu.cpp`.
+The binary `./Vtinygpu_top` links the generated model with `sim/tb_tinygpu.cpp` and produces `tinygpu_sim.vcd`.
 
 ---
 
-### Testbench location and behavior
+### Testbench behavior (tb_tinygpu.cpp)
 
-Testbench path:
+The standalone C++ testbench does the following:
 
-```bash
-/workspaces/lab_DHWA-main/neorv32-setups/neorv32/sim/tb_tinygpu.cpp
-```
+- Implements a 64 KB flat external memory (`sim_mem[]`) with:
+  - Byte-addressable access.
+  - 2-cycle read latency on the `mem_req/mem_ready/mem_rvalid` interface.
+- Drives clock, reset, and the TinyGPU MMIO bus.
+- Runs a sequence of directed tests:
+  1. **Register read/write sanity**: write/read `REG_SRC0_ADDR`.
+  2. **Soft reset**: assert `CTRL_SOFT_RESET` and check `STATUS` reports READY (idle) and not BUSY.
+  3. **VEC_ADD**: `z[4] = {1,2,3,4} + {10,20,30,40}` with INT8 inputs and INT32 outputs.
+  4. **GEMM**: `C[2][2] = A[2][8] * B[8][2]` using INT8 inputs and INT32 outputs.
+  5. **RELU**: `y[4] = max(0, {-5,3,-1,7})` using INT32 inputs/outputs.
+  6. **Performance counters**: read cycle/active/stall/cmd counters and apply basic sanity checks.
 
-Current behavior:
+Current status:
 
-- Drives `clk` / `rst_n` for `tinygpu_top`.
-- Programs a **direct-mode VEC_ADD** command via MMIO:
-  - `REGDIRECTOP = OP_VEC_ADD`
-  - `REGDIMM/N/K = 1`
-  - `REGSTRIDE0/1/DST = 1`
-  - SRC0/SRC1/DST/BIAS base addresses set to dummy values
-  - `REGFLAGS = 0`
-  - `REGCTRL` written with `direct_mode=1`, `irq_enable=1`, then `start` pulse via bit 0.
-- Uses a **dummy memory model**:
-  - Every cycle: `mem_ready = 1`, `mem_rvalid = 0`, `mem_rdata = 0`.
-- Every 100 cycles it prints:
-  - `REGSTATUS` decoded as bits  
-    `busy(0), done_sticky(1), illegal_opcode(2), shape_error(3), memory_error(4), unsupported_fmt(5), idle = ~busy (6)`.
-  - `REGIRQSTATUS` (bit 0 = `irq_pending`).
-- Logs show:
-  - At reset: `REGSTATUS = 0x00000040` → `idle=1`, others 0.
-  - After start: `REGSTATUS = 0x00000001` → `busy=1`, no errors, never returns to idle, `IRQST=0`, `irq` never asserts.
+- Register access and soft reset tests pass.
+- Compute tests (VEC_ADD, GEMM, RELU) start successfully (STATUS.BUSY set, no error bits) but never clear BUSY, so the testbench times out while waiting for completion.
+- Hardware performance counters remain at zero, indicating the command controller/DMA/epilogue never reach their “done” state.
 
-Interpretation:
-
-- Command is accepted and the engine becomes busy (no illegal/shape/memory/format error bits).
-- `cmd_done_i` never asserts, so `done_sticky`, `irq_pending`, and `irq` stay low.
-- Reason: DMA never sees `mem_rvalid` from the testbench memory, so the command never completes with the current stub.
-
----
-
-### Suggested next step
-
-Replace the dummy memory in `sim/tb_tinygpu.cpp` with a small RAM model:
-
-- Keep a `uint32_t ram[]` array.
-- On `mem_req && mem_we`: write `mem_wdata` to `ram[mem_addr >> 2]` with `mem_ready=1`.
-- On `mem_req && !mem_we`: drive `mem_rdata = ram[mem_addr >> 2]`, assert `mem_rvalid=1` for a cycle (and `mem_ready=1`) so DMA reads can complete.
-
-This should allow `cmd_done_i` to assert, flipping `done_sticky` / `irq_pending` and making `irq` go high on successful command completion.
+The generated `tinygpu_sim.vcd` can be used to debug the TinyGPU-ML command controller (`tinygpu_cmd_ctrl.sv`), DMA (`tinygpu_dma.sv`), and SPM (`tinygpu_spm.sv`) state machines to find why commands are stuck busy.
