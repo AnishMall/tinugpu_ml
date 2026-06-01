@@ -64,12 +64,13 @@ apt-get install -y git make autoconf g++ flex bison \
 
 ---
 
-### Verilator command (TinyGPU-ML only)
+### Clean build and Verilator command (TinyGPU-ML only)
 
 From the NEORV32 setup directory:
 
 ```bash
 cd /workspaces/lab_DHWA-main/neorv32-setups/neorv32
+rm -rf obj_dir
 
 verilator -Wall --Wno-fatal --cc --trace \
   --language 1800-2017 \
@@ -92,6 +93,7 @@ verilator -Wall --Wno-fatal --cc --trace \
 
 Notes:
 
+- `rm -rf obj_dir` forces a clean rebuild of all generated files.
 - `--Wno-fatal` keeps WIDTH/UNUSED/EOFNEWLINE warnings non-fatal so Verilator completes.
 - `--trace` enables VCD tracing; the testbench writes `tinygpu_sim.vcd` for waveform debug.
 
@@ -117,24 +119,73 @@ The binary `./Vtinygpu_top` links the generated model with `sim/tb_tinygpu.cpp` 
 
 ### Testbench behavior (tb_tinygpu.cpp)
 
-The standalone C++ testbench does the following:
+The standalone C++ testbench (`sim/tb_tinygpu.cpp`) currently:
 
-- Implements a 64 KB flat external memory (`sim_mem[]`) with:
-  - Byte-addressable access.
-  - 2-cycle read latency on the `mem_req/mem_ready/mem_rvalid` interface.
-- Drives clock, reset, and the TinyGPU MMIO bus.
-- Runs a sequence of directed tests:
-  1. **Register read/write sanity**: write/read `REG_SRC0_ADDR`.
-  2. **Soft reset**: assert `CTRL_SOFT_RESET` and check `STATUS` reports READY (idle) and not BUSY.
-  3. **VEC_ADD**: `z[4] = {1,2,3,4} + {10,20,30,40}` with INT8 inputs and INT32 outputs.
-  4. **GEMM**: `C[2][2] = A[2][8] * B[8][2]` using INT8 inputs and INT32 outputs.
-  5. **RELU**: `y[4] = max(0, {-5,3,-1,7})` using INT32 inputs/outputs.
-  6. **Performance counters**: read cycle/active/stall/cmd counters and apply basic sanity checks.
+- Implements a **64 KB flat external memory** (`sim_mem[]`) with:
+  - Byte‑addressable access helpers for 8‑bit and 32‑bit data.
+  - **2‑cycle read latency** on the TinyGPU DMA interface using `mem_req`, `mem_we`, `mem_ready`, `mem_rvalid`, and `mem_rdata`.
+- Drives **clock and reset** for `tinygpu_top`.
+- Provides simple **MMIO helpers** (`mmio_read`/`mmio_write`) targeting the TinyGPU register file:
+  - CTRL, STATUS, DIRECT_OP, SRC0/SRC1/BIAS/DST base addresses.
+  - Dimension/stride registers (DIM_M/N/K, STRIDE0/1/DST).
+  - Flags and performance counter registers.
+- Runs a sequence of **direct‑mode tests**:
+  1. **Register read/write sanity**  
+     - Writes `REG_SRC0_ADDR` and checks the read‑back value.
+  2. **Soft reset**  
+     - Asserts `CTRL_SOFT_RESET` and verifies `STATUS.BUSY=0` and `STATUS.READY=1`.
+  3. **VEC_ADD**  
+     - INT8 vectors in memory: `x = {1,2,3,4}`, `y = {10,20,30,40}`.  
+     - Programs registers for `OP_VEC_ADD` so that `z[4]` should be `{11,22,33,44}` as INT32 outputs.
+  4. **GEMM**  
+     - INT8 matrices in memory: `A[2][8]`, `B[8][2]`.  
+     - Configures `OP_GEMM` to compute `C[2][2] = A * B` with expected results `[[16,20],[4,4]]` as INT32.
+  5. **RELU**  
+     - INT32 vector in memory: `{-5, 3, -1, 7}`.  
+     - Configures `OP_RELU` so `y[4] = max(0, x)` should be `{0, 3, 0, 7}`.
+  6. **Performance counters**  
+     - Reads cycle/active/stall/cmd counters for a basic sanity check after the above tests.
 
-Current status:
+For each compute test (VEC_ADD, GEMM, RELU) the testbench:
 
-- Register access and soft reset tests pass.
-- Compute tests (VEC_ADD, GEMM, RELU) start successfully (STATUS.BUSY set, no error bits) but never clear BUSY, so the testbench times out while waiting for completion.
-- Hardware performance counters remain at zero, indicating the command controller/DMA/epilogue never reach their “done” state.
+- Programs all relevant MMIO registers.
+- Writes `CTRL = CTRL_DIRECT | CTRL_START` to launch a direct‑mode command.
+- Calls `wait_done(label)` which polls `STATUS` until `BUSY` clears or a timeout occurs.
+- Reads back and prints the output data and applies simple `check()` assertions.
 
-The generated `tinygpu_sim.vcd` can be used to debug the TinyGPU-ML command controller (`tinygpu_cmd_ctrl.sv`), DMA (`tinygpu_dma.sv`), and SPM (`tinygpu_spm.sv`) state machines to find why commands are stuck busy.
+The testbench also:
+
+- Prints human‑readable summaries of PASS/FAIL for each test.
+- Dumps small memory windows (e.g., `VEC_X/Y/Z`, `MAT_A/B/C`, `RELU_IN/OUT`) to help debug DMA and SPM interactions.
+- Finishes with a short summary including total passes/fails and simulated cycle count.
+
+---
+
+### Current status (what works vs. where it is stuck)
+
+What is working:
+
+- Verilator 4.228 builds a **standalone model of `tinygpu_top`** and links it with the C++ testbench.
+- **Clock/reset and MMIO** into TinyGPU-ML work as expected.
+- **Register read/write** and **soft reset** tests pass:
+  - `STATUS` reports READY and not BUSY after reset.
+- A **64 KB external memory model** is in place and exercising the DMA interface with 2‑cycle read latency.
+- A **VCD waveform** (`tinygpu_sim.vcd`) is generated for all runs and can be opened in tools like GtkWave or VaporView.
+
+Where it is currently stuck:
+
+- Direct‑mode **VEC_ADD, GEMM, and RELU** commands:
+  - Are accepted by the core (MMIO writes succeed, `STATUS.BUSY=1`, all error bits = 0).
+  - But **never complete**: `STATUS` does not return to READY and `wait_done()` times out.
+- Hardware **performance counters** (cycle/active/stall/cmd) remain at zero at the end of the test sequence.
+- This indicates that the TinyGPU command path in RTL:
+  - Primarily the **command controller** (`tinygpu_cmd_ctrl.sv`), and its interactions with **DMA** (`tinygpu_dma.sv`) and **SPM** (`tinygpu_spm.sv`),
+  - Does not yet reach its internal DONE state for these test configurations, so `STATUS.BUSY` is never cleared and counters are never updated.
+
+Next steps for RTL debugging:
+
+- Use `tinygpu_sim.vcd` to inspect:
+  - The **command controller state machine** in `tinygpu_cmd_ctrl.sv` (e.g., `S_VALIDATE`, `S_COMPUTE_K`, `S_STORE_C`, `S_DONE`).
+  - The **DMA state machine** in `tinygpu_dma.sv` and its use of `mem_req/mem_ready/mem_rvalid`.
+  - The **SPM addressing** in `tinygpu_spm.sv` (A/B/C regions, read/write addresses).
+- Focus on why, for the test dimensions and strides used in the C++ testbench, the command never transitions into the DONE state and therefore never de‑asserts BUSY or increments the counters.
