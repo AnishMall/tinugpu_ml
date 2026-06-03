@@ -28,6 +28,7 @@ import tinygpu_pkg::*;
 );
 
   logic        reg_start_pulse;
+  logic        reg_start_direct_mode;
   logic        reg_soft_reset;
   logic        reg_irq_enable;
   logic        reg_direct_mode;
@@ -96,6 +97,7 @@ import tinygpu_pkg::*;
     .stall_count_i      (stall_count_last),
     .cmd_count_i        (cmd_count_total),
     .start_pulse_o      (reg_start_pulse),
+    .start_direct_mode_o(reg_start_direct_mode),
     .soft_reset_o       (reg_soft_reset),
     .irq_enable_o       (reg_irq_enable),
     .direct_mode_o      (reg_direct_mode),
@@ -122,6 +124,7 @@ import tinygpu_pkg::*;
     .clk                (clk),
     .rst_n              (rst_n),
     .start              (reg_start_pulse),
+    .start_direct_mode  (reg_start_direct_mode),
     .soft_reset         (reg_soft_reset),
     .direct_mode        (reg_direct_mode),
     .cmd_addr           (reg_cmd_addr),
@@ -200,8 +203,15 @@ import tinygpu_pkg::*;
 
       if (mem_cmd_valid_q && mem_ready) begin
         mem_cmd_valid_q <= 1'b0;
-        if (!mem_cmd_we_q)
-          mem_read_pending_q <= 1'b1;
+        if (!mem_cmd_we_q) begin
+          if (mem_rvalid) begin
+            mem_read_pending_q <= 1'b0;
+            mem_rdata_stage_q  <= mem_rdata;
+            mem_rvalid_stage_q <= 1'b1;
+          end else begin
+            mem_read_pending_q <= 1'b1;
+          end
+        end
       end
 
       if (mem_read_pending_q && mem_rvalid) begin

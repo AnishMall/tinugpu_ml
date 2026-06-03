@@ -1,2 +1,6 @@
 build/
 .tools/
+obj_dir/
+*.vcd
+sw integration/neorv32-setups/neorv32/obj_dir/
+sw integration/neorv32-setups/neorv32/sim/neorv32_tb

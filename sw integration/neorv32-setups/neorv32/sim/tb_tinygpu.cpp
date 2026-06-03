@@ -19,6 +19,7 @@
 #include <cinttypes>
 #include <cassert>
 #include "Vtinygpu_top.h"
+#include "Vtinygpu_top___024root.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 
@@ -177,10 +178,115 @@ uint32_t mmio_read(Vtinygpu_top* top, uint32_t addr) {
 bool wait_done(Vtinygpu_top* top, int timeout = 50000) {
     for (int i = 0; i < timeout; i++) {
         uint32_t s = mmio_read(top, REG_STATUS);
-        if (!(s & STATUS_BUSY)) return true;
+        if (!(s & STATUS_BUSY)) {
+            while (top->rootp->tinygpu_top__DOT__mem_cmd_valid_q ||
+                   top->rootp->tinygpu_top__DOT__mem_read_pending_q) {
+                tick(top);
+            }
+            return true;
+        }
         tick(top);
     }
     return false; // timeout
+}
+
+static const char* cmd_state_name(uint8_t s) {
+    switch (s) {
+        case 0:  return "S_IDLE";
+        case 1:  return "S_VALIDATE";
+        case 2:  return "S_DESC_LOAD";
+        case 3:  return "S_INIT_TILE";
+        case 4:  return "S_CLEAR_ACC";
+        case 5:  return "S_LOAD_A";
+        case 6:  return "S_LOAD_B";
+        case 7:  return "S_COMPUTE_K";
+        case 8:  return "S_NEXT_K";
+        case 9:  return "S_LOAD_BIAS";
+        case 10: return "S_EPILOGUE";
+        case 11: return "S_STORE_C";
+        case 12: return "S_VEC_LOAD_X";
+        case 13: return "S_VEC_LOAD_Y";
+        case 14: return "S_VEC_EXEC";
+        case 15: return "S_VEC_EXEC2";
+        case 16: return "S_VEC_EXEC3";
+        case 17: return "S_VEC_EXEC4";
+        case 18: return "S_VEC_STORE";
+        case 19: return "S_NEXT_TILE_N";
+        case 20: return "S_NEXT_TILE_M";
+        case 21: return "S_DONE";
+        case 22: return "S_ERROR";
+        default: return "S_?";
+    }
+}
+
+static const char* dma_state_name(uint8_t s) {
+    switch (s) {
+        case 0: return "DMA_IDLE";
+        case 1: return "DMA_ISSUE_READ";
+        case 2: return "DMA_WAIT_READ";
+        case 3: return "DMA_WRITE_SPM";
+        case 4: return "DMA_READ_SPM";
+        case 5: return "DMA_ISSUE_WRITE";
+        case 6: return "DMA_DONE";
+        case 7: return "DMA_ERROR";
+        default: return "DMA_?";
+    }
+}
+
+static void dump_debug(Vtinygpu_top* top, const char* label) {
+    auto* r = top->rootp;
+    uint32_t status = mmio_read(top, REG_STATUS);
+    printf("  DEBUG[%s]\n", label);
+    printf("    STATUS=0x%08X BUSY=%u READY=%u DONE=%u ERR[ill=%u shape=%u mem=%u fmt=%u]\n",
+           status,
+           (status & STATUS_BUSY) ? 1u : 0u,
+           (status & STATUS_READY) ? 1u : 0u,
+           (status >> 1) & 1u,
+           (status >> 2) & 1u,
+           (status >> 3) & 1u,
+           (status >> 4) & 1u,
+           (status >> 5) & 1u);
+    printf("    CMD  state=%u(%s) opcode=0x%02X direct=%u start=%u cmd_busy=%u cnt_start=%u cnt_done=%u\n",
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q,
+           cmd_state_name(r->tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q),
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q,
+           r->tinygpu_top__DOT__reg_direct_mode,
+           r->tinygpu_top__DOT__u_regs__DOT__start_pulse_o,
+           r->tinygpu_top__DOT__ctrl_busy,
+           r->tinygpu_top__DOT__cnt_cmd_start,
+           r->tinygpu_top__DOT__cnt_cmd_done);
+    printf("    TOP  mem_cmd_valid=%u mem_read_pending=%u mem_req=%u mem_we=%u mem_ready=%u mem_rvalid=%u addr=0x%08X\n",
+           r->tinygpu_top__DOT__mem_cmd_valid_q,
+           r->tinygpu_top__DOT__mem_read_pending_q,
+           top->mem_req,
+           top->mem_we,
+           top->mem_ready,
+           top->mem_rvalid,
+           top->mem_addr);
+    printf("    CTRL inflight dma=%u vec=%u bias=%u desc=%u launch=%u mem_req=%u dma_start=%u\n",
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_req,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start);
+    printf("    DMA  state=%u(%s) busy=%u done=%u err=%u row=%u col=%u rows=%u cols=%u mem_ready=%u\n",
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q,
+           dma_state_name(r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q),
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_busy,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__done_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__error_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols_q,
+           r->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_ready);
+    printf("    CNTR cycle=%u active=%u stall=%u cmds=%u\n",
+           mmio_read(top, REG_CYCLE_COUNT),
+           mmio_read(top, REG_ACTIVE_CNT),
+           mmio_read(top, REG_STALL_CNT),
+           mmio_read(top, REG_CMD_COUNT));
 }
 
 // ── Test infrastructure ───────────────────────────────────────────────────────
@@ -276,12 +382,12 @@ int main(int argc, char** argv) {
     mmio_write(top, REG_SRC0_ADDR,  VEC_X);
     mmio_write(top, REG_SRC1_ADDR,  VEC_Y);
     mmio_write(top, REG_DST_ADDR,   VEC_Z);
-    mmio_write(top, REG_DIM_M,      1);
-    mmio_write(top, REG_DIM_N,      4);
+    mmio_write(top, REG_DIM_M,      4);
+    mmio_write(top, REG_DIM_N,      1);
     mmio_write(top, REG_DIM_K,      1);
-    mmio_write(top, REG_STRIDE0,    4);
-    mmio_write(top, REG_STRIDE1,    4);
-    mmio_write(top, REG_STRIDE_DST, 16);
+    mmio_write(top, REG_STRIDE0,    1);
+    mmio_write(top, REG_STRIDE1,    1);
+    mmio_write(top, REG_STRIDE_DST, 4);
     mmio_write(top, REG_FLAGS,      FLAG_DST_INT32 | FLAG_SIGNED);
 
     // Fire
@@ -290,6 +396,7 @@ int main(int argc, char** argv) {
     // Wait for completion
     if (!wait_done(top)) {
         printf("  TIMEOUT waiting for VEC_ADD\n");
+        dump_debug(top, "VEC_ADD");
         fail_count++;
     } else {
         int32_t z0 = mem_read32s(VEC_Z+0);
@@ -347,6 +454,7 @@ int main(int argc, char** argv) {
 
     if (!wait_done(top)) {
         printf("  TIMEOUT waiting for GEMM\n");
+        dump_debug(top, "GEMM");
         fail_count++;
     } else {
         int32_t c00 = mem_read32s(MAT_C+0);
@@ -379,18 +487,19 @@ int main(int argc, char** argv) {
     mmio_write(top, REG_SRC0_ADDR,  RELU_IN);
     mmio_write(top, REG_SRC1_ADDR,  0);
     mmio_write(top, REG_DST_ADDR,   RELU_OUT);
-    mmio_write(top, REG_DIM_M,      1);
-    mmio_write(top, REG_DIM_N,      4);
+    mmio_write(top, REG_DIM_M,      4);
+    mmio_write(top, REG_DIM_N,      1);
     mmio_write(top, REG_DIM_K,      1);
-    mmio_write(top, REG_STRIDE0,    16);
-    mmio_write(top, REG_STRIDE1,    16);
-    mmio_write(top, REG_STRIDE_DST, 16);
+    mmio_write(top, REG_STRIDE0,    4);
+    mmio_write(top, REG_STRIDE1,    4);
+    mmio_write(top, REG_STRIDE_DST, 4);
     mmio_write(top, REG_FLAGS,      FLAG_DST_INT32 | FLAG_SIGNED);
 
     mmio_write(top, REG_CTRL, CTRL_DIRECT | CTRL_START);
 
     if (!wait_done(top)) {
         printf("  TIMEOUT waiting for RELU\n");
+        dump_debug(top, "RELU");
         fail_count++;
     } else {
         int32_t y0 = mem_read32s(RELU_OUT+0);

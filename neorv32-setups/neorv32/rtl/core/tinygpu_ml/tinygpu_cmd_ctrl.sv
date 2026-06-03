@@ -5,6 +5,7 @@ import tinygpu_pkg::*;
   input  logic         rst_n,
 
   input  logic         start,
+  input  logic         start_direct_mode,
   input  logic         soft_reset,
   input  logic         direct_mode,
   input  logic [31:0]  cmd_addr,
@@ -1081,7 +1082,7 @@ import tinygpu_pkg::*;
         if (start) begin
           latch_cmd_addr = 1'b1;
           cnt_cmd_start = 1'b1;
-          if (direct_mode) begin
+          if (start_direct_mode) begin
             latch_cmd = 1'b1;
             state_d   = S_VALIDATE;
           end else begin

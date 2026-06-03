@@ -11,7 +11,7 @@ All commands below assume Verilator is installed and on `PATH`:
 
 ```bash
 verilator --version
-# Verilator 4.228 2022-10-01 rev v4.228
+# Verilator 5.048 2026-04-26
 ```
 
 ---
@@ -191,24 +191,18 @@ What is working:
   - `STATUS` reports READY and not BUSY after reset.
 - A **64 KB external memory model** is in place and exercising the DMA interface with 2‑cycle read latency.
 - A **VCD waveform** (`tinygpu_sim.vcd`) is generated for all runs and can be opened in tools like GtkWave or VaporView.
+- The standalone direct-mode regression now passes:
+  - `VEC_ADD`
+  - `GEMM`
+  - `RELU`
+  - performance counter sanity checks
 
-Where it is currently stuck:
+The key fixes that got the flow green were:
 
-- Direct‑mode **VEC_ADD, GEMM, and RELU** commands:
-  - Are accepted by the core (MMIO writes succeed, `STATUS.BUSY=1`, all error bits = 0).
-  - But **never complete**: `STATUS` does not return to READY and `wait_done()` times out.
-- Hardware **performance counters** (cycle/active/stall/cmd) remain at zero at the end of the test sequence.
-- This indicates that the TinyGPU command path in RTL:
-  - Primarily the **command controller** (`tinygpu_cmd_ctrl.sv`), and its interactions with **DMA** (`tinygpu_dma.sv`) and **SPM** (`tinygpu_spm.sv`),
-  - Does not yet reach its internal DONE state for these test configurations, so `STATUS.BUSY` is never cleared and counters are never updated.
-
-Next steps for RTL debugging:
-
-- Use `tinygpu_sim.vcd` to inspect:
-  - The **command controller state machine** in `tinygpu_cmd_ctrl.sv` (e.g., `S_VALIDATE`, `S_COMPUTE_K`, `S_STORE_C`, `S_DONE`).
-  - The **DMA state machine** in `tinygpu_dma.sv` and its use of `mem_req/mem_ready/mem_rvalid`.
-  - The **SPM addressing** in `tinygpu_spm.sv` (A/B/C regions, read/write addresses).
-- Focus on why, for the test dimensions and strides used in the C++ testbench, the command never transitions into the DONE state and therefore never de-asserts BUSY or increments the counters.
+- fixing the direct-mode control race so a `CTRL_DIRECT | CTRL_START` write launches a direct command instead of falling into descriptor mode
+- fixing the top-level staged read path so a same-cycle `mem_ready + mem_rvalid` response is not dropped
+- fixing the standalone vector testbench programming so vector length uses `DIM_M`, matching the RTL contract
+- draining the staged top-level write buffer in the standalone bench before checking memory results
 
 ### Relationship to the GHDL flow
 

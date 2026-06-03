@@ -25,6 +25,7 @@ import tinygpu_pkg::*;
   input  logic [31:0]  cmd_count_i,
 
   output logic         start_pulse_o,
+  output logic         start_direct_mode_o,
   output logic         soft_reset_o,
   output logic         irq_enable_o,
   output logic         direct_mode_o,
@@ -101,6 +102,7 @@ import tinygpu_pkg::*;
   assign addr_lo       = mmio_addr[7:0];
   assign mmio_ready    = 1'b1;
   assign start_pulse_o = mmio_valid && mmio_we && (addr_lo == REG_CTRL) && mmio_wdata[0];
+  assign start_direct_mode_o = start_pulse_o ? ctrl_next_w[3] : direct_mode_o;
   assign soft_reset_o  = mmio_valid && mmio_we && (addr_lo == REG_CTRL) && mmio_wdata[1];
   assign ctrl_next_w      = apply_wstrb32({28'd0, direct_mode_o, irq_enable_o, 1'b0, 1'b0}, mmio_wdata, mmio_wstrb);
   assign direct_op_next_w = apply_wstrb32({24'd0, opcode_o}, mmio_wdata, mmio_wstrb);
