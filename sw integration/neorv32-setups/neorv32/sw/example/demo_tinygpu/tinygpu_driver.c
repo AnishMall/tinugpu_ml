@@ -5,6 +5,30 @@
 
 #include "tinygpu_driver.h"
 
+static void tgpu_uart_putc(char c) {
+  neorv32_uart0_putc(c);
+}
+
+static void tgpu_uart_puts(const char *s) {
+  while (*s != '\0') {
+    tgpu_uart_putc(*s);
+    s++;
+  }
+}
+
+static void tgpu_uart_print_u32(uint32_t value) {
+  char buf[12];
+  neorv32_aux_itoa(buf, value, 10);
+  tgpu_uart_puts(buf);
+}
+
+static void tgpu_uart_print_hex32(uint32_t value) {
+  char buf[12];
+  neorv32_aux_itoa(buf, value, 16);
+  tgpu_uart_puts("0x");
+  tgpu_uart_puts(buf);
+}
+
 // =============================================================================
 // tgpu_init
 // Soft-reset the accelerator and verify it responds
@@ -44,10 +68,11 @@ tgpu_status_t tgpu_check_status(void) {
 }
 
 // =============================================================================
-// tgpu_run_direct
-// Program all registers manually and fire START pulse
+// tgpu_start_direct
+// Program all registers manually and fire START pulse without waiting.
+// ctrl_flags may contain TGPU_CTRL_IRQ_EN.
 // =============================================================================
-tgpu_status_t tgpu_run_direct(
+tgpu_status_t tgpu_start_direct(
   uint8_t   opcode,
   uint32_t  flags,
   uint32_t  src0_addr,
@@ -59,7 +84,8 @@ tgpu_status_t tgpu_run_direct(
   uint16_t  dim_k,
   uint16_t  stride0,
   uint16_t  stride1,
-  uint16_t  stride_dst
+  uint16_t  stride_dst,
+  uint32_t  ctrl_flags
 ) {
   // Guard: don't start if already busy
   if (tgpu_read(TGPU_REG_STATUS) & TGPU_STATUS_BUSY) {
@@ -89,12 +115,39 @@ tgpu_status_t tgpu_run_direct(
   tgpu_write(TGPU_REG_FLAGS,      flags);
   tgpu_write(TGPU_REG_DIRECT_OP,  (uint32_t)opcode);
 
-  // Fire: write DIRECT_MODE | START together
+  // Fire: write DIRECT_MODE | optional IRQ_EN | START together
   // START is a combinational pulse on the write, not a register bit
-  tgpu_write(TGPU_REG_CTRL, TGPU_CTRL_DIRECT_MODE | TGPU_CTRL_START);
+  tgpu_write(TGPU_REG_CTRL, TGPU_CTRL_DIRECT_MODE | ctrl_flags | TGPU_CTRL_START);
+
+  return TGPU_OK;
+}
+
+// =============================================================================
+// tgpu_run_direct
+// Program all registers manually and fire START pulse
+// =============================================================================
+tgpu_status_t tgpu_run_direct(
+  uint8_t   opcode,
+  uint32_t  flags,
+  uint32_t  src0_addr,
+  uint32_t  src1_addr,
+  uint32_t  bias_addr,
+  uint32_t  dst_addr,
+  uint16_t  dim_m,
+  uint16_t  dim_n,
+  uint16_t  dim_k,
+  uint16_t  stride0,
+  uint16_t  stride1,
+  uint16_t  stride_dst
+) {
+  tgpu_status_t ret = tgpu_start_direct(
+    opcode, flags, src0_addr, src1_addr, bias_addr, dst_addr,
+    dim_m, dim_n, dim_k, stride0, stride1, stride_dst, 0
+  );
+  if (ret != TGPU_OK) return ret;
 
   // Wait for completion
-  tgpu_status_t ret = tgpu_wait();
+  ret = tgpu_wait();
   if (ret != TGPU_OK) return ret;
 
   // Check for hardware errors
@@ -102,10 +155,11 @@ tgpu_status_t tgpu_run_direct(
 }
 
 // =============================================================================
-// tgpu_run_descriptor
-// Indirect mode: hardware loads a descriptor struct from DMEM and runs it
+// tgpu_start_descriptor
+// Indirect mode: hardware loads a descriptor struct from DMEM and runs it.
+// ctrl_flags may contain TGPU_CTRL_IRQ_EN.
 // =============================================================================
-tgpu_status_t tgpu_run_descriptor(uint32_t desc_addr) {
+tgpu_status_t tgpu_start_descriptor(uint32_t desc_addr, uint32_t ctrl_flags) {
   if (tgpu_read(TGPU_REG_STATUS) & TGPU_STATUS_BUSY) {
     return TGPU_ERR_BUSY;
   }
@@ -115,9 +169,20 @@ tgpu_status_t tgpu_run_descriptor(uint32_t desc_addr) {
   tgpu_write(TGPU_REG_CMD_ADDR, desc_addr);
 
   // Fire
-  tgpu_write(TGPU_REG_CTRL, TGPU_CTRL_START);
+  tgpu_write(TGPU_REG_CTRL, ctrl_flags | TGPU_CTRL_START);
 
-  tgpu_status_t ret = tgpu_wait();
+  return TGPU_OK;
+}
+
+// =============================================================================
+// tgpu_run_descriptor
+// Indirect mode: hardware loads a descriptor struct from DMEM and runs it
+// =============================================================================
+tgpu_status_t tgpu_run_descriptor(uint32_t desc_addr) {
+  tgpu_status_t ret = tgpu_start_descriptor(desc_addr, 0);
+  if (ret != TGPU_OK) return ret;
+
+  ret = tgpu_wait();
   if (ret != TGPU_OK) return ret;
 
   return tgpu_check_status();
@@ -186,6 +251,25 @@ tgpu_status_t tgpu_vec_add(uint32_t src0, uint32_t src1, uint32_t dst, uint16_t 
 }
 
 // =============================================================================
+// TinyGPU IRQ helpers
+// =============================================================================
+void tgpu_irq_enable(void) {
+  tgpu_write(TGPU_REG_CTRL, TGPU_CTRL_IRQ_EN);
+}
+
+void tgpu_irq_disable(void) {
+  tgpu_write(TGPU_REG_CTRL, 0);
+}
+
+void tgpu_irq_ack(void) {
+  tgpu_write(TGPU_REG_IRQ_STATUS, 1u);
+}
+
+uint32_t tgpu_irq_pending(void) {
+  return tgpu_read(TGPU_REG_IRQ_STATUS) & 1u;
+}
+
+// =============================================================================
 // tgpu_get_perf
 // Read performance counters captured at end of last command
 // =============================================================================
@@ -203,22 +287,47 @@ void tgpu_print_status(void) {
   uint32_t status = tgpu_read(TGPU_REG_STATUS);
   uint32_t ctrl   = tgpu_read(TGPU_REG_CTRL);
 
-  neorv32_uart0_printf("\n--- TinyGPU Status ---\n");
-  neorv32_uart0_printf("CTRL    : 0x%x\n", ctrl);
-  neorv32_uart0_printf("STATUS  : 0x%x\n", status);
-  neorv32_uart0_printf("  BUSY  : %d\n", (status & TGPU_STATUS_BUSY)       ? 1 : 0);
-  neorv32_uart0_printf("  DONE  : %d\n", (status & TGPU_STATUS_DONE)       ? 1 : 0);
-  neorv32_uart0_printf("  READY : %d\n", (status & TGPU_STATUS_READY)      ? 1 : 0);
-  neorv32_uart0_printf("  ERR_OP: %d\n", (status & TGPU_STATUS_ERR_OPCODE) ? 1 : 0);
-  neorv32_uart0_printf("  ERR_SH: %d\n", (status & TGPU_STATUS_ERR_SHAPE)  ? 1 : 0);
-  neorv32_uart0_printf("  ERR_MEM:%d\n", (status & TGPU_STATUS_ERR_MEMORY) ? 1 : 0);
-  neorv32_uart0_printf("  ERR_FMT:%d\n", (status & TGPU_STATUS_ERR_FMT)    ? 1 : 0);
+  tgpu_uart_puts("\n--- TinyGPU Status ---\n");
+  tgpu_uart_puts("CTRL    : ");
+  tgpu_uart_print_hex32(ctrl);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("STATUS  : ");
+  tgpu_uart_print_hex32(status);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("  BUSY  : ");
+  tgpu_uart_print_u32((status & TGPU_STATUS_BUSY) ? 1u : 0u);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("  DONE  : ");
+  tgpu_uart_print_u32((status & TGPU_STATUS_DONE) ? 1u : 0u);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("  READY : ");
+  tgpu_uart_print_u32((status & TGPU_STATUS_READY) ? 1u : 0u);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("  ERR_OP: ");
+  tgpu_uart_print_u32((status & TGPU_STATUS_ERR_OPCODE) ? 1u : 0u);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("  ERR_SH: ");
+  tgpu_uart_print_u32((status & TGPU_STATUS_ERR_SHAPE) ? 1u : 0u);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("  ERR_MEM:");
+  tgpu_uart_print_u32((status & TGPU_STATUS_ERR_MEMORY) ? 1u : 0u);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("  ERR_FMT:");
+  tgpu_uart_print_u32((status & TGPU_STATUS_ERR_FMT) ? 1u : 0u);
+  tgpu_uart_putc('\n');
 
   uint32_t cyc, act, stl;
   tgpu_get_perf(&cyc, &act, &stl);
-  neorv32_uart0_printf("CYCLES  : %d\n", cyc);
-  neorv32_uart0_printf("ACTIVE  : %d\n", act);
-  neorv32_uart0_printf("STALLS  : %d\n", stl);
-  neorv32_uart0_printf("CMD_CNT : %d\n", tgpu_read(TGPU_REG_CMD_COUNT));
-  neorv32_uart0_printf("----------------------\n");
+  tgpu_uart_puts("CYCLES  : ");
+  tgpu_uart_print_u32(cyc);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("ACTIVE  : ");
+  tgpu_uart_print_u32(act);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("STALLS  : ");
+  tgpu_uart_print_u32(stl);
+  tgpu_uart_putc('\n');
+  tgpu_uart_puts("CMD_CNT : ");
+  tgpu_uart_print_u32(tgpu_read(TGPU_REG_CMD_COUNT));
+  tgpu_uart_puts("\n----------------------\n");
 }

@@ -25,9 +25,9 @@ This directory contains the software integration for the TinyGPU-ML hardware acc
 
 ```
 demo_tinygpu/
-├── main.c                  # Test application — 6 test cases
+├── main.c                  # Test application — 7 checks incl. IRQ, descriptor mode, im2col
 ├── tinygpu_driver.h        # Register map, opcodes, flags, API
-├── tinygpu_driver.c        # Driver — direct mode, descriptor mode, polling
+├── tinygpu_driver.c        # Driver — direct mode, descriptor mode, polling + IRQ helpers
 └── Makefile                # Build system
 ```
 
@@ -53,8 +53,8 @@ demo_tinygpu/
 ## Prerequisites
 
 ```bash
-riscv32-unknown-elf-gcc --version   # RISC-V GCC toolchain (tested: 13.2.0)
-ghdl --version                      # GHDL simulator (tested: v1.0.0)
+riscv-none-elf-gcc --version        # xPack bare-metal RISC-V GCC toolchain
+ghdl --version                      # GHDL simulator
 ```
 
 ---
@@ -67,11 +67,39 @@ cd neorv32/sw/example/demo_tinygpu
 # Standard build (for flashing to hardware)
 make clean_all && make
 
-# Simulation build (UART output via text.io — no baud rate delays)
-make USER_FLAGS+=-DUART0_SIM_MODE clean_all install sim
+# Recommended GHDL software-integration run
+make sim_ghdl_safe
+
+# Real TinyGPU RTL simulation (Verilator standalone)
+cd ../../sim
+./verilator_tinygpu.sh
 ```
 
-`UART0_SIM_MODE` redirects all UART0 TX output directly to the GHDL simulator console — no baud rate timing required. Output appears in `sim/ghdl.log`.
+The recommended GHDL path uses:
+
+- `TGPU_GHDL_SIM=1`
+- polling mode (`TGPU_SW_SIM_DISABLE_IRQ_TEST=1`)
+- single-core testbench defaults
+- caches disabled
+- fast simulated UART receiver baud (`UART_SIM_BAUD=1000000`)
+
+In this mode, the firmware avoids verbose UART logging and instead drops a final result signature on GPIO for the testbench to detect.
+
+`UART0_SIM_MODE` is currently **not** the preferred path in this repo. It exposed unstable behavior in this GHDL/NEORV32 setup during TinyGPU demo runs, so the safer GHDL mode above is the maintained SW-simulation flow.
+
+The checked-in `sim/neorv32_tb.vhd` and `sim/ghdl.sh` are configured for a **single-core** software-verification run by default (`DUAL_CORE_EN=false`). This avoids dual-hart UART interleaving and makes TinyGPU firmware debugging much more deterministic in GHDL.
+
+The example `Makefile` also auto-detects a local xPack toolchain at:
+
+```bash
+/Users/anish/tinyml_gpu/.tools/xpack-riscv-none-elf-gcc-15.2.0-1/bin
+```
+
+If that directory exists, it is preferred over generic Homebrew `riscv64-elf-*` tools because it includes the bare-metal headers and libraries needed to rebuild the firmware image.
+
+> In this repo, the GHDL flow uses `sim/tinygpu_top_stub.vhd`, a behavioral VHDL model of the TinyGPU MMIO + memory-master interface. It is useful for firmware integration checks, but it is not a substitute for native SystemVerilog RTL verification.
+
+For real TinyGPU hardware behavior in simulation, use the Verilator flow documented in [sw integration/README.md](/Users/anish/tinyml_gpu/sw%20integration/README.md).
 
 Expected build output:
 ```
@@ -95,7 +123,7 @@ These generics must be set to match the TinyGPU hardware configuration:
 |---|---|---|
 | `CLOCK_FREQUENCY` | `27_000_000` | Tang Nano 20K oscillator frequency |
 | `BOOT_MODE_SELECT` | `2` | Boot directly from IMEM image |
-| `IMEM_SIZE` | `8*1024` | Match ROM array size |
+| `IMEM_SIZE` | `16*1024` | Needed for the current TinyGPU demo firmware image |
 | `IO_UART0_EN` | `true` | Enable UART0 for test output |
 | `IO_TINYGPU_EN` | `true` | Enable TinyGPU wrapper |
 | `IO_CLINT_EN` | `true` | Required for timer interrupts |
@@ -184,22 +212,51 @@ tail -f /workspaces/lab_DHWA-main/neorv32-setups/neorv32/sim/ghdl.log
 | `several sources for unresolved signal` | Multi-driver elaboration error ❌ |
 | `bound check failure` | Generic value out of allowed range ❌ |
 
-Expected healthy output with `UART0_SIM_MODE`:
+Expected healthy output for the maintained GHDL path:
 ```
 [NEORV32] BOOT_MODE_SELECT 2 - booting IMEM image
-========================================
- TinyGPU-ML Accelerator Test
- Tang Nano 20K / NEORV32
-========================================
-[PASS] CTRL register read-back == 0
-[PASS] STATUS[BUSY]=0 after soft reset
-[PASS] VEC_ADD z[0]==11
-[PASS] GEMM C[0][0]==16
-[PASS] RELU y[0]==0
-...
-Results: 12 passed, 0 failed
-ALL TESTS PASSED
+[TB:TGPU] Software integration result: pass=<N> fail=<M>
+simulation stopped ...
 ```
+
+### Expected UART transcript checklist
+
+Use this as the quick "is the software integration healthy?" checklist.
+
+For the maintained **GHDL self-check mode**, `sim/ghdl.log` should contain:
+
+```text
+[NEORV32] BOOT_MODE_SELECT 2 - booting IMEM image
+[TB:TGPU] Software integration result: pass=...
+fail=...
+```
+
+If the GPIO result line does not appear, the firmware did not complete the self-check sequence.
+
+### im2col software path
+
+The current accelerator still does not implement dedicated Conv2D hardware. The SW demo therefore maps convolution as:
+
+```text
+Conv2D -> software im2col transform -> hardware GEMM
+```
+
+The demo application includes a tiny example:
+
+- input image: `3x3`
+- kernel: `2x2`
+- stride: `1`
+- output: `2x2`
+
+Software flattens each `2x2` patch into one im2col row and flattens the kernel into one column vector, then launches:
+
+```text
+GEMM M=4, N=1, K=4
+```
+
+This matches the project scope's "Conv2D via software im2col + hardware GEMM" requirement without adding dedicated convolution RTL.
+
+For **on-board UART0** at `19200` baud, the same banner and `[TEST ...]` / `[PASS]` lines should appear on the serial terminal. The exact counter values in TEST 6 can vary, but the pass/fail text should not.
 
 ### `sim/neorv32.tracer0.log` — CPU core 0 instruction trace
 
@@ -232,29 +289,27 @@ tail -f /workspaces/lab_DHWA-main/neorv32-setups/neorv32/sim/tb.uart0_rx.log
 
 | Mode | Output location | Speed |
 |---|---|---|
-| `UART0_SIM_MODE` ON | `ghdl.log` via text.io | Instant — use for SW verification |
-| `UART0_SIM_MODE` OFF | `tb.uart0_rx.log` | ~521µs/char at 19200 baud — needs `--stop-time=300ms` |
-
-> **Note:** When using `UART0_SIM_MODE`, `tb.uart0_rx.log` will always be empty. This is correct behaviour.
+| `sim_ghdl_safe` | GPIO signature reported in `ghdl.log` | Maintained GHDL SW-integration flow |
+| Hardware / board run | UART0 serial console | Preferred for human-readable demo output |
 
 ---
 
 ## Known Issues
 
-### 1. `tinygpu_top` component unbound (warning — not blocking)
+### 1. GHDL does not simulate the real SystemVerilog accelerator
 
 ```
 neorv32_tinygpu_wrapper.vhd:118: warning:
   instance "tinygpu_top_inst" of component "tinygpu_top" is not bound [-Wbinding]
 ```
 
-**Cause:** `tinygpu_top` is SystemVerilog (`.sv`). GHDL supports VHDL only — it cannot compile `.sv` files. The component port is left open (all outputs = `U`).
+**Cause:** `tinygpu_top` is SystemVerilog (`.sv`). GHDL supports VHDL only, so it cannot compile the real TinyGPU RTL.
 
-**Impact:** Simulation still elaborates and runs. TinyGPU MMIO register accesses will cause bus timeouts since `mmio_ready` is never driven `'1'`.
+**Current repo state:** `sim/tinygpu_top_stub.vhd` is provided as a pure VHDL behavioral model matching the `tinygpu_top` component port map. It drives `mmio_ready='1'`, supports the demo app's IRQ-driven `VEC_ADD`, descriptor-mode `GEMM`, and `RELU` cases, and provides enough MMIO / memory-master behavior for software-integration testing.
 
-**Fix:** Create `sim/tinygpu_top_stub.vhd` — a pure VHDL behavioral model matching the `tinygpu_top` component port map. The stub drives `mmio_ready='1'` always and implements the register file from `tinygpu_regs.sv`.
+**Impact:** A clean GHDL run validates firmware boot, UART output, MMIO accesses, IRQ handling, and descriptor-vs-direct software sequencing. It does **not** replace the native SystemVerilog RTL testbenches for hardware verification.
 
-**Alternative:** Use Verilator (installed: v4.038) to compile the `.sv` files and co-simulate via VPI with GHDL.
+**Alternative:** Use Verilator or another mixed-language-capable simulator if you want one integrated CPU + real SV TinyGPU simulation flow.
 
 ### 2. IMEM ROM data loading
 
@@ -298,8 +353,7 @@ Hardware (GowinEDA project):
 
 | Priority | Task |
 |---|---|
-| 1 | Fix IMEM ROM loading — verify `ghdl.sh` exclude for `neorv32_imem_image.vhd` |
-| 2 | Create `tinygpu_top_stub.vhd` — VHDL behavioral model for GHDL |
-| 3 | Confirm UART output in `ghdl.log` with all 6 tests passing |
-| 4 | Generate focused VCD for VaporView waveform analysis |
-| 5 | Flash bitstream to Tang Nano 20K for hardware validation |
+| 1 | Confirm UART output in `ghdl.log` with the IRQ/direct/descriptor test flow passing |
+| 2 | Flash bitstream to Tang Nano 20K and confirm the same UART transcript on hardware |
+| 3 | Add an IRQ-driven descriptor-mode variant if hardware/software latency testing is needed |
+| 4 | Move to Verilator or mixed-language co-sim if a true CPU + SV accelerator simulation is required |

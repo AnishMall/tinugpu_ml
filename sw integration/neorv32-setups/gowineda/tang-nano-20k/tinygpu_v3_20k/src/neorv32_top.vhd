@@ -466,7 +466,7 @@ begin
 
   -- fast interrupt requests (FIRQs) --
   cpu_firq(0)  <= '0'; -- reserved
-  cpu_firq(1)  <= firq(FIRQ_CFS);
+  cpu_firq(1)  <= firq(FIRQ_CFS) or tinygpu_irq;
   cpu_firq(2)  <= firq(FIRQ_UART0);
   cpu_firq(3)  <= firq(FIRQ_UART1);
   cpu_firq(4)  <= firq(FIRQ_TWD);

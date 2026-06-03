@@ -9,7 +9,7 @@
 //   SPM A  : 256 bytes   SPM B : 256 bytes   SPM C : 128 bytes
 //   Ops    : GEMM, GEMV, VEC_ADD, VEC_MUL, RELU, CLAMP
 //
-// Base address : 0xFFEB0000
+// Base address : 0xFFEE0000
 //   --> Confirm by checking where neorv32_tinygpu_wrapper is instantiated
 //       in your neorv32_top.vhd. If it is NOT in the CFS slot, update
 //       TINYGPU_BASE below to match your actual address.
@@ -24,7 +24,7 @@
 // =============================================================================
 // BASE ADDRESS  <-- verify against your neorv32_top.vhd instantiation
 // =============================================================================
-#define TINYGPU_BASE  0xFFEB0000UL
+#define TINYGPU_BASE  0xFFEE0000UL
 
 // =============================================================================
 // REGISTER OFFSETS  (from tinygpu_regs.sv localparam)
@@ -59,6 +59,11 @@
 #define TGPU_CTRL_SOFT_RESET  (1u << 1)  // write 1 = soft reset
 #define TGPU_CTRL_IRQ_EN      (1u << 2)  // 1 = enable done interrupt (FIRQ1)
 #define TGPU_CTRL_DIRECT_MODE (1u << 3)  // 1 = direct mode, 0 = indirect/descriptor
+
+// TinyGPU IRQ is routed on FIRQ1 in the SW integration setup.
+#define TGPU_FIRQ_ENABLE      CFS_FIRQ_ENABLE
+#define TGPU_FIRQ_PENDING     CFS_FIRQ_PENDING
+#define TGPU_TRAP_CODE        CFS_TRAP_CODE
 
 // =============================================================================
 // STATUS register bits (offset 0x04)  -- READ ONLY
@@ -174,6 +179,22 @@ tgpu_status_t tgpu_check_status(void);
 
 // Direct mode: fill registers and fire.
 // All addresses are byte addresses in the NEORV32 address space.
+tgpu_status_t tgpu_start_direct(
+  uint8_t   opcode,
+  uint32_t  flags,
+  uint32_t  src0_addr,
+  uint32_t  src1_addr,
+  uint32_t  bias_addr,
+  uint32_t  dst_addr,
+  uint16_t  dim_m,
+  uint16_t  dim_n,
+  uint16_t  dim_k,
+  uint16_t  stride0,
+  uint16_t  stride1,
+  uint16_t  stride_dst,
+  uint32_t  ctrl_flags
+);
+
 tgpu_status_t tgpu_run_direct(
   uint8_t   opcode,
   uint32_t  flags,
@@ -190,6 +211,7 @@ tgpu_status_t tgpu_run_direct(
 );
 
 // Indirect mode: point at a descriptor in memory and fire.
+tgpu_status_t tgpu_start_descriptor(uint32_t desc_addr, uint32_t ctrl_flags);
 tgpu_status_t tgpu_run_descriptor(uint32_t desc_addr);
 
 // Convenience wrappers
@@ -201,6 +223,12 @@ tgpu_status_t tgpu_gemm(
 
 tgpu_status_t tgpu_relu(uint32_t src, uint32_t dst, uint16_t len);
 tgpu_status_t tgpu_vec_add(uint32_t src0, uint32_t src1, uint32_t dst, uint16_t len);
+
+// IRQ helpers
+void tgpu_irq_enable(void);
+void tgpu_irq_disable(void);
+void tgpu_irq_ack(void);
+uint32_t tgpu_irq_pending(void);
 
 // Read performance counters from last command
 void tgpu_get_perf(uint32_t *cycles, uint32_t *active, uint32_t *stalls);

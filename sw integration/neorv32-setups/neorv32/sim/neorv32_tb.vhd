@@ -11,6 +11,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.math_real.all;
+use ieee.numeric_std.all;
+use std.env.all;
 
 library neorv32;
 use neorv32.neorv32_package.all;
@@ -23,7 +25,7 @@ entity neorv32_tb is
     JTAG_TESTS_EN     : boolean                        := false;        -- enable JTAG/DMI tests in testbench
     -- processor --
     CLOCK_FREQUENCY   : natural                        := 27_000_000; -- clock frequency of clk_i in Hz
-    DUAL_CORE_EN      : boolean                        := true;        -- enable dual-core homogeneous SMP
+    DUAL_CORE_EN      : boolean                        := false;       -- enable dual-core homogeneous SMP
     BOOT_MODE_SELECT  : natural range 0 to 2           := 2;           -- boot from pre-initialized IMEM
     BOOT_ADDR_CUSTOM  : std_ulogic_vector(31 downto 0) := x"00000000"; -- custom CPU boot address (if boot_config = 1)
     RISCV_ISA_C       : boolean                        := true;        -- compressed extension
@@ -59,7 +61,7 @@ entity neorv32_tb is
     CPU_RF_ARCH_SEL   : natural range 0 to 3           := 0;           -- register file implementation style select
     IMEM_EN           : boolean                        := true;        -- implement processor-internal instruction memory
     IMEM_BASE         : std_ulogic_vector(31 downto 0) := x"00000000"; -- base address of processor-internal instruction memory (naturally aligned)
-    IMEM_SIZE         : natural                        := 8*1024;     -- size of processor-internal instruction memory in bytes (use a power of 2)
+    IMEM_SIZE         : natural                        := 16*1024;    -- size of processor-internal instruction memory in bytes (use a power of 2)
     DMEM_EN           : boolean                        := true;        -- implement processor-internal data memory
     DMEM_BASE         : std_ulogic_vector(31 downto 0) := x"80000000"; -- base address of processor-internal data memory (naturally aligned)
     DMEM_SIZE         : natural                        := 8*1024;      -- size of processor-internal data memory in bytes (use a power of 2)
@@ -69,7 +71,8 @@ entity neorv32_tb is
     DCACHE_NUM_BLOCKS : natural range 1 to 4096        := 32;          -- d-cache: number of blocks, has to be a power of 2
     CACHE_BLOCK_SIZE  : natural range 4 to 1024        := 32;          -- i-cache/d-cache: block size in bytes, has to be a power of 2
     CACHE_BURSTS_EN   : boolean                        := true;        -- enable issuing of burst transfer for cache update
-    TRACE_LOG_EN      : boolean                        := true;        -- write full trace log to file
+    TRACE_LOG_EN      : boolean                        := false;       -- write full trace log to file
+    UART_SIM_BAUD     : natural                        := 1000000;     -- UART baud for simulation receivers
     -- external memory A --
     EXT_MEM_A_EN      : boolean                        := false;       -- enable memory
     EXT_MEM_A_BASE    : std_ulogic_vector(31 downto 0) := x"00000000"; -- base address, has to be word-aligned
@@ -477,6 +480,24 @@ begin
   end generate;
 
   gpio_in <= std_ulogic_vector(gpio); -- sense
+
+  sim_tinygpu_status: process(clk_gen)
+    variable status_word_v : std_ulogic_vector(31 downto 0);
+    variable pass_count_v  : integer;
+    variable fail_count_v  : integer;
+  begin
+    if rising_edge(clk_gen) then
+      status_word_v := gpio_out;
+      if status_word_v(31 downto 16) = x"5447" then
+        pass_count_v := to_integer(unsigned(status_word_v(15 downto 8)));
+        fail_count_v := to_integer(unsigned(status_word_v(7 downto 0)));
+        report "[TB:TGPU] Software integration result: pass=" &
+               integer'image(pass_count_v) & " fail=" &
+               integer'image(fail_count_v) severity note;
+        stop;
+      end if;
+    end if;
+  end process sim_tinygpu_status;
   gpio    <= (others => 'L'); -- weak pull-downs
 
 
@@ -547,7 +568,7 @@ begin
   generic map (
     NAME => "tb.uart0_rx",
     FCLK => real(CLOCK_FREQUENCY),
-    BAUD => real(19200)
+    BAUD => real(UART_SIM_BAUD)
   )
   port map (
     clk => clk_gen,
@@ -558,7 +579,7 @@ begin
   generic map (
     NAME => "tb.uart1_rx",
     FCLK => real(CLOCK_FREQUENCY),
-    BAUD => real(19200)
+    BAUD => real(UART_SIM_BAUD)
   )
   port map (
     clk => clk_gen,

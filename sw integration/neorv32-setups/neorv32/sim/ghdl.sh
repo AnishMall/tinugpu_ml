@@ -2,29 +2,32 @@
 
 set -e
 
-cd $(dirname "$0")
+cd "$(dirname "$0")"
 GHDL="${GHDL:-ghdl}"
 
 # GHDL build directory
+rm -rf build
 mkdir -p build
 
 # Compile IMEM image package FIRST (dependency order)
-ghdl -a --std=08 --workdir=build --ieee=standard --work=neorv32 \
+$GHDL -a --std=08 --workdir=build --ieee=standard --work=neorv32 \
   ../rtl/core/neorv32_imem_image.vhd
 
 # GHDL import
-find ../rtl/core ../sim -type f -name '*.vhd' ! -path '*/tinygpu_ml/*' ! -name 'neorv32_tinygpu.vhd' -exec \
-  ghdl -i --std=08 --workdir=build --ieee=standard --work=neorv32 {} \;
+find ../rtl/core ../sim -type f -name '*.vhd' \
+  ! -path '*/tinygpu_ml/*' \
+  ! -name 'neorv32_tinygpu.vhd' \
+  ! -name 'neorv32_imem_image.vhd' -exec \
+  "$GHDL" -i --std=08 --workdir=build --ieee=standard --work=neorv32 {} \;
 
 # GHDL analyze
 $GHDL -m --work=neorv32 --workdir=build --std=08 neorv32_tb
 
 # GHDL run parameters
-if [ -z "$1" ]
-  then
-    GHDL_RUN_ARGS="${@:---stop-time=10ms}"
-  else
-    GHDL_RUN_ARGS=$@
+if [ $# -eq 0 ]; then
+  GHDL_RUN_ARGS="--stop-time=10ms -gDUAL_CORE_EN=false -gTRACE_LOG_EN=false"
+else
+  GHDL_RUN_ARGS="$*"
 fi
 echo "GHDL simulation run parameters: $GHDL_RUN_ARGS";
 

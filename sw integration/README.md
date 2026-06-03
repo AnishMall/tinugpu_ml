@@ -1,8 +1,13 @@
-## TinyGPU-ML Verilator Standalone Simulation
+## TinyGPU-ML Verilator Simulation
+
+This is the recommended path for exercising the **real SystemVerilog TinyGPU RTL** in the SW-integration tree.
+
+Use GHDL only for the **firmware-side NEORV32 harness** with the TinyGPU VHDL stub. Use Verilator when you want
+the accelerator behavior itself instead of the stubbed MMIO/memory-master model.
 
 ### Verilator version
 
-All commands below assume Verilator has been built from source and installed as:
+All commands below assume Verilator is installed and on `PATH`:
 
 ```bash
 verilator --version
@@ -64,7 +69,22 @@ apt-get install -y git make autoconf g++ flex bison \
 
 ---
 
-### Clean build and Verilator command (TinyGPU-ML only)
+### One-command flow
+
+From `sw integration/neorv32-setups/neorv32`:
+
+```bash
+./sim/verilator_tinygpu.sh
+```
+
+This script:
+
+- removes the old `obj_dir`
+- invokes Verilator on the TinyGPU SystemVerilog sources
+- builds the generated model
+- runs the standalone TinyGPU testbench
+
+### Manual clean build and Verilator command
 
 From the NEORV32 setup directory:
 
@@ -161,7 +181,7 @@ The testbench also:
 
 ---
 
-### Current status (what works vs. where it is stuck)
+### Current status
 
 What is working:
 
@@ -188,4 +208,11 @@ Next steps for RTL debugging:
   - The **command controller state machine** in `tinygpu_cmd_ctrl.sv` (e.g., `S_VALIDATE`, `S_COMPUTE_K`, `S_STORE_C`, `S_DONE`).
   - The **DMA state machine** in `tinygpu_dma.sv` and its use of `mem_req/mem_ready/mem_rvalid`.
   - The **SPM addressing** in `tinygpu_spm.sv` (A/B/C regions, read/write addresses).
-- Focus on why, for the test dimensions and strides used in the C++ testbench, the command never transitions into the DONE state and therefore never de‑asserts BUSY or increments the counters.
+- Focus on why, for the test dimensions and strides used in the C++ testbench, the command never transitions into the DONE state and therefore never de-asserts BUSY or increments the counters.
+
+### Relationship to the GHDL flow
+
+- **GHDL path**: software/firmware integration only, using `sim/tinygpu_top_stub.vhd`
+- **Verilator path**: real TinyGPU RTL behavior, no VHDL stub
+
+That split is intentional. The current GHDL path is not the right place to debug TinyGPU datapath/controller behavior.

@@ -5,10 +5,11 @@
 // Tests (in order):
 //   1. Register read-back sanity check
 //   2. Soft reset and STATUS verification
-//   3. VEC_ADD  : z[4] = x[4] + y[4]
-//   4. GEMM     : C[2][2] = A[2][8] * B[8][2]  (smallest valid tile)
-//   5. RELU     : y[4] = max(0, x[4])
-//   6. Performance counter readback
+//   3. IRQ-driven VEC_ADD: z[4] = x[4] + y[4]
+//   4. Descriptor-mode GEMM: C[2][2] = A[2][8] * B[8][2]
+//   5. RELU: y[4] = max(0, x[4])
+//   6. Conv2D via software im2col + hardware GEMM
+//   7. Performance counter readback
 // =============================================================================
 
 #include <neorv32.h>
@@ -17,7 +18,11 @@
 // =============================================================================
 // UART baud rate
 // =============================================================================
+#ifdef TGPU_GHDL_SIM
+#define BAUD_RATE  1000000
+#else
 #define BAUD_RATE  19200
+#endif
 
 // =============================================================================
 // Test data buffers — placed in DMEM
@@ -48,10 +53,36 @@ static volatile int8_t mat_b[8][2] = {
 };
 // C is 2 rows x 2 cols of INT32 (output)
 static volatile int32_t mat_c[2][2] = { {0,0}, {0,0} };
+static volatile int32_t mat_c_desc[2][2] = { {0,0}, {0,0} };
 
 // --- RELU test ---
 static volatile int32_t relu_in[4]  = { -5, 3, -1, 7 };
 static volatile int32_t relu_out[4] = {  0, 0,  0, 0 };
+
+// --- Conv2D via im2col test ---
+// Input image 3x3, kernel 2x2, stride 1, no padding => output 2x2
+static volatile int8_t conv_in[3][3] = {
+  { 1, 2, 3 },
+  { 4, 5, 6 },
+  { 7, 8, 9 }
+};
+static volatile int8_t conv_kernel[2][2] = {
+  { 1, 0 },
+  { 0, 1 }
+};
+static volatile int8_t conv_im2col[4][4] = { {0,0,0,0}, {0,0,0,0}, {0,0,0,0}, {0,0,0,0} };
+static volatile int8_t conv_weight[4][1] = { {0}, {0}, {0}, {0} };
+static volatile int32_t conv_out_vec[4][1] = { {0}, {0}, {0}, {0} };
+static volatile int32_t conv_out_map[2][2] = { {0,0}, {0,0} };
+
+static volatile tgpu_descriptor_t gemm_desc;
+
+static volatile uint32_t tgpu_irq_count = 0;
+static volatile uint32_t tgpu_irq_seen  = 0;
+
+#ifndef TGPU_SW_SIM_DISABLE_IRQ_TEST
+#define TGPU_SW_SIM_DISABLE_IRQ_TEST 0
+#endif
 
 // =============================================================================
 // Helper: pass/fail print
@@ -59,14 +90,104 @@ static volatile int32_t relu_out[4] = {  0, 0,  0, 0 };
 static int test_pass = 0;
 static int test_fail = 0;
 
+static void uart_putc(char c) {
+#ifdef TGPU_GHDL_SIM
+  (void)c;
+#else
+  neorv32_uart0_putc(c);
+#endif
+}
+
+static void uart_puts(const char *s) {
+#ifdef TGPU_GHDL_SIM
+  (void)s;
+#else
+  while (*s != '\0') {
+    uart_putc(*s);
+    s++;
+  }
+#endif
+}
+
+static void uart_putln(const char *s) {
+#ifdef TGPU_GHDL_SIM
+  (void)s;
+#else
+  uart_puts(s);
+  uart_putc('\n');
+#endif
+}
+
+static void uart_print_u32(uint32_t value) {
+#ifdef TGPU_GHDL_SIM
+  (void)value;
+#else
+  char buf[12];
+  neorv32_aux_itoa(buf, value, 10);
+  uart_puts(buf);
+#endif
+}
+
+static void uart_print_i32(int32_t value) {
+#ifdef TGPU_GHDL_SIM
+  (void)value;
+#else
+  if (value < 0) {
+    neorv32_uart0_putc('-');
+    uart_print_u32((uint32_t)(-value));
+  } else {
+    uart_print_u32((uint32_t)value);
+  }
+#endif
+}
+
 static void check(const char *name, int condition) {
   if (condition) {
-    neorv32_uart0_printf("[PASS] %s\n", name);
+#ifndef TGPU_GHDL_SIM
+    uart_puts("[PASS] ");
+    uart_putln(name);
+#endif
     test_pass++;
   } else {
-    neorv32_uart0_printf("[FAIL] %s\n", name);
+    uart_puts("[FAIL] ");
+    uart_putln(name);
     test_fail++;
   }
+}
+
+static void tinygpu_firq_handler(void) {
+  tgpu_irq_count++;
+  tgpu_irq_seen = 1;
+  tgpu_irq_ack();
+}
+
+static void im2col_2x2_stride1_int8(volatile int8_t dst[4][4], volatile int8_t src[3][3]) {
+  int out_row, out_col;
+  int patch_idx = 0;
+
+  for (out_row = 0; out_row < 2; out_row++) {
+    for (out_col = 0; out_col < 2; out_col++) {
+      dst[patch_idx][0] = src[out_row + 0][out_col + 0];
+      dst[patch_idx][1] = src[out_row + 0][out_col + 1];
+      dst[patch_idx][2] = src[out_row + 1][out_col + 0];
+      dst[patch_idx][3] = src[out_row + 1][out_col + 1];
+      patch_idx++;
+    }
+  }
+}
+
+static void kernel_to_col_2x2_int8(volatile int8_t dst[4][1], volatile int8_t kernel[2][2]) {
+  dst[0][0] = kernel[0][0];
+  dst[1][0] = kernel[0][1];
+  dst[2][0] = kernel[1][0];
+  dst[3][0] = kernel[1][1];
+}
+
+static void vec_to_map_2x2_i32(volatile int32_t dst[2][2], volatile int32_t src[4][1]) {
+  dst[0][0] = src[0][0];
+  dst[0][1] = src[1][0];
+  dst[1][0] = src[2][0];
+  dst[1][1] = src[3][0];
 }
 
 // =============================================================================
@@ -74,19 +195,30 @@ static void check(const char *name, int condition) {
 // =============================================================================
 int main(void) {
 
+  neorv32_rte_setup();
+
   // ---- UART init ----
+#ifndef TGPU_GHDL_SIM
   neorv32_uart0_setup(BAUD_RATE, 0);
-  neorv32_uart0_printf("\n");
-  neorv32_uart0_printf("========================================\n");
-  neorv32_uart0_printf(" TinyGPU-ML Accelerator Test\n");
-  neorv32_uart0_printf(" Tang Nano 20K / NEORV32\n");
-  neorv32_uart0_printf(" Array: 2x2 PEs, INT8 in, INT32 acc\n");
-  neorv32_uart0_printf("========================================\n\n");
+#endif
+
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("========================================");
+  uart_putln(" TinyGPU-ML Accelerator Test");
+  uart_putln(" Tang Nano 20K / NEORV32");
+  uart_putln(" Array: 2x2 PEs, INT8 in, INT32 acc");
+  uart_putln(" FIRQ : using channel 1 in this SW demo");
+  uart_putln("========================================");
+  uart_putln("");
+#endif
 
   // ====================================================================
   // TEST 1: Register accessibility — write CTRL, read it back
   // ====================================================================
-  neorv32_uart0_printf("[TEST 1] Register read-back\n");
+#ifndef TGPU_GHDL_SIM
+  uart_putln("[TEST 1] Register read-back");
+#endif
 
   tgpu_write(TGPU_REG_CTRL, 0);
   uint32_t ctrl_val = tgpu_read(TGPU_REG_CTRL);
@@ -103,7 +235,10 @@ int main(void) {
   // ====================================================================
   // TEST 2: Soft reset — STATUS should show not busy after reset
   // ====================================================================
-  neorv32_uart0_printf("\n[TEST 2] Soft reset\n");
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("[TEST 2] Soft reset");
+#endif
 
   tgpu_init();
   uint32_t status = tgpu_read(TGPU_REG_STATUS);
@@ -111,33 +246,110 @@ int main(void) {
   check("STATUS[ERR]=0 after soft reset",  !(status & TGPU_STATUS_ERR_MASK));
 
   // ====================================================================
-  // TEST 3: VEC_ADD   z[4] = x[4] + y[4]
-  // Expected: z = {11, 22, 33, 44}
+  // TEST 3: VEC_ADD
   // ====================================================================
-  neorv32_uart0_printf("\n[TEST 3] VEC_ADD z[4] = {1,2,3,4} + {10,20,30,40}\n");
-
-  tgpu_status_t ret = tgpu_vec_add(
+#if TGPU_SW_SIM_DISABLE_IRQ_TEST
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("[TEST 3] Polling VEC_ADD z[4] = {1,2,3,4} + {10,20,30,40}");
+#endif
+  tgpu_status_t ret = tgpu_run_direct(
+    TGPU_OP_VEC_ADD,
+    0,
     (uint32_t)vec_x,
     (uint32_t)vec_y,
+    0,
     (uint32_t)vec_z,
-    4
+    1, 4, 1,
+    4, 4, 16
   );
-
   if (ret != TGPU_OK) {
-    neorv32_uart0_printf("  ERROR: tgpu_vec_add returned %d\n", (int)ret);
+    uart_puts("  ERROR: tgpu_run_direct returned ");
+    uart_print_i32((int32_t)ret);
+    uart_putln("");
     tgpu_print_status();
     test_fail++;
   } else {
-    neorv32_uart0_printf("  z = {%d, %d, %d, %d}\n",
-      (int)vec_z[0], (int)vec_z[1], (int)vec_z[2], (int)vec_z[3]);
+#ifndef TGPU_GHDL_SIM
+    uart_puts("  z = {");
+    uart_print_i32(vec_z[0]);
+    uart_puts(", ");
+    uart_print_i32(vec_z[1]);
+    uart_puts(", ");
+    uart_print_i32(vec_z[2]);
+    uart_puts(", ");
+    uart_print_i32(vec_z[3]);
+    uart_putln("}");
+#endif
     check("VEC_ADD z[0]==11", vec_z[0] == 11);
     check("VEC_ADD z[1]==22", vec_z[1] == 22);
     check("VEC_ADD z[2]==33", vec_z[2] == 33);
     check("VEC_ADD z[3]==44", vec_z[3] == 44);
   }
+#else
+  uart_putln("");
+  uart_putln("[TEST 3] IRQ-driven VEC_ADD z[4] = {1,2,3,4} + {10,20,30,40}");
+
+  neorv32_rte_handler_install(TGPU_TRAP_CODE, tinygpu_firq_handler);
+  neorv32_cpu_csr_clr(CSR_MIE, 1 << TGPU_FIRQ_ENABLE);
+  neorv32_cpu_csr_clr(CSR_MSTATUS, 1 << CSR_MSTATUS_MIE);
+  tgpu_irq_seen = 0;
+  tgpu_irq_ack();
+  neorv32_cpu_csr_set(CSR_MIE, 1 << TGPU_FIRQ_ENABLE);
+  neorv32_cpu_csr_set(CSR_MSTATUS, 1 << CSR_MSTATUS_MIE);
+
+  tgpu_status_t ret = tgpu_start_direct(
+    TGPU_OP_VEC_ADD,
+    0,
+    (uint32_t)vec_x,
+    (uint32_t)vec_y,
+    0,
+    (uint32_t)vec_z,
+    1, 4, 1,
+    4, 4, 16,
+    TGPU_CTRL_IRQ_EN
+  );
+
+  if (ret != TGPU_OK) {
+    uart_puts("  ERROR: tgpu_start_direct returned ");
+    uart_print_i32((int32_t)ret);
+    uart_putln("");
+    tgpu_print_status();
+    test_fail++;
+  } else {
+    uint32_t timeout = 100000u;
+    while ((tgpu_irq_seen == 0) && (timeout != 0u)) {
+      neorv32_cpu_sleep();
+      timeout--;
+    }
+    check("TinyGPU IRQ observed", tgpu_irq_seen == 1u);
+    ret = tgpu_check_status();
+    if (ret != TGPU_OK) {
+      uart_puts("  ERROR: tgpu_check_status returned ");
+      uart_print_i32((int32_t)ret);
+      uart_putln("");
+      tgpu_print_status();
+      test_fail++;
+    } else {
+      uart_puts("  z = {");
+      uart_print_i32(vec_z[0]);
+      uart_puts(", ");
+      uart_print_i32(vec_z[1]);
+      uart_puts(", ");
+      uart_print_i32(vec_z[2]);
+      uart_puts(", ");
+      uart_print_i32(vec_z[3]);
+      uart_putln("}");
+      check("VEC_ADD z[0]==11", vec_z[0] == 11);
+      check("VEC_ADD z[1]==22", vec_z[1] == 22);
+      check("VEC_ADD z[2]==33", vec_z[2] == 33);
+      check("VEC_ADD z[3]==44", vec_z[3] == 44);
+    }
+  }
+#endif
 
   // ====================================================================
-  // TEST 4: GEMM   C[2][2] = A[2][8] * B[8][2]
+  // TEST 4: Descriptor-mode GEMM   C[2][2] = A[2][8] * B[8][2]
   //
   // A = [[1,2,3,4,5,6,7,8],   B = col0: {1,0,1,0,1,0,1,0} sum=4
   //      [1,1,1,1,1,1,1,1]]       col1: {0,1,0,1,0,1,0,1} sum=4
@@ -147,35 +359,61 @@ int main(void) {
   // C[1][0] = 1+1+1+1 = 4
   // C[1][1] = 1+1+1+1 = 4
   // ====================================================================
-  neorv32_uart0_printf("\n[TEST 4] GEMM C[2][2] = A[2][8] * B[8][2]\n");
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("[TEST 4] Descriptor-mode GEMM C[2][2] = A[2][8] * B[8][2]");
+#endif
 
-  ret = tgpu_gemm(
-    (uint32_t)mat_a,
-    (uint32_t)mat_b,
-    (uint32_t)mat_c,
-    2, 2, 8,          // M=2, N=2, K=8
-    TGPU_FLAG_DST_INT32
-  );
+  gemm_desc.opcode     = TGPU_OP_GEMM;
+  gemm_desc.flags      = TGPU_FLAG_DST_INT32;
+  gemm_desc.src0_addr  = (uint32_t)mat_a;
+  gemm_desc.src1_addr  = (uint32_t)mat_b;
+  gemm_desc.bias_addr  = 0;
+  gemm_desc.dst_addr   = (uint32_t)mat_c_desc;
+  gemm_desc.dim_m      = 2;
+  gemm_desc.dim_n      = 2;
+  gemm_desc.dim_k      = 8;
+  gemm_desc.stride0    = 8;
+  gemm_desc.stride1    = 2;
+  gemm_desc.stride_dst = 8;
+  gemm_desc.scale      = 0;
+  gemm_desc.shift      = 0;
+  gemm_desc.zero_point = 0;
+
+  ret = tgpu_run_descriptor((uint32_t)&gemm_desc);
 
   if (ret != TGPU_OK) {
-    neorv32_uart0_printf("  ERROR: tgpu_gemm returned %d\n", (int)ret);
+    uart_puts("  ERROR: tgpu_run_descriptor returned ");
+    uart_print_i32((int32_t)ret);
+    uart_putln("");
     tgpu_print_status();
     test_fail++;
   } else {
-    neorv32_uart0_printf("  C = [[%d, %d], [%d, %d]]\n",
-      (int)mat_c[0][0], (int)mat_c[0][1],
-      (int)mat_c[1][0], (int)mat_c[1][1]);
-    check("GEMM C[0][0]==16", mat_c[0][0] == 16);
-    check("GEMM C[0][1]==20", mat_c[0][1] == 20);
-    check("GEMM C[1][0]==4",  mat_c[1][0] == 4);
-    check("GEMM C[1][1]==4",  mat_c[1][1] == 4);
+#ifndef TGPU_GHDL_SIM
+    uart_puts("  C = [[");
+    uart_print_i32(mat_c_desc[0][0]);
+    uart_puts(", ");
+    uart_print_i32(mat_c_desc[0][1]);
+    uart_puts("], [");
+    uart_print_i32(mat_c_desc[1][0]);
+    uart_puts(", ");
+    uart_print_i32(mat_c_desc[1][1]);
+    uart_putln("]]");
+#endif
+    check("DESC GEMM C[0][0]==16", mat_c_desc[0][0] == 16);
+    check("DESC GEMM C[0][1]==20", mat_c_desc[0][1] == 20);
+    check("DESC GEMM C[1][0]==4",  mat_c_desc[1][0] == 4);
+    check("DESC GEMM C[1][1]==4",  mat_c_desc[1][1] == 4);
   }
 
   // ====================================================================
   // TEST 5: RELU   y[4] = max(0, {-5, 3, -1, 7})
   // Expected: {0, 3, 0, 7}
   // ====================================================================
-  neorv32_uart0_printf("\n[TEST 5] RELU y[4] = max(0, {-5,3,-1,7})\n");
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("[TEST 5] RELU y[4] = max(0, {-5,3,-1,7})");
+#endif
 
   ret = tgpu_relu(
     (uint32_t)relu_in,
@@ -184,13 +422,23 @@ int main(void) {
   );
 
   if (ret != TGPU_OK) {
-    neorv32_uart0_printf("  ERROR: tgpu_relu returned %d\n", (int)ret);
+    uart_puts("  ERROR: tgpu_relu returned ");
+    uart_print_i32((int32_t)ret);
+    uart_putln("");
     tgpu_print_status();
     test_fail++;
   } else {
-    neorv32_uart0_printf("  y = {%d, %d, %d, %d}\n",
-      (int)relu_out[0], (int)relu_out[1],
-      (int)relu_out[2], (int)relu_out[3]);
+#ifndef TGPU_GHDL_SIM
+    uart_puts("  y = {");
+    uart_print_i32(relu_out[0]);
+    uart_puts(", ");
+    uart_print_i32(relu_out[1]);
+    uart_puts(", ");
+    uart_print_i32(relu_out[2]);
+    uart_puts(", ");
+    uart_print_i32(relu_out[3]);
+    uart_putln("}");
+#endif
     check("RELU y[0]==0", relu_out[0] == 0);
     check("RELU y[1]==3", relu_out[1] == 3);
     check("RELU y[2]==0", relu_out[2] == 0);
@@ -198,38 +446,127 @@ int main(void) {
   }
 
   // ====================================================================
-  // TEST 6: Performance counters
   // ====================================================================
-  neorv32_uart0_printf("\n[TEST 6] Performance counters (from last RELU)\n");
+  // TEST 6: Conv2D via software im2col + hardware GEMM
+  //
+  // Input:
+  //   [[1,2,3],
+  //    [4,5,6],
+  //    [7,8,9]]
+  //
+  // Kernel:
+  //   [[1,0],
+  //    [0,1]]
+  //
+  // Expected output:
+  //   [[1+5, 2+6],
+  //    [4+8, 5+9]] = [[6,8],[12,14]]
+  // ====================================================================
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("[TEST 6] Conv2D via software im2col + hardware GEMM");
+#endif
+
+  im2col_2x2_stride1_int8(conv_im2col, conv_in);
+  kernel_to_col_2x2_int8(conv_weight, conv_kernel);
+
+  ret = tgpu_run_direct(
+    TGPU_OP_GEMM,
+    TGPU_FLAG_DST_INT32,
+    (uint32_t)conv_im2col,
+    (uint32_t)conv_weight,
+    0,
+    (uint32_t)conv_out_vec,
+    4, 1, 4,
+    4, 1, 4
+  );
+
+  if (ret != TGPU_OK) {
+    uart_puts("  ERROR: im2col GEMM returned ");
+    uart_print_i32((int32_t)ret);
+    uart_putln("");
+    tgpu_print_status();
+    test_fail++;
+  } else {
+    vec_to_map_2x2_i32(conv_out_map, conv_out_vec);
+#ifndef TGPU_GHDL_SIM
+    uart_puts("  im2col result = [[");
+    uart_print_i32(conv_out_map[0][0]);
+    uart_puts(", ");
+    uart_print_i32(conv_out_map[0][1]);
+    uart_puts("], [");
+    uart_print_i32(conv_out_map[1][0]);
+    uart_puts(", ");
+    uart_print_i32(conv_out_map[1][1]);
+    uart_putln("]]");
+#endif
+    check("IM2COL CONV y[0][0]==6",  conv_out_map[0][0] == 6);
+    check("IM2COL CONV y[0][1]==8",  conv_out_map[0][1] == 8);
+    check("IM2COL CONV y[1][0]==12", conv_out_map[1][0] == 12);
+    check("IM2COL CONV y[1][1]==14", conv_out_map[1][1] == 14);
+  }
+
+  // ====================================================================
+  // TEST 7: Performance counters
+  // ====================================================================
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("[TEST 7] Performance counters (from last command)");
+#endif
 
   uint32_t cyc, act, stl;
   tgpu_get_perf(&cyc, &act, &stl);
-  neorv32_uart0_printf("  Cycles : %d\n", cyc);
-  neorv32_uart0_printf("  Active : %d\n", act);
-  neorv32_uart0_printf("  Stalls : %d\n", stl);
-  neorv32_uart0_printf("  Efficiency: %d%%\n",
-    (cyc > 0) ? (act * 100 / cyc) : 0);
+#ifndef TGPU_GHDL_SIM
+  uart_puts("  Cycles : ");
+  uart_print_u32(cyc);
+  uart_putln("");
+  uart_puts("  Active : ");
+  uart_print_u32(act);
+  uart_putln("");
+  uart_puts("  Stalls : ");
+  uart_print_u32(stl);
+  uart_putln("");
+  uart_puts("  Efficiency: ");
+  uart_print_u32((cyc > 0) ? (act * 100 / cyc) : 0);
+  uart_putln("%");
+#endif
 
   check("Cycle count > 0", cyc > 0);
   check("Active <= Cycles", act <= cyc);
+#if TGPU_SW_SIM_DISABLE_IRQ_TEST
+  check("IRQ count == 0 in polling build", tgpu_irq_count == 0u);
+#else
+  check("IRQ count >= 1", tgpu_irq_count >= 1u);
+#endif
 
   // ====================================================================
   // FINAL SUMMARY
   // ====================================================================
-  neorv32_uart0_printf("\n========================================\n");
-  neorv32_uart0_printf(" Results: %d passed, %d failed\n", test_pass, test_fail);
-  neorv32_uart0_printf("========================================\n");
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("========================================");
+  uart_puts(" Results: ");
+  uart_print_i32(test_pass);
+  uart_puts(" passed, ");
+  uart_print_i32(test_fail);
+  uart_putln(" failed");
+  uart_putln("========================================");
 
   if (test_fail == 0) {
-    neorv32_uart0_printf(" ALL TESTS PASSED\n");
+    uart_putln(" ALL TESTS PASSED");
   } else {
-    neorv32_uart0_printf(" SOME TESTS FAILED -- see above\n");
-    neorv32_uart0_printf(" Tip: check TINYGPU_BASE in tinygpu_driver.h\n");
-    neorv32_uart0_printf("      matches your neorv32_top.vhd instantiation\n");
+    uart_putln(" SOME TESTS FAILED -- see above");
+    uart_putln(" Tip: check TINYGPU_BASE in tinygpu_driver.h");
+    uart_putln("      matches your neorv32_top.vhd instantiation");
   }
+#else
+  neorv32_gpio_port_set(0x54470000u | ((uint32_t)(test_pass & 0xff) << 8) | (uint32_t)(test_fail & 0xff));
+#endif
 
   // Full register dump for waveform correlation
+#ifndef TGPU_GHDL_SIM
   tgpu_print_status();
+#endif
 
   return 0;
 }

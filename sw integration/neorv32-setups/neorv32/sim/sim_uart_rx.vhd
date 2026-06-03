@@ -63,11 +63,6 @@ begin
         if (bitcnt = 0) then
           busy <= '0'; -- done
           char_v := to_integer(unsigned(sreg(8 downto 1)));
-          if (char_v < 32) or (char_v > 32+95) then -- non-printable character?
-            report NAME & ": (" & integer'image(char_v) & ")";
-          else
-            report NAME & ": " & character'val(char_v);
-          end if;
           if (char_v = 10) then -- LF line break
             writeline(file_out, line_v);
           elsif (char_v /= 13) then -- no additional CR
