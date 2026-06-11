@@ -336,6 +336,7 @@ architecture neorv32_top_rtl of neorv32_top is
   signal tinygpu_irq     : std_ulogic;
   signal tinygpu_mem_req : bus_req_t;
   signal tinygpu_mem_rsp : bus_rsp_t;
+  signal tinygpu_mem_rsp_raw : bus_rsp_t;
 
 begin
 
@@ -758,7 +759,7 @@ begin
     if IO_TINYGPU_EN generate
       neorv32_tinygpu_bus_switch_inst: entity neorv32.neorv32_bus_switch
     generic map (
-      ROUND_ROBIN_EN => false,
+      ROUND_ROBIN_EN => false, -- match the native NEORV32 DMA arbitration policy
       A_READ_ONLY    => false,
       B_READ_ONLY    => false
     )
@@ -768,7 +769,7 @@ begin
       a_req_i => sys2a_req,
       a_rsp_o => sys2a_rsp,
       b_req_i => tinygpu_mem_req,
-      b_rsp_o => tinygpu_mem_rsp,
+      b_rsp_o => tinygpu_mem_rsp_raw,
       x_req_o => sys2_req,
       x_rsp_i => sys2_rsp
     );
@@ -779,8 +780,19 @@ begin
     sys2_req        <= sys2a_req;
     sys2a_rsp       <= sys2_rsp;
     tinygpu_mem_req <= req_terminate_c;
-    tinygpu_mem_rsp <= rsp_terminate_c;
+    tinygpu_mem_rsp_raw <= rsp_terminate_c;
     end generate;
+
+  -- Keep the TinyGPU completion pulse and return data in the same clock
+  -- domain/phase before translating them to ready/rvalid.
+  tinygpu_response_reg: process(clk_i, rstn_sys)
+  begin
+    if rstn_sys = '0' then
+      tinygpu_mem_rsp <= rsp_terminate_c;
+    elsif rising_edge(clk_i) then
+      tinygpu_mem_rsp <= tinygpu_mem_rsp_raw;
+    end if;
+  end process tinygpu_response_reg;
 
     neorv32_bus_amo_rmw_disabled:
     if not RISCV_ISA_Zaamo generate
@@ -1071,6 +1083,15 @@ begin
           mem_rvalid_i=> tinygpu_mem_rsp.ack,
           irq_o       => tinygpu_irq
         );
+
+      -- TinyGPU issues plain, non-atomic data accesses. Drive every request
+      -- field so arbitration never depends on unresolved record members.
+      tinygpu_mem_req.meta  <= (others => '0');
+      tinygpu_mem_req.amo   <= '0';
+      tinygpu_mem_req.amoop <= (others => '0');
+      tinygpu_mem_req.burst <= '0';
+      tinygpu_mem_req.lock  <= '0';
+      tinygpu_mem_req.fence <= '0';
 
     end generate;
 

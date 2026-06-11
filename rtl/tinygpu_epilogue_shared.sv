@@ -52,6 +52,7 @@ module tinygpu_epilogue_shared
   logic                    last_elem;
   logic signed [ACC_W-1:0] post_elem_n;
   logic signed [31:0]      x_shifted;
+  logic signed [31:0]      zero_point_ext;
 
   function automatic signed [INT8_W-1:0] sat_i8(input signed [31:0] x);
     begin
@@ -111,13 +112,14 @@ module tinygpu_epilogue_shared
   assign post_elem_n = postprocess_elem(c_in[row_q][col_q], bias[col_q], elem_valid, flags);
   assign mul_a = post_elem_q;
   assign mul_b = scale;
+  assign zero_point_ext = {{16{zero_point[15]}}, zero_point};
 
   always_comb begin
     if (flags[FLAG_REQUANT_EN]) begin
       if ($signed(shift) >= 0)
-        x_shifted = ($signed(scaled_elem_q) >>> shift) + $signed(zero_point);
+        x_shifted = ($signed(scaled_elem_q) >>> shift) + zero_point_ext;
       else
-        x_shifted = ($signed(scaled_elem_q) <<< (-$signed(shift))) + $signed(zero_point);
+        x_shifted = ($signed(scaled_elem_q) <<< (-$signed(shift))) + zero_point_ext;
     end else begin
       x_shifted = post_elem_q;
     end

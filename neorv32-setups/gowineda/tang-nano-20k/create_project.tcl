@@ -131,6 +131,9 @@ import_files \
 import_files \
   -file $script_dir/tang-nano-20k_test_setup_bootloader.cst \
   {*}$flags_import
+import_files \
+  -file $script_dir/tinygpu_20k.sdc \
+  {*}$flags_import
 
 # --- Modify bootloader template file ---
 set fd [open $project_dir/src/neorv32_test_setup_bootloader.vhd r]
@@ -151,6 +154,12 @@ regsub -all {gpio_o\s*?<=\s*?con_gpio_out\s*?\(\s*?[0-9]+\s+downto\s+0\s*?\)} $f
 # IO_GPIO_NUM from 8 to 6
 regsub -all {IO_GPIO_NUM\s*=>\s*8,} $fc {IO_GPIO_NUM       => 6,} fc
 
+# Enable the TinyGPU peripheral in the generated board top.
+regsub -all \
+  {IO_UART0_EN\s*=>\s*true\s*-- implement primary universal asynchronous receiver/transmitter \(UART0\)\?} \
+  $fc {IO_UART0_EN       => true,              -- implement primary universal asynchronous receiver/transmitter (UART0)?
+    IO_TINYGPU_EN     => true               -- enable TinyGPU-ML accelerator} fc
+
 set fd [open $project_dir/src/neorv32_test_setup_bootloader.vhd w]
 puts -nonewline $fd $fc
 close $fd
@@ -164,6 +173,9 @@ set_option -use_done_as_gpio 1
 # --- Other set_options ---
 set_option -synthesis_tool gowinsynthesis
 set_option -output_base_name tang-nano-20k
+set_option -include_path $project_dir/src
+set_option -verilog_std sysv2017
+set_option -print_all_synthesis_warning 1
 
 # --- Unset variables ---
 unset flags_project

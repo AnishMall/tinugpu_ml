@@ -35,7 +35,12 @@ APP_INC = -I.
 # Include the common NEORV32 makefile
 include $(NEORV32_HOME)/sw/common/common.mk
 
-.PHONY: sim_ghdl_safe sim_ghdl_trace
+.PHONY: sim_ghdl_mmio sim_ghdl_safe sim_ghdl_trace
+
+sim_ghdl_mmio:
+	$(MAKE) APP_SRC=mmio_smoke.c \
+	  GHDL_RUN_FLAGS='--stop-time=2ms -gDUAL_CORE_EN=false -gTRACE_LOG_EN=true -gICACHE_EN=false -gDCACHE_EN=false -gUART_SIM_BAUD=1000000' \
+	  clean_all all install sim
 
 sim_ghdl_safe:
 	$(MAKE) USER_FLAGS+=' -DTGPU_GHDL_SIM=1 -DTGPU_SW_SIM_DISABLE_IRQ_TEST=1' \

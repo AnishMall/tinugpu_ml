@@ -1,19 +1,19 @@
 package tinygpu_pkg;
 
-  parameter int ADDR_W      = 32; //previously 32
-  parameter int DATA_W      = 32; //previously 32
-  parameter int INT8_W      = 8; //previously 8
-  parameter int ACC_W       = 32; //previously 32
+  parameter int ADDR_W      = 32;
+  parameter int DATA_W      = 32;
+  parameter int INT8_W      = 8;
+  parameter int ACC_W       = 32;
 
-  parameter int TILE_M      = 2; //previously 4
-  parameter int TILE_N      = 2; //previously 4
-  parameter int TILE_K      = 8; //previously 16
+  parameter int TILE_M      = 2;
+  parameter int TILE_N      = 2;
+  parameter int TILE_K      = 8;
 
   parameter int NUM_PES     = TILE_M * TILE_N;
-  parameter int SPM_A_BYTES = 256; //previously 512
-  parameter int SPM_B_BYTES = 256; //previously 512
-  parameter int SPM_C_BYTES = 128; //previously 256
-  parameter int MAX_BURST   = 8; //previously 16
+  parameter int SPM_A_BYTES = 256;
+  parameter int SPM_B_BYTES = 256;
+  parameter int SPM_C_BYTES = 128;
+  parameter int MAX_BURST   = 8;
 
   localparam logic [7:0] OP_NOP     = 8'h00;
   localparam logic [7:0] OP_GEMM    = 8'h01;

@@ -483,12 +483,21 @@ begin
 
   sim_tinygpu_status: process(clk_gen)
     variable status_word_v : std_ulogic_vector(31 downto 0);
+    variable prev_status_v : std_ulogic_vector(31 downto 0) := (others => '0');
     variable pass_count_v  : integer;
     variable fail_count_v  : integer;
   begin
     if rising_edge(clk_gen) then
       status_word_v := gpio_out;
-      if status_word_v(31 downto 16) = x"5447" then
+      if (status_word_v /= prev_status_v) and (status_word_v(31 downto 16) = x"5444") then
+        report "[TB:TGPU] check=" &
+               integer'image(to_integer(unsigned(status_word_v(14 downto 8)))) &
+               " pass=" & std_ulogic'image(status_word_v(0)) severity note;
+      elsif (status_word_v /= prev_status_v) and (status_word_v(31 downto 16) = x"5445") then
+        report "[TB:TGPU] value=" &
+               integer'image(to_integer(unsigned(status_word_v(15 downto 8)))) &
+               " data=" & integer'image(to_integer(signed(status_word_v(7 downto 0)))) severity note;
+      elsif status_word_v(31 downto 16) = x"5447" then
         pass_count_v := to_integer(unsigned(status_word_v(15 downto 8)));
         fail_count_v := to_integer(unsigned(status_word_v(7 downto 0)));
         report "[TB:TGPU] Software integration result: pass=" &
@@ -496,6 +505,7 @@ begin
                integer'image(fail_count_v) severity note;
         stop;
       end if;
+      prev_status_v := status_word_v;
     end if;
   end process sim_tinygpu_status;
   gpio    <= (others => 'L'); -- weak pull-downs

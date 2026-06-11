@@ -83,6 +83,17 @@ architecture neorv32_tinygpu_wrapper_rtl of neorv32_tinygpu_wrapper is
   signal mem_rvalid : std_logic;
   signal irq_int    : std_logic;
 
+  type mem_bridge_state_t is (MEM_IDLE, MEM_WAIT_READ, MEM_WAIT_WRITE, MEM_WAIT_DROP);
+  signal mem_bridge_state : mem_bridge_state_t;
+  signal mem_bus_req       : std_ulogic;
+  signal mem_bus_we        : std_ulogic;
+  signal mem_bus_addr      : std_ulogic_vector(31 downto 0);
+  signal mem_bus_wdata     : std_ulogic_vector(31 downto 0);
+  signal mem_bus_wstrb     : std_ulogic_vector(3 downto 0);
+  signal mem_core_rdata    : std_logic_vector(31 downto 0);
+  signal mem_core_ready    : std_logic;
+  signal mem_core_rvalid   : std_logic;
+
 begin
 
   -- Type conversions: std_ulogic -> std_logic
@@ -96,21 +107,91 @@ begin
   -- Byte strobes (NEORV32 doesn't use strobes on reads, so default to all 1s)
   mmio_wstrb <= "1111" when bus_req_i.rw = '1' else "0000";
   
-  -- Memory interface type conversions
-  mem_rdata  <= std_logic_vector(mem_rdata_i);
-  mem_ready  <= std_logic(mem_ready_i);
-  mem_rvalid <= std_logic(mem_rvalid_i);
+  mem_rdata  <= mem_core_rdata;
+  mem_ready  <= mem_core_ready;
+  mem_rvalid <= mem_core_rvalid;
   
-  -- Type conversions: std_logic -> std_ulogic
-  bus_rsp_o.ack  <= std_ulogic(mmio_ready) and bus_req_i.stb;
-  bus_rsp_o.err  <= '0';
-  bus_rsp_o.data <= std_ulogic_vector(mmio_rdata);
+  -- NEORV32 peripherals return a registered, single-cycle response.
+  bus_response: process(clk_i, rstn_i)
+  begin
+    if rstn_i = '0' then
+      bus_rsp_o <= rsp_terminate_c;
+    elsif rising_edge(clk_i) then
+      bus_rsp_o.ack  <= '0';
+      bus_rsp_o.err  <= '0';
+      bus_rsp_o.data <= (others => '0');
+      if (bus_req_i.stb = '1') and (mmio_ready = '1') then
+        bus_rsp_o.ack <= '1';
+        if bus_req_i.rw = '0' then
+          bus_rsp_o.data <= std_ulogic_vector(mmio_rdata);
+        end if;
+      end if;
+    end if;
+  end process bus_response;
   
-  mem_req_o   <= std_ulogic(mem_req);
-  mem_we_o    <= std_ulogic(mem_we);
-  mem_addr_o  <= std_ulogic_vector(mem_addr);
-  mem_wdata_o <= std_ulogic_vector(mem_wdata);
-  mem_wstrb_o <= std_ulogic_vector(mem_wstrb);
+  mem_req_o   <= mem_bus_req;
+  mem_we_o    <= mem_bus_we;
+  mem_addr_o  <= mem_bus_addr;
+  mem_wdata_o <= mem_bus_wdata;
+  mem_wstrb_o <= mem_bus_wstrb;
+
+  -- Convert TinyGPU's split ready/rvalid protocol into one NEORV32
+  -- completion response. Only one transaction can be outstanding.
+  memory_bridge: process(clk_i, rstn_i)
+  begin
+    if rstn_i = '0' then
+      mem_bridge_state <= MEM_IDLE;
+      mem_bus_req       <= '0';
+      mem_bus_we        <= '0';
+      mem_bus_addr      <= (others => '0');
+      mem_bus_wdata     <= (others => '0');
+      mem_bus_wstrb     <= (others => '0');
+      mem_core_rdata    <= (others => '0');
+      mem_core_ready    <= '0';
+      mem_core_rvalid   <= '0';
+    elsif rising_edge(clk_i) then
+      mem_bus_req     <= '0';
+      mem_core_ready  <= '0';
+      mem_core_rvalid <= '0';
+
+      case mem_bridge_state is
+        when MEM_IDLE =>
+          if mem_req = '1' then
+            mem_bus_req   <= '1';
+            mem_bus_we    <= std_ulogic(mem_we);
+            mem_bus_addr  <= std_ulogic_vector(mem_addr);
+            mem_bus_wdata <= std_ulogic_vector(mem_wdata);
+            if mem_we = '1' then
+              mem_bus_wstrb    <= std_ulogic_vector(mem_wstrb);
+              mem_bridge_state <= MEM_WAIT_WRITE;
+            else
+              -- NEORV32 uses BEN as the RAM lane enable for reads too.
+              mem_bus_wstrb    <= (others => '1');
+              mem_core_ready   <= '1';
+              mem_bridge_state <= MEM_WAIT_READ;
+            end if;
+          end if;
+
+        when MEM_WAIT_READ =>
+          if (mem_rvalid_i = '1') or (mem_ready_i = '1') then
+            mem_core_rdata   <= std_logic_vector(mem_rdata_i);
+            mem_core_rvalid  <= '1';
+            mem_bridge_state <= MEM_WAIT_DROP;
+          end if;
+
+        when MEM_WAIT_WRITE =>
+          if mem_ready_i = '1' then
+            mem_core_ready   <= '1';
+            mem_bridge_state <= MEM_WAIT_DROP;
+          end if;
+
+        when MEM_WAIT_DROP =>
+          if mem_req = '0' then
+            mem_bridge_state <= MEM_IDLE;
+          end if;
+      end case;
+    end if;
+  end process memory_bridge;
   
   irq_o <= std_ulogic(irq_int);
 

@@ -1194,12 +1194,12 @@ The design is correct if:
 
 ---
 
-## 25. Notes for Codex Code Generation
+## 25. RTL Development Guidelines
 
-When generating RTL:
+When implementing or modifying RTL:
 
-1. Generate one module at a time.
-2. Generate the matching testbench immediately after the module.
+1. Implement one module at a time.
+2. Add or update the matching testbench with the module change.
 3. Prefer clarity over premature optimization.
 4. Make the functional version work before adding pipelining or double-buffer overlap.
 5. Keep all interfaces explicit.

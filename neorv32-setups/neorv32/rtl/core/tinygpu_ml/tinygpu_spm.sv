@@ -104,7 +104,7 @@ import tinygpu_pkg::*;
           if (dma_wstrb[byte_idx]) begin
             write_byte_region(
               dma_region,
-              dma_addr + byte_idx,
+              {23'd0, dma_addr} + 32'(byte_idx),
               dma_wdata[8*byte_idx +: 8]
             );
           end
@@ -124,21 +124,21 @@ import tinygpu_pkg::*;
 
   always_comb begin
     dma_rdata = {
-      read_byte_region(dma_region, dma_addr + 3),
-      read_byte_region(dma_region, dma_addr + 2),
-      read_byte_region(dma_region, dma_addr + 1),
-      read_byte_region(dma_region, dma_addr + 0)
+      read_byte_region(dma_region, {23'd0, dma_addr} + 32'd3),
+      read_byte_region(dma_region, {23'd0, dma_addr} + 32'd2),
+      read_byte_region(dma_region, {23'd0, dma_addr} + 32'd1),
+      read_byte_region(dma_region, {23'd0, dma_addr})
     };
 
     for (int r = 0; r < TILE_M; r++) begin
-      if (a_rd_addr[r] < A_BYTES)
+      if (int'(a_rd_addr[r]) < A_BYTES)
         a_rd_data[r] = a_mem[a_rd_addr[r]];
       else
         a_rd_data[r] = '0;
     end
 
     for (int c = 0; c < TILE_N; c++) begin
-      if (b_rd_addr[c] < B_BYTES)
+      if (int'(b_rd_addr[c]) < B_BYTES)
         b_rd_data[c] = b_mem[b_rd_addr[c]];
       else
         b_rd_data[c] = '0;

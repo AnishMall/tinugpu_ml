@@ -85,7 +85,7 @@ architecture behavioral of tinygpu_top is
     RK_VEC_Y8,
     RK_GEMM_A8,
     RK_GEMM_B8,
-    RK_RELU_32
+    RK_RELU_8
   );
 
   signal state_q : state_t := ST_IDLE;
@@ -236,7 +236,6 @@ begin
 
   process(clk, rst_n)
     variable read_byte_v : signed(7 downto 0);
-    variable read_word_v : signed(31 downto 0);
     variable acc_next_v  : signed(31 downto 0);
     variable row_base_v  : integer;
     variable b_base_v    : integer;
@@ -371,7 +370,7 @@ begin
             read_kind_q  <= RK_DESC;
             state_q      <= ST_RD_REQ;
           elsif opcode_q = OP_VEC_ADD then
-            if dim_n_q <= 0 then
+            if dim_m_q <= 0 then
               err_shape_q <= '1';
               state_q     <= ST_FINISH;
             else
@@ -380,12 +379,12 @@ begin
               state_q     <= ST_RD_REQ;
             end if;
           elsif opcode_q = OP_RELU then
-            if dim_n_q <= 0 then
+            if dim_m_q <= 0 then
               err_shape_q <= '1';
               state_q     <= ST_FINISH;
             else
               cur_addr_q  <= src0_addr_q;
-              read_kind_q <= RK_RELU_32;
+              read_kind_q <= RK_RELU_8;
               state_q     <= ST_RD_REQ;
             end if;
           elsif (opcode_q = OP_GEMM) or (opcode_q = OP_GEMV) then
@@ -414,7 +413,7 @@ begin
           state_q     <= ST_RD_WAIT;
 
         when ST_RD_WAIT =>
-          if mem_rvalid = '1' or mem_ready = '1' then
+          if mem_rvalid = '1' then
             mem_req_q <= '0';
             case read_kind_q is
               when RK_DESC =>
@@ -433,22 +432,25 @@ begin
                     dst_addr_q <= unsigned(mem_rdata);
                   when 6 =>
                     dim_m_q <= to_integer(unsigned(mem_rdata(15 downto 0)));
-                    dim_n_q <= to_integer(unsigned(mem_rdata(31 downto 16)));
                   when 7 =>
-                    dim_k_q <= to_integer(unsigned(mem_rdata(15 downto 0)));
-                    stride0_q <= to_integer(unsigned(mem_rdata(31 downto 16)));
+                    dim_n_q <= to_integer(unsigned(mem_rdata(15 downto 0)));
                   when 8 =>
-                    stride1_q <= to_integer(unsigned(mem_rdata(15 downto 0)));
-                    stride_dst_q <= to_integer(unsigned(mem_rdata(31 downto 16)));
+                    dim_k_q <= to_integer(unsigned(mem_rdata(15 downto 0)));
                   when 9 =>
-                    scale_q <= mem_rdata;
+                    stride0_q <= to_integer(unsigned(mem_rdata(15 downto 0)));
                   when 10 =>
+                    stride1_q <= to_integer(unsigned(mem_rdata(15 downto 0)));
+                  when 11 =>
+                    stride_dst_q <= to_integer(unsigned(mem_rdata(15 downto 0)));
+                  when 12 =>
+                    scale_q <= mem_rdata;
+                  when 13 =>
                     shift_zp_q <= mem_rdata;
                   when others =>
                     null;
                 end case;
 
-                if desc_word_q < 10 then
+                if desc_word_q < 13 then
                   desc_word_q <= desc_word_q + 1;
                   cur_addr_q  <= unsigned(cmd_addr_q) + u32((desc_word_q + 1) * 4);
                   state_q     <= ST_RD_REQ;
@@ -459,20 +461,20 @@ begin
 
               when RK_VEC_X8 =>
                 a_val_q     <= extract_s8(mem_rdata, to_integer(cur_addr_q(1 downto 0)));
-                cur_addr_q  <= src1_addr_q + u32(vec_idx_q);
+                cur_addr_q  <= src1_addr_q + u32(vec_idx_q * stride1_q);
                 read_kind_q <= RK_VEC_Y8;
                 state_q     <= ST_RD_REQ;
 
               when RK_VEC_Y8 =>
                 read_byte_v := extract_s8(mem_rdata, to_integer(cur_addr_q(1 downto 0)));
                 result_q    <= resize(a_val_q, 32) + resize(read_byte_v, 32);
-                cur_addr_q  <= dst_addr_q + u32(vec_idx_q * 4);
+                cur_addr_q  <= dst_addr_q + u32(vec_idx_q * stride_dst_q);
                 state_q     <= ST_WR_REQ;
 
-              when RK_RELU_32 =>
-                read_word_v := signed(mem_rdata);
-                result_q    <= max0(read_word_v);
-                cur_addr_q  <= dst_addr_q + u32(vec_idx_q * 4);
+              when RK_RELU_8 =>
+                read_byte_v := extract_s8(mem_rdata, to_integer(cur_addr_q(1 downto 0)));
+                result_q    <= max0(resize(read_byte_v, 32));
+                cur_addr_q  <= dst_addr_q + u32(vec_idx_q * stride_dst_q);
                 state_q     <= ST_WR_REQ;
 
               when RK_GEMM_A8 =>
@@ -519,19 +521,19 @@ begin
             mem_wstrb_q <= "0000";
 
             if opcode_q = OP_VEC_ADD then
-              if vec_idx_q + 1 < dim_n_q then
+              if vec_idx_q + 1 < dim_m_q then
                 vec_idx_q   <= vec_idx_q + 1;
-                cur_addr_q  <= src0_addr_q + u32(vec_idx_q + 1);
+                cur_addr_q  <= src0_addr_q + u32((vec_idx_q + 1) * stride0_q);
                 read_kind_q <= RK_VEC_X8;
                 state_q     <= ST_RD_REQ;
               else
                 state_q <= ST_FINISH;
               end if;
             elsif opcode_q = OP_RELU then
-              if vec_idx_q + 1 < dim_n_q then
+              if vec_idx_q + 1 < dim_m_q then
                 vec_idx_q   <= vec_idx_q + 1;
-                cur_addr_q  <= src0_addr_q + u32((vec_idx_q + 1) * 4);
-                read_kind_q <= RK_RELU_32;
+                cur_addr_q  <= src0_addr_q + u32((vec_idx_q + 1) * stride0_q);
+                read_kind_q <= RK_RELU_8;
                 state_q     <= ST_RD_REQ;
               else
                 state_q <= ST_FINISH;

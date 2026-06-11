@@ -56,7 +56,7 @@ static volatile int32_t mat_c[2][2] = { {0,0}, {0,0} };
 static volatile int32_t mat_c_desc[2][2] = { {0,0}, {0,0} };
 
 // --- RELU test ---
-static volatile int32_t relu_in[4]  = { -5, 3, -1, 7 };
+static volatile int8_t  relu_in[4]  = { -5, 3, -1, 7 };
 static volatile int32_t relu_out[4] = {  0, 0,  0, 0 };
 
 // --- Conv2D via im2col test ---
@@ -89,6 +89,15 @@ static volatile uint32_t tgpu_irq_seen  = 0;
 // =============================================================================
 static int test_pass = 0;
 static int test_fail = 0;
+static int test_index = 0;
+
+#ifdef TGPU_GHDL_SIM
+static void sim_report_value(uint32_t index, int32_t value) {
+  neorv32_gpio_port_set(0x54450000u |
+                        ((index & 0xffu) << 8) |
+                        ((uint32_t)value & 0xffu));
+}
+#endif
 
 static void uart_putc(char c) {
 #ifdef TGPU_GHDL_SIM
@@ -153,6 +162,12 @@ static void check(const char *name, int condition) {
     uart_putln(name);
     test_fail++;
   }
+#ifdef TGPU_GHDL_SIM
+  neorv32_gpio_port_set(0x54440000u |
+                        (((uint32_t)test_index & 0x7fu) << 8) |
+                        (condition ? 1u : 0u));
+#endif
+  test_index++;
 }
 
 static void tinygpu_firq_handler(void) {
@@ -255,13 +270,13 @@ int main(void) {
 #endif
   tgpu_status_t ret = tgpu_run_direct(
     TGPU_OP_VEC_ADD,
-    0,
+    TGPU_FLAG_DST_INT32 | TGPU_FLAG_SIGNED_MODE,
     (uint32_t)vec_x,
     (uint32_t)vec_y,
     0,
     (uint32_t)vec_z,
-    1, 4, 1,
-    4, 4, 16
+    4, 1, 1,
+    1, 1, 4
   );
   if (ret != TGPU_OK) {
     uart_puts("  ERROR: tgpu_run_direct returned ");
@@ -270,6 +285,12 @@ int main(void) {
     tgpu_print_status();
     test_fail++;
   } else {
+#ifdef TGPU_GHDL_SIM
+    sim_report_value(0, vec_z[0]);
+    sim_report_value(1, vec_z[1]);
+    sim_report_value(2, vec_z[2]);
+    sim_report_value(3, vec_z[3]);
+#endif
 #ifndef TGPU_GHDL_SIM
     uart_puts("  z = {");
     uart_print_i32(vec_z[0]);
@@ -300,13 +321,13 @@ int main(void) {
 
   tgpu_status_t ret = tgpu_start_direct(
     TGPU_OP_VEC_ADD,
-    0,
+    TGPU_FLAG_DST_INT32 | TGPU_FLAG_SIGNED_MODE,
     (uint32_t)vec_x,
     (uint32_t)vec_y,
     0,
     (uint32_t)vec_z,
-    1, 4, 1,
-    4, 4, 16,
+    4, 1, 1,
+    1, 1, 4,
     TGPU_CTRL_IRQ_EN
   );
 
@@ -377,8 +398,7 @@ int main(void) {
   gemm_desc.stride1    = 2;
   gemm_desc.stride_dst = 8;
   gemm_desc.scale      = 0;
-  gemm_desc.shift      = 0;
-  gemm_desc.zero_point = 0;
+  gemm_desc.shift_zero_point = TGPU_PACK_SHIFT_ZP(0, 0);
 
   ret = tgpu_run_descriptor((uint32_t)&gemm_desc);
 
@@ -389,6 +409,12 @@ int main(void) {
     tgpu_print_status();
     test_fail++;
   } else {
+#ifdef TGPU_GHDL_SIM
+    sim_report_value(4, mat_c_desc[0][0]);
+    sim_report_value(5, mat_c_desc[0][1]);
+    sim_report_value(6, mat_c_desc[1][0]);
+    sim_report_value(7, mat_c_desc[1][1]);
+#endif
 #ifndef TGPU_GHDL_SIM
     uart_puts("  C = [[");
     uart_print_i32(mat_c_desc[0][0]);
@@ -428,6 +454,12 @@ int main(void) {
     tgpu_print_status();
     test_fail++;
   } else {
+#ifdef TGPU_GHDL_SIM
+    sim_report_value(8, relu_out[0]);
+    sim_report_value(9, relu_out[1]);
+    sim_report_value(10, relu_out[2]);
+    sim_report_value(11, relu_out[3]);
+#endif
 #ifndef TGPU_GHDL_SIM
     uart_puts("  y = {");
     uart_print_i32(relu_out[0]);
@@ -482,6 +514,9 @@ int main(void) {
   );
 
   if (ret != TGPU_OK) {
+#ifdef TGPU_GHDL_SIM
+    sim_report_value(12, ret);
+#endif
     uart_puts("  ERROR: im2col GEMM returned ");
     uart_print_i32((int32_t)ret);
     uart_putln("");

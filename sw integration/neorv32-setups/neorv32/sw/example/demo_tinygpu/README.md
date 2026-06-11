@@ -17,7 +17,8 @@ This directory contains the software integration for the TinyGPU-ML hardware acc
 | IRQ | FIRQ channel 1 |
 | Board | Tang Nano 20K — GW2AR-18C QN88P |
 | Synthesis tool | Gowin EDA v1.9.12.02 |
-| Resource usage | 17% LUT · 10% FF · 35% BSRAM (16 blocks) |
+| Resource usage | 86% logic · 56% registers · 35% BSRAM · 77% DSP |
+| Timing at 27 MHz | 0 setup/hold violations · 48.397 MHz reported Fmax |
 
 ---
 
@@ -47,6 +48,20 @@ demo_tinygpu/
 | `0x38` | FLAGS | RW | BIAS_EN, RELU_EN, CLAMP_EN, REQUANT_EN, DST_INT8/32, SIGNED |
 | `0x44`–`0x50` | Perf counters | RO | cycles, active cycles, stalls, total commands |
 | `0x54` | IRQ_STATUS | RW | Write bit0=1 to clear IRQ pending |
+
+## Command Descriptor ABI
+
+Indirect mode fetches exactly fourteen 32-bit little-endian words:
+
+```text
+0 opcode       1 flags        2 src0_addr    3 src1_addr
+4 bias_addr    5 dst_addr     6 dim_m        7 dim_n
+8 dim_k        9 stride0     10 stride1     11 stride_dst
+12 scale      13 shift[31:16] | zero_point[15:0]
+```
+
+`tgpu_descriptor_t` mirrors this layout and has a compile-time 56-byte size
+assertion. Do not repack the 16-bit dimensions or strides into shared words.
 
 ---
 
@@ -83,9 +98,9 @@ The recommended GHDL path uses:
 - caches disabled
 - fast simulated UART receiver baud (`UART_SIM_BAUD=1000000`)
 
-In this mode, the firmware avoids verbose UART logging and instead drops a final result signature on GPIO for the testbench to detect.
+In this mode, the firmware keeps UART logging minimal and drops a final result signature on GPIO for the testbench to detect.
 
-`UART0_SIM_MODE` is currently **not** the preferred path in this repo. It exposed unstable behavior in this GHDL/NEORV32 setup during TinyGPU demo runs, so the safer GHDL mode above is the maintained SW-simulation flow.
+The maintained GHDL regression uses the GPIO signature as its pass/fail source because it is deterministic and avoids treating UART text formatting as a hardware correctness check. UART0 remains the intended human-readable interface for the board demo at `19200` baud.
 
 The checked-in `sim/neorv32_tb.vhd` and `sim/ghdl.sh` are configured for a **single-core** software-verification run by default (`DUAL_CORE_EN=false`). This avoids dual-hart UART interleaving and makes TinyGPU firmware debugging much more deterministic in GHDL.
 
@@ -208,18 +223,18 @@ tail -f /workspaces/lab_DHWA-main/neorv32-setups/neorv32/sim/ghdl.log
 | `BOOT_MODE_SELECT 2 - booting IMEM image` | CPU booted from compiled firmware ✅ |
 | `Processor Configuration: ... UART0 ... TINYGPU ...` | Both peripherals active ✅ |
 | `simulation stopped by --stop-time @10ms` | Simulation completed normally ✅ |
-| `UART0_SIM_MODE` printf lines | Your C test output ✅ |
+| `[TB:TGPU] Software integration result: pass=23 fail=0` | Firmware self-check completed ✅ |
 | `several sources for unresolved signal` | Multi-driver elaboration error ❌ |
 | `bound check failure` | Generic value out of allowed range ❌ |
 
 Expected healthy output for the maintained GHDL path:
 ```
 [NEORV32] BOOT_MODE_SELECT 2 - booting IMEM image
-[TB:TGPU] Software integration result: pass=<N> fail=<M>
+[TB:TGPU] Software integration result: pass=23 fail=0
 simulation stopped ...
 ```
 
-### Expected UART transcript checklist
+### Expected simulation and UART checklist
 
 Use this as the quick "is the software integration healthy?" checklist.
 
@@ -227,8 +242,7 @@ For the maintained **GHDL self-check mode**, `sim/ghdl.log` should contain:
 
 ```text
 [NEORV32] BOOT_MODE_SELECT 2 - booting IMEM image
-[TB:TGPU] Software integration result: pass=...
-fail=...
+[TB:TGPU] Software integration result: pass=23 fail=0
 ```
 
 If the GPIO result line does not appear, the firmware did not complete the self-check sequence.
@@ -256,7 +270,11 @@ GEMM M=4, N=1, K=4
 
 This matches the project scope's "Conv2D via software im2col + hardware GEMM" requirement without adding dedicated convolution RTL.
 
-For **on-board UART0** at `19200` baud, the same banner and `[TEST ...]` / `[PASS]` lines should appear on the serial terminal. The exact counter values in TEST 6 can vary, but the pass/fail text should not.
+For **on-board UART0** at `19200` baud, the same banner and `[TEST ...]` / `[PASS]` lines should appear on the serial terminal. The exact counter values in TEST 7 can vary, but the pass/fail text should not.
+
+Vector operations use `DIM_M` as their element count. Their sources are INT8
+with one-byte element strides; the current demo stores INT32 results with a
+four-byte destination stride.
 
 ### `sim/neorv32.tracer0.log` — CPU core 0 instruction trace
 
@@ -307,7 +325,15 @@ neorv32_tinygpu_wrapper.vhd:118: warning:
 
 **Current repo state:** `sim/tinygpu_top_stub.vhd` is provided as a pure VHDL behavioral model matching the `tinygpu_top` component port map. It drives `mmio_ready='1'`, supports the demo app's IRQ-driven `VEC_ADD`, descriptor-mode `GEMM`, and `RELU` cases, and provides enough MMIO / memory-master behavior for software-integration testing.
 
-**Impact:** A clean GHDL run validates firmware boot, UART output, MMIO accesses, IRQ handling, and descriptor-vs-direct software sequencing. It does **not** replace the native SystemVerilog RTL testbenches for hardware verification.
+**Impact:** If the GHDL run reaches its GPIO completion signature, it validates firmware boot, MMIO accesses, and descriptor-vs-direct software sequencing against the stub. It does **not** replace the native SystemVerilog RTL testbenches for hardware verification.
+
+**Current status:** The GHDL software-integration flow completes with
+`pass=23 fail=0`. The former instruction corruption was caused by an
+incomplete bus adapter, not UART0: the wrapper returned MMIO responses
+combinationally, tied NEORV32's single completion ACK directly to both
+TinyGPU `ready` and `rvalid`, and passed `0000` read strobes into NEORV32's
+RAM byte-enable bus. The wrapper now registers MMIO responses, uses a
+single-outstanding memory bridge, and drives all byte lanes for reads.
 
 **Alternative:** Use Verilator or another mixed-language-capable simulator if you want one integrated CPU + real SV TinyGPU simulation flow.
 
@@ -336,15 +362,16 @@ IMEM image (auto-generated — do not edit manually):
 Simulation:
   neorv32/sim/neorv32_tb.vhd        ← testbench (modified for TinyGPU)
   neorv32/sim/ghdl.sh               ← simulation script (modified)
-  neorv32/sim/ghdl.log              ← simulation output + UART0_SIM_MODE text
-  neorv32/sim/tb.uart0_rx.log       ← UART0 physical RX (empty with SIM_MODE)
+  neorv32/sim/ghdl.log              ← simulation output + GPIO pass/fail signature
+  neorv32/sim/tb.uart0_rx.log       ← UART0 physical RX log when UART capture is enabled
   neorv32/sim/neorv32.tracer0.log   ← CPU core 0 instruction trace
   neorv32/sim/neorv32.tracer1.log   ← CPU core 1 instruction trace
 
 Hardware (GowinEDA project):
-  gowineda/tang-nano-20k/tinygpu_v3_20k_new/src/neorv32_top.vhd
-  gowineda/tang-nano-20k/tinygpu_v3_20k_new/src/neorv32_tinygpu_wrapper.vhd
-  gowineda/tang-nano-20k/tinygpu_v3_20k_new/impl/pnr/tang-nano-20k.fs  ← bitstream
+  gowineda/tang-nano-20k/create_project.tcl
+  gowineda/tang-nano-20k/tinygpu_v3_20k/src/neorv32_top.vhd
+  gowineda/tang-nano-20k/tinygpu_v3_20k/src/neorv32_tinygpu_wrapper.vhd
+  gowineda/tang-nano-20k/tinygpu_v3_20k/impl/pnr/tang-nano-20k.fs  ← bitstream
 ```
 
 ---
@@ -353,7 +380,7 @@ Hardware (GowinEDA project):
 
 | Priority | Task |
 |---|---|
-| 1 | Confirm UART output in `ghdl.log` with the IRQ/direct/descriptor test flow passing |
-| 2 | Flash bitstream to Tang Nano 20K and confirm the same UART transcript on hardware |
-| 3 | Add an IRQ-driven descriptor-mode variant if hardware/software latency testing is needed |
-| 4 | Move to Verilator or mixed-language co-sim if a true CPU + SV accelerator simulation is required |
+| 1 | Regenerate and synthesize the 2x2x8 Gowin project from `create_project.tcl` |
+| 2 | Require zero setup/hold violations and confirm the hierarchy contains four PEs |
+| 3 | Flash the bitstream, upload `neorv32_exe.bin`, and check the UART transcript |
+| 4 | Keep `sim_ghdl_safe`, Verilator, and the RTL unit suite green while preparing the board demo |

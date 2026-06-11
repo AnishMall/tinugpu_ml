@@ -37,3 +37,22 @@ foreach corefile $corefiles {
     # TODO: verify set_file_prop call is refering to the files correctly
 }
 
+# Add TinyGPU SystemVerilog in package-first dependency order. Importing copies
+# the files into the project, so the generated Gowin project is self-contained.
+set tinygpu_dir $import_neorv32_dir/rtl/core/tinygpu_ml
+set tinygpu_files {
+    tinygpu_pkg.sv
+    tinygpu_pe.sv
+    tinygpu_array4x4.sv
+    tinygpu_spm.sv
+    tinygpu_epilogue.sv
+    tinygpu_dma.sv
+    tinygpu_vec_alu.sv
+    tinygpu_cmd_ctrl.sv
+    tinygpu_counters.sv
+    tinygpu_regs.sv
+    tinygpu_top.sv
+}
+foreach tinygpu_file $tinygpu_files {
+    import_files -file $tinygpu_dir/$tinygpu_file {*}$flags_import
+}

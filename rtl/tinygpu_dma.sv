@@ -35,8 +35,8 @@ module tinygpu_dma import tinygpu_pkg::*; (
   localparam logic [1:0] DMA_OP_LOAD_I8   = 2'd0;
   localparam logic [1:0] DMA_OP_STORE_I32 = 2'd2;
   localparam logic [1:0] DMA_OP_STORE_I8  = 2'd3;
-  localparam logic [15:0] TILE_N_U16 = TILE_N;
-  localparam logic [15:0] TILE_K_U16 = TILE_K;
+  localparam logic [31:0] TILE_N_U32 = 32'(TILE_N);
+  localparam logic [31:0] TILE_K_U32 = 32'(TILE_K);
 
   typedef enum logic [2:0] {
     DMA_IDLE,
@@ -67,10 +67,14 @@ module tinygpu_dma import tinygpu_pkg::*; (
   logic [31:0] write_addr;
   logic [31:0] aligned_write_addr;
   logic [8:0]  spm_elem_addr;
-  logic [31:0] spm_addr_store_i32;
-  logic [31:0] spm_addr_store_i8;
+  logic [8:0]  spm_addr_store_i32;
+  logic [8:0]  spm_addr_store_i8;
   logic [7:0]  load_byte;
   logic [1:0]  load_lane_sel;
+  logic [31:0] row_u32;
+  logic [31:0] col_u32;
+  logic [31:0] stride_u32;
+  logic [31:0] spm_base_u32;
 
   logic        advance_elem;
   logic        last_elem;
@@ -79,17 +83,20 @@ module tinygpu_dma import tinygpu_pkg::*; (
   assign done  = done_q;
   assign error = error_q;
 
-  assign elem_addr = base_addr_q + (row_q * stride_bytes_q) + col_q;
+  assign row_u32 = {16'd0, row_q};
+  assign col_u32 = {16'd0, col_q};
+  assign stride_u32 = {16'd0, stride_bytes_q};
+  assign spm_base_u32 = {23'd0, spm_base_q};
+  assign elem_addr = base_addr_q + (row_u32 * stride_u32) + col_u32;
   assign aligned_read_addr = {elem_addr[31:2], 2'b00};
-  assign write_addr = base_addr_q + (row_q * stride_bytes_q) +
-                      ((op_kind_q == DMA_OP_STORE_I32) ? (col_q * 16'd4) : col_q);
+  assign write_addr = base_addr_q + (row_u32 * stride_u32) +
+                      ((op_kind_q == DMA_OP_STORE_I32) ? (col_u32 << 2) : col_u32);
   assign aligned_write_addr = {write_addr[31:2], 2'b00};
-  assign spm_elem_addr =
-    (spm_region_q == 2'd0) ? (spm_base_q + (row_q * TILE_K_U16) + col_q[8:0]) :
-    (spm_region_q == 2'd1) ? (spm_base_q + (row_q * TILE_N_U16) + col_q[8:0]) :
-                             (spm_base_q + (row_q * TILE_N_U16) + col_q[8:0]);
-  assign spm_addr_store_i32 = spm_base_q + (((row_q * TILE_N_U16) + col_q) * 16'd4);
-  assign spm_addr_store_i8  = spm_base_q + (((row_q * TILE_N_U16) + col_q) * 16'd4);
+  assign spm_elem_addr = 9'(spm_base_u32 +
+                            (row_u32 * ((spm_region_q == 2'd0) ? TILE_K_U32 : TILE_N_U32)) +
+                            col_u32);
+  assign spm_addr_store_i32 = 9'(spm_base_u32 + (((row_u32 * TILE_N_U32) + col_u32) << 2));
+  assign spm_addr_store_i8  = 9'(spm_base_u32 + (((row_u32 * TILE_N_U32) + col_u32) << 2));
   assign load_lane_sel = elem_addr[1:0];
   assign last_elem = (row_q + 16'd1 >= rows_q) && (col_q + 16'd1 >= cols_q);
   assign store_word_data = spm_rdata;
@@ -217,9 +224,9 @@ module tinygpu_dma import tinygpu_pkg::*; (
       DMA_READ_SPM: begin
         spm_region_o = spm_region_q;
         if (op_kind_q == DMA_OP_STORE_I32)
-          spm_addr = spm_addr_store_i32[8:0];
+          spm_addr = spm_addr_store_i32;
         else
-          spm_addr = spm_addr_store_i8[8:0];
+          spm_addr = spm_addr_store_i8;
         state_d = DMA_ISSUE_WRITE;
       end
 
@@ -229,9 +236,9 @@ module tinygpu_dma import tinygpu_pkg::*; (
         mem_addr = aligned_write_addr;
         spm_region_o = spm_region_q;
         if (op_kind_q == DMA_OP_STORE_I32)
-          spm_addr = spm_addr_store_i32[8:0];
+          spm_addr = spm_addr_store_i32;
         else
-          spm_addr = spm_addr_store_i8[8:0];
+          spm_addr = spm_addr_store_i8;
 
         if (op_kind_q == DMA_OP_STORE_I32) begin
           mem_wdata = store_word_data;

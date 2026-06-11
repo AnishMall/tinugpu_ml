@@ -3,6 +3,7 @@ module tb_tinygpu_cmd_ctrl_idle_tb;
   logic clk;
   logic rst_n;
   logic start;
+  logic start_direct_mode;
   logic soft_reset;
   logic direct_mode;
   logic [31:0] cmd_addr;
@@ -42,7 +43,8 @@ module tb_tinygpu_cmd_ctrl_idle_tb;
   logic mem_rvalid;
 
   tinygpu_cmd_ctrl dut (
-    .clk(clk), .rst_n(rst_n), .start(start), .soft_reset(soft_reset), .direct_mode(direct_mode), .cmd_addr(cmd_addr),
+    .clk(clk), .rst_n(rst_n), .start(start), .start_direct_mode(start_direct_mode),
+    .soft_reset(soft_reset), .direct_mode(direct_mode), .cmd_addr(cmd_addr),
     .opcode(opcode), .flags(flags), .src0_addr(src0_addr), .src1_addr(src1_addr), .bias_addr(bias_addr),
     .dst_addr(dst_addr), .M(M), .N(N), .K(K), .stride0(stride0), .stride1(stride1), .stride_dst(stride_dst),
     .scale(scale), .shift(shift), .zero_point(zero_point),
@@ -60,6 +62,7 @@ module tb_tinygpu_cmd_ctrl_idle_tb;
   initial begin
     rst_n = 0;
     start = 0;
+    start_direct_mode = 1;
     soft_reset = 0;
     direct_mode = 1;
     cmd_addr = 0;

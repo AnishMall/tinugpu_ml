@@ -149,7 +149,7 @@ The standalone C++ testbench (`sim/tb_tinygpu.cpp`) currently:
   - CTRL, STATUS, DIRECT_OP, SRC0/SRC1/BIAS/DST base addresses.
   - Dimension/stride registers (DIM_M/N/K, STRIDE0/1/DST).
   - Flags and performance counter registers.
-- Runs a sequence of **direct‑mode tests**:
+- Runs a sequence of direct- and descriptor-mode tests:
   1. **Register read/write sanity**  
      - Writes `REG_SRC0_ADDR` and checks the read‑back value.
   2. **Soft reset**  
@@ -160,10 +160,13 @@ The standalone C++ testbench (`sim/tb_tinygpu.cpp`) currently:
   4. **GEMM**  
      - INT8 matrices in memory: `A[2][8]`, `B[8][2]`.  
      - Configures `OP_GEMM` to compute `C[2][2] = A * B` with expected results `[[16,20],[4,4]]` as INT32.
-  5. **RELU**  
-     - INT32 vector in memory: `{-5, 3, -1, 7}`.  
+  5. **Descriptor GEMM**
+     - Fetches the same explicit 14-word command descriptor used by the firmware.
+     - Repeats the `2x8 * 8x2` GEMM and checks `[[16,20],[4,4]]`.
+  6. **RELU**
+     - INT8 vector in memory: `{-5, 3, -1, 7}`.
      - Configures `OP_RELU` so `y[4] = max(0, x)` should be `{0, 3, 0, 7}`.
-  6. **Performance counters**  
+  7. **Performance counters**
      - Reads cycle/active/stall/cmd counters for a basic sanity check after the above tests.
 
 For each compute test (VEC_ADD, GEMM, RELU) the testbench:
@@ -194,15 +197,22 @@ What is working:
 - The standalone direct-mode regression now passes:
   - `VEC_ADD`
   - `GEMM`
+  - descriptor-mode `GEMM`
   - `RELU`
   - performance counter sanity checks
+- Current result: **22 passed, 0 failed**.
 
 The key fixes that got the flow green were:
 
 - fixing the direct-mode control race so a `CTRL_DIRECT | CTRL_START` write launches a direct command instead of falling into descriptor mode
 - fixing the top-level staged read path so a same-cycle `mem_ready + mem_rvalid` response is not dropped
 - fixing the standalone vector testbench programming so vector length uses `DIM_M`, matching the RTL contract
+- matching the firmware descriptor to the RTL's fourteen separate 32-bit descriptor words
+- using INT8 vector/RELU sources with one-byte source strides and INT32 destinations with four-byte strides
 - draining the staged top-level write buffer in the standalone bench before checking memory results
+- registering the NEORV32 MMIO response so ACK and read data are deterministic
+- translating NEORV32's single completion ACK into TinyGPU's split `ready`/`rvalid` protocol
+- forcing `ben=1111` for NEORV32 memory reads while preserving TinyGPU write strobes
 
 ### Relationship to the GHDL flow
 

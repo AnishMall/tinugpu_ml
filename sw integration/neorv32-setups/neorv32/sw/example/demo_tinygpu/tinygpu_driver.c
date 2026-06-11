@@ -219,17 +219,17 @@ tgpu_status_t tgpu_gemm(
 tgpu_status_t tgpu_relu(uint32_t src, uint32_t dst, uint16_t len) {
   return tgpu_run_direct(
     TGPU_OP_RELU,
-    0,
+    TGPU_FLAG_DST_INT32 | TGPU_FLAG_SIGNED_MODE,
     src,
     0,   // src1 not used
     0,   // bias not used
     dst,
-    1,        // M = 1 row
-    len,      // N = vector length
+    len,      // M = vector length
+    1,        // N is unused by vector operations
     1,        // K = 1
-    len,      // stride0
-    len,      // stride1
-    len * 4   // stride_dst (INT32 output)
+    1,        // INT8 source element stride
+    1,        // src1 is unused
+    4         // INT32 destination element stride
   );
 }
 
@@ -240,13 +240,13 @@ tgpu_status_t tgpu_relu(uint32_t src, uint32_t dst, uint16_t len) {
 tgpu_status_t tgpu_vec_add(uint32_t src0, uint32_t src1, uint32_t dst, uint16_t len) {
   return tgpu_run_direct(
     TGPU_OP_VEC_ADD,
-    0,
+    TGPU_FLAG_DST_INT32 | TGPU_FLAG_SIGNED_MODE,
     src0,
     src1,
     0,
     dst,
-    1, len, 1,
-    len, len, len * 4
+    len, 1, 1,
+    1, 1, 4
   );
 }
 

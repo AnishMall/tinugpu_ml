@@ -49,9 +49,9 @@ import tinygpu_pkg::*;
   input  logic         mem_rvalid
 );
 
-  localparam logic [15:0] TILE_M_U16 = TILE_M;
-  localparam logic [15:0] TILE_N_U16 = TILE_N;
-  localparam logic [15:0] TILE_K_U16 = TILE_K;
+  localparam logic [15:0] TILE_M_U16 = 16'(TILE_M);
+  localparam logic [15:0] TILE_N_U16 = 16'(TILE_N);
+  localparam logic [15:0] TILE_K_U16 = 16'(TILE_K);
   localparam int TILE_M_SHIFT = (TILE_M <= 1) ? 0 : $clog2(TILE_M);
   localparam int TILE_N_SHIFT = (TILE_N <= 1) ? 0 : $clog2(TILE_N);
   localparam int TILE_K_SHIFT = (TILE_K <= 1) ? 0 : $clog2(TILE_K);
@@ -140,6 +140,7 @@ import tinygpu_pkg::*;
   logic signed [ACC_W-1:0]  vec_result_raw;
   logic signed [ACC_W-1:0]  vec_result_post;
   logic signed [INT8_W-1:0] vec_result_i8;
+  logic signed [31:0]        zero_point_ext;
   logic [31:0]              vec_store_addr_q;
   logic [31:0]              vec_store_wdata_q;
   logic [3:0]               vec_store_wstrb_q;
@@ -305,7 +306,8 @@ import tinygpu_pkg::*;
 
   assign dma_store_base_addr = dst_row_base_q + dst_n_offset_q;
   assign c_stage_addr = (store_row_q * TILE_N_U16) + store_col_q;
-  assign bias_mem_addr = bias_base_q + (bias_col_q << 2);
+  assign bias_mem_addr = bias_base_q + {14'd0, bias_col_q, 2'b00};
+  assign zero_point_ext = {{16{zero_point_q[15]}}, zero_point_q};
   assign desc_mem_addr = cmd_addr_q + {25'd0, desc_word_idx_q, 2'b00};
   assign state_is_bias = (state_q == S_LOAD_BIAS);
   assign state_is_vec  = (state_q == S_VEC_LOAD_X) || (state_q == S_VEC_LOAD_Y) || (state_q == S_VEC_STORE);
@@ -473,9 +475,9 @@ import tinygpu_pkg::*;
 
     if (flags_q[FLAG_REQUANT_EN]) begin
       if ($signed(shift_q) >= 0)
-        vec_result_i8 = sat_i8(($signed(vec_scaled_q) >>> shift_q) + $signed(zero_point_q));
+        vec_result_i8 = sat_i8(($signed(vec_scaled_q) >>> shift_q) + zero_point_ext);
       else
-        vec_result_i8 = sat_i8(($signed(vec_scaled_q) <<< (-$signed(shift_q))) + $signed(zero_point_q));
+        vec_result_i8 = sat_i8(($signed(vec_scaled_q) <<< (-$signed(shift_q))) + zero_point_ext);
     end else begin
       vec_result_i8 = sat_i8(vec_result_post_q);  // use registered value
     end
@@ -709,7 +711,7 @@ import tinygpu_pkg::*;
           bias_vec[c] <= '0;
         end
       end else if (load_bias_reg) begin
-        bias_vec[bias_col_q[1:0]] <= $signed(mem_rdata);
+        bias_vec[int'(bias_col_q)] <= $signed(mem_rdata);
       end
 
       if (load_vec_x_reg)
@@ -811,14 +813,14 @@ import tinygpu_pkg::*;
 
   always @* begin
     for (int r = 0; r < TILE_M; r++) begin
-      row_mask[r]  = ((m0_q + r) < M_q);
-      a_rd_addr[r] = (r * TILE_K) + kk_q[7:0];
+      row_mask[r]  = ((m0_q + 16'(r)) < M_q);
+      a_rd_addr[r] = 8'((r * TILE_K) + kk_q);
       a_vec[r]     = $signed(a_rd_data[r]);
     end
 
     for (int c = 0; c < TILE_N; c++) begin
-      col_mask[c]  = ((n0_q + c) < effective_n);
-      b_rd_addr[c] = (kk_q[7:0] * TILE_N) + c;
+      col_mask[c]  = ((n0_q + 16'(c)) < effective_n);
+      b_rd_addr[c] = 8'((kk_q * TILE_N) + c);
       b_vec[c]     = $signed(b_rd_data[c]);
     end
   end
@@ -976,7 +978,7 @@ import tinygpu_pkg::*;
         vec_idx_d          = '0;
         store_stage_done_d = 1'b0;
         src1_k_base_d      = src1_addr_q;
-        src1_n_offset_d    = src1_n_offset_q + TILE_N_U16;
+        src1_n_offset_d    = src1_n_offset_q + {16'd0, TILE_N_U16};
         dst_n_offset_d     = dst_n_offset_q + dst_n_step_q;
         bias_base_d        = bias_base_q + bias_n_step_q;
       end
@@ -1156,7 +1158,7 @@ import tinygpu_pkg::*;
       S_LOAD_A: begin
         desc_inflight_d        = 1'b0;
         dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
-        dma_base_addr_cmd_n    = src0_row_base_q + k0_q;
+        dma_base_addr_cmd_n    = src0_row_base_q + {16'd0, k0_q};
         dma_rows_cmd_n         = active_tile_m;
         dma_cols_cmd_n         = active_tile_k;
         dma_stride_bytes_cmd_n = stride0_q;
@@ -1286,9 +1288,9 @@ import tinygpu_pkg::*;
           c_wr_en   = 1'b1;
           c_wr_addr = c_stage_addr[7:0];
           if (use_dst_i8)
-            c_wr_data = {24'd0, c_epi_i8[store_row_q[1:0]][store_col_q[1:0]]};
+            c_wr_data = {24'd0, c_epi_i8[int'(store_row_q)][int'(store_col_q)]};
           else
-            c_wr_data = c_epi_i32[store_row_q[1:0]][store_col_q[1:0]];
+            c_wr_data = c_epi_i32[int'(store_row_q)][int'(store_col_q)];
         end else begin
           dma_op_kind_cmd_n      = use_dst_i8 ? DMA_OP_STORE_I8 : DMA_OP_STORE_I32;
           dma_base_addr_cmd_n    = dma_store_base_addr;

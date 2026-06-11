@@ -24,3 +24,26 @@ for the according FPGA pin mapping.
 * GPIO output port `gpio_o` bits 0..5 are connected to the orange on-board LEDs (LED1 - LED6); LED6 is the bootloader status LED
 * UART0 signals `uart0_txd_o` and `uart0_rxd_i` are connected to the on-board USB-UART chip
   * Under Linux, run `sudo modprobe ftdi_sio` for the on-board UART to appear under `/dev/ttyUSB*` (the higher of the two ports that will appear). Run `sudo modprobe -r ftdi_sio` to be able to program the device on the Gowin Programmer. There is no need to unplug the device from the USB port.
+
+## TinyGPU-ML 2x2x8 Demo Build
+
+The demo target uses a 2x2 PE array with `TILE_K=8`. The checked timing report
+meets the 27 MHz board clock with zero setup/hold violations and reports a
+48.397 MHz Fmax. Place-and-route uses 86% of logic and 77% of DSP resources, so
+the configuration should remain frozen for the first board demonstration.
+
+Generate a portable project with Gowin Shell instead of reusing the checked
+`tinygpu_v3_20k.gprj`, which was produced on another workstation:
+
+```bash
+cd neorv32-setups/gowineda/tang-nano-20k
+gw_sh create_project.tcl \
+  --project-name tinygpu_v3_20k_local \
+  --project-path .
+```
+
+The script copies the NEORV32 VHDL and TinyGPU SystemVerilog sources into the
+generated project, enables `IO_TINYGPU_EN`, selects SystemVerilog 2017, and
+applies the 27 MHz `tinygpu_20k.sdc` clock constraint.
+After synthesis, confirm that the hierarchy contains four `tinygpu_pe`
+instances and that both setup and hold violated endpoint counts are zero.

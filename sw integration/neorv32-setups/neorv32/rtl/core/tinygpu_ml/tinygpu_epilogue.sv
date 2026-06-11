@@ -35,6 +35,9 @@ import tinygpu_pkg::*;
   epi_state_e state_q;
   logic signed [ACC_W-1:0] post_q   [0:TILE_M-1][0:TILE_N-1];
   logic signed [ACC_W-1:0] scaled_q [0:TILE_M-1][0:TILE_N-1];
+  logic signed [31:0] zero_point_ext;
+
+  assign zero_point_ext = {{16{zero_point[15]}}, zero_point};
 
   function automatic signed [INT8_W-1:0] sat_i8(input signed [31:0] x);
     begin
@@ -148,9 +151,9 @@ import tinygpu_pkg::*;
               logic signed [31:0] x_shifted;
               if (flags[FLAG_REQUANT_EN]) begin
                 if (shift >= 0)
-                  x_shifted = (scaled_q[r][c] >>> shift) + zero_point;
+                  x_shifted = (scaled_q[r][c] >>> shift) + zero_point_ext;
                 else
-                  x_shifted = (scaled_q[r][c] <<< (-shift)) + zero_point;
+                  x_shifted = (scaled_q[r][c] <<< (-shift)) + zero_point_ext;
               end else begin
                 x_shifted = post_q[r][c];
               end

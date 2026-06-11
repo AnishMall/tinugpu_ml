@@ -145,24 +145,28 @@ typedef enum {
 // DESCRIPTOR  (for indirect / command-queue mode)
 // Write this struct to DMEM, then point TGPU_REG_CMD_ADDR at it
 // =============================================================================
-typedef struct __attribute__((packed)) {
-  uint8_t  opcode;       // TGPU_OP_*
-  uint8_t  _pad0[3];
-  uint32_t flags;        // TGPU_FLAG_*
-  uint32_t src0_addr;    // byte address of matrix A in DMEM
-  uint32_t src1_addr;    // byte address of matrix B in DMEM
-  uint32_t bias_addr;    // byte address of bias vector (or 0)
-  uint32_t dst_addr;     // byte address of output in DMEM
-  uint16_t dim_m;
-  uint16_t dim_n;
-  uint16_t dim_k;
-  uint16_t stride0;      // bytes per row of src0
-  uint16_t stride1;      // bytes per row of src1
-  uint16_t stride_dst;   // bytes per row of dst
-  uint32_t scale;        // requant scale
-  uint16_t shift;        // requant shift
-  uint16_t zero_point;   // requant zero point
+typedef struct __attribute__((aligned(4))) {
+  uint32_t opcode;           // word 0: TGPU_OP_* in bits [7:0]
+  uint32_t flags;            // word 1: TGPU_FLAG_*
+  uint32_t src0_addr;        // word 2: byte address of matrix A
+  uint32_t src1_addr;        // word 3: byte address of matrix B
+  uint32_t bias_addr;        // word 4: byte address of bias vector
+  uint32_t dst_addr;         // word 5: byte address of output
+  uint32_t dim_m;            // word 6: value in bits [15:0]
+  uint32_t dim_n;            // word 7: value in bits [15:0]
+  uint32_t dim_k;            // word 8: value in bits [15:0]
+  uint32_t stride0;          // word 9: bytes per source-0 element/row
+  uint32_t stride1;          // word 10: bytes per source-1 element/row
+  uint32_t stride_dst;       // word 11: bytes per destination element/row
+  uint32_t scale;            // word 12: requant scale
+  uint32_t shift_zero_point; // word 13: [31:16]=shift, [15:0]=zero point
 } tgpu_descriptor_t;
+
+#define TGPU_PACK_SHIFT_ZP(shift, zero_point) \
+  ((((uint32_t)(uint16_t)(shift)) << 16) | (uint32_t)(uint16_t)(zero_point))
+
+_Static_assert(sizeof(tgpu_descriptor_t) == 14u * sizeof(uint32_t),
+               "TinyGPU descriptor must match the RTL 14-word ABI");
 
 // =============================================================================
 // API DECLARATIONS

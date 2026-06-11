@@ -1,6 +1,4 @@
-module tinygpu_top 
-import tinygpu_pkg::*;
- #(
+module tinygpu_top #(
   parameter int ADDR_W = 32,
   parameter int DATA_W = 32
 )(

@@ -1,6 +1,6 @@
 # TinyGPU-ML Project Architecture: Hardware/Software Co-Design Specification
 
-This markdown document summarizes the technical architecture of the TinyGPU-ML project from the previously prepared LaTeX/PDF architecture document. It focuses only on the hardware side, software side, co-design interface, and simulation/verification plan.
+This markdown document summarizes the technical architecture of the TinyGPU-ML project. It focuses only on the hardware side, software side, co-design interface, and simulation/verification plan.
 
 ---
 

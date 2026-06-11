@@ -5,15 +5,15 @@ package tinygpu_pkg;
   parameter int INT8_W      = 8;
   parameter int ACC_W       = 32;
 
-  parameter int TILE_M      = 1;
-  parameter int TILE_N      = 1;
-  parameter int TILE_K      = 4;
+  parameter int TILE_M      = 2;
+  parameter int TILE_N      = 2;
+  parameter int TILE_K      = 8;
 
   parameter int NUM_PES     = TILE_M * TILE_N;
-  parameter int SPM_A_BYTES = 32;
-  parameter int SPM_B_BYTES = 32;
-  parameter int SPM_C_BYTES = 16;
-  parameter int MAX_BURST   = 2;
+  parameter int SPM_A_BYTES = 256;
+  parameter int SPM_B_BYTES = 256;
+  parameter int SPM_C_BYTES = 128;
+  parameter int MAX_BURST   = 8;
 
   localparam logic [7:0] OP_NOP     = 8'h00;
   localparam logic [7:0] OP_GEMM    = 8'h01;
@@ -47,7 +47,7 @@ package tinygpu_pkg;
     S_VEC_LOAD_X,
     S_VEC_LOAD_Y,
     S_VEC_EXEC,
-    S_VEC_EXEC2,  // <-- new pipeline state
+    S_VEC_EXEC2,
     S_VEC_EXEC3,
     S_VEC_EXEC4,
     S_VEC_STORE,

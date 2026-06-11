@@ -7,8 +7,9 @@
 //   2. Soft reset — STATUS = READY
 //   3. VEC_ADD  z[4] = {1,2,3,4} + {10,20,30,40} → {11,22,33,44}
 //   4. GEMM     C[2][2] = A[2][8] * B[8][2]      → [[16,20],[4,4]]
-//   5. RELU     y[4]    = max(0, {-5,3,-1,7})     → {0,3,0,7}
-//   6. Performance counters — cycles > 0
+//   5. Descriptor-mode GEMM using the firmware's 14-word ABI
+//   6. RELU     y[4]    = max(0, {-5,3,-1,7})     → {0,3,0,7}
+//   7. Performance counters — cycles > 0
 //
 // Memory model: 64KB flat array, 2-cycle read latency
 // VCD output  : tinygpu_sim.vcd  (open in VaporView)
@@ -469,19 +470,66 @@ int main(int argc, char** argv) {
     }
 
     // ====================================================================
-    // TEST 5 — RELU  y[4] = max(0, {-5, 3, -1, 7})
+    // TEST 5 — Descriptor-mode GEMM with the firmware's 14-word ABI
+    // ====================================================================
+    printf("\n[TEST 5] Descriptor-mode GEMM with 14-word ABI\n");
+
+    const uint32_t MAT_C_DESC = 0x6200;
+    const uint32_t DESC_ADDR  = 0x9000;
+    const uint32_t desc[14] = {
+        OP_GEMM,
+        FLAG_DST_INT32 | FLAG_SIGNED,
+        MAT_A,
+        MAT_B,
+        0,
+        MAT_C_DESC,
+        2,
+        2,
+        8,
+        8,
+        2,
+        8,
+        0,
+        0
+    };
+
+    for (int i = 0; i < 14; i++) {
+        mem_write32(DESC_ADDR + static_cast<uint32_t>(i * 4), desc[i], 0xF);
+    }
+
+    mmio_write(top, REG_CMD_ADDR, DESC_ADDR);
+    mmio_write(top, REG_CTRL, CTRL_START);
+
+    if (!wait_done(top)) {
+        printf("  TIMEOUT waiting for descriptor GEMM\n");
+        dump_debug(top, "DESC_GEMM");
+        fail_count++;
+    } else {
+        int32_t c00 = mem_read32s(MAT_C_DESC+0);
+        int32_t c01 = mem_read32s(MAT_C_DESC+4);
+        int32_t c10 = mem_read32s(MAT_C_DESC+8);
+        int32_t c11 = mem_read32s(MAT_C_DESC+12);
+        printf("  C = [[%d, %d], [%d, %d]]\n", c00, c01, c10, c11);
+        check("DESC GEMM C[0][0]==16", c00 == 16);
+        check("DESC GEMM C[0][1]==20", c01 == 20);
+        check("DESC GEMM C[1][0]==4",  c10 == 4);
+        check("DESC GEMM C[1][1]==4",  c11 == 4);
+    }
+
+    // ====================================================================
+    // TEST 6 — RELU  y[4] = max(0, {-5, 3, -1, 7})
     //          Expected: {0, 3, 0, 7}
     // ====================================================================
-    printf("\n[TEST 5] RELU y[4] = max(0, {-5,3,-1,7})\n");
+    printf("\n[TEST 6] RELU y[4] = max(0, {-5,3,-1,7})\n");
 
     const uint32_t RELU_IN  = 0x7000;
     const uint32_t RELU_OUT = 0x8000;
 
-    // Write INT32 inputs
-    mem_write32(RELU_IN+0,  (uint32_t)(-5), 0xF);
-    mem_write32(RELU_IN+4,  3,  0xF);
-    mem_write32(RELU_IN+8,  (uint32_t)(-1), 0xF);
-    mem_write32(RELU_IN+12, 7,  0xF);
+    // Vector inputs are INT8; results are stored as INT32.
+    mem_write8(RELU_IN+0, -5);
+    mem_write8(RELU_IN+1,  3);
+    mem_write8(RELU_IN+2, -1);
+    mem_write8(RELU_IN+3,  7);
 
     mmio_write(top, REG_DIRECT_OP,  OP_RELU);
     mmio_write(top, REG_SRC0_ADDR,  RELU_IN);
@@ -490,8 +538,8 @@ int main(int argc, char** argv) {
     mmio_write(top, REG_DIM_M,      4);
     mmio_write(top, REG_DIM_N,      1);
     mmio_write(top, REG_DIM_K,      1);
-    mmio_write(top, REG_STRIDE0,    4);
-    mmio_write(top, REG_STRIDE1,    4);
+    mmio_write(top, REG_STRIDE0,    1);
+    mmio_write(top, REG_STRIDE1,    1);
     mmio_write(top, REG_STRIDE_DST, 4);
     mmio_write(top, REG_FLAGS,      FLAG_DST_INT32 | FLAG_SIGNED);
 
@@ -514,9 +562,9 @@ int main(int argc, char** argv) {
     }
 
     // ====================================================================
-    // TEST 6 — Performance counters
+    // TEST 7 — Performance counters
     // ====================================================================
-    printf("\n[TEST 6] Performance counters\n");
+    printf("\n[TEST 7] Performance counters\n");
 
     uint32_t cyc  = mmio_read(top, REG_CYCLE_COUNT);
     uint32_t act  = mmio_read(top, REG_ACTIVE_CNT);

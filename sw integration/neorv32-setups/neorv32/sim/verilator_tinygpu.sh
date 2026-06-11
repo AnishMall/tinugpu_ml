@@ -5,6 +5,7 @@ set -euo pipefail
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 src_root="$(cd "$script_dir/.." && pwd)"
 work_root="${WORK_ROOT:-/private/tmp/tinygpu_neorv32_verilator_work}"
+vcd_out="${VCD_OUT:-$script_dir/tinygpu_sim.vcd}"
 
 if ! command -v verilator >/dev/null 2>&1; then
   echo "error: verilator not found on PATH" >&2
@@ -15,6 +16,7 @@ fi
 OBJ_DIR="${OBJ_DIR:-obj_dir}"
 
 rm -rf "$work_root"
+rm -f "$vcd_out"
 mkdir -p "$work_root"
 ln -s "$src_root/rtl" "$work_root/rtl"
 mkdir -p "$work_root/sim"
@@ -43,3 +45,5 @@ verilator -Wall --Wno-fatal --cc --trace \
 
 make -C "$OBJ_DIR" -f Vtinygpu_top.mk
 "./$OBJ_DIR/Vtinygpu_top"
+cp "$work_root/tinygpu_sim.vcd" "$vcd_out"
+echo "Latest waveform: $vcd_out"
