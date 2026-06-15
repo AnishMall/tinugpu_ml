@@ -196,3 +196,94 @@ module formal_regs;
                             mmio_addr[7:0] == 8'h00 && mmio_wdata[0]));
   end
 endmodule
+
+module formal_cmd_ctrl_vector;
+  import tinygpu_pkg::*;
+  logic clk = 0;
+  logic rst_n = 0;
+  logic start = 0;
+  logic start_direct_mode = 0;
+  logic soft_reset = 0;
+  (* anyseq *) logic [31:0] mem_rdata;
+  logic [31:0] mem_addr, mem_wdata;
+  logic [3:0] mem_wstrb;
+  logic mem_req, mem_we;
+  logic mem_ready = 0;
+  logic mem_rvalid = 0;
+  logic busy, done, illegal_opcode, shape_error, memory_error, unsupported_format;
+  logic cnt_cmd_start, cnt_cmd_done, cnt_busy, cnt_active, cnt_stall;
+  logic [6:0] progress_q;
+
+  always @($global_clock) clk <= !clk;
+  always @(posedge clk) begin
+    rst_n <= 1'b1;
+    start <= !rst_n;
+    start_direct_mode <= !rst_n;
+    soft_reset <= 1'b0;
+    mem_ready <= rst_n;
+    if (!rst_n)
+      mem_rvalid <= 1'b0;
+    else
+      mem_rvalid <= $past(rst_n) && $past(mem_req && mem_ready && !mem_we);
+  end
+
+  tinygpu_cmd_ctrl dut (
+    .clk(clk),
+    .rst_n(rst_n),
+    .start(start),
+    .start_direct_mode(start_direct_mode),
+    .soft_reset(soft_reset),
+    .direct_mode(1'b1),
+    .cmd_addr(32'h0),
+    .opcode(OP_VEC_ADD),
+    .flags(32'h0000_0060),
+    .src0_addr(32'h1000),
+    .src1_addr(32'h2000),
+    .bias_addr(32'h0),
+    .dst_addr(32'h3000),
+    .M(16'd2),
+    .N(16'd1),
+    .K(16'd1),
+    .stride0(16'd1),
+    .stride1(16'd1),
+    .stride_dst(16'd4),
+    .scale(32'd0),
+    .shift(16'd0),
+    .zero_point(16'd0),
+    .conv_in_hw(32'd0),
+    .conv_channels(32'd0),
+    .conv_cfg(32'd0),
+    .busy(busy),
+    .done(done),
+    .illegal_opcode(illegal_opcode),
+    .shape_error(shape_error),
+    .memory_error(memory_error),
+    .unsupported_format(unsupported_format),
+    .cnt_cmd_start(cnt_cmd_start),
+    .cnt_cmd_done(cnt_cmd_done),
+    .cnt_busy(cnt_busy),
+    .cnt_active(cnt_active),
+    .cnt_stall(cnt_stall),
+    .mem_req(mem_req),
+    .mem_we(mem_we),
+    .mem_addr(mem_addr),
+    .mem_wdata(mem_wdata),
+    .mem_wstrb(mem_wstrb),
+    .mem_rdata(mem_rdata),
+    .mem_ready(mem_ready),
+    .mem_rvalid(mem_rvalid)
+  );
+
+  always @(posedge clk) if (rst_n) begin
+    if (start)
+      progress_q <= '0;
+    else if (!done)
+      progress_q <= progress_q + 7'd1;
+    assert (!(illegal_opcode || shape_error || memory_error || unsupported_format));
+    assert (progress_q < 7'd40 || done);
+    if (done) begin
+      assert (!busy);
+      assert (cnt_cmd_done);
+    end
+  end
+endmodule
