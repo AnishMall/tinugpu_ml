@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$ROOT_DIR"
 mkdir -p build
+mkdir -p build/cov
 
 mapfile_compat() {
   while IFS= read -r file; do
@@ -18,6 +19,4 @@ verilator -Wall -Wno-fatal -Wno-UNUSEDPARAM --cc --exe --build --coverage \
   -Mdir build/obj_diff \
   "${RTL_FILES[@]}" verification/verilator_diff.cpp
 
-build/obj_diff/Vtinygpu_top
-verilator_coverage --annotate build/coverage --write-info build/coverage.info \
-  build/coverage.dat
+build/obj_diff/Vtinygpu_top +verilator+coverage+file+build/cov/diff.dat

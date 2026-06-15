@@ -4,25 +4,25 @@
           parameter int DATA_W = 32,
           parameter bit ENABLE_CONV = 1'b1
         )(
- 017302   input  logic                 clk,
+ 016633   input  logic                 clk,
 %000007   input  logic                 rst_n,
         
- 005849   input  logic                 mmio_valid,
+ 005626   input  logic                 mmio_valid,
  000873   input  logic                 mmio_we,
 ~000404   input  logic [ADDR_W-1:0]    mmio_addr,
-~000197   input  logic [DATA_W-1:0]    mmio_wdata,
+~000201   input  logic [DATA_W-1:0]    mmio_wdata,
  000065   input  logic [DATA_W/8-1:0]  mmio_wstrb,
-~000274   output logic [DATA_W-1:0]    mmio_rdata,
+~000291   output logic [DATA_W-1:0]    mmio_rdata,
 %000001   output logic                 mmio_ready,
         
- 001835   output logic                 mem_req,
- 000100   output logic                 mem_we,
-~000364   output logic [ADDR_W-1:0]    mem_addr,
- 000145   output logic [DATA_W-1:0]    mem_wdata,
- 000100   output logic [DATA_W/8-1:0]  mem_wstrb,
- 000116   input  logic [DATA_W-1:0]    mem_rdata,
- 001835   input  logic                 mem_ready,
- 001357   input  logic                 mem_rvalid,
+ 001730   output logic                 mem_req,
+ 000098   output logic                 mem_we,
+~000349   output logic [ADDR_W-1:0]    mem_addr,
+ 000142   output logic [DATA_W-1:0]    mem_wdata,
+ 000098   output logic [DATA_W/8-1:0]  mem_wstrb,
+ 000101   input  logic [DATA_W-1:0]    mem_rdata,
+ 001730   input  logic                 mem_ready,
+ 001254   input  logic                 mem_rvalid,
         
 %000000   output logic                 irq
         );
@@ -54,28 +54,28 @@
  000064   logic        cnt_cmd_start;
  000064   logic        cnt_cmd_done;
  000064   logic        cnt_busy;
- 000100   logic        cnt_active;
- 000245   logic        cnt_stall;
+ 000098   logic        cnt_active;
+ 000241   logic        cnt_stall;
         
-~000022   logic [31:0] cycle_count_last;
-~000017   logic [31:0] active_count_last;
-~000020   logic [31:0] stall_count_last;
+~000021   logic [31:0] cycle_count_last;
+~000018   logic [31:0] active_count_last;
+~000021   logic [31:0] stall_count_last;
 ~000034   logic [31:0] cmd_count_total;
         
- 001829   logic                 mem_req_raw;
- 000478   logic                 mem_we_raw;
-~001122   logic [ADDR_W-1:0]    mem_addr_raw;
+ 001724   logic                 mem_req_raw;
+ 000476   logic                 mem_we_raw;
+~001143   logic [ADDR_W-1:0]    mem_addr_raw;
  000236   logic [DATA_W-1:0]    mem_wdata_raw;
- 000478   logic [DATA_W/8-1:0]  mem_wstrb_raw;
- 000116   logic [DATA_W-1:0]    mem_rdata_stage_q;
- 001357   logic                 mem_rvalid_stage_q;
- 001835   logic                 mem_cmd_valid_q;
- 000100   logic                 mem_cmd_we_q;
-~000364   logic [ADDR_W-1:0]    mem_cmd_addr_q;
- 000145   logic [DATA_W-1:0]    mem_cmd_wdata_q;
- 000100   logic [DATA_W/8-1:0]  mem_cmd_wstrb_q;
+ 000476   logic [DATA_W/8-1:0]  mem_wstrb_raw;
+ 000101   logic [DATA_W-1:0]    mem_rdata_stage_q;
+ 001254   logic                 mem_rvalid_stage_q;
+ 001730   logic                 mem_cmd_valid_q;
+ 000098   logic                 mem_cmd_we_q;
+~000349   logic [ADDR_W-1:0]    mem_cmd_addr_q;
+ 000142   logic [DATA_W-1:0]    mem_cmd_wdata_q;
+ 000098   logic [DATA_W/8-1:0]  mem_cmd_wstrb_q;
 %000000   logic                 mem_read_pending_q;
- 001836   logic                 mem_stage_ready;
+ 001731   logic                 mem_stage_ready;
         
           tinygpu_regs #(
             .ENABLE_CONV (ENABLE_CONV)
@@ -191,8 +191,8 @@
         
           assign mem_stage_ready = !mem_cmd_valid_q && !mem_read_pending_q;
         
- 017308   always_ff @(posedge clk or negedge rst_n) begin
- 017274     if (!rst_n) begin
+ 016639   always_ff @(posedge clk or negedge rst_n) begin
+ 016605     if (!rst_n) begin
  000034       mem_rdata_stage_q  <= '0;
  000034       mem_rvalid_stage_q <= 1'b0;
  000034       mem_cmd_valid_q    <= 1'b0;
@@ -201,31 +201,31 @@
  000034       mem_cmd_wdata_q    <= '0;
  000034       mem_cmd_wstrb_q    <= '0;
  000034       mem_read_pending_q <= 1'b0;
- 017274     end else begin
- 017274       mem_rvalid_stage_q <= 1'b0;
+ 016605     end else begin
+ 016605       mem_rvalid_stage_q <= 1'b0;
         
- 015439       if (mem_stage_ready && mem_req_raw) begin
- 001835         mem_cmd_valid_q <= 1'b1;
- 001835         mem_cmd_we_q    <= mem_we_raw;
- 001835         mem_cmd_addr_q  <= mem_addr_raw;
- 001835         mem_cmd_wdata_q <= mem_wdata_raw;
- 001835         mem_cmd_wstrb_q <= mem_wstrb_raw;
+ 014875       if (mem_stage_ready && mem_req_raw) begin
+ 001730         mem_cmd_valid_q <= 1'b1;
+ 001730         mem_cmd_we_q    <= mem_we_raw;
+ 001730         mem_cmd_addr_q  <= mem_addr_raw;
+ 001730         mem_cmd_wdata_q <= mem_wdata_raw;
+ 001730         mem_cmd_wstrb_q <= mem_wstrb_raw;
               end
         
- 015439       if (mem_cmd_valid_q && mem_ready) begin
- 001835         mem_cmd_valid_q <= 1'b0;
- 001357         if (!mem_cmd_we_q) begin
-~001357           if (mem_rvalid) begin
- 001357             mem_read_pending_q <= 1'b0;
- 001357             mem_rdata_stage_q  <= mem_rdata;
- 001357             mem_rvalid_stage_q <= 1'b1;
+ 014875       if (mem_cmd_valid_q && mem_ready) begin
+ 001730         mem_cmd_valid_q <= 1'b0;
+ 001254         if (!mem_cmd_we_q) begin
+~001254           if (mem_rvalid) begin
+ 001254             mem_read_pending_q <= 1'b0;
+ 001254             mem_rdata_stage_q  <= mem_rdata;
+ 001254             mem_rvalid_stage_q <= 1'b1;
 %000000           end else begin
 %000000             mem_read_pending_q <= 1'b1;
                   end
                 end
               end
         
-~017274       if (mem_read_pending_q && mem_rvalid) begin
+~016605       if (mem_read_pending_q && mem_rvalid) begin
 %000000         mem_read_pending_q <= 1'b0;
 %000000         mem_rdata_stage_q  <= mem_rdata;
 %000000         mem_rvalid_stage_q <= 1'b1;

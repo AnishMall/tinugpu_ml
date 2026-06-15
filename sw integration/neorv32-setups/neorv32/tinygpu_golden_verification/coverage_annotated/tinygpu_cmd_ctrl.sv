@@ -5,7 +5,7 @@
             parameter bit ENABLE_CONV = 1'b1
           )
         (
- 017302   input  logic         clk,
+ 016633   input  logic         clk,
 %000007   input  logic         rst_n,
         
  000064   input  logic         start,
@@ -20,11 +20,11 @@
 ~000063   input  logic [31:0]  src1_addr,
 %000000   input  logic [31:0]  bias_addr,
 ~000064   input  logic [31:0]  dst_addr,
-~000025   input  logic [15:0]  M,
+~000028   input  logic [15:0]  M,
 ~000032   input  logic [15:0]  N,
-~000028   input  logic [15:0]  K,
-~000029   input  logic [15:0]  stride0,
-~000032   input  logic [15:0]  stride1,
+~000026   input  logic [15:0]  K,
+~000025   input  logic [15:0]  stride0,
+~000031   input  logic [15:0]  stride1,
 ~000032   input  logic [15:0]  stride_dst,
 %000000   input  logic [31:0]  scale,
 %000000   input  logic [15:0]  shift,
@@ -43,17 +43,17 @@
  000064   output logic         cnt_cmd_start,
  000064   output logic         cnt_cmd_done,
  000064   output logic         cnt_busy,
- 000100   output logic         cnt_active,
- 000245   output logic         cnt_stall,
+ 000098   output logic         cnt_active,
+ 000241   output logic         cnt_stall,
         
- 001829   output logic         mem_req,
- 000478   output logic         mem_we,
-~001122   output logic [31:0]  mem_addr,
+ 001724   output logic         mem_req,
+ 000476   output logic         mem_we,
+~001143   output logic [31:0]  mem_addr,
  000236   output logic [31:0]  mem_wdata,
- 000478   output logic [3:0]   mem_wstrb,
- 000116   input  logic [31:0]  mem_rdata,
- 001836   input  logic         mem_ready,
- 001357   input  logic         mem_rvalid
+ 000476   output logic [3:0]   mem_wstrb,
+ 000101   input  logic [31:0]  mem_rdata,
+ 001731   input  logic         mem_ready,
+ 001254   input  logic         mem_rvalid
         );
         
           localparam logic [15:0] TILE_M_U16 = 16'(TILE_M);
@@ -72,33 +72,33 @@
           localparam logic [1:0] SPM_REGION_B = 2'd1;
           localparam logic [1:0] SPM_REGION_C = 2'd2;
         
- 000352   cmd_state_e state_q, state_d;
+ 000346   cmd_state_e state_q, state_d;
         
 ~000064   logic [7:0]  opcode_q;
 ~000064   logic [31:0] flags_q;
 %000000   logic [31:0] cmd_addr_q;
 ~000064   logic [31:0] src0_addr_q, src1_addr_q, bias_addr_q, dst_addr_q;
-~000038   logic [15:0] M_q, N_q, K_q;
+~000043   logic [15:0] M_q, N_q, K_q;
 ~000032   logic [15:0] stride0_q, stride1_q, stride_dst_q;
 %000000   logic [31:0] scale_q;
 %000000   logic [15:0] shift_q, zero_point_q;
 ~000011   logic [31:0] conv_in_hw_q, conv_channels_q, conv_cfg_q;
 ~000064   logic [7:0]  conv_desc_version_q;
         
-~000016   logic [15:0] m0_q, m0_d;
+~000017   logic [15:0] m0_q, m0_d;
 %000000   logic [15:0] n0_q, n0_d;
 %000000   logic [15:0] k0_q, k0_d;
-~000108   logic [15:0] kk_q, kk_d;
-~000126   logic [15:0] store_row_q, store_row_d;
-~000128   logic [15:0] store_col_q, store_col_d;
+~000097   logic [15:0] kk_q, kk_d;
+~000135   logic [15:0] store_row_q, store_row_d;
+~000115   logic [15:0] store_col_q, store_col_d;
 %000000   logic [15:0] bias_col_q, bias_col_d;
 %000004   logic [15:0] vec_idx_q, vec_idx_d;
 %000000   logic [4:0]  desc_word_idx_q, desc_word_idx_d;
         
- 000092   logic        store_stage_done_q;
- 000092   logic        store_stage_done_d;
- 000235   logic        dma_inflight_q;
- 000235   logic        dma_inflight_d;
+ 000090   logic        store_stage_done_q;
+ 000090   logic        store_stage_done_d;
+ 000231   logic        dma_inflight_q;
+ 000231   logic        dma_inflight_d;
 %000000   logic        bias_inflight_q;
 %000000   logic        bias_inflight_d;
  000012   logic        vec_inflight_q;
@@ -106,57 +106,57 @@
 %000000   logic        desc_inflight_q;
 %000000   logic        desc_inflight_d;
         
-~000013   logic [15:0] conv_out_y_q, conv_out_y_d;
-%000008   logic [15:0] conv_out_x_q, conv_out_x_d;
-~000041   logic [3:0]  conv_kh_q, conv_kh_d;
+~000011   logic [15:0] conv_out_y_q, conv_out_y_d;
+%000007   logic [15:0] conv_out_x_q, conv_out_x_d;
+~000039   logic [3:0]  conv_kh_q, conv_kh_d;
 %000000   logic [3:0]  conv_kw_q, conv_kw_d;
 %000000   logic [15:0] conv_ic_q, conv_ic_d;
         
-~000032   logic [15:0] active_tile_m;
-~000038   logic [15:0] active_tile_n;
-~000032   logic [15:0] active_tile_k;
+~000034   logic [15:0] active_tile_m;
+~000043   logic [15:0] active_tile_n;
+~000037   logic [15:0] active_tile_k;
         
  000064   logic [TILE_M-1:0] row_mask;
  000064   logic [TILE_N-1:0] col_mask;
         
-~000108   logic [7:0] a_rd_addr [0:TILE_M-1];
- 000088   logic [7:0] a_rd_data [0:TILE_M-1];
-~000108   logic [7:0] b_rd_addr [0:TILE_N-1];
- 000077   logic [7:0] b_rd_data [0:TILE_N-1];
+~000097   logic [7:0] a_rd_addr [0:TILE_M-1];
+ 000080   logic [7:0] a_rd_data [0:TILE_M-1];
+~000097   logic [7:0] b_rd_addr [0:TILE_N-1];
+ 000079   logic [7:0] b_rd_data [0:TILE_N-1];
         
- 000088   logic signed [INT8_W-1:0] a_vec [0:TILE_M-1];
- 000077   logic signed [INT8_W-1:0] b_vec [0:TILE_N-1];
+ 000080   logic signed [INT8_W-1:0] a_vec [0:TILE_M-1];
+ 000079   logic signed [INT8_W-1:0] b_vec [0:TILE_N-1];
           logic signed [ACC_W-1:0]  c_tile [0:TILE_M-1][0:TILE_N-1];
         
- 000092   logic                     array_clear_acc;
- 000092   logic                     array_mac_en;
+ 000090   logic                     array_clear_acc;
+ 000090   logic                     array_mac_en;
         
- 001189   logic                     spm_dma_wr_en;
- 000092   logic [1:0]               spm_dma_region;
-~000538   logic [8:0]               spm_dma_addr;
-~000609   logic [31:0]              spm_dma_wdata;
-~001189   logic [3:0]               spm_dma_wstrb;
- 000842   logic [31:0]              spm_dma_rdata;
+ 001094   logic                     spm_dma_wr_en;
+ 000090   logic [1:0]               spm_dma_region;
+~000503   logic [8:0]               spm_dma_addr;
+~000571   logic [31:0]              spm_dma_wdata;
+~001094   logic [3:0]               spm_dma_wstrb;
+ 000727   logic [31:0]              spm_dma_rdata;
         
- 001472   logic                     c_wr_en;
-~000736   logic [7:0]               c_wr_addr;
- 000233   logic [31:0]              c_wr_data;
+ 001440   logic                     c_wr_en;
+~000720   logic [7:0]               c_wr_addr;
+ 000235   logic [31:0]              c_wr_data;
 %000000   logic [7:0]               c_rd_addr;
- 000029   logic [31:0]              c_rd_data;
+ 000028   logic [31:0]              c_rd_data;
         
- 000092   logic                     epi_start;
- 000092   logic                     epi_busy;
- 000092   logic                     epi_done;
+ 000090   logic                     epi_start;
+ 000090   logic                     epi_busy;
+ 000090   logic                     epi_done;
 %000000   logic                     epi_mul_start;
  000184   logic signed [ACC_W-1:0]  epi_mul_a;
 %000000   logic signed [31:0]       epi_mul_b;
 %000000   logic signed [ACC_W-1:0]  bias_vec [0:TILE_N-1];
- 001472   logic                     epi_out_valid;
-~000736   logic [7:0]               epi_out_index;
+ 001440   logic                     epi_out_valid;
+~000720   logic [7:0]               epi_out_index;
  000184   logic signed [ACC_W-1:0]  epi_out_i32;
  000184   logic signed [INT8_W-1:0] epi_out_i8;
           logic signed [ACC_W-1:0]  epi_shadow_i32 [0:TILE_M-1][0:TILE_N-1];
-~000029   logic signed [INT8_W-1:0] epi_shadow_i8 [0:TILE_M-1][0:TILE_N-1];
+~000028   logic signed [INT8_W-1:0] epi_shadow_i8 [0:TILE_M-1][0:TILE_N-1];
 %000003   logic signed [INT8_W-1:0] vec_x_q;
 %000002   logic signed [INT8_W-1:0] vec_y_q;
 %000005   logic signed [ACC_W-1:0]  vec_result_raw;
@@ -180,15 +180,15 @@
 %000004   logic signed [ACC_W-1:0]  shared_mul_a;
 %000000   logic signed [31:0]       shared_mul_b;
         
- 000235   logic                     dma_start;
- 000235   logic                     dma_busy_status;
- 000235   logic                     dma_done;
+ 000231   logic                     dma_start;
+ 000231   logic                     dma_busy_status;
+ 000231   logic                     dma_done;
 %000000   logic                     dma_error;
- 001659   logic                     dma_mem_req;
- 000470   logic                     dma_mem_we;
-~001110   logic [31:0]              dma_mem_addr;
- 000233   logic [31:0]              dma_mem_wdata;
- 000470   logic [3:0]               dma_mem_wstrb;
+ 001562   logic                     dma_mem_req;
+ 000468   logic                     dma_mem_we;
+~001094   logic [31:0]              dma_mem_addr;
+ 000235   logic [31:0]              dma_mem_wdata;
+ 000468   logic [3:0]               dma_mem_wstrb;
 %000000   logic                     bias_mem_req;
 %000000   logic                     bias_mem_we;
 %000000   logic [31:0]              bias_mem_addr_mux;
@@ -204,43 +204,43 @@
 %000000   logic [31:0]              desc_mem_addr;
 %000000   logic [31:0]              desc_mem_wdata;
 %000000   logic [3:0]               desc_mem_wstrb;
- 000235   logic                     dma_launch_pending_q;
- 000235   logic                     dma_launch_pending_d;
-~000092   logic [1:0]               dma_op_kind_q;
-~000143   logic [31:0]              dma_base_addr_q;
-~000088   logic [15:0]              dma_rows_q;
-~000046   logic [15:0]              dma_cols_q;
-~000099   logic [15:0]              dma_stride_bytes_q;
- 000092   logic [1:0]               dma_spm_region_q;
+ 000231   logic                     dma_launch_pending_q;
+ 000231   logic                     dma_launch_pending_d;
+~000090   logic [1:0]               dma_op_kind_q;
+~000141   logic [31:0]              dma_base_addr_q;
+~000093   logic [15:0]              dma_rows_q;
+~000050   logic [15:0]              dma_cols_q;
+~000097   logic [15:0]              dma_stride_bytes_q;
+ 000090   logic [1:0]               dma_spm_region_q;
 %000000   logic [8:0]               dma_spm_base_q;
         
- 000041   logic                     conv_start;
- 000041   logic                     conv_start_q;
- 000041   logic                     conv_busy_status;
- 000041   logic                     conv_done;
+ 000039   logic                     conv_start;
+ 000039   logic                     conv_start_q;
+ 000039   logic                     conv_busy_status;
+ 000039   logic                     conv_done;
 %000000   logic                     conv_error;
- 000041   logic                     conv_inflight_q;
- 000041   logic                     conv_inflight_d;
- 000156   logic                     conv_mem_req;
+ 000039   logic                     conv_inflight_q;
+ 000039   logic                     conv_inflight_d;
+ 000148   logic                     conv_mem_req;
 ~000064   logic [31:0]              conv_mem_addr;
-~000051   logic [2:0]               mem_client_sel;
- 000116   logic [31:0]              client_mem_rdata;
- 001711   logic                     dma_mem_ready;
- 001189   logic                     dma_mem_rvalid;
+~000049   logic [2:0]               mem_client_sel;
+ 000101   logic [31:0]              client_mem_rdata;
+ 001612   logic                     dma_mem_ready;
+ 001094   logic                     dma_mem_rvalid;
 %000000   logic                     desc_mem_ready;
 %000000   logic                     desc_mem_rvalid;
- 000197   logic                     conv_mem_ready;
- 000156   logic                     conv_mem_rvalid;
+ 000187   logic                     conv_mem_ready;
+ 000148   logic                     conv_mem_rvalid;
  000028   logic                     vec_mem_ready;
  000012   logic                     vec_mem_rvalid;
 %000000   logic                     bias_mem_ready;
 %000000   logic                     bias_mem_rvalid;
- 000156   logic                     conv_spm_wr_en;
-~000078   logic [8:0]               conv_spm_addr;
-~000046   logic [31:0]              conv_spm_wdata;
+ 000148   logic                     conv_spm_wr_en;
+~000073   logic [8:0]               conv_spm_addr;
+~000042   logic [31:0]              conv_spm_wdata;
 %000001   logic [3:0]               conv_spm_wstrb;
 ~000015   logic [15:0]              conv_next_out_y;
-%000008   logic [15:0]              conv_next_out_x;
+%000007   logic [15:0]              conv_next_out_x;
 %000002   logic [3:0]               conv_next_kh;
 %000000   logic [3:0]               conv_next_kw;
 %000000   logic [15:0]              conv_next_ic;
@@ -250,7 +250,7 @@
 %000000   logic        clear_cmd_fields;
 %000000   logic        load_desc_word;
 %000008   logic        latch_vec_store_cmd;
- 000235   logic        latch_dma_cmd;
+ 000231   logic        latch_dma_cmd;
  000064   logic        clear_status;
 %000000   logic        set_illegal_opcode;
 %000000   logic        set_shape_error;
@@ -262,10 +262,10 @@
  000064   logic        dims_ok;
 %000000   logic        more_k_tiles;
 %000000   logic        more_n_tiles;
- 000020   logic        more_m_tiles;
+ 000018   logic        more_m_tiles;
 %000000   logic        use_dst_i8;
- 000146   logic        store_stage_last;
- 000092   logic        clear_bias_regs;
+ 000150   logic        store_stage_last;
+ 000090   logic        clear_bias_regs;
 %000000   logic        load_bias_reg;
 %000008   logic        load_vec_x_reg;
 %000004   logic        load_vec_y_reg;
@@ -279,9 +279,9 @@
 %000000   logic        state_is_bias;
  000010   logic        state_is_vec;
 %000000   logic        state_is_desc;
- 000041   logic        state_is_conv;
-~000038   logic [15:0] effective_n;
-~000038   logic [15:0] effective_n_q;
+ 000039   logic        state_is_conv;
+~000043   logic [15:0] effective_n;
+~000043   logic [15:0] effective_n_q;
 ~000064   logic [31:0] src0_row_base_q;
 ~000064   logic [31:0] src0_row_base_d;
 ~000063   logic [31:0] src1_k_base_q;
@@ -294,12 +294,12 @@
 %000000   logic [31:0] dst_n_offset_d;
 %000000   logic [31:0] bias_base_q;
 %000000   logic [31:0] bias_base_d;
-~000029   logic [31:0] src0_m_step_q;
-~000029   logic [31:0] src0_m_step_d;
-~000037   logic [31:0] stride1_k_step_q;
-~000037   logic [31:0] stride1_k_step_d;
-~000038   logic [31:0] dst_m_step_q;
-~000038   logic [31:0] dst_m_step_d;
+~000025   logic [31:0] src0_m_step_q;
+~000025   logic [31:0] src0_m_step_d;
+~000042   logic [31:0] stride1_k_step_q;
+~000042   logic [31:0] stride1_k_step_d;
+~000043   logic [31:0] dst_m_step_q;
+~000043   logic [31:0] dst_m_step_d;
 ~000064   logic [31:0] dst_n_step_q;
 ~000064   logic [31:0] dst_n_step_d;
 ~000064   logic [31:0] bias_n_step_q;
@@ -307,9 +307,9 @@
         
 ~000064   logic [31:0] dma_store_base_addr;
 %000000   logic [31:0] bias_mem_addr;
-~000034   logic [15:0] vec_src0_stride_bytes;
-~000032   logic [15:0] vec_src1_stride_bytes;
-~000032   logic [15:0] vec_dst_stride_bytes;
+~000029   logic [15:0] vec_src0_stride_bytes;
+~000023   logic [15:0] vec_src1_stride_bytes;
+~000022   logic [15:0] vec_dst_stride_bytes;
 ~000064   logic [31:0] vec_src0_elem_addr;
 ~000063   logic [31:0] vec_src1_elem_addr;
 ~000064   logic [31:0] vec_dst_elem_addr;
@@ -318,16 +318,16 @@
 ~000063   logic [31:0] vec_src1_read_addr;
 %000002   logic [1:0]  vec_src0_lane_sel;
 %000002   logic [1:0]  vec_src1_lane_sel;
- 000105   logic [7:0]  vec_load_byte;
+ 000100   logic [7:0]  vec_load_byte;
 ~000064   logic [31:0] vec_store_addr_next;
 %000004   logic [31:0] vec_store_wdata_next;
 %000001   logic [3:0]  vec_store_wstrb_next;
-~000092   logic [1:0]  dma_op_kind_cmd_n;
-~000184   logic [31:0] dma_base_addr_cmd_n;
-~000099   logic [15:0] dma_rows_cmd_n;
-~000142   logic [15:0] dma_cols_cmd_n;
-~000099   logic [15:0] dma_stride_bytes_cmd_n;
- 000092   logic [1:0]  dma_spm_region_cmd_n;
+~000090   logic [1:0]  dma_op_kind_cmd_n;
+~000180   logic [31:0] dma_base_addr_cmd_n;
+~000105   logic [15:0] dma_rows_cmd_n;
+~000147   logic [15:0] dma_cols_cmd_n;
+~000097   logic [15:0] dma_stride_bytes_cmd_n;
+ 000090   logic [1:0]  dma_spm_region_cmd_n;
 %000000   logic [8:0]  dma_spm_base_cmd_n;
         
 %000006   logic [15:0] conv_input_h;
@@ -340,26 +340,26 @@
 ~000011   logic [3:0]  conv_stride_w;
 %000000   logic [3:0]  conv_pad_h;
 %000000   logic [3:0]  conv_pad_w;
-%000009   logic [31:0] conv_out_h_calc;
-%000008   logic [31:0] conv_out_w_calc;
-~000011   logic [31:0] conv_m_calc;
+%000008   logic [31:0] conv_out_h_calc;
+~000010   logic [31:0] conv_out_w_calc;
+~000010   logic [31:0] conv_m_calc;
 ~000011   logic [31:0] conv_k_calc;
-~000035   logic [31:0] conv_input_row_stride;
-~000037   logic [15:0] stride1_eff;
-~000038   logic [15:0] stride_dst_eff;
+~000029   logic [31:0] conv_input_row_stride;
+~000042   logic [15:0] stride1_eff;
+~000043   logic [15:0] stride_dst_eff;
  000011   logic        conv_shape_ok;
 ~000011   logic [4:0]  desc_words_expected;
         
- 000023   logic unused_c_rd_data;
+ 000020   logic unused_c_rd_data;
         
- 103821   function automatic signed [INT8_W-1:0] sat_i8(input signed [31:0] x);
- 103821     begin
+ 099807   function automatic signed [INT8_W-1:0] sat_i8(input signed [31:0] x);
+ 099807     begin
 %000000       if (x > 32'sd127)
 %000000         sat_i8 = 8'sd127;
-~103821       else if (x < -32'sd128)
+~099807       else if (x < -32'sd128)
 %000000         sat_i8 = -8'sd128;
               else
- 103821         sat_i8 = x[INT8_W-1:0];
+ 099807         sat_i8 = x[INT8_W-1:0];
             end
           endfunction
         
@@ -400,17 +400,17 @@
           assign state_is_vec  = (state_q == S_VEC_LOAD_X) || (state_q == S_VEC_LOAD_Y) || (state_q == S_VEC_STORE);
           assign state_is_desc  = (state_q == S_DESC_LOAD);
           assign state_is_conv  = (state_q == S_CONV_LOAD_A);
-~103821   assign mem_client_sel = state_is_desc ? 3'd1 :
- 096531                           state_is_conv ? 3'd2 :
- 096123                           state_is_vec  ? 3'd3 :
-~096123                           state_is_bias ? 3'd4 : 3'd0;
- 066126   assign vec_src0_stride_bytes = (stride0_q != 16'd0) ? stride0_q : 16'd1;
- 066126   assign vec_src1_stride_bytes = (stride1_q != 16'd0) ? stride1_q : 16'd1;
-~066126   assign vec_dst_stride_bytes  = (stride_dst_q != 16'd0) ? stride_dst_q : (use_dst_i8 ? 16'd1 : 16'd4);
+~099807   assign mem_client_sel = state_is_desc ? 3'd1 :
+ 092889                           state_is_conv ? 3'd2 :
+ 092481                           state_is_vec  ? 3'd3 :
+~092481                           state_is_bias ? 3'd4 : 3'd0;
+ 063390   assign vec_src0_stride_bytes = (stride0_q != 16'd0) ? stride0_q : 16'd1;
+ 063390   assign vec_src1_stride_bytes = (stride1_q != 16'd0) ? stride1_q : 16'd1;
+~063390   assign vec_dst_stride_bytes  = (stride_dst_q != 16'd0) ? stride_dst_q : (use_dst_i8 ? 16'd1 : 16'd4);
           assign vec_src0_elem_addr = src0_addr_q + (vec_idx_q * vec_src0_stride_bytes);
           assign vec_src1_elem_addr = src1_addr_q + (vec_idx_q * vec_src1_stride_bytes);
           assign vec_dst_elem_addr  = dst_addr_q  + (vec_idx_q * vec_dst_stride_bytes);
-~103821   assign vec_store_aligned_addr = use_dst_i8 ? {vec_dst_elem_addr[31:2], 2'b00} : vec_dst_elem_addr;
+~099807   assign vec_store_aligned_addr = use_dst_i8 ? {vec_dst_elem_addr[31:2], 2'b00} : vec_dst_elem_addr;
           assign vec_src0_read_addr = {vec_src0_elem_addr[31:2], 2'b00};
           assign vec_src1_read_addr = {vec_src1_elem_addr[31:2], 2'b00};
           assign vec_src0_lane_sel  = vec_src0_elem_addr[1:0];
@@ -432,11 +432,11 @@
                                     ((conv_stride_w == 4'd2) ? 1 : 0)) + 32'd1;
           assign conv_m_calc = conv_out_h_calc * conv_out_w_calc;
           assign conv_k_calc = conv_kernel_h * conv_kernel_w * conv_input_c;
- 066126   assign conv_input_row_stride = (stride0_q != 0) ? {16'd0, stride0_q} : ({16'd0, conv_input_w} * {16'd0, conv_input_c});
-~076613   assign stride1_eff = is_conv_opcode ? ((stride1_q != 0) ? stride1_q : conv_output_c) : stride1_q;
-~076613   assign stride_dst_eff = is_conv_opcode ? ((stride_dst_q != 0) ? stride_dst_q :
-~076613                           (use_dst_i8 ? conv_output_c : (conv_output_c << 2))) : stride_dst_q;
- 076613   assign desc_words_expected = (opcode_q == OP_CONV2D) ? DESC_WORDS_CONV : DESC_WORDS_BASE;
+ 063390   assign conv_input_row_stride = (stride0_q != 0) ? {16'd0, stride0_q} : ({16'd0, conv_input_w} * {16'd0, conv_input_c});
+~073877   assign stride1_eff = is_conv_opcode ? ((stride1_q != 0) ? stride1_q : conv_output_c) : stride1_q;
+~073877   assign stride_dst_eff = is_conv_opcode ? ((stride_dst_q != 0) ? stride_dst_q :
+~073877                           (use_dst_i8 ? conv_output_c : (conv_output_c << 2))) : stride_dst_q;
+ 073877   assign desc_words_expected = (opcode_q == OP_CONV2D) ? DESC_WORDS_CONV : DESC_WORDS_BASE;
           assign conv_shape_ok = ENABLE_CONV &&
                                  (conv_input_h != 0) && (conv_input_w != 0) &&
                                  (conv_input_c != 0) && (conv_output_c != 0) &&
@@ -452,12 +452,12 @@
                                  (conv_k_calc != 0) && (conv_k_calc <= 32'h0000_ffff) &&
                                  (direct_mode || (conv_desc_version_q == ABI_VERSION));
         
- 103821   always @* begin
- 103821     vec_store_addr_next = vec_store_aligned_addr;
- 103821     vec_store_wdata_next = vec_result_post_q;
- 103821     vec_store_wstrb_next = 4'b1111;
+ 099807   always @* begin
+ 099807     vec_store_addr_next = vec_store_aligned_addr;
+ 099807     vec_store_wdata_next = vec_result_post_q;
+ 099807     vec_store_wstrb_next = 4'b1111;
         
-~103821     if (use_dst_i8) begin
+~099807     if (use_dst_i8) begin
 %000000       case (vec_dst_elem_addr[1:0])
 %000000         2'd0: begin
 %000000           vec_store_wdata_next = {24'd0, vec_result_i8};
@@ -678,14 +678,14 @@
           );
         
           assign shared_mul_start = epi_mul_start | vec_mul_start;
-~103821   assign shared_mul_a     = epi_mul_start ? epi_mul_a : vec_result_post_q;
-~103821   assign shared_mul_b     = epi_mul_start ? epi_mul_b : scale_q;
+~099807   assign shared_mul_a     = epi_mul_start ? epi_mul_a : vec_result_post_q;
+~099807   assign shared_mul_b     = epi_mul_start ? epi_mul_b : scale_q;
           assign vec_mul_busy     = shared_mul_busy;
           assign vec_mul_done     = shared_mul_done;
           assign vec_mul_product  = shared_mul_product;
         
- 103821   always @* begin
- 103821     case (state_q)
+ 099807   always @* begin
+ 099807     case (state_q)
  000096       S_VEC_LOAD_Y: begin
  000096         case (vec_src1_lane_sel)
  000024           2'd0: vec_load_byte = client_mem_rdata[7:0];
@@ -694,9 +694,9 @@
  000024           default: vec_load_byte = client_mem_rdata[31:24];
                 endcase
               end
- 103725       default: begin
- 103725         case (vec_src0_lane_sel)
- 103545           2'd0: vec_load_byte = client_mem_rdata[7:0];
+ 099711       default: begin
+ 099711         case (vec_src0_lane_sel)
+ 099531           2'd0: vec_load_byte = client_mem_rdata[7:0];
  000060           2'd1: vec_load_byte = client_mem_rdata[15:8];
  000060           2'd2: vec_load_byte = client_mem_rdata[23:16];
  000060           default: vec_load_byte = client_mem_rdata[31:24];
@@ -705,27 +705,27 @@
             endcase
           end
         
- 103821   always @* begin
- 103821     vec_result_post = vec_result_raw_q;
+ 099807   always @* begin
+ 099807     vec_result_post = vec_result_raw_q;
         
-~103821     if (flags_q[FLAG_RELU_EN] && (vec_result_post < 0))
+~099807     if (flags_q[FLAG_RELU_EN] && (vec_result_post < 0))
 %000000       vec_result_post = 32'sd0;
         
-~103821     if (flags_q[FLAG_CLAMP_EN])
+~099807     if (flags_q[FLAG_CLAMP_EN])
 %000000       vec_result_post = clamp32(vec_result_post, -32'sd128, 32'sd127);
         
-~103821     if (flags_q[FLAG_REQUANT_EN]) begin
+~099807     if (flags_q[FLAG_REQUANT_EN]) begin
 %000000       if ($signed(shift_q) >= 0)
 %000000         vec_result_i8 = sat_i8(($signed(vec_scaled_q) >>> shift_q) + zero_point_ext);
               else
 %000000         vec_result_i8 = sat_i8(($signed(vec_scaled_q) <<< (-$signed(shift_q))) + zero_point_ext);
- 103821     end else begin
- 103821       vec_result_i8 = sat_i8(vec_result_post_q);  // use registered value
+ 099807     end else begin
+ 099807       vec_result_i8 = sat_i8(vec_result_post_q);  // use registered value
             end
           end
         
- 017308   always_ff @(posedge clk or negedge rst_n) begin
- 017274     if (!rst_n) begin
+ 016639   always_ff @(posedge clk or negedge rst_n) begin
+ 016605     if (!rst_n) begin
  000034       state_q           <= S_IDLE;
  000034       opcode_q          <= '0;
  000034       flags_q           <= '0;
@@ -800,7 +800,7 @@
  000136       for (int c = 0; c < TILE_N; c++) begin
  000136         bias_vec[c] <= '0;
               end
- 017213     end else if (soft_reset) begin
+ 016544     end else if (soft_reset) begin
  000061       state_q           <= S_IDLE;
  000061       opcode_q          <= '0;
  000061       flags_q           <= '0;
@@ -875,46 +875,46 @@
  000244       for (int c = 0; c < TILE_N; c++) begin
  000244         bias_vec[c] <= '0;
               end
- 017213     end else begin
- 017213       state_q            <= state_d;
- 017213       m0_q               <= m0_d;
- 017213       n0_q               <= n0_d;
- 017213       k0_q               <= k0_d;
- 017213       kk_q               <= kk_d;
- 017213       store_row_q        <= store_row_d;
- 017213       store_col_q        <= store_col_d;
- 017213       bias_col_q         <= bias_col_d;
- 017213       vec_idx_q          <= vec_idx_d;
- 017213       desc_word_idx_q    <= desc_word_idx_d;
- 017213       store_stage_done_q <= store_stage_done_d;
- 017213       src0_row_base_q    <= src0_row_base_d;
- 017213       src1_k_base_q      <= src1_k_base_d;
- 017213       src1_n_offset_q    <= src1_n_offset_d;
- 017213       dst_row_base_q     <= dst_row_base_d;
- 017213       dst_n_offset_q     <= dst_n_offset_d;
- 017213       bias_base_q        <= bias_base_d;
- 017213       src0_m_step_q      <= src0_m_step_d;
- 017213       stride1_k_step_q   <= stride1_k_step_d;
- 017213       dst_m_step_q       <= dst_m_step_d;
- 017213       dst_n_step_q       <= dst_n_step_d;
- 017213       bias_n_step_q      <= bias_n_step_d;
- 017213       dma_inflight_q     <= dma_inflight_d;
- 017213       bias_inflight_q    <= bias_inflight_d;
- 017213       vec_inflight_q     <= vec_inflight_d;
- 017213       desc_inflight_q    <= desc_inflight_d;
- 017213       conv_inflight_q    <= conv_inflight_d;
- 017213       conv_start_q       <= (state_q == S_CONV_LOAD_A) && !conv_inflight_q;
- 017213       conv_out_y_q       <= conv_out_y_d;
- 017213       conv_out_x_q       <= conv_out_x_d;
- 017213       conv_kh_q          <= conv_kh_d;
- 017213       conv_kw_q          <= conv_kw_d;
- 017213       conv_ic_q          <= conv_ic_d;
- 017213       dma_launch_pending_q <= dma_launch_pending_d;
+ 016544     end else begin
+ 016544       state_q            <= state_d;
+ 016544       m0_q               <= m0_d;
+ 016544       n0_q               <= n0_d;
+ 016544       k0_q               <= k0_d;
+ 016544       kk_q               <= kk_d;
+ 016544       store_row_q        <= store_row_d;
+ 016544       store_col_q        <= store_col_d;
+ 016544       bias_col_q         <= bias_col_d;
+ 016544       vec_idx_q          <= vec_idx_d;
+ 016544       desc_word_idx_q    <= desc_word_idx_d;
+ 016544       store_stage_done_q <= store_stage_done_d;
+ 016544       src0_row_base_q    <= src0_row_base_d;
+ 016544       src1_k_base_q      <= src1_k_base_d;
+ 016544       src1_n_offset_q    <= src1_n_offset_d;
+ 016544       dst_row_base_q     <= dst_row_base_d;
+ 016544       dst_n_offset_q     <= dst_n_offset_d;
+ 016544       bias_base_q        <= bias_base_d;
+ 016544       src0_m_step_q      <= src0_m_step_d;
+ 016544       stride1_k_step_q   <= stride1_k_step_d;
+ 016544       dst_m_step_q       <= dst_m_step_d;
+ 016544       dst_n_step_q       <= dst_n_step_d;
+ 016544       bias_n_step_q      <= bias_n_step_d;
+ 016544       dma_inflight_q     <= dma_inflight_d;
+ 016544       bias_inflight_q    <= bias_inflight_d;
+ 016544       vec_inflight_q     <= vec_inflight_d;
+ 016544       desc_inflight_q    <= desc_inflight_d;
+ 016544       conv_inflight_q    <= conv_inflight_d;
+ 016544       conv_start_q       <= (state_q == S_CONV_LOAD_A) && !conv_inflight_q;
+ 016544       conv_out_y_q       <= conv_out_y_d;
+ 016544       conv_out_x_q       <= conv_out_x_d;
+ 016544       conv_kh_q          <= conv_kh_d;
+ 016544       conv_kw_q          <= conv_kw_d;
+ 016544       conv_ic_q          <= conv_ic_d;
+ 016544       dma_launch_pending_q <= dma_launch_pending_d;
         
- 017149       if (latch_cmd_addr)
+ 016480       if (latch_cmd_addr)
  000064         cmd_addr_q <= cmd_addr;
         
- 017149       if (latch_cmd) begin
+ 016480       if (latch_cmd) begin
  000064         opcode_q     <= opcode;
  000064         flags_q      <= flags;
  000064         src0_addr_q  <= src0_addr;
@@ -936,7 +936,7 @@
  000064         conv_desc_version_q <= ABI_VERSION;
               end
         
-~017213       if (clear_cmd_fields) begin
+~016544       if (clear_cmd_fields) begin
 %000000         opcode_q     <= '0;
 %000000         flags_q      <= '0;
 %000000         src0_addr_q  <= '0;
@@ -958,7 +958,7 @@
 %000000         conv_desc_version_q <= '0;
               end
         
-~017213       if (load_desc_word) begin
+~016544       if (load_desc_word) begin
 %000000         case (desc_word_idx_q)
 %000000           5'd0:  opcode_q     <= client_mem_rdata[7:0];
 %000000           5'd1:  flags_q      <= client_mem_rdata;
@@ -986,95 +986,95 @@
                 endcase
               end
         
- 017202       if ((state_q == S_VALIDATE) && is_conv_opcode && conv_shape_ok) begin
+ 016533       if ((state_q == S_VALIDATE) && is_conv_opcode && conv_shape_ok) begin
  000011         M_q <= conv_m_calc[15:0];
  000011         N_q <= conv_output_c;
  000011         K_q <= conv_k_calc[15:0];
               end
         
- 000092       if (clear_bias_regs) begin
- 000368         for (int c = 0; c < TILE_N; c++) begin
- 000368           bias_vec[c] <= '0;
+ 000090       if (clear_bias_regs) begin
+ 000360         for (int c = 0; c < TILE_N; c++) begin
+ 000360           bias_vec[c] <= '0;
                 end
-~017121       end else if (load_bias_reg) begin
+~016454       end else if (load_bias_reg) begin
 %000000         bias_vec[int'(bias_col_q)] <= $signed(client_mem_rdata);
               end
         
-~017205       if (load_vec_x_reg)
+~016536       if (load_vec_x_reg)
 %000008         vec_x_q <= $signed(vec_load_byte);
-~017209       if (load_vec_y_reg)
+~016540       if (load_vec_y_reg)
 %000004         vec_y_q <= $signed(vec_load_byte);
-~017205       if (latch_vec_raw)
+~016536       if (latch_vec_raw)
 %000008         vec_result_raw_q <= vec_result_raw;
-~017205       if (latch_vec_post)
+~016536       if (latch_vec_post)
 %000008         vec_result_post_q <= vec_result_post;
-~017213       if (latch_vec_scaled)
+~016544       if (latch_vec_scaled)
 %000000         vec_scaled_q <= vec_mul_product;
- 017213       is_vector_opcode_q <= (opcode_q == OP_VEC_ADD) || (opcode_q == OP_VEC_MUL) ||
-~017213                             (opcode_q == OP_RELU)    || (opcode_q == OP_CLAMP);
-~017213       effective_n_q      <= (opcode_q == OP_GEMV) ? 16'd1 : N_q;
+ 016544       is_vector_opcode_q <= (opcode_q == OP_VEC_ADD) || (opcode_q == OP_VEC_MUL) ||
+~016544                             (opcode_q == OP_RELU)    || (opcode_q == OP_CLAMP);
+~016544       effective_n_q      <= (opcode_q == OP_GEMV) ? 16'd1 : N_q;
         
-~017205       if (latch_vec_store_cmd) begin
+~016536       if (latch_vec_store_cmd) begin
 %000008         vec_store_addr_q  <= vec_store_addr_next;
 %000008         vec_store_wdata_q <= vec_store_wdata_next;
 %000008         vec_store_wstrb_q <= vec_store_wstrb_next;
               end
         
- 016978       if (latch_dma_cmd) begin
- 000235         dma_op_kind_q      <= dma_op_kind_cmd_n;
- 000235         dma_base_addr_q    <= dma_base_addr_cmd_n;
- 000235         dma_rows_q         <= dma_rows_cmd_n;
- 000235         dma_cols_q         <= dma_cols_cmd_n;
- 000235         dma_stride_bytes_q <= dma_stride_bytes_cmd_n;
- 000235         dma_spm_region_q   <= dma_spm_region_cmd_n;
- 000235         dma_spm_base_q     <= dma_spm_base_cmd_n;
+ 016313       if (latch_dma_cmd) begin
+ 000231         dma_op_kind_q      <= dma_op_kind_cmd_n;
+ 000231         dma_base_addr_q    <= dma_base_addr_cmd_n;
+ 000231         dma_rows_q         <= dma_rows_cmd_n;
+ 000231         dma_cols_q         <= dma_cols_cmd_n;
+ 000231         dma_stride_bytes_q <= dma_stride_bytes_cmd_n;
+ 000231         dma_spm_region_q   <= dma_spm_region_cmd_n;
+ 000231         dma_spm_base_q     <= dma_spm_base_cmd_n;
               end
             end
           end
         
- 017308   always_ff @(posedge clk or negedge rst_n) begin
- 017274     if (!rst_n) begin
+ 016639   always_ff @(posedge clk or negedge rst_n) begin
+ 016605     if (!rst_n) begin
  000034       illegal_opcode     <= 1'b0;
  000034       shape_error        <= 1'b0;
  000034       memory_error       <= 1'b0;
  000034       unsupported_format <= 1'b0;
- 017149     end else if (soft_reset || clear_status) begin
+ 016480     end else if (soft_reset || clear_status) begin
  000125       illegal_opcode     <= 1'b0;
  000125       shape_error        <= 1'b0;
  000125       memory_error       <= 1'b0;
  000125       unsupported_format <= 1'b0;
- 017149     end else begin
-~017149       if (set_illegal_opcode)
+ 016480     end else begin
+~016480       if (set_illegal_opcode)
 %000000         illegal_opcode <= 1'b1;
-~017149       if (set_shape_error)
+~016480       if (set_shape_error)
 %000000         shape_error <= 1'b1;
-~017149       if (set_memory_error)
+~016480       if (set_memory_error)
 %000000         memory_error <= 1'b1;
-~017149       if (set_unsupported_format)
+~016480       if (set_unsupported_format)
 %000000         unsupported_format <= 1'b1;
             end
           end
         
- 103821   always @* begin
- 103821     opcode_ok = 1'b0;
- 103821     case (opcode_q)
+ 099807   always @* begin
+ 099807     opcode_ok = 1'b0;
+ 099807     case (opcode_q)
               OP_GEMM,
               OP_GEMV,
               OP_VEC_ADD,
               OP_VEC_MUL,
               OP_RELU,
- 066126       OP_CLAMP: opcode_ok = 1'b1;
- 027208       OP_CONV2D: opcode_ok = ENABLE_CONV;
+ 063390       OP_CLAMP: opcode_ok = 1'b1;
+ 025930       OP_CONV2D: opcode_ok = ENABLE_CONV;
  010487       default: opcode_ok = 1'b0;
             endcase
         
-~103821     dst_flags_ok = !(flags_q[FLAG_DST_INT8] && flags_q[FLAG_DST_INT32]);
+~099807     dst_flags_ok = !(flags_q[FLAG_DST_INT8] && flags_q[FLAG_DST_INT32]);
         
- 103821     dims_ok = 1'b1;
- 103821     case (opcode_q)
- 093268       OP_GEMM: dims_ok = (M_q != 16'd0) && (N_q != 16'd0) && (K_q != 16'd0);
-~093268       OP_GEMV: dims_ok = (M_q != 16'd0) && (K_q != 16'd0);
- 027208       OP_CONV2D: dims_ok = conv_shape_ok;
+ 099807     dims_ok = 1'b1;
+ 099807     case (opcode_q)
+ 089254       OP_GEMM: dims_ok = (M_q != 16'd0) && (N_q != 16'd0) && (K_q != 16'd0);
+~089254       OP_GEMV: dims_ok = (M_q != 16'd0) && (K_q != 16'd0);
+ 025930       OP_CONV2D: dims_ok = conv_shape_ok;
               OP_VEC_ADD,
               OP_VEC_MUL,
               OP_RELU,
@@ -1083,93 +1083,93 @@
             endcase
           end
         
- 103821   always @* begin
- 054095     if ((M_q - m0_q) >= TILE_M_U16)
- 049726       active_tile_m = TILE_M_U16;
+ 099807   always @* begin
+ 053696     if ((M_q - m0_q) >= TILE_M_U16)
+ 046111       active_tile_m = TILE_M_U16;
             else
- 054095       active_tile_m = M_q - m0_q;
+ 053696       active_tile_m = M_q - m0_q;
         
- 087783     if ((effective_n - n0_q) >= TILE_N_U16)
- 016038       active_tile_n = TILE_N_U16;
+ 086874     if ((effective_n - n0_q) >= TILE_N_U16)
+ 012933       active_tile_n = TILE_N_U16;
             else
- 087783       active_tile_n = effective_n - n0_q;
+ 086874       active_tile_n = effective_n - n0_q;
         
-~103821     if ((K_q - k0_q) >= TILE_K_U16)
+~099807     if ((K_q - k0_q) >= TILE_K_U16)
 %000000       active_tile_k = TILE_K_U16;
             else
- 103821       active_tile_k = K_q - k0_q;
+ 099807       active_tile_k = K_q - k0_q;
           end
         
- 104290   always @* begin
- 417160     for (int r = 0; r < TILE_M; r++) begin
- 417160       row_mask[r]  = ((m0_q + 16'(r)) < M_q);
- 417160       a_rd_addr[r] = 8'((r * TILE_K) + kk_q);
- 417160       a_vec[r]     = $signed(a_rd_data[r]);
+ 100226   always @* begin
+ 400904     for (int r = 0; r < TILE_M; r++) begin
+ 400904       row_mask[r]  = ((m0_q + 16'(r)) < M_q);
+ 400904       a_rd_addr[r] = 8'((r * TILE_K) + kk_q);
+ 400904       a_vec[r]     = $signed(a_rd_data[r]);
             end
         
- 417160     for (int c = 0; c < TILE_N; c++) begin
- 417160       col_mask[c]  = ((n0_q + 16'(c)) < effective_n);
- 417160       b_rd_addr[c] = 8'((kk_q * TILE_N) + c);
- 417160       b_vec[c]     = $signed(b_rd_data[c]);
+ 400904     for (int c = 0; c < TILE_N; c++) begin
+ 400904       col_mask[c]  = ((n0_q + 16'(c)) < effective_n);
+ 400904       b_rd_addr[c] = 8'((kk_q * TILE_N) + c);
+ 400904       b_vec[c]     = $signed(b_rd_data[c]);
             end
           end
         
- 103821   always @* begin
- 103821     m0_d               = m0_q;
- 103821     n0_d               = n0_q;
- 103821     k0_d               = k0_q;
- 103821     kk_d               = kk_q;
- 103821     store_row_d        = store_row_q;
- 103821     store_col_d        = store_col_q;
- 103821     bias_col_d         = bias_col_q;
- 103821     vec_idx_d          = vec_idx_q;
- 103821     desc_word_idx_d    = desc_word_idx_q;
- 103821     store_stage_done_d = store_stage_done_q;
- 103821     src0_row_base_d    = src0_row_base_q;
- 103821     src1_k_base_d      = src1_k_base_q;
- 103821     src1_n_offset_d    = src1_n_offset_q;
- 103821     dst_row_base_d     = dst_row_base_q;
- 103821     dst_n_offset_d     = dst_n_offset_q;
- 103821     bias_base_d        = bias_base_q;
- 103821     src0_m_step_d      = src0_m_step_q;
- 103821     stride1_k_step_d   = stride1_k_step_q;
- 103821     dst_m_step_d       = dst_m_step_q;
- 103821     dst_n_step_d       = dst_n_step_q;
- 103821     bias_n_step_d      = bias_n_step_q;
- 103821     conv_out_y_d       = conv_out_y_q;
- 103821     conv_out_x_d       = conv_out_x_q;
- 103821     conv_kh_d          = conv_kh_q;
- 103821     conv_kw_d          = conv_kw_q;
- 103821     conv_ic_d          = conv_ic_q;
+ 099807   always @* begin
+ 099807     m0_d               = m0_q;
+ 099807     n0_d               = n0_q;
+ 099807     k0_d               = k0_q;
+ 099807     kk_d               = kk_q;
+ 099807     store_row_d        = store_row_q;
+ 099807     store_col_d        = store_col_q;
+ 099807     bias_col_d         = bias_col_q;
+ 099807     vec_idx_d          = vec_idx_q;
+ 099807     desc_word_idx_d    = desc_word_idx_q;
+ 099807     store_stage_done_d = store_stage_done_q;
+ 099807     src0_row_base_d    = src0_row_base_q;
+ 099807     src1_k_base_d      = src1_k_base_q;
+ 099807     src1_n_offset_d    = src1_n_offset_q;
+ 099807     dst_row_base_d     = dst_row_base_q;
+ 099807     dst_n_offset_d     = dst_n_offset_q;
+ 099807     bias_base_d        = bias_base_q;
+ 099807     src0_m_step_d      = src0_m_step_q;
+ 099807     stride1_k_step_d   = stride1_k_step_q;
+ 099807     dst_m_step_d       = dst_m_step_q;
+ 099807     dst_n_step_d       = dst_n_step_q;
+ 099807     bias_n_step_d      = bias_n_step_q;
+ 099807     conv_out_y_d       = conv_out_y_q;
+ 099807     conv_out_x_d       = conv_out_x_q;
+ 099807     conv_kh_d          = conv_kh_q;
+ 099807     conv_kw_d          = conv_kw_q;
+ 099807     conv_ic_d          = conv_ic_q;
         
- 103821     case (state_q)
- 015069       S_IDLE: begin
- 015069         m0_d               = '0;
- 015069         n0_d               = '0;
- 015069         k0_d               = '0;
- 015069         kk_d               = '0;
- 015069         store_row_d        = '0;
- 015069         store_col_d        = '0;
- 015069         bias_col_d         = '0;
- 015069         vec_idx_d          = '0;
- 015069         desc_word_idx_d    = '0;
- 015069         store_stage_done_d = 1'b0;
- 015069         src0_row_base_d    = '0;
- 015069         src1_k_base_d      = '0;
- 015069         src1_n_offset_d    = '0;
- 015069         dst_row_base_d     = '0;
- 015069         dst_n_offset_d     = '0;
- 015069         bias_base_d        = '0;
- 015069         src0_m_step_d      = '0;
- 015069         stride1_k_step_d   = '0;
- 015069         dst_m_step_d       = '0;
- 015069         dst_n_step_d       = '0;
- 015069         bias_n_step_d      = '0;
- 015069         conv_out_y_d       = '0;
- 015069         conv_out_x_d       = '0;
- 015069         conv_kh_d          = '0;
- 015069         conv_kw_d          = '0;
- 015069         conv_ic_d          = '0;
+ 099807     case (state_q)
+ 015147       S_IDLE: begin
+ 015147         m0_d               = '0;
+ 015147         n0_d               = '0;
+ 015147         k0_d               = '0;
+ 015147         kk_d               = '0;
+ 015147         store_row_d        = '0;
+ 015147         store_col_d        = '0;
+ 015147         bias_col_d         = '0;
+ 015147         vec_idx_d          = '0;
+ 015147         desc_word_idx_d    = '0;
+ 015147         store_stage_done_d = 1'b0;
+ 015147         src0_row_base_d    = '0;
+ 015147         src1_k_base_d      = '0;
+ 015147         src1_n_offset_d    = '0;
+ 015147         dst_row_base_d     = '0;
+ 015147         dst_n_offset_d     = '0;
+ 015147         bias_base_d        = '0;
+ 015147         src0_m_step_d      = '0;
+ 015147         stride1_k_step_d   = '0;
+ 015147         dst_m_step_d       = '0;
+ 015147         dst_n_step_d       = '0;
+ 015147         bias_n_step_d      = '0;
+ 015147         conv_out_y_d       = '0;
+ 015147         conv_out_x_d       = '0;
+ 015147         conv_kh_d          = '0;
+ 015147         conv_kw_d          = '0;
+ 015147         conv_ic_d          = '0;
               end
         
  000384       S_INIT_TILE: begin
@@ -1189,7 +1189,7 @@
               end
         
  000384       S_VALIDATE: begin
-~093334         if (opcode_ok && dims_ok && dst_flags_ok) begin
+~089320         if (opcode_ok && dims_ok && dst_flags_ok) begin
  000384           src0_row_base_d  = src0_addr_q;
  000384           src1_k_base_d    = src1_addr_q;
  000384           src1_n_offset_d  = '0;
@@ -1205,39 +1205,39 @@
               end
         
 %000000       S_DESC_LOAD: begin
-~103821         if (desc_inflight_q && desc_mem_rvalid) begin
+~099807         if (desc_inflight_q && desc_mem_rvalid) begin
 %000000           if (desc_word_idx_q + 5'd1 < desc_words_expected)
 %000000             desc_word_idx_d = desc_word_idx_q + 5'd1;
                 end
               end
         
- 000552       S_CLEAR_ACC: begin
- 000552         kk_d = '0;
- 000552         bias_col_d = '0;
- 000552         vec_idx_d = '0;
+ 000540       S_CLEAR_ACC: begin
+ 000540         kk_d = '0;
+ 000540         bias_col_d = '0;
+ 000540         vec_idx_d = '0;
               end
         
- 001656       S_COMPUTE_K: begin
- 001104         if (kk_q + 16'd1 < active_tile_k)
- 001104           kk_d = kk_q + 16'd1;
+ 001542       S_COMPUTE_K: begin
+ 001002         if (kk_q + 16'd1 < active_tile_k)
+ 001002           kk_d = kk_q + 16'd1;
                 else
- 000552           kk_d = '0;
+ 000540           kk_d = '0;
               end
         
- 000552       S_NEXT_K: begin
-~000552         if (more_k_tiles) begin
+ 000540       S_NEXT_K: begin
+~000540         if (more_k_tiles) begin
 %000000           k0_d = k0_q + TILE_K_U16;
 %000000           src1_k_base_d = src1_k_base_q + stride1_k_step_q;
- 000552         end else begin
- 000552           store_row_d        = '0;
- 000552           store_col_d        = '0;
- 000552           bias_col_d         = '0;
- 000552           store_stage_done_d = 1'b0;
+ 000540         end else begin
+ 000540           store_row_d        = '0;
+ 000540           store_col_d        = '0;
+ 000540           bias_col_d         = '0;
+ 000540           store_stage_done_d = 1'b0;
                 end
               end
         
 %000000       S_LOAD_BIAS: begin
-~103821         if (flags_q[FLAG_BIAS_EN] && bias_inflight_q && bias_mem_rvalid) begin
+~099807         if (flags_q[FLAG_BIAS_EN] && bias_inflight_q && bias_mem_rvalid) begin
 %000000           if (bias_col_q + 16'd1 < active_tile_n)
 %000000             bias_col_d = bias_col_q + 16'd1;
                   else
@@ -1245,16 +1245,16 @@
                 end
               end
         
- 007290       S_CONV_LOAD_A: begin
- 007044         if (conv_done) begin
- 000246           conv_kh_d = conv_next_kh;
- 000246           conv_kw_d = conv_next_kw;
- 000246           conv_ic_d = conv_next_ic;
+ 006918       S_CONV_LOAD_A: begin
+ 006684         if (conv_done) begin
+ 000234           conv_kh_d = conv_next_kh;
+ 000234           conv_kw_d = conv_next_kw;
+ 000234           conv_ic_d = conv_next_ic;
                 end
               end
         
  000048       S_VEC_STORE: begin
-~103629         if (((!vec_inflight_q) && vec_mem_ready) || (vec_inflight_q && vec_mem_ready)) begin
+~099615         if (((!vec_inflight_q) && vec_mem_ready) || (vec_inflight_q && vec_mem_ready)) begin
  000036           if (vec_idx_q + 16'd1 < M_q)
  000036             vec_idx_d = vec_idx_q + 16'd1;
                   else
@@ -1262,20 +1262,20 @@
                 end
               end
         
- 010116       S_STORE_C: begin
- 095601         if (!store_stage_done_q) begin
- 001662           if (store_col_q + 16'd1 < active_tile_n) begin
- 001158             store_col_d = store_col_q + 16'd1;
- 001662           end else begin
- 001662             store_col_d = '0;
- 001110             if (store_row_q + 16'd1 < active_tile_m)
- 001110               store_row_d = store_row_q + 16'd1;
+ 010044       S_STORE_C: begin
+ 091659         if (!store_stage_done_q) begin
+ 001782           if (store_col_q + 16'd1 < active_tile_n) begin
+ 001026             store_col_d = store_col_q + 16'd1;
+ 001782           end else begin
+ 001782             store_col_d = '0;
+ 001242             if (store_row_q + 16'd1 < active_tile_m)
+ 001242               store_row_d = store_row_q + 16'd1;
                   end
         
  002268           if (store_stage_last) begin
- 000552             store_row_d        = '0;
- 000552             store_col_d        = '0;
- 000552             store_stage_done_d = 1'b1;
+ 000540             store_row_d        = '0;
+ 000540             store_col_d        = '0;
+ 000540             store_stage_done_d = 1'b1;
                   end
                 end
               end
@@ -1298,116 +1298,116 @@
 %000000         conv_ic_d          = '0;
               end
         
- 000180       S_NEXT_TILE_M: begin
- 000180         m0_d               = m0_q + TILE_M_U16;
- 000180         n0_d               = '0;
- 000180         k0_d               = '0;
- 000180         kk_d               = '0;
- 000180         store_row_d        = '0;
- 000180         store_col_d        = '0;
- 000180         bias_col_d         = '0;
- 000180         vec_idx_d          = '0;
- 000180         store_stage_done_d = 1'b0;
- 000180         src0_row_base_d    = src0_row_base_q + src0_m_step_q;
- 000180         src1_k_base_d      = src1_addr_q;
- 000180         src1_n_offset_d    = '0;
- 000180         dst_row_base_d     = dst_row_base_q + dst_m_step_q;
- 000180         dst_n_offset_d     = '0;
- 000180         bias_base_d        = bias_addr_q;
- 000180         conv_out_y_d       = conv_next_out_y;
- 000180         conv_out_x_d       = conv_next_out_x;
- 000180         conv_kh_d          = '0;
- 000180         conv_kw_d          = '0;
- 000180         conv_ic_d          = '0;
+ 000168       S_NEXT_TILE_M: begin
+ 000168         m0_d               = m0_q + TILE_M_U16;
+ 000168         n0_d               = '0;
+ 000168         k0_d               = '0;
+ 000168         kk_d               = '0;
+ 000168         store_row_d        = '0;
+ 000168         store_col_d        = '0;
+ 000168         bias_col_d         = '0;
+ 000168         vec_idx_d          = '0;
+ 000168         store_stage_done_d = 1'b0;
+ 000168         src0_row_base_d    = src0_row_base_q + src0_m_step_q;
+ 000168         src1_k_base_d      = src1_addr_q;
+ 000168         src1_n_offset_d    = '0;
+ 000168         dst_row_base_d     = dst_row_base_q + dst_m_step_q;
+ 000168         dst_n_offset_d     = '0;
+ 000168         bias_base_d        = bias_addr_q;
+ 000168         conv_out_y_d       = conv_next_out_y;
+ 000168         conv_out_x_d       = conv_next_out_x;
+ 000168         conv_kh_d          = '0;
+ 000168         conv_kw_d          = '0;
+ 000168         conv_ic_d          = '0;
               end
         
- 067590       default: begin
+ 064092       default: begin
               end
             endcase
           end
         
- 103821   always @* begin
- 103821     state_d                = state_q;
- 103821     latch_cmd              = 1'b0;
- 103821     latch_cmd_addr         = 1'b0;
- 103821     clear_cmd_fields       = 1'b0;
- 103821     load_desc_word         = 1'b0;
- 103821     clear_status           = 1'b0;
- 103821     set_illegal_opcode     = 1'b0;
- 103821     set_shape_error        = 1'b0;
- 103821     set_memory_error       = 1'b0;
- 103821     set_unsupported_format = 1'b0;
- 103821     dma_inflight_d         = dma_inflight_q;
- 103821     bias_inflight_d        = bias_inflight_q;
- 103821     vec_inflight_d         = vec_inflight_q;
- 103821     desc_inflight_d        = desc_inflight_q;
- 103821     conv_inflight_d        = conv_inflight_q;
- 103821     dma_launch_pending_d   = dma_launch_pending_q;
+ 099807   always @* begin
+ 099807     state_d                = state_q;
+ 099807     latch_cmd              = 1'b0;
+ 099807     latch_cmd_addr         = 1'b0;
+ 099807     clear_cmd_fields       = 1'b0;
+ 099807     load_desc_word         = 1'b0;
+ 099807     clear_status           = 1'b0;
+ 099807     set_illegal_opcode     = 1'b0;
+ 099807     set_shape_error        = 1'b0;
+ 099807     set_memory_error       = 1'b0;
+ 099807     set_unsupported_format = 1'b0;
+ 099807     dma_inflight_d         = dma_inflight_q;
+ 099807     bias_inflight_d        = bias_inflight_q;
+ 099807     vec_inflight_d         = vec_inflight_q;
+ 099807     desc_inflight_d        = desc_inflight_q;
+ 099807     conv_inflight_d        = conv_inflight_q;
+ 099807     dma_launch_pending_d   = dma_launch_pending_q;
         
- 103821     busy          = 1'b1;
- 103821     done          = 1'b0;
+ 099807     busy          = 1'b1;
+ 099807     done          = 1'b0;
         
- 103821     cnt_cmd_start = 1'b0;
- 103821     cnt_cmd_done  = 1'b0;
-~103821     cnt_busy      = (state_q != S_IDLE) && (state_q != S_DONE) && (state_q != S_ERROR);
- 103821     cnt_active    = (state_q == S_COMPUTE_K) || (state_q == S_VEC_EXEC) ||
-~103821                     (state_q == S_VEC_EXEC2) || (state_q == S_VEC_EXEC3);
- 103821     cnt_stall     = 1'b0;
- 103821     clear_bias_regs = 1'b0;
- 103821     load_bias_reg   = 1'b0;
- 103821     load_vec_x_reg  = 1'b0;
- 103821     load_vec_y_reg  = 1'b0;
- 103821     latch_vec_store_cmd = 1'b0;
- 103821     latch_dma_cmd       = 1'b0;
- 103821     latch_vec_raw       = 1'b0;
- 103821     latch_vec_post      = 1'b0;
- 103821     latch_vec_scaled    = 1'b0;
+ 099807     cnt_cmd_start = 1'b0;
+ 099807     cnt_cmd_done  = 1'b0;
+~099807     cnt_busy      = (state_q != S_IDLE) && (state_q != S_DONE) && (state_q != S_ERROR);
+ 099807     cnt_active    = (state_q == S_COMPUTE_K) || (state_q == S_VEC_EXEC) ||
+~099807                     (state_q == S_VEC_EXEC2) || (state_q == S_VEC_EXEC3);
+ 099807     cnt_stall     = 1'b0;
+ 099807     clear_bias_regs = 1'b0;
+ 099807     load_bias_reg   = 1'b0;
+ 099807     load_vec_x_reg  = 1'b0;
+ 099807     load_vec_y_reg  = 1'b0;
+ 099807     latch_vec_store_cmd = 1'b0;
+ 099807     latch_dma_cmd       = 1'b0;
+ 099807     latch_vec_raw       = 1'b0;
+ 099807     latch_vec_post      = 1'b0;
+ 099807     latch_vec_scaled    = 1'b0;
         
- 103821     array_clear_acc = 1'b0;
- 103821     array_mac_en    = 1'b0;
- 103821     epi_start       = 1'b0;
+ 099807     array_clear_acc = 1'b0;
+ 099807     array_mac_en    = 1'b0;
+ 099807     epi_start       = 1'b0;
         
- 103821     dma_start        = 1'b0;
- 103821     vec_mul_start    = 1'b0;
+ 099807     dma_start        = 1'b0;
+ 099807     vec_mul_start    = 1'b0;
         
- 103821     c_wr_en         = 1'b0;
- 103821     c_wr_addr       = '0;
- 103821     c_wr_data       = '0;
- 103821     c_rd_addr       = '0;
+ 099807     c_wr_en         = 1'b0;
+ 099807     c_wr_addr       = '0;
+ 099807     c_wr_data       = '0;
+ 099807     c_rd_addr       = '0;
         
- 103821     bias_mem_req      = 1'b0;
- 103821     bias_mem_we       = 1'b0;
- 103821     bias_mem_addr_mux = bias_mem_addr;
- 103821     bias_mem_wdata    = '0;
- 103821     bias_mem_wstrb    = 4'b0000;
- 103821     vec_mem_req       = 1'b0;
- 103821     vec_mem_we        = 1'b0;
- 103821     vec_mem_addr      = '0;
- 103821     vec_mem_wdata     = '0;
- 103821     vec_mem_wstrb     = 4'b0000;
- 103821     desc_mem_req      = 1'b0;
- 103821     desc_mem_we       = 1'b0;
- 103821     desc_mem_wdata    = '0;
- 103821     desc_mem_wstrb    = 4'b0000;
- 103821     dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
- 103821     dma_base_addr_cmd_n    = '0;
- 103821     dma_rows_cmd_n         = '0;
- 103821     dma_cols_cmd_n         = '0;
- 103821     dma_stride_bytes_cmd_n = '0;
- 103821     dma_spm_region_cmd_n   = SPM_REGION_A;
- 103821     dma_spm_base_cmd_n     = 9'd0;
+ 099807     bias_mem_req      = 1'b0;
+ 099807     bias_mem_we       = 1'b0;
+ 099807     bias_mem_addr_mux = bias_mem_addr;
+ 099807     bias_mem_wdata    = '0;
+ 099807     bias_mem_wstrb    = 4'b0000;
+ 099807     vec_mem_req       = 1'b0;
+ 099807     vec_mem_we        = 1'b0;
+ 099807     vec_mem_addr      = '0;
+ 099807     vec_mem_wdata     = '0;
+ 099807     vec_mem_wstrb     = 4'b0000;
+ 099807     desc_mem_req      = 1'b0;
+ 099807     desc_mem_we       = 1'b0;
+ 099807     desc_mem_wdata    = '0;
+ 099807     desc_mem_wstrb    = 4'b0000;
+ 099807     dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
+ 099807     dma_base_addr_cmd_n    = '0;
+ 099807     dma_rows_cmd_n         = '0;
+ 099807     dma_cols_cmd_n         = '0;
+ 099807     dma_stride_bytes_cmd_n = '0;
+ 099807     dma_spm_region_cmd_n   = SPM_REGION_A;
+ 099807     dma_spm_base_cmd_n     = 9'd0;
         
- 103821     case (state_q)
- 015069       S_IDLE: begin
- 015069         busy = 1'b0;
- 015069         dma_inflight_d = 1'b0;
- 015069         bias_inflight_d = 1'b0;
- 015069         vec_inflight_d = 1'b0;
- 015069         desc_inflight_d = 1'b0;
- 015069         conv_inflight_d = 1'b0;
- 015069         dma_launch_pending_d = 1'b0;
- 015069         clear_status = start;
- 014749         if (start) begin
+ 099807     case (state_q)
+ 015147       S_IDLE: begin
+ 015147         busy = 1'b0;
+ 015147         dma_inflight_d = 1'b0;
+ 015147         bias_inflight_d = 1'b0;
+ 015147         vec_inflight_d = 1'b0;
+ 015147         desc_inflight_d = 1'b0;
+ 015147         conv_inflight_d = 1'b0;
+ 015147         dma_launch_pending_d = 1'b0;
+ 015147         clear_status = start;
+ 014827         if (start) begin
  000320           latch_cmd_addr = 1'b1;
  000320           cnt_cmd_start = 1'b1;
 ~000320           if (start_direct_mode) begin
@@ -1426,7 +1426,7 @@
 %000000         vec_inflight_d = 1'b0;
 %000000         cnt_stall = 1'b1;
         
-~103821         if (!desc_inflight_q) begin
+~099807         if (!desc_inflight_q) begin
 %000000           desc_mem_req = 1'b1;
 %000000           if (desc_mem_ready)
 %000000             desc_inflight_d = 1'b1;
@@ -1445,7 +1445,7 @@
  000384         desc_inflight_d = 1'b0;
  000384         conv_inflight_d = 1'b0;
  000384         dma_launch_pending_d = 1'b0;
-~093334         if (!opcode_ok) begin
+~089320         if (!opcode_ok) begin
 %000000           set_illegal_opcode = 1'b1;
 %000000           state_d = S_ERROR;
 ~000384         end else if (!dims_ok) begin
@@ -1472,52 +1472,52 @@
  000372           state_d = S_CLEAR_ACC;
               end
         
- 000552       S_CLEAR_ACC: begin
- 000552         dma_inflight_d = 1'b0;
- 000552         bias_inflight_d = 1'b0;
- 000552         vec_inflight_d = 1'b0;
- 000552         desc_inflight_d = 1'b0;
- 000552         conv_inflight_d = 1'b0;
- 000552         dma_launch_pending_d = 1'b0;
- 000552         clear_bias_regs = 1'b1;
- 000552         array_clear_acc = 1'b1;
+ 000540       S_CLEAR_ACC: begin
+ 000540         dma_inflight_d = 1'b0;
+ 000540         bias_inflight_d = 1'b0;
+ 000540         vec_inflight_d = 1'b0;
+ 000540         desc_inflight_d = 1'b0;
+ 000540         conv_inflight_d = 1'b0;
+ 000540         dma_launch_pending_d = 1'b0;
+ 000540         clear_bias_regs = 1'b1;
+ 000540         array_clear_acc = 1'b1;
  000306         if (is_conv_opcode)
- 000246           state_d = S_CONV_LOAD_A;
+ 000234           state_d = S_CONV_LOAD_A;
                 else
  000306           state_d = S_LOAD_A;
               end
         
- 007290       S_CONV_LOAD_A: begin
- 007290         dma_inflight_d = 1'b0;
- 007290         bias_inflight_d = 1'b0;
- 007290         vec_inflight_d = 1'b0;
- 007290         desc_inflight_d = 1'b0;
- 007290         dma_launch_pending_d = 1'b0;
- 007290         cnt_stall = 1'b1;
+ 006918       S_CONV_LOAD_A: begin
+ 006918         dma_inflight_d = 1'b0;
+ 006918         bias_inflight_d = 1'b0;
+ 006918         vec_inflight_d = 1'b0;
+ 006918         desc_inflight_d = 1'b0;
+ 006918         dma_launch_pending_d = 1'b0;
+ 006918         cnt_stall = 1'b1;
         
- 096777         if (!conv_inflight_q) begin
- 000246           conv_inflight_d = 1'b1;
+ 093123         if (!conv_inflight_q) begin
+ 000234           conv_inflight_d = 1'b1;
 %000000         end else if (conv_error) begin
 %000000           set_memory_error = 1'b1;
 %000000           conv_inflight_d = 1'b0;
 %000000           state_d = S_ERROR;
- 006798         end else if (conv_done) begin
- 000246           conv_inflight_d = 1'b0;
- 000246           state_d = S_LOAD_B;
+ 006450         end else if (conv_done) begin
+ 000234           conv_inflight_d = 1'b0;
+ 000234           state_d = S_LOAD_B;
                 end
               end
         
- 017694       S_LOAD_A: begin
- 017694         desc_inflight_d        = 1'b0;
- 017694         dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
- 017694         dma_base_addr_cmd_n    = src0_row_base_q + {16'd0, k0_q};
- 017694         dma_rows_cmd_n         = active_tile_m;
- 017694         dma_cols_cmd_n         = active_tile_k;
- 017694         dma_stride_bytes_cmd_n = stride0_q;
- 017694         dma_spm_region_cmd_n   = SPM_REGION_A;
- 017694         dma_spm_base_cmd_n     = 9'd0;
+ 020004       S_LOAD_A: begin
+ 020004         desc_inflight_d        = 1'b0;
+ 020004         dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
+ 020004         dma_base_addr_cmd_n    = src0_row_base_q + {16'd0, k0_q};
+ 020004         dma_rows_cmd_n         = active_tile_m;
+ 020004         dma_cols_cmd_n         = active_tile_k;
+ 020004         dma_stride_bytes_cmd_n = stride0_q;
+ 020004         dma_spm_region_cmd_n   = SPM_REGION_A;
+ 020004         dma_spm_base_cmd_n     = 9'd0;
         
- 056013         if (!dma_launch_pending_q && !dma_inflight_q) begin
+ 054945         if (!dma_launch_pending_q && !dma_inflight_q) begin
  000306           latch_dma_cmd        = 1'b1;
  000306           dma_launch_pending_d = 1'b1;
  000306           cnt_stall            = 1'b1;
@@ -1531,75 +1531,75 @@
 %000000           dma_inflight_d       = 1'b0;
 %000000           dma_launch_pending_d = 1'b0;
 %000000           state_d = S_ERROR;
- 016776         end else if (dma_done) begin
+ 019086         end else if (dma_done) begin
  000306           dma_inflight_d       = 1'b0;
  000306           dma_launch_pending_d = 1'b0;
  000306           state_d = S_LOAD_B;
- 016776         end else begin
- 016776           cnt_stall = 1'b1;
+ 019086         end else begin
+ 019086           cnt_stall = 1'b1;
                 end
               end
         
- 021408       S_LOAD_B: begin
- 021408         desc_inflight_d        = 1'b0;
- 021408         dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
- 021408         dma_base_addr_cmd_n    = src1_k_base_q + src1_n_offset_q;
- 021408         dma_rows_cmd_n         = active_tile_k;
- 021408         dma_cols_cmd_n         = active_tile_n;
- 021408         dma_stride_bytes_cmd_n = stride1_eff;
- 021408         dma_spm_region_cmd_n   = SPM_REGION_B;
- 021408         dma_spm_base_cmd_n     = 9'd0;
+ 016200       S_LOAD_B: begin
+ 016200         desc_inflight_d        = 1'b0;
+ 016200         dma_op_kind_cmd_n      = DMA_OP_LOAD_I8;
+ 016200         dma_base_addr_cmd_n    = src1_k_base_q + src1_n_offset_q;
+ 016200         dma_rows_cmd_n         = active_tile_k;
+ 016200         dma_cols_cmd_n         = active_tile_n;
+ 016200         dma_stride_bytes_cmd_n = stride1_eff;
+ 016200         dma_spm_region_cmd_n   = SPM_REGION_B;
+ 016200         dma_spm_base_cmd_n     = 9'd0;
         
- 056013         if (!dma_launch_pending_q && !dma_inflight_q) begin
- 000552           latch_dma_cmd        = 1'b1;
- 000552           dma_launch_pending_d = 1'b1;
- 000552           cnt_stall            = 1'b1;
- 000552         end else if (dma_launch_pending_q) begin
- 000552           dma_start            = 1'b1;
- 000552           dma_launch_pending_d = 1'b0;
- 000552           dma_inflight_d       = 1'b1;
- 000552           cnt_stall            = 1'b1;
+ 054945         if (!dma_launch_pending_q && !dma_inflight_q) begin
+ 000540           latch_dma_cmd        = 1'b1;
+ 000540           dma_launch_pending_d = 1'b1;
+ 000540           cnt_stall            = 1'b1;
+ 000540         end else if (dma_launch_pending_q) begin
+ 000540           dma_start            = 1'b1;
+ 000540           dma_launch_pending_d = 1'b0;
+ 000540           dma_inflight_d       = 1'b1;
+ 000540           cnt_stall            = 1'b1;
 %000000         end else if (dma_error) begin
 %000000           set_memory_error = 1'b1;
 %000000           dma_inflight_d       = 1'b0;
 %000000           dma_launch_pending_d = 1'b0;
 %000000           state_d = S_ERROR;
- 019752         end else if (dma_done) begin
- 000552           dma_inflight_d       = 1'b0;
- 000552           dma_launch_pending_d = 1'b0;
- 000552           state_d = S_COMPUTE_K;
- 019752         end else begin
- 019752           cnt_stall = 1'b1;
+ 014580         end else if (dma_done) begin
+ 000540           dma_inflight_d       = 1'b0;
+ 000540           dma_launch_pending_d = 1'b0;
+ 000540           state_d = S_COMPUTE_K;
+ 014580         end else begin
+ 014580           cnt_stall = 1'b1;
                 end
               end
         
- 001656       S_COMPUTE_K: begin
- 001656         dma_inflight_d = 1'b0;
- 001656         bias_inflight_d = 1'b0;
- 001656         vec_inflight_d = 1'b0;
- 001656         desc_inflight_d = 1'b0;
- 001656         dma_launch_pending_d = 1'b0;
- 001656         array_mac_en = 1'b1;
- 001104         if (kk_q + 16'd1 >= active_tile_k)
- 000552           state_d = S_NEXT_K;
+ 001542       S_COMPUTE_K: begin
+ 001542         dma_inflight_d = 1'b0;
+ 001542         bias_inflight_d = 1'b0;
+ 001542         vec_inflight_d = 1'b0;
+ 001542         desc_inflight_d = 1'b0;
+ 001542         dma_launch_pending_d = 1'b0;
+ 001542         array_mac_en = 1'b1;
+ 001002         if (kk_q + 16'd1 >= active_tile_k)
+ 000540           state_d = S_NEXT_K;
               end
         
- 000552       S_NEXT_K: begin
- 000552         dma_inflight_d = 1'b0;
- 000552         bias_inflight_d = 1'b0;
- 000552         vec_inflight_d = 1'b0;
- 000552         desc_inflight_d = 1'b0;
- 000552         dma_launch_pending_d = 1'b0;
+ 000540       S_NEXT_K: begin
+ 000540         dma_inflight_d = 1'b0;
+ 000540         bias_inflight_d = 1'b0;
+ 000540         vec_inflight_d = 1'b0;
+ 000540         desc_inflight_d = 1'b0;
+ 000540         dma_launch_pending_d = 1'b0;
 %000000         if (more_k_tiles) begin
 %000000           if (is_conv_opcode)
 %000000             state_d = S_CONV_LOAD_A;
                   else
 %000000             state_d = S_LOAD_A;
                 end
-~000552         else if (flags_q[FLAG_BIAS_EN])
+~000540         else if (flags_q[FLAG_BIAS_EN])
 %000000           state_d = S_LOAD_BIAS;
                 else
- 000552           state_d = S_EPILOGUE;
+ 000540           state_d = S_EPILOGUE;
               end
         
 %000000       S_LOAD_BIAS: begin
@@ -1609,7 +1609,7 @@
 %000000         dma_launch_pending_d = 1'b0;
 %000000         cnt_stall = 1'b1;
         
-~103821         if (!flags_q[FLAG_BIAS_EN]) begin
+~099807         if (!flags_q[FLAG_BIAS_EN]) begin
 %000000           bias_inflight_d = 1'b0;
 %000000           state_d = S_EPILOGUE;
 %000000         end else if (!bias_inflight_q) begin
@@ -1624,61 +1624,61 @@
                 end
               end
         
- 027600       S_EPILOGUE: begin
- 027600         dma_inflight_d = 1'b0;
- 027600         bias_inflight_d = 1'b0;
- 027600         vec_inflight_d = 1'b0;
- 027600         desc_inflight_d = 1'b0;
- 027600         dma_launch_pending_d = 1'b0;
- 076773         if (!epi_busy && !epi_done)
- 000552           epi_start = 1'b1;
+ 027000       S_EPILOGUE: begin
+ 027000         dma_inflight_d = 1'b0;
+ 027000         bias_inflight_d = 1'b0;
+ 027000         vec_inflight_d = 1'b0;
+ 027000         desc_inflight_d = 1'b0;
+ 027000         dma_launch_pending_d = 1'b0;
+ 073347         if (!epi_busy && !epi_done)
+ 000540           epi_start = 1'b1;
         
- 018768         if (epi_out_valid) begin
- 008832           c_wr_en = 1'b1;
- 008832           c_wr_addr = epi_out_index;
-~008832           c_wr_data = use_dst_i8 ? {24'd0, epi_out_i8} : epi_out_i32;
+ 018360         if (epi_out_valid) begin
+ 008640           c_wr_en = 1'b1;
+ 008640           c_wr_addr = epi_out_index;
+~008640           c_wr_data = use_dst_i8 ? {24'd0, epi_out_i8} : epi_out_i32;
                 end
         
- 027048         if (epi_done)
- 000552           state_d = S_STORE_C;
+ 026460         if (epi_done)
+ 000540           state_d = S_STORE_C;
               end
         
- 010116       S_STORE_C: begin
- 010116         desc_inflight_d = 1'b0;
- 010116         vec_inflight_d = 1'b0;
-~103821         dma_op_kind_cmd_n      = use_dst_i8 ? DMA_OP_STORE_I8 : DMA_OP_STORE_I32;
- 010116         dma_base_addr_cmd_n    = dma_store_base_addr;
- 010116         dma_rows_cmd_n         = active_tile_m;
- 010116         dma_cols_cmd_n         = active_tile_n;
- 010116         dma_stride_bytes_cmd_n = stride_dst_eff;
- 010116         dma_spm_region_cmd_n   = SPM_REGION_C;
- 010116         dma_spm_base_cmd_n     = 9'd0;
+ 010044       S_STORE_C: begin
+ 010044         desc_inflight_d = 1'b0;
+ 010044         vec_inflight_d = 1'b0;
+~099807         dma_op_kind_cmd_n      = use_dst_i8 ? DMA_OP_STORE_I8 : DMA_OP_STORE_I32;
+ 010044         dma_base_addr_cmd_n    = dma_store_base_addr;
+ 010044         dma_rows_cmd_n         = active_tile_m;
+ 010044         dma_cols_cmd_n         = active_tile_n;
+ 010044         dma_stride_bytes_cmd_n = stride_dst_eff;
+ 010044         dma_spm_region_cmd_n   = SPM_REGION_C;
+ 010044         dma_spm_base_cmd_n     = 9'd0;
         
- 056013         if (!dma_launch_pending_q && !dma_inflight_q) begin
- 000552           latch_dma_cmd        = 1'b1;
- 000552           dma_launch_pending_d = 1'b1;
- 000552           cnt_stall            = 1'b1;
- 000552         end else if (dma_launch_pending_q) begin
- 000552           dma_start            = 1'b1;
- 000552           dma_launch_pending_d = 1'b0;
- 000552           dma_inflight_d       = 1'b1;
- 000552           cnt_stall            = 1'b1;
+ 054945         if (!dma_launch_pending_q && !dma_inflight_q) begin
+ 000540           latch_dma_cmd        = 1'b1;
+ 000540           dma_launch_pending_d = 1'b1;
+ 000540           cnt_stall            = 1'b1;
+ 000540         end else if (dma_launch_pending_q) begin
+ 000540           dma_start            = 1'b1;
+ 000540           dma_launch_pending_d = 1'b0;
+ 000540           dma_inflight_d       = 1'b1;
+ 000540           cnt_stall            = 1'b1;
 %000000         end else if (dma_error) begin
 %000000           set_memory_error = 1'b1;
 %000000           dma_inflight_d       = 1'b0;
 %000000           dma_launch_pending_d = 1'b0;
 %000000           state_d = S_ERROR;
- 008460         end else if (dma_done) begin
- 000552           dma_inflight_d       = 1'b0;
- 000552           dma_launch_pending_d = 1'b0;
+ 008424         end else if (dma_done) begin
+ 000540           dma_inflight_d       = 1'b0;
+ 000540           dma_launch_pending_d = 1'b0;
 %000000           if (more_n_tiles)
 %000000             state_d = S_NEXT_TILE_N;
  000372           else if (more_m_tiles)
- 000180             state_d = S_NEXT_TILE_M;
+ 000168             state_d = S_NEXT_TILE_M;
                   else
  000372             state_d = S_DONE;
- 008460         end else begin
- 008460           cnt_stall = 1'b1;
+ 008424         end else begin
+ 008424           cnt_stall = 1'b1;
                 end
               end
         
@@ -1692,7 +1692,7 @@
  000264         vec_mem_we   = 1'b0;
  000264         vec_mem_addr = vec_src0_read_addr;
         
- 103605         if (!vec_inflight_q) begin
+ 099591         if (!vec_inflight_q) begin
  000120           vec_mem_req = 1'b1;
  000072           if (vec_mem_ready)
  000048             vec_inflight_d = 1'b1;
@@ -1716,7 +1716,7 @@
  000096         vec_mem_we   = 1'b0;
  000096         vec_mem_addr = vec_src1_read_addr;
         
- 103605         if (!vec_inflight_q) begin
+ 099591         if (!vec_inflight_q) begin
  000024           vec_mem_req = 1'b1;
 ~000024           if (vec_mem_ready)
  000024             vec_inflight_d = 1'b1;
@@ -1812,13 +1812,13 @@
 %000000         state_d = S_CLEAR_ACC;
               end
         
- 000180       S_NEXT_TILE_M: begin
- 000180         dma_inflight_d = 1'b0;
- 000180         bias_inflight_d = 1'b0;
- 000180         vec_inflight_d = 1'b0;
- 000180         desc_inflight_d = 1'b0;
- 000180         dma_launch_pending_d = 1'b0;
- 000180         state_d = S_CLEAR_ACC;
+ 000168       S_NEXT_TILE_M: begin
+ 000168         dma_inflight_d = 1'b0;
+ 000168         bias_inflight_d = 1'b0;
+ 000168         vec_inflight_d = 1'b0;
+ 000168         desc_inflight_d = 1'b0;
+ 000168         dma_launch_pending_d = 1'b0;
+ 000168         state_d = S_CLEAR_ACC;
               end
         
  000384       S_DONE: begin
@@ -1855,23 +1855,23 @@
           // - Add dedicated vector tiling / multi-lane execution instead of scalar sequencing.
           // - Extend vector path to support richer clamp parameterization if the register map grows.
         `ifndef SYNTHESIS
- 017308   always @(posedge clk or negedge rst_n) begin
- 017274     if (!rst_n) begin
- 017213     end else if (!soft_reset) begin
- 017213       assert (state_q <= S_ERROR);
- 017213       assert (m0_q <= M_q);
- 017213       assert (n0_q <= effective_n);
- 017213       assert (k0_q <= K_q);
-~017213       assert (!array_mac_en || state_q == S_COMPUTE_K);
-~017213       assert (!(conv_spm_wr_en && !state_is_conv));
-~017213       assert (!dma_busy_status || dma_inflight_q || dma_launch_pending_q);
-~017213       assert (!conv_busy_status || conv_inflight_q);
-~017213       assert (!(dma_launch_pending_q && dma_inflight_q));
-~017213       assert (!done || (state_q == S_DONE) || (state_q == S_ERROR));
-~017213       assert (!(done && busy));
- 015741       if (epi_out_valid) begin
- 001472         assert (epi_shadow_i32[int'(epi_out_index) / TILE_N][int'(epi_out_index) % TILE_N] == epi_out_i32);
- 001472         assert (epi_shadow_i8[int'(epi_out_index) / TILE_N][int'(epi_out_index) % TILE_N] == epi_out_i8);
+ 016639   always @(posedge clk or negedge rst_n) begin
+ 016605     if (!rst_n) begin
+ 016544     end else if (!soft_reset) begin
+ 016544       assert (state_q <= S_ERROR);
+ 016544       assert (m0_q <= M_q);
+ 016544       assert (n0_q <= effective_n);
+ 016544       assert (k0_q <= K_q);
+~016544       assert (!array_mac_en || state_q == S_COMPUTE_K);
+~016544       assert (!(conv_spm_wr_en && !state_is_conv));
+~016544       assert (!dma_busy_status || dma_inflight_q || dma_launch_pending_q);
+~016544       assert (!conv_busy_status || conv_inflight_q);
+~016544       assert (!(dma_launch_pending_q && dma_inflight_q));
+~016544       assert (!done || (state_q == S_DONE) || (state_q == S_ERROR));
+~016544       assert (!(done && busy));
+ 015104       if (epi_out_valid) begin
+ 001440         assert (epi_shadow_i32[int'(epi_out_index) / TILE_N][int'(epi_out_index) % TILE_N] == epi_out_i32);
+ 001440         assert (epi_shadow_i8[int'(epi_out_index) / TILE_N][int'(epi_out_index) % TILE_N] == epi_out_i8);
               end
             end
           end

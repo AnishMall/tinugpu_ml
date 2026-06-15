@@ -1,13 +1,13 @@
 //      // verilator_coverage annotation
         module tinygpu_array4x4 import tinygpu_pkg::*; (
- 017302   input  logic                            clk,
+ 016633   input  logic                            clk,
 %000007   input  logic                            rst_n,
         
- 000092   input  logic                            clear_acc,
- 000092   input  logic                            mac_en,
+ 000090   input  logic                            clear_acc,
+ 000090   input  logic                            mac_en,
         
- 000088   input  logic signed [INT8_W-1:0]        a_vec [0:TILE_M-1],
- 000077   input  logic signed [INT8_W-1:0]        b_vec [0:TILE_N-1],
+ 000080   input  logic signed [INT8_W-1:0]        a_vec [0:TILE_M-1],
+ 000079   input  logic signed [INT8_W-1:0]        b_vec [0:TILE_N-1],
         
  000064   input  logic [TILE_M-1:0]               row_mask,
  000064   input  logic [TILE_N-1:0]               col_mask,
@@ -17,7 +17,7 @@
         
           for (genvar r = 0; r < TILE_M; r++) begin : g_row
             for (genvar c = 0; c < TILE_N; c++) begin : g_col
-~000092       logic pe_mac_en;
+~000090       logic pe_mac_en;
         
               assign pe_mac_en = mac_en && row_mask[r] && col_mask[c];
         

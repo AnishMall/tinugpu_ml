@@ -80,10 +80,113 @@ struct JobCounts {
   unsigned error = 0;
 };
 
+struct FunctionalCoverage {
+  bool op_gemm = false;
+  bool op_vec_add = false;
+  bool op_vec_mul = false;
+  bool op_relu = false;
+  bool op_clamp = false;
+  bool op_conv2d = false;
+  bool mode_direct = false;
+  bool mode_descriptor = false;
+  bool dst_int8 = false;
+  bool dst_int32 = false;
+  bool feat_bias = false;
+  bool feat_relu = false;
+  bool feat_clamp = false;
+  bool feat_requant = false;
+  bool conv_kernel_1x1 = false;
+  bool conv_kernel_3x3 = false;
+  bool conv_stride_11 = false;
+  bool conv_stride_21 = false;
+  bool conv_stride_12 = false;
+  bool conv_stride_22 = false;
+  bool conv_pad_00 = false;
+  bool conv_pad_10 = false;
+  bool conv_pad_01 = false;
+  bool conv_pad_11 = false;
+  bool err_illegal_opcode = false;
+  bool err_invalid_conv_cfg = false;
+  bool err_invalid_desc_version = false;
+  bool err_zero_dim = false;
+  bool err_conflicting_dst = false;
+  bool sat_pos = false;
+  bool sat_neg = false;
+  bool mmio_protocol = false;
+
+  static constexpr unsigned total_bins() { return 32; }
+  void print_missing() const {
+    struct NamedBin {
+      const char *name;
+      bool hit;
+    };
+    const NamedBin bins[] = {
+      {"op_gemm", op_gemm},
+      {"op_vec_add", op_vec_add},
+      {"op_vec_mul", op_vec_mul},
+      {"op_relu", op_relu},
+      {"op_clamp", op_clamp},
+      {"op_conv2d", op_conv2d},
+      {"mode_direct", mode_direct},
+      {"mode_descriptor", mode_descriptor},
+      {"dst_int8", dst_int8},
+      {"dst_int32", dst_int32},
+      {"feat_bias", feat_bias},
+      {"feat_relu", feat_relu},
+      {"feat_clamp", feat_clamp},
+      {"feat_requant", feat_requant},
+      {"conv_kernel_1x1", conv_kernel_1x1},
+      {"conv_kernel_3x3", conv_kernel_3x3},
+      {"conv_stride_11", conv_stride_11},
+      {"conv_stride_21", conv_stride_21},
+      {"conv_stride_12", conv_stride_12},
+      {"conv_stride_22", conv_stride_22},
+      {"conv_pad_00", conv_pad_00},
+      {"conv_pad_10", conv_pad_10},
+      {"conv_pad_01", conv_pad_01},
+      {"conv_pad_11", conv_pad_11},
+      {"err_illegal_opcode", err_illegal_opcode},
+      {"err_invalid_conv_cfg", err_invalid_conv_cfg},
+      {"err_invalid_desc_version", err_invalid_desc_version},
+      {"err_zero_dim", err_zero_dim},
+      {"err_conflicting_dst", err_conflicting_dst},
+      {"sat_pos", sat_pos},
+      {"sat_neg", sat_neg},
+      {"mmio_protocol", mmio_protocol},
+    };
+    bool first = true;
+    for (const auto &bin : bins) {
+      if (!bin.hit) {
+        std::printf("%s%s", first ? "missing_functional_bins " : ",", bin.name);
+        first = false;
+      }
+    }
+    if (!first)
+      std::printf("\n");
+  }
+  unsigned hit_bins() const {
+    const bool bins[] = {
+      op_gemm, op_vec_add, op_vec_mul, op_relu, op_clamp, op_conv2d,
+      mode_direct, mode_descriptor, dst_int8, dst_int32,
+      feat_bias, feat_relu, feat_clamp, feat_requant,
+      conv_kernel_1x1, conv_kernel_3x3, conv_stride_11, conv_stride_21,
+      conv_stride_12, conv_stride_22, conv_pad_00, conv_pad_10,
+      conv_pad_01, conv_pad_11, err_illegal_opcode, err_invalid_conv_cfg,
+      err_invalid_desc_version, err_zero_dim, err_conflicting_dst,
+      sat_pos, sat_neg, mmio_protocol
+    };
+    unsigned hits = 0;
+    for (bool hit : bins)
+      hits += hit ? 1u : 0u;
+    return hits;
+  }
+};
+
 uint8_t memory[MEM_SIZE];
 uint64_t sim_time = 0;
 uint32_t random_state = 0x31415926u;
 uint32_t expected_cmd_count = 0;
+FunctionalCoverage fcov;
 
 uint32_t random_u32() {
   random_state = random_state * 1664525u + 1013904223u;
@@ -119,6 +222,8 @@ void write32(uint32_t address, uint32_t data, uint8_t strobe = 0xf) {
 }
 
 int8_t sat_i8(int32_t value) {
+  if (value > 127) fcov.sat_pos = true;
+  if (value < -128) fcov.sat_neg = true;
   if (value > 127) return 127;
   if (value < -128) return -128;
   return static_cast<int8_t>(value);
@@ -428,6 +533,7 @@ bool run_mmio_protocol_checks(Vtinygpu_top *top) {
   (void)mmio_read(top, REG_CYCLE_COUNT);
   (void)mmio_read(top, REG_ACTIVE_COUNT);
   (void)mmio_read(top, REG_STALL_COUNT);
+  fcov.mmio_protocol = true;
   return true;
 }
 
@@ -456,6 +562,21 @@ bool run_vector_job(Vtinygpu_top *top) {
   if (use_relu) flags |= FLAG_RELU_EN;
   if (use_clamp) flags |= FLAG_CLAMP_EN;
   if (use_requant) flags |= FLAG_REQUANT_EN;
+
+  fcov.mode_descriptor |= use_descriptor;
+  fcov.mode_direct |= !use_descriptor;
+  fcov.dst_int8 |= use_int8;
+  fcov.dst_int32 |= !use_int8;
+  fcov.feat_relu |= use_relu || opcode == OP_RELU;
+  fcov.feat_clamp |= use_clamp || opcode == OP_CLAMP;
+  fcov.feat_requant |= use_requant;
+  switch (opcode) {
+    case OP_VEC_ADD: fcov.op_vec_add = true; break;
+    case OP_VEC_MUL: fcov.op_vec_mul = true; break;
+    case OP_RELU: fcov.op_relu = true; break;
+    case OP_CLAMP: fcov.op_clamp = true; break;
+    default: break;
+  }
 
   std::memset(memory + SRC0, 0, 128);
   std::memset(memory + SRC1, 0, 128);
@@ -517,6 +638,16 @@ bool run_gemm_job(Vtinygpu_top *top) {
   if (use_int8) flags |= FLAG_DST_INT8;
   else flags |= FLAG_DST_INT32;
 
+  fcov.op_gemm = true;
+  fcov.mode_descriptor |= use_descriptor;
+  fcov.mode_direct |= !use_descriptor;
+  fcov.dst_int8 |= use_int8;
+  fcov.dst_int32 |= !use_int8;
+  fcov.feat_bias |= use_bias;
+  fcov.feat_relu |= use_relu;
+  fcov.feat_clamp |= use_clamp;
+  fcov.feat_requant |= use_requant;
+
   std::vector<int8_t> a(m * k), b(k * n);
   std::vector<int32_t> bias(n, 0), expected_i32(m * n, 0);
   std::vector<int8_t> expected_i8(m * n, 0);
@@ -566,15 +697,33 @@ bool run_gemm_job(Vtinygpu_top *top) {
 }
 
 bool run_conv_job(Vtinygpu_top *top) {
-  const unsigned input_h = 2 + random_u32() % 4;
-  const unsigned input_w = 2 + random_u32() % 4;
-  const unsigned input_c = 1 + random_u32() % 3;
-  const unsigned output_c = 1 + random_u32() % 5;
-  const unsigned kernel = (random_u32() & 1u) ? 1u : 3u;
-  const unsigned stride_h = 1 + (random_u32() & 1u);
-  const unsigned stride_w = 1 + (random_u32() & 1u);
-  const unsigned pad_h = (kernel == 3u) ? (random_u32() & 1u) : 0u;
-  const unsigned pad_w = (kernel == 3u) ? (random_u32() & 1u) : 0u;
+  static unsigned conv_job_count = 0;
+  unsigned input_h = 2 + random_u32() % 4;
+  unsigned input_w = 2 + random_u32() % 4;
+  unsigned input_c = 1 + random_u32() % 3;
+  unsigned output_c = 1 + random_u32() % 5;
+  unsigned kernel = (random_u32() & 1u) ? 1u : 3u;
+  unsigned stride_h = 1 + (random_u32() & 1u);
+  unsigned stride_w = 1 + (random_u32() & 1u);
+  unsigned pad_h = (kernel == 3u) ? (random_u32() & 1u) : 0u;
+  unsigned pad_w = (kernel == 3u) ? (random_u32() & 1u) : 0u;
+
+  switch (conv_job_count++) {
+    case 0:
+      input_h = 4; input_w = 4; input_c = 2; output_c = 3;
+      kernel = 1; stride_h = 1; stride_w = 1; pad_h = 0; pad_w = 0;
+      break;
+    case 1:
+      input_h = 4; input_w = 4; input_c = 2; output_c = 3;
+      kernel = 3; stride_h = 2; stride_w = 2; pad_h = 1; pad_w = 1;
+      break;
+    case 2:
+      input_h = 4; input_w = 4; input_c = 2; output_c = 3;
+      kernel = 3; stride_h = 1; stride_w = 2; pad_h = 0; pad_w = 1;
+      break;
+    default:
+      break;
+  }
   if (input_h + 2 * pad_h < kernel || input_w + 2 * pad_w < kernel)
     return true;
 
@@ -599,6 +748,26 @@ bool run_conv_job(Vtinygpu_top *top) {
   if (use_requant) flags |= FLAG_REQUANT_EN;
   if (use_int8) flags |= FLAG_DST_INT8;
   else flags |= FLAG_DST_INT32;
+
+  fcov.op_conv2d = true;
+  fcov.mode_descriptor |= use_descriptor;
+  fcov.mode_direct |= !use_descriptor;
+  fcov.dst_int8 |= use_int8;
+  fcov.dst_int32 |= !use_int8;
+  fcov.feat_bias |= use_bias;
+  fcov.feat_relu |= use_relu;
+  fcov.feat_clamp |= use_clamp;
+  fcov.feat_requant |= use_requant;
+  fcov.conv_kernel_1x1 |= (kernel == 1u);
+  fcov.conv_kernel_3x3 |= (kernel == 3u);
+  fcov.conv_stride_11 |= (stride_h == 1u && stride_w == 1u);
+  fcov.conv_stride_21 |= (stride_h == 2u && stride_w == 1u);
+  fcov.conv_stride_12 |= (stride_h == 1u && stride_w == 2u);
+  fcov.conv_stride_22 |= (stride_h == 2u && stride_w == 2u);
+  fcov.conv_pad_00 |= (pad_h == 0u && pad_w == 0u);
+  fcov.conv_pad_10 |= (pad_h == 1u && pad_w == 0u);
+  fcov.conv_pad_01 |= (pad_h == 0u && pad_w == 1u);
+  fcov.conv_pad_11 |= (pad_h == 1u && pad_w == 1u);
 
   std::vector<int8_t> input(input_h * input_w * input_c);
   std::vector<int8_t> weights(flat_k * output_c);
@@ -693,24 +862,82 @@ bool run_error_job(Vtinygpu_top *top) {
   uint32_t status = 0;
   switch (mode) {
     case 0:
+      fcov.err_illegal_opcode = true;
       status = run_direct_command(top, 0xff, FLAG_I32_SIGNED, 1, 1, 1, 1, 1, 4);
       return finalize_command(top, status, STATUS_ERR_OPCODE);
     case 1:
+      fcov.err_invalid_conv_cfg = true;
       mmio_write(top, REG_CONV_IN_HW, (3u << 16) | 3u);
       mmio_write(top, REG_CONV_CHANNELS, (1u << 16) | 1u);
       mmio_write(top, REG_CONV_CFG, 0x00001122u);
       status = run_direct_command(top, OP_CONV2D, FLAG_I32_SIGNED, 0, 0, 0, 0, 0, 0);
       return finalize_command(top, status, STATUS_ERR_SHAPE);
     case 2:
+      fcov.err_invalid_desc_version = true;
       status = run_invalid_conv_descriptor(top, 2);
       return finalize_command(top, status, STATUS_ERR_SHAPE);
     case 3:
+      fcov.err_zero_dim = true;
       status = run_direct_command(top, OP_GEMM, FLAG_I32_SIGNED, 0, 2, 2, 2, 2, 8);
       return finalize_command(top, status, STATUS_ERR_SHAPE);
     default:
+      fcov.err_conflicting_dst = true;
       status = run_direct_command(top, OP_GEMM, FLAG_DST_INT8 | FLAG_DST_INT32, 2, 2, 2, 2, 2, 8);
       return finalize_command(top, status, STATUS_ERR_FMT);
   }
+}
+
+bool run_forced_saturation_job(Vtinygpu_top *top, bool positive) {
+  std::memset(memory + SRC0, 0, 32);
+  std::memset(memory + SRC1, 0, 32);
+  std::memset(memory + DST, 0, 32);
+  memory[SRC0 + 0] = positive ? 120u : static_cast<uint8_t>(static_cast<int8_t>(-120));
+  memory[SRC1 + 0] = positive ? 120u : static_cast<uint8_t>(static_cast<int8_t>(-120));
+  const uint32_t status = run_direct_command(top, OP_VEC_ADD,
+                                             FLAG_I8_SIGNED,
+                                             1, 1, 1, 1, 1, 1,
+                                             0, 0, 0);
+  if (!finalize_command(top, status, 0))
+    return false;
+  const int8_t expected = sat_i8(positive ? 240 : -240);
+  return static_cast<int8_t>(memory[DST]) == expected;
+}
+
+bool run_forced_error_suite(Vtinygpu_top *top) {
+  for (unsigned mode = 0; mode < 5; ++mode) {
+    uint32_t status = 0;
+    switch (mode) {
+      case 0:
+        fcov.err_illegal_opcode = true;
+        status = run_direct_command(top, 0xff, FLAG_I32_SIGNED, 1, 1, 1, 1, 1, 4);
+        if (!finalize_command(top, status, STATUS_ERR_OPCODE)) return false;
+        break;
+      case 1:
+        fcov.err_invalid_conv_cfg = true;
+        mmio_write(top, REG_CONV_IN_HW, (3u << 16) | 3u);
+        mmio_write(top, REG_CONV_CHANNELS, (1u << 16) | 1u);
+        mmio_write(top, REG_CONV_CFG, 0x00001122u);
+        status = run_direct_command(top, OP_CONV2D, FLAG_I32_SIGNED, 0, 0, 0, 0, 0, 0);
+        if (!finalize_command(top, status, STATUS_ERR_SHAPE)) return false;
+        break;
+      case 2:
+        fcov.err_invalid_desc_version = true;
+        status = run_invalid_conv_descriptor(top, 2);
+        if (!finalize_command(top, status, STATUS_ERR_SHAPE)) return false;
+        break;
+      case 3:
+        fcov.err_zero_dim = true;
+        status = run_direct_command(top, OP_GEMM, FLAG_I32_SIGNED, 0, 2, 2, 2, 2, 8);
+        if (!finalize_command(top, status, STATUS_ERR_SHAPE)) return false;
+        break;
+      default:
+        fcov.err_conflicting_dst = true;
+        status = run_direct_command(top, OP_GEMM, FLAG_DST_INT8 | FLAG_DST_INT32, 2, 2, 2, 2, 2, 8);
+        if (!finalize_command(top, status, STATUS_ERR_FMT)) return false;
+        break;
+    }
+  }
+  return true;
 }
 
 }  // namespace
@@ -737,6 +964,13 @@ int main(int argc, char **argv) {
 
   if (!run_mmio_protocol_checks(top)) {
     std::fprintf(stderr, "MMIO protocol checks failed\n");
+    delete top;
+    return 1;
+  }
+  if (!run_forced_saturation_job(top, true) ||
+      !run_forced_saturation_job(top, false) ||
+      !run_forced_error_suite(top)) {
+    std::fprintf(stderr, "forced functional coverage prelude failed\n");
     delete top;
     return 1;
   }
@@ -776,6 +1010,12 @@ int main(int argc, char **argv) {
   std::printf("Verilator differential PASS: %u jobs, memory latency 0-15 cycles\n", jobs);
   std::printf("job_counts gemm=%u vector=%u conv=%u error=%u\n",
               counts.gemm, counts.vector, counts.conv, counts.error);
+  const unsigned func_hits = fcov.hit_bins();
+  const unsigned func_total = FunctionalCoverage::total_bins();
+  std::printf("functional_coverage %.2f%% (%u/%u bins)\n",
+              100.0 * static_cast<double>(func_hits) / static_cast<double>(func_total),
+              func_hits, func_total);
+  fcov.print_missing();
   std::printf("coverage written to build/coverage.dat (use make coverage-report for ranking)\n");
   return 0;
 }

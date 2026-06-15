@@ -17,6 +17,7 @@ module tb_tinygpu_top_demo_tb;
   localparam logic [31:0] REG_CYCLE_COUNT   = 32'h44;
   localparam logic [31:0] REG_ACTIVE_CNT    = 32'h48;
   localparam logic [31:0] REG_STALL_CNT     = 32'h4c;
+  localparam logic [31:0] REG_CMD_COUNT     = 32'h50;
   localparam logic [31:0] REG_IRQ_STATUS    = 32'h54;
   localparam logic [31:0] REG_CONV_IN_HW    = 32'h58;
   localparam logic [31:0] REG_CONV_CHANNELS = 32'h5c;
@@ -63,6 +64,10 @@ module tb_tinygpu_top_demo_tb;
   logic       rd_pending_q;
   logic [31:0] rd_addr_q;
   logic [31:0] rd_word;
+  integer cycle_last;
+  integer active_last;
+  integer stall_last;
+  integer cmd_count_last;
 
   tinygpu_top dut (
     .clk(clk), .rst_n(rst_n),
@@ -187,6 +192,50 @@ module tb_tinygpu_top_demo_tb;
     end
   endtask
 
+  task automatic capture_counters(
+    output integer cycles,
+    output integer active,
+    output integer stalls
+  );
+    begin
+      mmio_rd(REG_CYCLE_COUNT, rd_word);
+      cycles = rd_word;
+      mmio_rd(REG_ACTIVE_CNT, rd_word);
+      active = rd_word;
+      mmio_rd(REG_STALL_CNT, rd_word);
+      stalls = rd_word;
+    end
+  endtask
+
+  task automatic print_perf(
+    input string name,
+    input integer cycles,
+    input integer active,
+    input integer stalls,
+    input integer work_items
+  );
+    integer ops_per_cycle_milli;
+    integer stall_pct;
+    begin
+      if (cycles > 0) begin
+        ops_per_cycle_milli = (work_items * 1000) / cycles;
+        stall_pct = (stalls * 100) / cycles;
+      end else begin
+        ops_per_cycle_milli = 0;
+        stall_pct = 0;
+      end
+      $display("%s perf: cycles=%0d active=%0d stalls=%0d work=%0d ops/cycle=%0d.%03d stall=%0d%%",
+               name,
+               cycles,
+               active,
+               stalls,
+               work_items,
+               ops_per_cycle_milli / 1000,
+               ops_per_cycle_milli % 1000,
+               stall_pct);
+    end
+  endtask
+
   initial begin
     rst_n = 1'b0;
     mmio_valid = 1'b0;
@@ -223,9 +272,11 @@ module tb_tinygpu_top_demo_tb;
     mmio_wr(REG_FLAGS,     FLAG_DST_INT32 | FLAG_SIGNED);
     mmio_wr(REG_CTRL,      CTRL_IRQ_EN | CTRL_DIRECT | CTRL_START);
     wait_irq(2000);
+    capture_counters(cycle_last, active_last, stall_last);
     $display("Direct GEMM C = [[%0d, %0d], [%0d, %0d]]",
              read_word(GEMM_C_BASE + 0), read_word(GEMM_C_BASE + 4),
              read_word(GEMM_C_BASE + 8), read_word(GEMM_C_BASE + 12));
+    print_perf("Direct GEMM", cycle_last, active_last, stall_last, 8);
 
     // Descriptor GEMM.
     write_word_mem(DESC_BASE + 0*4, 32'h0000_0001);
@@ -247,9 +298,11 @@ module tb_tinygpu_top_demo_tb;
     mmio_wr(REG_CMD_ADDR, DESC_BASE);
     mmio_wr(REG_CTRL, CTRL_IRQ_EN | CTRL_START);
     wait_irq(2000);
+    capture_counters(cycle_last, active_last, stall_last);
     $display("Descriptor GEMM C = [[%0d, %0d], [%0d, %0d]]",
              read_word(GEMM_C_BASE + 32), read_word(GEMM_C_BASE + 36),
              read_word(GEMM_C_BASE + 40), read_word(GEMM_C_BASE + 44));
+    print_perf("Descriptor GEMM", cycle_last, active_last, stall_last, 8);
 
     // Vector add.
     mem_bytes[VEC_X_BASE + 0] = 8'sd1;
@@ -274,9 +327,11 @@ module tb_tinygpu_top_demo_tb;
     mmio_wr(REG_FLAGS,     FLAG_DST_INT32 | FLAG_SIGNED);
     mmio_wr(REG_CTRL,      CTRL_IRQ_EN | CTRL_DIRECT | CTRL_START);
     wait_irq(2000);
+    capture_counters(cycle_last, active_last, stall_last);
     $display("Vector add z = {%0d, %0d, %0d, %0d}",
              read_word(VEC_Z_BASE + 0), read_word(VEC_Z_BASE + 4),
              read_word(VEC_Z_BASE + 8), read_word(VEC_Z_BASE + 12));
+    print_perf("Vector add", cycle_last, active_last, stall_last, 4);
 
     // Hardware Conv2D.
     for (int i = 0; i < 9; i++) mem_bytes[CONV_IN_BASE + i] = i + 1;
@@ -303,19 +358,24 @@ module tb_tinygpu_top_demo_tb;
     mmio_wr(REG_CONV_CFG, 32'h0011_1133);
     mmio_wr(REG_CTRL,      CTRL_IRQ_EN | CTRL_DIRECT | CTRL_START);
     wait_irq(4000);
+    capture_counters(cycle_last, active_last, stall_last);
     $display("Conv2D out row0 = {%0d, %0d, %0d}",
              read_word(CONV_OUT_BASE + 0), read_word(CONV_OUT_BASE + 4), read_word(CONV_OUT_BASE + 8));
     $display("Conv2D out row1 = {%0d, %0d, %0d}",
              read_word(CONV_OUT_BASE + 12), read_word(CONV_OUT_BASE + 16), read_word(CONV_OUT_BASE + 20));
     $display("Conv2D out row2 = {%0d, %0d, %0d}",
              read_word(CONV_OUT_BASE + 24), read_word(CONV_OUT_BASE + 28), read_word(CONV_OUT_BASE + 32));
+    print_perf("Conv2D", cycle_last, active_last, stall_last, 81);
 
     mmio_rd(REG_CYCLE_COUNT, rd_word);
-    $display("Cycles : %0d", rd_word);
+    $display("Last command cycles : %0d", rd_word);
     mmio_rd(REG_ACTIVE_CNT, rd_word);
-    $display("Active : %0d", rd_word);
+    $display("Last command active : %0d", rd_word);
     mmio_rd(REG_STALL_CNT, rd_word);
-    $display("Stalls : %0d", rd_word);
+    $display("Last command stalls : %0d", rd_word);
+    mmio_rd(REG_CMD_COUNT, rd_word);
+    cmd_count_last = rd_word;
+    $display("Commands completed : %0d", cmd_count_last);
 
     $display("tb_tinygpu_top_demo_tb PASS");
     $finish;

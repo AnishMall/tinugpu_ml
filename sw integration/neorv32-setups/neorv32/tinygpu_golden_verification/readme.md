@@ -46,15 +46,24 @@ pip3 install cocotb cocotb-test numpy
 ### Coverage Results
 
 ```
-Python cocotb suite alone:
-  line     : 69.5%   (214/308)
+Python cocotb suite (independent contribution):
+  line     : 69.2%   (213/308)
   branch   : 74.1%   (304/410)
   expr     : 75.3%   (216/287)
   overall  : 65.0%   (1614/2478)
 
-Full team (cocotb + Icarus + Verilator diff):
-  line             : 89.83%
-  functional cov   : 100%
+Full team combined (cocotb + Icarus 26 tb + Verilator 1000 jobs):
+  line             : 94.35%  (2338/2478)
+  functional cov   : 100.00% (32/32 bins)
+  branch           : 24.59%  (controller paths dominate)
+```
+
+### Coverage Progression
+
+```
+Start (Python cocotb alone) : 69.2%
+After team L4 Icarus tests  : 89.83%
+After controller_cov_tb     : 94.35%  ← current
 ```
 
 ### Python Verification Levels Completed
@@ -75,15 +84,15 @@ This Python suite covers **L4 — Kernel-level verification**.
 
 ```
 L1  Arithmetic unit    Single PE: signed multiply, accumulate, reset, overflow
-    ─────────────────  Method: Verilator unit tests (RTL team)
+    ─────────────────  Method: Icarus unit tests (RTL team)
     Status: COMPLETE
 
 L2  Array              4×4 array against software model, full + partial tiles
-    ─────────────────  Method: Verilator array tests (RTL team)
+    ─────────────────  Method: Icarus array tests (RTL team)
     Status: COMPLETE
 
 L3  Scratchpad + DMA   Bank select, load/store ordering, burst, stride handling
-    ─────────────────  Method: Verilator DMA tests (RTL team)
+    ─────────────────  Method: Icarus DMA tests (RTL team)
     Status: COMPLETE
 
 L4  Kernel-level  ◄─── THIS SUITE
@@ -94,12 +103,12 @@ L4  Kernel-level  ◄─── THIS SUITE
       ✅ RELU    — fixed values
       ✅ Conv2D  — fixed + 10 randomized cases
     Status: PASSING (7/7 tests)
-    Line coverage: 69.5% (Python alone)
-    Team total:    89.83% line, 100% functional
+    Line coverage (Python alone) : 69.2%
+    Team total                   : 94.35% line, 100% functional
 
 L5  SoC-level          NEORV32 firmware launches kernels, checks vs C reference
     ─────────────────  Method: GHDL firmware simulation
-    Status: IN PROGRESS (Zfinx fix pending)
+    Status: IN PROGRESS
 ```
 
 ### What "Golden Reference Model at L4" Means
@@ -201,7 +210,7 @@ Unlike a standard C++ Verilator testbench, cocotb allows Python to:
 
 - Drive clock and reset signals directly
 - Write to MMIO registers cycle-accurately
-- Respond to hardware memory requests in real time
+- Respond to hardware memory requests in real time via background memory responder
 - Run randomized test cases automatically
 - Compare hardware output against Python golden values independently
 
@@ -235,7 +244,8 @@ Python mirrors hardware arithmetic exactly:
 
 ## 🆕 Conv2D Hardware Support
 
-The TinyGPU hardware uses a streaming im2col engine (`tinygpu_im2col_loader.sv`). Software does NOT perform im2col — hardware does it internally via opcode `OP_CONV2D = 0x07`.
+The TinyGPU hardware uses a streaming im2col engine (`tinygpu_im2col_loader.sv`).
+Software does NOT perform im2col — hardware does it internally via opcode `OP_CONV2D = 0x07`.
 
 New registers:
 
@@ -256,10 +266,10 @@ Output  : [OH][OW][Cout]       (INT32 or INT8)
 
 ## 👥 Team Split
 
-| Person | Task |
-|--------|------|
-| RTL teammate | Conv2D hardware, coverage (89.83% line, 100% functional) |
-| This person | Python golden model + cocotb testbench (L4, 7/7 PASS) |
+| Person | Task | Result |
+|--------|------|--------|
+| RTL teammate | Conv2D hardware, Icarus 26 testbenches, controller coverage tb, formal verification | 94.35% line, 100% functional |
+| This person | Python golden model (L1→L4), cocotb testbench | 7/7 PASS, 69.2% line (independent) |
 
 ---
 

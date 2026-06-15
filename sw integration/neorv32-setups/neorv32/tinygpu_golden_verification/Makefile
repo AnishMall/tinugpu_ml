@@ -26,13 +26,11 @@ TOPLEVEL      = tinygpu_top
 MODULE        = test_tinygpu
 SIM           = verilator
 
-# Enable coverage measurement
 COMPILE_ARGS += --coverage
 EXTRA_ARGS   += --language 1800-2017 -Wno-fatal
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
 
-# Coverage report target
 coverage:
 	@echo "Generating coverage report..."
 	@mkdir -p coverage_annotated

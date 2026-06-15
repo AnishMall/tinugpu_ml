@@ -1,12 +1,12 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1781565764" />
-    <testcase name="test_soft_reset" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="203" time="-0.5296351909637451" sim_time_ns="120.0" ratio_time="-226.57104748202863" />
-    <testcase name="test_vec_add_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="221" time="0.020774364471435547" sim_time_ns="1000.0" ratio_time="48136.249913925676" />
-    <testcase name="test_gemm_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="265" time="0.06112265586853027" sim_time_ns="2890.0" ratio_time="47281.97685349519" />
-    <testcase name="test_gemm_random" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="312" time="1.3866429328918457" sim_time_ns="119040.0" ratio_time="85847.62318857525" />
-    <testcase name="test_relu_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="385" time="0.031952857971191406" sim_time_ns="820.0" ratio_time="25662.80614833607" />
-    <testcase name="test_conv2d_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="428" time="0.07404088973999023" sim_time_ns="4890.0" ratio_time="66044.58721622927" />
-    <testcase name="test_conv2d_random" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="503" time="0.625136137008667" sim_time_ns="44250.0" ratio_time="70784.58175804754" />
+    <property name="random_seed" value="1781567282" />
+    <testcase name="test_soft_reset" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="203" time="0.003421783447265625" sim_time_ns="120.0" ratio_time="35069.43143812709" />
+    <testcase name="test_vec_add_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="221" time="0.023581981658935547" sim_time_ns="1000.0" ratio_time="42405.25730462036" />
+    <testcase name="test_gemm_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="265" time="0.06059122085571289" sim_time_ns="2890.0" ratio_time="47696.67881229883" />
+    <testcase name="test_gemm_random" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="312" time="1.2841498851776123" sim_time_ns="114480.0" ratio_time="89148.47193570876" />
+    <testcase name="test_relu_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="385" time="0.02272796630859375" sim_time_ns="820.0" ratio_time="36078.89895938234" />
+    <testcase name="test_conv2d_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="428" time="0.08087277412414551" sim_time_ns="4890.0" ratio_time="60465.34266888755" />
+    <testcase name="test_conv2d_random" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="503" time="0.8309524059295654" sim_time_ns="42120.0" ratio_time="50688.823691269565" />
   </testsuite>
 </testsuites>

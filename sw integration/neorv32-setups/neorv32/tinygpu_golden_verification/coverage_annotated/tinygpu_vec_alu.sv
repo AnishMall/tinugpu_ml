@@ -27,14 +27,14 @@
             end
           endfunction
         
- 103821   always_comb begin
- 103821     z_o = '0;
- 103821     case (opcode)
+ 099807   always_comb begin
+ 099807     z_o = '0;
+ 099807     case (opcode)
  000411       OP_VEC_ADD: z_o = x_ext + y_ext;
 %000000       OP_VEC_MUL: z_o = x_ext * y_ext;
- 103701       OP_RELU:    z_o = (x_ext < 0) ? 32'sd0 : x_ext;
+ 099687       OP_RELU:    z_o = (x_ext < 0) ? 32'sd0 : x_ext;
 %000000       OP_CLAMP:   z_o = clamp32(x_ext, -32'sd128, 32'sd127);
- 103107       default:    z_o = '0;
+ 099093       default:    z_o = '0;
             endcase
           end
         
