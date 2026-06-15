@@ -280,6 +280,37 @@ Current functional coverage:
 
 - `100.00% (32/32 bins)`
 
+### Python golden-model story
+
+There is also an independent Python-based verification flow under
+[`sw integration/neorv32-setups/neorv32/tinygpu_golden_verification/`](sw%20integration/neorv32-setups/neorv32/tinygpu_golden_verification).
+
+What it adds beyond the main RTL regressions:
+
+- a pure Python learning/reference path:
+  - `step1_convolution.py`
+  - `step2_im2col.py`
+  - `step3_golden_model.py`
+- a Python-versus-hardware comparison script:
+  - `step4_compare_hardware.py`
+- a cocotb testbench:
+  - `test_tinygpu.py`
+
+Why this matters in the demo:
+
+- it gives you an independent golden model, not just self-checking RTL tests
+- it makes the Conv2D/im2col math easier to explain at a high level
+- it shows a standard HW/SW co-design verification pattern:
+  software reference model plus hardware DUT comparison
+
+Important nuance to say clearly:
+
+- the canonical repository-wide randomized differential harness is C++/Verilator
+- the Python golden suite is an additional reference/teaching/validation path
+- the Python scripts still describe the algorithm in im2col terms, but the
+  actual accelerator performs the lowering in hardware through
+  `tinygpu_im2col_loader.sv`
+
 ### Formal checks
 
 Run:
@@ -462,6 +493,77 @@ flowchart TD
 - What is the bottleneck: compute, memory, or control?
 - What did FPGA constraints force you to change?
 - What would be the next step toward a stronger accelerator?
+
+### Suggested answers
+
+#### Why use im2col instead of dedicated convolution hardware?
+
+Because the project already had a general GEMM-style MAC array, and im2col lets
+us reuse that engine for convolution instead of building a second specialized
+datapath. That reduced design complexity, reused the same compute array,
+scratchpad, epilogue, and store path, and made verification much more
+manageable. In this design, the lowering is done in RTL by
+`tinygpu_im2col_loader.sv`, so software does not build the full im2col matrix.
+
+#### Why is branch coverage low while functional coverage is high?
+
+Functional coverage is based on the behaviors we intentionally targeted:
+GEMM, vector ops, Conv2D modes, error paths, requantization, descriptor mode,
+and so on. That is why it can be high. Branch coverage is lower because
+`tinygpu_cmd_ctrl.sv` contains a lot of control decisions, defensive cases,
+state transitions, and flag combinations, and Verilator counts all of those
+branches very aggressively. So the design behavior is well covered at the
+feature level, but not every internal controller decision outcome has been hit.
+
+#### What does the controller do versus the DMA?
+
+The controller is the scheduler and orchestrator. It validates commands,
+computes derived dimensions, decides which operation is being run, sequences
+states like load/compute/store, handles direct versus descriptor mode, and
+raises done or error status. The DMA is narrower in scope: it only performs the
+actual memory movement between external memory and local scratchpad or output
+storage when asked to do so by the controller.
+
+#### Why direct mode and descriptor mode both?
+
+Direct mode is the simplest bring-up and debug interface: software writes the
+registers and launches immediately, which is ideal for waveforms, unit tests,
+and deterministic demos. Descriptor mode is closer to a realistic accelerator
+programming model because software can prepare a command block in memory and
+then launch it with less MMIO traffic. Having both lets us show both easy
+debuggability and a more realistic command-driven interface.
+
+#### What is the bottleneck: compute, memory, or control?
+
+For the small demo workloads, the bottleneck is mostly memory/control overhead,
+not raw arithmetic throughput. The counter results show relatively high stall
+percentages, which means setup, reads, writes, and orchestration dominate these
+tiny jobs. For larger workloads, compute utilization would matter more, but in
+this presentation the honest story is that the demo kernels are correctness
+oriented and overhead dominated.
+
+#### What did FPGA constraints force you to change?
+
+The FPGA constraints forced architectural tradeoffs. We could not just keep
+everything fully parallel at all times, especially in smaller-board studies, so
+the design moved toward a serialized/shared epilogue, tighter scratchpad
+organization, shared multiplier reuse, and more timing-aware control/memory
+structuring. In other words, the constraints pushed the project from a more
+idealized architecture toward a more implementation-conscious one.
+
+#### What would be the next step toward a stronger accelerator?
+
+The next strongest steps would be:
+
+- improve controller branch closure further, especially in `tinygpu_cmd_ctrl`
+- strengthen formal liveness/progress proofs around controller and arbiter
+- gather performance numbers on larger workloads and compare against a software
+  baseline
+- if area allowed, explore a less serialized postprocess/memory path to improve
+  utilization
+
+That answer shows both verification maturity and clear awareness of the next
+engineering bottlenecks.
 
 ## 17. Suggested Improvements
 
