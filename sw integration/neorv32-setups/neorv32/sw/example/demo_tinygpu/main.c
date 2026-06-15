@@ -1,6 +1,6 @@
 // =============================================================================
 // main.c
-// TinyGPU-ML accelerator test on NEORV32 / Tang Nano 20K
+// TinyGPU-ML accelerator test on NEORV32
 //
 // Tests (in order):
 //   1. Register read-back sanity check
@@ -8,7 +8,7 @@
 //   3. IRQ-driven VEC_ADD: z[4] = x[4] + y[4]
 //   4. Descriptor-mode GEMM: C[2][2] = A[2][8] * B[8][2]
 //   5. RELU: y[4] = max(0, x[4])
-//   6. Conv2D via software im2col + hardware GEMM
+//   6. Hardware Conv2D (GHDL uses an equivalent reference lowering)
 //   7. Performance counter readback
 // =============================================================================
 
@@ -26,7 +26,6 @@
 
 // =============================================================================
 // Test data buffers — placed in DMEM
-// Keep sizes small: SPM_A = 256 bytes, SPM_B = 256 bytes, SPM_C = 128 bytes
 // =============================================================================
 
 // --- VEC_ADD test ---
@@ -59,21 +58,23 @@ static volatile int32_t mat_c_desc[2][2] = { {0,0}, {0,0} };
 static volatile int8_t  relu_in[4]  = { -5, 3, -1, 7 };
 static volatile int32_t relu_out[4] = {  0, 0,  0, 0 };
 
-// --- Conv2D via im2col test ---
-// Input image 3x3, kernel 2x2, stride 1, no padding => output 2x2
+// --- Hardware Conv2D test ---
+// A center-only 3x3 kernel with pad 1 reproduces the 3x3 input.
 static volatile int8_t conv_in[3][3] = {
   { 1, 2, 3 },
   { 4, 5, 6 },
   { 7, 8, 9 }
 };
-static volatile int8_t conv_kernel[2][2] = {
-  { 1, 0 },
-  { 0, 1 }
+static volatile int8_t conv_weight[3][3][1][1] = {
+  {{{0}}, {{0}}, {{0}}},
+  {{{0}}, {{1}}, {{0}}},
+  {{{0}}, {{0}}, {{0}}}
 };
-static volatile int8_t conv_im2col[4][4] = { {0,0,0,0}, {0,0,0,0}, {0,0,0,0}, {0,0,0,0} };
-static volatile int8_t conv_weight[4][1] = { {0}, {0}, {0}, {0} };
-static volatile int32_t conv_out_vec[4][1] = { {0}, {0}, {0}, {0} };
-static volatile int32_t conv_out_map[2][2] = { {0,0}, {0,0} };
+static volatile int32_t conv_out[3][3] = { {0,0,0}, {0,0,0}, {0,0,0} };
+#ifdef TGPU_GHDL_SIM
+static volatile int8_t conv_im2col_ref[9][9];
+static volatile int8_t conv_weight_ref[9][1];
+#endif
 
 static volatile tgpu_descriptor_t gemm_desc;
 
@@ -176,34 +177,27 @@ static void tinygpu_firq_handler(void) {
   tgpu_irq_ack();
 }
 
-static void im2col_2x2_stride1_int8(volatile int8_t dst[4][4], volatile int8_t src[3][3]) {
-  int out_row, out_col;
-  int patch_idx = 0;
+#ifdef TGPU_GHDL_SIM
+static void build_conv_reference_matrices(void) {
+  int oy, ox, ky, kx;
 
-  for (out_row = 0; out_row < 2; out_row++) {
-    for (out_col = 0; out_col < 2; out_col++) {
-      dst[patch_idx][0] = src[out_row + 0][out_col + 0];
-      dst[patch_idx][1] = src[out_row + 0][out_col + 1];
-      dst[patch_idx][2] = src[out_row + 1][out_col + 0];
-      dst[patch_idx][3] = src[out_row + 1][out_col + 1];
-      patch_idx++;
+  for (oy = 0; oy < 3; oy++) {
+    for (ox = 0; ox < 3; ox++) {
+      for (ky = 0; ky < 3; ky++) {
+        for (kx = 0; kx < 3; kx++) {
+          int iy = oy + ky - 1;
+          int ix = ox + kx - 1;
+          int k = ky * 3 + kx;
+          conv_im2col_ref[oy * 3 + ox][k] =
+            ((iy >= 0) && (iy < 3) && (ix >= 0) && (ix < 3)) ?
+            conv_in[iy][ix] : 0;
+          conv_weight_ref[k][0] = conv_weight[ky][kx][0][0];
+        }
+      }
     }
   }
 }
-
-static void kernel_to_col_2x2_int8(volatile int8_t dst[4][1], volatile int8_t kernel[2][2]) {
-  dst[0][0] = kernel[0][0];
-  dst[1][0] = kernel[0][1];
-  dst[2][0] = kernel[1][0];
-  dst[3][0] = kernel[1][1];
-}
-
-static void vec_to_map_2x2_i32(volatile int32_t dst[2][2], volatile int32_t src[4][1]) {
-  dst[0][0] = src[0][0];
-  dst[0][1] = src[1][0];
-  dst[1][0] = src[2][0];
-  dst[1][1] = src[3][0];
-}
+#endif
 
 // =============================================================================
 // MAIN
@@ -221,8 +215,8 @@ int main(void) {
   uart_putln("");
   uart_putln("========================================");
   uart_putln(" TinyGPU-ML Accelerator Test");
-  uart_putln(" Tang Nano 20K / NEORV32");
-  uart_putln(" Array: 2x2 PEs, INT8 in, INT32 acc");
+  uart_putln(" NEORV32 software / MMIO demo");
+  uart_putln(" Canonical RTL: 4x4x16 INT8 -> INT32");
   uart_putln(" FIRQ : using channel 1 in this SW demo");
   uart_putln("========================================");
   uart_putln("");
@@ -478,67 +472,63 @@ int main(void) {
   }
 
   // ====================================================================
-  // ====================================================================
-  // TEST 6: Conv2D via software im2col + hardware GEMM
+  // TEST 6: 3x3 hardware Conv2D, stride 1, padding 1
   //
-  // Input:
-  //   [[1,2,3],
-  //    [4,5,6],
-  //    [7,8,9]]
-  //
-  // Kernel:
-  //   [[1,0],
-  //    [0,1]]
-  //
-  // Expected output:
-  //   [[1+5, 2+6],
-  //    [4+8, 5+9]] = [[6,8],[12,14]]
+  // The kernel contains one at its center and zero elsewhere, so the
+  // expected output equals the input. GHDL runs the equivalent GEMM
+  // reference because its behavioral MMIO model does not execute SV RTL.
   // ====================================================================
 #ifndef TGPU_GHDL_SIM
   uart_putln("");
-  uart_putln("[TEST 6] Conv2D via software im2col + hardware GEMM");
+  uart_putln("[TEST 6] Hardware Conv2D 3x3, stride 1, padding 1");
 #endif
 
-  im2col_2x2_stride1_int8(conv_im2col, conv_in);
-  kernel_to_col_2x2_int8(conv_weight, conv_kernel);
-
+#ifdef TGPU_GHDL_SIM
+  build_conv_reference_matrices();
   ret = tgpu_run_direct(
     TGPU_OP_GEMM,
     TGPU_FLAG_DST_INT32,
-    (uint32_t)conv_im2col,
+    (uint32_t)conv_im2col_ref,
+    (uint32_t)conv_weight_ref,
+    0,
+    (uint32_t)conv_out,
+    9, 1, 9,
+    9, 1, 4
+  );
+#else
+  ret = tgpu_conv2d(
+    (uint32_t)conv_in,
     (uint32_t)conv_weight,
     0,
-    (uint32_t)conv_out_vec,
-    4, 1, 4,
-    4, 1, 4
+    (uint32_t)conv_out,
+    3, 3, 1, 1,
+    3, 3, 1, 1, 1, 1,
+    TGPU_FLAG_DST_INT32 | TGPU_FLAG_SIGNED_MODE
   );
+#endif
 
   if (ret != TGPU_OK) {
 #ifdef TGPU_GHDL_SIM
     sim_report_value(12, ret);
 #endif
-    uart_puts("  ERROR: im2col GEMM returned ");
+    uart_puts("  ERROR: Conv2D returned ");
     uart_print_i32((int32_t)ret);
     uart_putln("");
     tgpu_print_status();
     test_fail++;
   } else {
-    vec_to_map_2x2_i32(conv_out_map, conv_out_vec);
 #ifndef TGPU_GHDL_SIM
-    uart_puts("  im2col result = [[");
-    uart_print_i32(conv_out_map[0][0]);
-    uart_puts(", ");
-    uart_print_i32(conv_out_map[0][1]);
-    uart_puts("], [");
-    uart_print_i32(conv_out_map[1][0]);
-    uart_puts(", ");
-    uart_print_i32(conv_out_map[1][1]);
-    uart_putln("]]");
+    uart_putln("  Conv2D output should equal the 3x3 input");
 #endif
-    check("IM2COL CONV y[0][0]==6",  conv_out_map[0][0] == 6);
-    check("IM2COL CONV y[0][1]==8",  conv_out_map[0][1] == 8);
-    check("IM2COL CONV y[1][0]==12", conv_out_map[1][0] == 12);
-    check("IM2COL CONV y[1][1]==14", conv_out_map[1][1] == 14);
+    check("CONV y[0][0]==1", conv_out[0][0] == 1);
+    check("CONV y[0][1]==2", conv_out[0][1] == 2);
+    check("CONV y[0][2]==3", conv_out[0][2] == 3);
+    check("CONV y[1][0]==4", conv_out[1][0] == 4);
+    check("CONV y[1][1]==5", conv_out[1][1] == 5);
+    check("CONV y[1][2]==6", conv_out[1][2] == 6);
+    check("CONV y[2][0]==7", conv_out[2][0] == 7);
+    check("CONV y[2][1]==8", conv_out[2][1] == 8);
+    check("CONV y[2][2]==9", conv_out[2][2] == 9);
   }
 
   // ====================================================================

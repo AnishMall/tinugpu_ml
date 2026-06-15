@@ -1,6 +1,6 @@
-module tinygpu_regs 
-import tinygpu_pkg::*;
- (
+module tinygpu_regs import tinygpu_pkg::*; #(
+  parameter bit ENABLE_CONV = 1'b1
+) (
   input  logic         clk,
   input  logic         rst_n,
 
@@ -46,7 +46,10 @@ import tinygpu_pkg::*;
   output logic [31:0]  flags_o,
   output logic [31:0]  scale_o,
   output logic [15:0]  shift_o,
-  output logic [15:0]  zero_point_o
+  output logic [15:0]  zero_point_o,
+  output logic [31:0]  conv_in_hw_o,
+  output logic [31:0]  conv_channels_o,
+  output logic [31:0]  conv_cfg_o
 );
 
   localparam logic [7:0] REG_CTRL        = 8'h00;
@@ -71,19 +74,30 @@ import tinygpu_pkg::*;
   localparam logic [7:0] REG_STALL_CNT   = 8'h4c;
   localparam logic [7:0] REG_CMD_COUNT   = 8'h50;
   localparam logic [7:0] REG_IRQ_STATUS  = 8'h54;
+  localparam logic [7:0] REG_CONV_IN_HW  = 8'h58;
+  localparam logic [7:0] REG_CONV_CHAN   = 8'h5c;
+  localparam logic [7:0] REG_CONV_CFG    = 8'h60;
+  localparam logic [7:0] REG_CAPS        = 8'h64;
+
+  localparam logic [31:0] CAPS_VALUE = {
+    ABI_VERSION,
+    3'd0, ENABLE_CONV, 1'b1, 1'b1, 1'b1, 1'b1,
+    8'(TILE_K), 4'(TILE_N), 4'(TILE_M)
+  };
 
   logic        done_sticky_q;
   logic        irq_pending_q;
   logic [7:0]  addr_lo;
-  logic [31:0] ctrl_next_w;
-  logic [31:0] direct_op_next_w;
-  logic [31:0] dim_m_next_w;
-  logic [31:0] dim_n_next_w;
-  logic [31:0] dim_k_next_w;
-  logic [31:0] stride0_next_w;
-  logic [31:0] stride1_next_w;
-  logic [31:0] stride_dst_next_w;
+  logic [1:0]  ctrl_mode_next_w;
+  logic [7:0]  direct_op_next_w;
+  logic [15:0] dim_m_next_w;
+  logic [15:0] dim_n_next_w;
+  logic [15:0] dim_k_next_w;
+  logic [15:0] stride0_next_w;
+  logic [15:0] stride1_next_w;
+  logic [15:0] stride_dst_next_w;
   logic [31:0] shiftzp_next_w;
+  logic        unused_mmio_addr;
 
   function automatic [31:0] apply_wstrb32(
     input [31:0] oldv,
@@ -99,19 +113,32 @@ import tinygpu_pkg::*;
     end
   endfunction
 
+  function automatic [15:0] apply_wstrb16(
+    input [15:0] oldv,
+    input [15:0] newv,
+    input [1:0]  wstrb
+  );
+    begin
+      apply_wstrb16 = oldv;
+      if (wstrb[0]) apply_wstrb16[7:0] = newv[7:0];
+      if (wstrb[1]) apply_wstrb16[15:8] = newv[15:8];
+    end
+  endfunction
+
   assign addr_lo       = mmio_addr[7:0];
-  assign mmio_ready    = 1'b1;
+  assign unused_mmio_addr = ^mmio_addr[31:8];
+  assign mmio_ready    = 1'b1 | unused_mmio_addr;
   assign start_pulse_o = mmio_valid && mmio_we && (addr_lo == REG_CTRL) && mmio_wdata[0];
-  assign start_direct_mode_o = start_pulse_o ? ctrl_next_w[3] : direct_mode_o;
+  assign start_direct_mode_o = start_pulse_o ? ctrl_mode_next_w[1] : direct_mode_o;
   assign soft_reset_o  = mmio_valid && mmio_we && (addr_lo == REG_CTRL) && mmio_wdata[1];
-  assign ctrl_next_w      = apply_wstrb32({28'd0, direct_mode_o, irq_enable_o, 1'b0, 1'b0}, mmio_wdata, mmio_wstrb);
-  assign direct_op_next_w = apply_wstrb32({24'd0, opcode_o}, mmio_wdata, mmio_wstrb);
-  assign dim_m_next_w     = apply_wstrb32({16'd0, dim_m_o}, mmio_wdata, mmio_wstrb);
-  assign dim_n_next_w     = apply_wstrb32({16'd0, dim_n_o}, mmio_wdata, mmio_wstrb);
-  assign dim_k_next_w     = apply_wstrb32({16'd0, dim_k_o}, mmio_wdata, mmio_wstrb);
-  assign stride0_next_w   = apply_wstrb32({16'd0, stride0_o}, mmio_wdata, mmio_wstrb);
-  assign stride1_next_w   = apply_wstrb32({16'd0, stride1_o}, mmio_wdata, mmio_wstrb);
-  assign stride_dst_next_w= apply_wstrb32({16'd0, stride_dst_o}, mmio_wdata, mmio_wstrb);
+  assign ctrl_mode_next_w = mmio_wstrb[0] ? mmio_wdata[3:2] : {direct_mode_o, irq_enable_o};
+  assign direct_op_next_w = mmio_wstrb[0] ? mmio_wdata[7:0] : opcode_o;
+  assign dim_m_next_w     = apply_wstrb16(dim_m_o, mmio_wdata[15:0], mmio_wstrb[1:0]);
+  assign dim_n_next_w     = apply_wstrb16(dim_n_o, mmio_wdata[15:0], mmio_wstrb[1:0]);
+  assign dim_k_next_w     = apply_wstrb16(dim_k_o, mmio_wdata[15:0], mmio_wstrb[1:0]);
+  assign stride0_next_w   = apply_wstrb16(stride0_o, mmio_wdata[15:0], mmio_wstrb[1:0]);
+  assign stride1_next_w   = apply_wstrb16(stride1_o, mmio_wdata[15:0], mmio_wstrb[1:0]);
+  assign stride_dst_next_w= apply_wstrb16(stride_dst_o, mmio_wdata[15:0], mmio_wstrb[1:0]);
   assign shiftzp_next_w   = apply_wstrb32({shift_o, zero_point_o}, mmio_wdata, mmio_wstrb);
 
   always_ff @(posedge clk or negedge rst_n) begin
@@ -134,6 +161,9 @@ import tinygpu_pkg::*;
       scale_o       <= '0;
       shift_o       <= '0;
       zero_point_o  <= '0;
+      conv_in_hw_o  <= '0;
+      conv_channels_o <= '0;
+      conv_cfg_o    <= '0;
       done_sticky_q <= 1'b0;
       irq_pending_q <= 1'b0;
     end else if (soft_reset_o) begin
@@ -155,6 +185,9 @@ import tinygpu_pkg::*;
       scale_o       <= '0;
       shift_o       <= '0;
       zero_point_o  <= '0;
+      conv_in_hw_o  <= '0;
+      conv_channels_o <= '0;
+      conv_cfg_o    <= '0;
       done_sticky_q <= 1'b0;
       irq_pending_q <= 1'b0;
     end else begin
@@ -169,27 +202,30 @@ import tinygpu_pkg::*;
       if (mmio_valid && mmio_we) begin
         case (addr_lo)
           REG_CTRL: begin
-            irq_enable_o  <= ctrl_next_w[2];
-            direct_mode_o <= ctrl_next_w[3];
+            irq_enable_o  <= ctrl_mode_next_w[0];
+            direct_mode_o <= ctrl_mode_next_w[1];
           end
           REG_CMD_ADDR:   cmd_addr_o   <= apply_wstrb32(cmd_addr_o, mmio_wdata, mmio_wstrb);
-          REG_DIRECT_OP:  opcode_o     <= direct_op_next_w[7:0];
+          REG_DIRECT_OP:  opcode_o     <= direct_op_next_w;
           REG_SRC0_ADDR:  src0_addr_o  <= apply_wstrb32(src0_addr_o, mmio_wdata, mmio_wstrb);
           REG_SRC1_ADDR:  src1_addr_o  <= apply_wstrb32(src1_addr_o, mmio_wdata, mmio_wstrb);
           REG_BIAS_ADDR:  bias_addr_o  <= apply_wstrb32(bias_addr_o, mmio_wdata, mmio_wstrb);
           REG_DST_ADDR:   dst_addr_o   <= apply_wstrb32(dst_addr_o, mmio_wdata, mmio_wstrb);
-          REG_DIM_M:      dim_m_o      <= dim_m_next_w[15:0];
-          REG_DIM_N:      dim_n_o      <= dim_n_next_w[15:0];
-          REG_DIM_K:      dim_k_o      <= dim_k_next_w[15:0];
-          REG_STRIDE0:    stride0_o    <= stride0_next_w[15:0];
-          REG_STRIDE1:    stride1_o    <= stride1_next_w[15:0];
-          REG_STRIDE_DST: stride_dst_o <= stride_dst_next_w[15:0];
+          REG_DIM_M:      dim_m_o      <= dim_m_next_w;
+          REG_DIM_N:      dim_n_o      <= dim_n_next_w;
+          REG_DIM_K:      dim_k_o      <= dim_k_next_w;
+          REG_STRIDE0:    stride0_o    <= stride0_next_w;
+          REG_STRIDE1:    stride1_o    <= stride1_next_w;
+          REG_STRIDE_DST: stride_dst_o <= stride_dst_next_w;
           REG_FLAGS:      flags_o      <= apply_wstrb32(flags_o, mmio_wdata, mmio_wstrb);
           REG_SCALE:      scale_o      <= apply_wstrb32(scale_o, mmio_wdata, mmio_wstrb);
           REG_SHIFT_ZP: begin
             shift_o      <= shiftzp_next_w[31:16];
             zero_point_o <= shiftzp_next_w[15:0];
           end
+          REG_CONV_IN_HW: conv_in_hw_o <= apply_wstrb32(conv_in_hw_o, mmio_wdata, mmio_wstrb);
+          REG_CONV_CHAN:  conv_channels_o <= apply_wstrb32(conv_channels_o, mmio_wdata, mmio_wstrb);
+          REG_CONV_CFG:   conv_cfg_o <= apply_wstrb32(conv_cfg_o, mmio_wdata, mmio_wstrb);
           REG_IRQ_STATUS: begin
             if (mmio_wdata[0])
               irq_pending_q <= 1'b0;
@@ -228,6 +264,10 @@ import tinygpu_pkg::*;
       REG_STALL_CNT:   mmio_rdata = stall_count_i;
       REG_CMD_COUNT:   mmio_rdata = cmd_count_i;
       REG_IRQ_STATUS:  mmio_rdata = {31'd0, irq_pending_q};
+      REG_CONV_IN_HW:  mmio_rdata = conv_in_hw_o;
+      REG_CONV_CHAN:   mmio_rdata = conv_channels_o;
+      REG_CONV_CFG:    mmio_rdata = conv_cfg_o;
+      REG_CAPS:        mmio_rdata = CAPS_VALUE;
       default:         mmio_rdata = 32'd0;
     endcase
   end

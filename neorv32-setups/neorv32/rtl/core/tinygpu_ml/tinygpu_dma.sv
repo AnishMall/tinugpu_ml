@@ -1,6 +1,4 @@
-module tinygpu_dma 
-import tinygpu_pkg::*; 
-(
+module tinygpu_dma import tinygpu_pkg::*; (
   input  logic              clk,
   input  logic              rst_n,
 
@@ -37,8 +35,6 @@ import tinygpu_pkg::*;
   localparam logic [1:0] DMA_OP_LOAD_I8   = 2'd0;
   localparam logic [1:0] DMA_OP_STORE_I32 = 2'd2;
   localparam logic [1:0] DMA_OP_STORE_I8  = 2'd3;
-  localparam logic [31:0] TILE_N_U32 = 32'(TILE_N);
-  localparam logic [31:0] TILE_K_U32 = 32'(TILE_K);
 
   typedef enum logic [2:0] {
     DMA_IDLE,
@@ -56,52 +52,32 @@ import tinygpu_pkg::*;
   logic       error_q;
 
   logic [1:0]  op_kind_q;
-  logic [31:0] base_addr_q;
   logic [15:0] rows_q, cols_q, stride_bytes_q;
   logic [1:0]  spm_region_q;
-  logic [8:0]  spm_base_q;
 
   logic [15:0] row_q, row_d;
   logic [15:0] col_q, col_d;
+  logic [31:0] ext_row_base_q, ext_row_base_d;
+  logic [31:0] ext_addr_q, ext_addr_d;
+  logic [8:0]  spm_row_base_q, spm_row_base_d;
+  logic [8:0]  spm_addr_q, spm_addr_d;
 
-  logic [31:0] elem_addr;
   logic [31:0] aligned_read_addr;
-  logic [31:0] write_addr;
   logic [31:0] aligned_write_addr;
-  logic [8:0]  spm_elem_addr;
-  logic [8:0]  spm_addr_store_i32;
-  logic [8:0]  spm_addr_store_i8;
   logic [7:0]  load_byte;
   logic [1:0]  load_lane_sel;
-  logic [31:0] row_u32;
-  logic [31:0] col_u32;
-  logic [31:0] stride_u32;
-  logic [31:0] spm_base_u32;
 
   logic        advance_elem;
   logic        last_elem;
-  logic [31:0] store_word_data;
+  logic [31:0] store_word_q;
 
   assign done  = done_q;
   assign error = error_q;
 
-  assign row_u32 = {16'd0, row_q};
-  assign col_u32 = {16'd0, col_q};
-  assign stride_u32 = {16'd0, stride_bytes_q};
-  assign spm_base_u32 = {23'd0, spm_base_q};
-  assign elem_addr = base_addr_q + (row_u32 * stride_u32) + col_u32;
-  assign aligned_read_addr = {elem_addr[31:2], 2'b00};
-  assign write_addr = base_addr_q + (row_u32 * stride_u32) +
-                      ((op_kind_q == DMA_OP_STORE_I32) ? (col_u32 << 2) : col_u32);
-  assign aligned_write_addr = {write_addr[31:2], 2'b00};
-  assign spm_elem_addr = 9'(spm_base_u32 +
-                            (row_u32 * ((spm_region_q == 2'd0) ? TILE_K_U32 : TILE_N_U32)) +
-                            col_u32);
-  assign spm_addr_store_i32 = 9'(spm_base_u32 + (((row_u32 * TILE_N_U32) + col_u32) << 2));
-  assign spm_addr_store_i8  = 9'(spm_base_u32 + (((row_u32 * TILE_N_U32) + col_u32) << 2));
-  assign load_lane_sel = elem_addr[1:0];
+  assign aligned_read_addr = {ext_addr_q[31:2], 2'b00};
+  assign aligned_write_addr = {ext_addr_q[31:2], 2'b00};
+  assign load_lane_sel = ext_addr_q[1:0];
   assign last_elem = (row_q + 16'd1 >= rows_q) && (col_q + 16'd1 >= cols_q);
-  assign store_word_data = spm_rdata;
 
   always @* begin
     case (load_lane_sel)
@@ -118,36 +94,52 @@ import tinygpu_pkg::*;
       done_q           <= 1'b0;
       error_q          <= 1'b0;
       op_kind_q        <= '0;
-      base_addr_q      <= '0;
       rows_q           <= '0;
       cols_q           <= '0;
       stride_bytes_q   <= '0;
       spm_region_q     <= '0;
-      spm_base_q       <= '0;
       row_q            <= '0;
       col_q            <= '0;
+      ext_row_base_q   <= '0;
+      ext_addr_q       <= '0;
+      spm_row_base_q   <= '0;
+      spm_addr_q       <= '0;
+      store_word_q     <= '0;
     end else begin
       state_q <= state_d;
       done_q  <= (state_q == DMA_DONE);
       error_q <= (state_q == DMA_ERROR);
       row_q   <= row_d;
       col_q   <= col_d;
+      ext_row_base_q <= ext_row_base_d;
+      ext_addr_q <= ext_addr_d;
+      spm_row_base_q <= spm_row_base_d;
+      spm_addr_q <= spm_addr_d;
 
       if (state_q == DMA_IDLE && start) begin
         op_kind_q      <= op_kind;
-        base_addr_q    <= base_addr;
         rows_q         <= rows;
         cols_q         <= cols;
         stride_bytes_q <= stride_bytes;
         spm_region_q   <= spm_region;
-        spm_base_q     <= spm_base;
+        ext_row_base_q <= base_addr;
+        ext_addr_q     <= base_addr;
+        spm_row_base_q <= spm_base;
+        spm_addr_q     <= spm_base;
       end
+
+      if (state_q == DMA_READ_SPM)
+        store_word_q <= spm_rdata;
     end
   end
 
   always @* begin
     row_d = row_q;
     col_d = col_q;
+    ext_row_base_d = ext_row_base_q;
+    ext_addr_d = ext_addr_q;
+    spm_row_base_d = spm_row_base_q;
+    spm_addr_d = spm_addr_q;
 
     if (state_q == DMA_IDLE && start) begin
       row_d = '0;
@@ -155,10 +147,38 @@ import tinygpu_pkg::*;
     end else if (advance_elem) begin
       if (col_q + 16'd1 < cols_q) begin
         col_d = col_q + 16'd1;
+        if (op_kind_q == DMA_OP_STORE_I32)
+          ext_addr_d = ext_addr_q + 32'd4;
+        else
+          ext_addr_d = ext_addr_q + 32'd1;
+
+        if (op_kind_q == DMA_OP_LOAD_I8)
+          spm_addr_d = spm_addr_q + 9'd1;
+        else
+          spm_addr_d = spm_addr_q + 9'd4;
       end else begin
         col_d = '0;
-        if (row_q + 16'd1 < rows_q)
+        if (row_q + 16'd1 < rows_q) begin
           row_d = row_q + 16'd1;
+          ext_row_base_d = ext_row_base_q + {16'd0, stride_bytes_q};
+          ext_addr_d = ext_row_base_q + {16'd0, stride_bytes_q};
+          if (op_kind_q == DMA_OP_LOAD_I8) begin
+            if (spm_region_q == 2'd0)
+              spm_row_base_d = spm_row_base_q + 9'(TILE_K);
+            else
+              spm_row_base_d = spm_row_base_q + 9'(TILE_N);
+          end else begin
+            spm_row_base_d = spm_row_base_q + 9'(TILE_N * 4);
+          end
+          if (op_kind_q == DMA_OP_LOAD_I8) begin
+            if (spm_region_q == 2'd0)
+              spm_addr_d = spm_row_base_q + 9'(TILE_K);
+            else
+              spm_addr_d = spm_row_base_q + 9'(TILE_N);
+          end else begin
+            spm_addr_d = spm_row_base_q + 9'(TILE_N * 4);
+          end
+        end
       end
     end
   end
@@ -211,7 +231,7 @@ import tinygpu_pkg::*;
       DMA_WRITE_SPM: begin
         spm_wr_en    = 1'b1;
         spm_region_o = spm_region_q;
-        spm_addr     = spm_elem_addr;
+        spm_addr     = spm_addr_q;
         spm_wdata    = {24'd0, load_byte};
         spm_wstrb    = 4'b0001;
 
@@ -225,10 +245,7 @@ import tinygpu_pkg::*;
 
       DMA_READ_SPM: begin
         spm_region_o = spm_region_q;
-        if (op_kind_q == DMA_OP_STORE_I32)
-          spm_addr = spm_addr_store_i32;
-        else
-          spm_addr = spm_addr_store_i8;
+        spm_addr = spm_addr_q;
         state_d = DMA_ISSUE_WRITE;
       end
 
@@ -237,30 +254,27 @@ import tinygpu_pkg::*;
         mem_we   = 1'b1;
         mem_addr = aligned_write_addr;
         spm_region_o = spm_region_q;
-        if (op_kind_q == DMA_OP_STORE_I32)
-          spm_addr = spm_addr_store_i32;
-        else
-          spm_addr = spm_addr_store_i8;
+        spm_addr = spm_addr_q;
 
         if (op_kind_q == DMA_OP_STORE_I32) begin
-          mem_wdata = store_word_data;
+          mem_wdata = store_word_q;
           mem_wstrb = 4'b1111;
         end else begin
-          case (write_addr[1:0])
+          case (ext_addr_q[1:0])
             2'd0: begin
-              mem_wdata = {24'd0, spm_rdata[7:0]};
+              mem_wdata = {24'd0, store_word_q[7:0]};
               mem_wstrb = 4'b0001;
             end
             2'd1: begin
-              mem_wdata = {16'd0, spm_rdata[7:0], 8'd0};
+              mem_wdata = {16'd0, store_word_q[7:0], 8'd0};
               mem_wstrb = 4'b0010;
             end
             2'd2: begin
-              mem_wdata = {8'd0, spm_rdata[7:0], 16'd0};
+              mem_wdata = {8'd0, store_word_q[7:0], 16'd0};
               mem_wstrb = 4'b0100;
             end
             default: begin
-              mem_wdata = {spm_rdata[7:0], 24'd0};
+              mem_wdata = {store_word_q[7:0], 24'd0};
               mem_wstrb = 4'b1000;
             end
           endcase
@@ -291,5 +305,38 @@ import tinygpu_pkg::*;
       end
     endcase
   end
+
+`ifndef SYNTHESIS
+  logic        held_req_q;
+  logic        held_we_q;
+  logic [31:0] held_addr_q;
+  logic [31:0] held_wdata_q;
+  logic [3:0]  held_wstrb_q;
+
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      held_req_q <= 1'b0;
+      held_we_q <= 1'b0;
+      held_addr_q <= '0;
+      held_wdata_q <= '0;
+      held_wstrb_q <= '0;
+    end else begin
+      if (held_req_q) begin
+        assert (mem_req);
+        assert (mem_we == held_we_q);
+        assert (mem_addr == held_addr_q);
+        assert (mem_wdata == held_wdata_q);
+        assert (mem_wstrb == held_wstrb_q);
+      end
+      held_req_q <= mem_req && !mem_ready;
+      if (mem_req && !mem_ready) begin
+        held_we_q <= mem_we;
+        held_addr_q <= mem_addr;
+        held_wdata_q <= mem_wdata;
+        held_wstrb_q <= mem_wstrb;
+      end
+    end
+  end
+`endif
 
 endmodule

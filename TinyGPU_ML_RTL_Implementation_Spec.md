@@ -17,7 +17,7 @@ Implement a synthesizable RTL accelerator that supports:
 5. ReLU / clamp
 6. Bias add
 7. Requantization from `int32` accumulator values to `int8`
-8. Conv2D through software `im2col + GEMM`, not through a dedicated convolution datapath
+8. Conv2D through a hardware streaming-im2col loader feeding the GEMM datapath
 
 For larger tile configurations such as the standalone `4x4x16` RTL, the implementation may serialize the epilogue and reuse a shared multiplier for requantization in order to reduce FPGA area. The MAC array can remain parallel even if the postprocess path is multi-cycle.
 
@@ -96,6 +96,7 @@ localparam logic [7:0] OP_VEC_ADD   = 8'h03;
 localparam logic [7:0] OP_VEC_MUL   = 8'h04;
 localparam logic [7:0] OP_RELU      = 8'h05;
 localparam logic [7:0] OP_CLAMP     = 8'h06;
+localparam logic [7:0] OP_CONV2D    = 8'h07;
 ```
 
 Use these flags:
@@ -115,6 +116,7 @@ Rules:
 - `OP_GEMM` uses `M`, `N`, `K`.
 - `OP_GEMV` uses `M`, `K`; internally set `N = 1`.
 - `OP_VEC_ADD`, `OP_VEC_MUL`, `OP_RELU`, `OP_CLAMP` use `M` as vector length.
+- `OP_CONV2D` derives `M=OH*OW`, `N=Cout`, and `K=KH*KW*Cin` from the convolution registers.
 - `FLAG_REQUANT_EN` and `FLAG_DST_INT8` mean the epilogue converts int32 results to int8.
 - If both `FLAG_DST_INT8` and `FLAG_DST_INT32` are set, raise shape/descriptor error.
 - Unsupported opcodes set `STATUS.illegal_opcode`.
@@ -149,6 +151,15 @@ The accelerator appears as an MMIO peripheral to NEORV32.
 | `0x4C` | `STALL_COUNT` | R | Cycles stalled |
 | `0x50` | `CMD_COUNT` | R | Completed commands since reset |
 | `0x54` | `IRQ_STATUS` | R/W1C | Interrupt status |
+| `0x58` | `CONV_IN_HW` | R/W | `{input_h[15:0], input_w[15:0]}` |
+| `0x5C` | `CONV_CHANNELS` | R/W | `{output_channels[15:0], input_channels[15:0]}` |
+| `0x60` | `CONV_CFG` | R/W | 4-bit kernel H/W, stride H/W, and padding H/W fields |
+| `0x64` | `CAPS` | R | ABI version, feature bits, and tile dimensions |
+
+The base descriptor remains 14 words. A Conv2D descriptor is 18 words: words
+0-13 retain the base layout, word 14 contains ABI version 1, word 15 contains
+`CONV_IN_HW`, word 16 contains `CONV_CHANNELS`, and word 17 contains
+`CONV_CFG`.
 
 ### CTRL bits
 
@@ -1222,9 +1233,15 @@ The current project version does not implement:
 - hardware cache coherence
 - virtual memory
 - reliability or fault-injection logic
-- dedicated direct Conv2D hardware
+- batch sizes above one
+- grouped or depthwise convolution
+- dilation above one
+- convolution kernels other than `1x1` and `3x3`
 
-Conv2D is supported through software lowering to GEMM.
+Conv2D is opcode `0x07`. The RTL accepts packed NHWC INT8 activations, streams
+one `4x16` lowered A tile at a time, injects padding zeros without issuing
+memory reads, and reuses the normal B DMA, MAC, epilogue, and C-store paths.
+Software im2col is retained only as a reference model.
 
 ---
 
@@ -1255,4 +1272,82 @@ After this passes, add in this order:
 
 ## 28. Final Architecture Summary
 
-TinyGPU-ML is a small NEORV32-attached ML accelerator built around a 4x4 output-stationary int8 MAC array. The host CPU launches kernels through MMIO registers. A command controller sequences DMA tile loads, scratchpad access, MAC execution, epilogue processing, and output stores. GEMM is the primary kernel, GEMV reuses the same datapath, vector operations use a small vector ALU, and convolution is executed by software lowering to GEMM. Extensive verification must cover individual arithmetic units, tile-level execution, memory movement, register behavior, edge masking, quantization, and full accelerator operation under randomized memory latency and randomized valid workloads.
+TinyGPU-ML is a small NEORV32-attached ML accelerator built around a 4x4 output-stationary int8 MAC array. The host CPU launches kernels through MMIO registers. A command controller sequences DMA tile loads, scratchpad access, MAC execution, epilogue processing, and output stores. GEMM is the primary kernel, GEMV reuses the same datapath, vector operations use a small vector ALU, and Conv2D is executed by a hardware im2col-style streaming loader that feeds the existing GEMM path. Extensive verification must cover individual arithmetic units, tile-level execution, memory movement, register behavior, edge masking, quantization, convolution lowering, and full accelerator operation under randomized memory latency and randomized valid workloads.
+
+---
+
+## 29. Demo And Coverage Commands
+
+Current Verilator line coverage is `69.00% (1714/2456)`.
+
+The most useful commands to run locally are:
+
+```bash
+make test
+make verilator-diff
+make coverage-report
+make demo-rtl
+make demo-sw
+```
+
+What each command shows:
+
+1. `make test`
+   - Runs the full directed Icarus bench suite.
+   - Expected output is a series of `... PASS` lines for PE, array, DMA, im2col, epilogue, GEMM, regs, counters, top-level GEMM/vector/Conv2D/error/requant/demo, and random-latency benches.
+
+2. `make verilator-diff`
+   - Runs the randomized differential harness against the real `tinygpu_top` RTL with memory latency from `0` to `15` cycles.
+   - Expected output ends with:
+
+```text
+Verilator differential PASS: 1000 jobs, memory latency 0-15 cycles
+job_counts gemm=250 vector=250 conv=250 error=250
+```
+
+3. `make coverage-report`
+   - Re-runs the Verilator differential flow and prints the current coverage summary and uncovered-file ranking.
+   - Expected output ends with a line like:
+
+```text
+Annotation Summary:
+  lines with all attached points covered : 69.00%  (1714/2456)
+```
+
+4. `make demo-rtl`
+   - Runs the deterministic top-level RTL demo bench and emits `build/tinygpu_top_demo.vcd` for waveform review.
+   - Expected transcript includes:
+
+```text
+TinyGPU-ML RTL demo
+Direct GEMM C = [[19, 22], [43, 50]]
+Descriptor GEMM C = [[19, 22], [43, 50]]
+Vector add z = {6, 4, -4, 12}
+Conv2D out row0 = {1, 2, 3}
+Conv2D out row1 = {4, 5, 6}
+Conv2D out row2 = {7, 8, 9}
+Cycles : 888
+Active : 27
+Stalls : 695
+tb_tinygpu_top_demo_tb PASS
+```
+
+5. `make demo-sw`
+   - Runs the maintained software/MMIO regression.
+   - Expected output ends with:
+
+```text
+[TB:TGPU] Software integration result: pass=28 fail=0
+```
+
+For presentation purposes, the strongest artifacts are:
+
+1. `make demo-rtl`
+   - console transcript for fixed GEMM, descriptor GEMM, vector, Conv2D, and counters
+   - waveform file `build/tinygpu_top_demo.vcd` for VaporView
+
+2. `make coverage-report`
+   - current quantitative verification-coverage snapshot
+
+3. `make test`
+   - broad directed verification closure evidence across unit, integration, and stress benches

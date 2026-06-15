@@ -1,103 +1,102 @@
-# TinyGPU-ML NEORV32 SoC Integration
+# TinyGPU-ML
 
-This folder contains the files needed to integrate TinyGPU-ML into the NEORV32 RISC-V SoC.
+TinyGPU-ML is a command-driven INT8 inference accelerator for integration with
+the NEORV32 RISC-V SoC. The canonical implementation is a `4x4x16` tiled
+engine: 16 signed INT8 processing elements run in parallel, accumulate into
+INT32, and feed a serialized bias/activation/requantization epilogue.
 
-## Files
+## Hardware
 
-### VHDL Files (NEORV32 Integration)
-- **neorv32_top.vhd** - Modified NEORV32 SoC top-level with TinyGPU bus arbiter
-- **tinygpu_ml/tinygpu_regs.vhd** - Mixed-language VHDL wrapper that instantiates the real SystemVerilog `tinygpu_top`
-- **neorv32_tinygpu.vhd** - legacy stub example, not the main integration path
+The canonical source tree is [`rtl/`](rtl/). It implements:
 
-### SystemVerilog RTL (TinyGPU Core)
-- **tinygpu_ml/** - Complete TinyGPU-ML RTL implementation
-  - tinygpu_top.sv - Top-level module
-  - tinygpu_pkg.sv - Package with parameters and opcodes
-  - tinygpu_regs.sv - MMIO register file
-  - tinygpu_cmd_ctrl.sv - Command controller FSM
-  - tinygpu_dma.sv - DMA engine
-  - tinygpu_spm.sv - Scratchpad memory
-  - tinygpu_array4x4.sv - 4×4 MAC array
-  - tinygpu_pe.sv - Processing element
-  - tinygpu_shared_mul.sv - Shared signed multiplier for serialized requant paths
-  - tinygpu_epilogue_shared.sv - Multi-cycle shared epilogue for area-optimized 4×4 builds
-  - tinygpu_epilogue.sv - Wrapper around the shared epilogue
-  - tinygpu_vec_alu.sv - Vector ALU
-  - tinygpu_counters.sv - Performance counters
+- tiled GEMM and GEMV;
+- vector add, multiply, ReLU, and clamp;
+- bias, ReLU, clamp, requantization, INT8 stores, and INT32 stores;
+- hardware Conv2D using streaming im2col into the existing GEMM array;
+- direct MMIO and descriptor command modes;
+- registered one-outstanding-read memory-master traffic;
+- cycle, active-cycle, stall, and command counters.
 
-## Root RTL Note
+Conv2D accepts packed NHWC signed INT8 activations and weights laid out as
+`[KH][KW][Cin][Cout]`. It supports batch 1, `1x1` or `3x3` kernels, independent
+stride 1 or 2, independent padding 0 or 1, dilation 1, and groups 1. The RTL
+does not materialize a complete im2col matrix: it generates and loads one
+`4x16` activation tile at a time, injects zero for padding, and reuses the
+normal weight DMA, MAC array, epilogue, and output-store path.
 
-The standalone root `rtl/` copy keeps the original `4x4x16` tile configuration, but its post-processing path is area-optimized:
+The scratchpad contains exactly one tile: four A row banks, four B column
+banks, and sixteen C words. DMA row addresses use registered pointers rather
+than live row multipliers. The epilogue streams each completed element directly
+to C storage and shares one requantization multiplier with the vector path.
 
-- the `4x4` int8 MAC array remains parallel
-- the epilogue runs as a multi-cycle shared unit instead of a 16-lane parallel requant block
-- the vector requant path and epilogue requant path share one physical multiplier instance inside the root controller path rather than keeping separate always-live multiply stages
+## Software Interface
 
-That reduces replicated arithmetic in the full-size RTL while keeping the software-visible behavior unchanged.
+The NEORV32 MMIO base used by the integration is `0xFFEE0000`. Existing
+14-word GEMM/vector descriptors remain unchanged. Conv2D uses an 18-word
+descriptor: word 14 is ABI version 1, and words 15-17 contain input shape,
+channel counts, and kernel/stride/padding configuration.
 
-## Running the Root SV Regression
+New registers are:
 
-From the repo root:
+| Offset | Register | Description |
+|---:|---|---|
+| `0x58` | `CONV_IN_HW` | input height and width |
+| `0x5c` | `CONV_CHANNELS` | output and input channels |
+| `0x60` | `CONV_CFG` | padding, stride, and kernel fields |
+| `0x64` | `CAPS` | ABI version, features, and tile dimensions |
+
+The driver in
+[`sw integration/neorv32-setups/neorv32/sw/example/demo_tinygpu`](sw%20integration/neorv32-setups/neorv32/sw/example/demo_tinygpu)
+defines both descriptor layouts and provides `tgpu_conv2d()`.
+
+## Verification
+
+Run the complete Icarus regression:
 
 ```bash
 make test
 ```
 
-The regression now includes `tb_tinygpu_epilogue_tb` in addition to the existing unit, datapath, and top-level benches.
+Run Verilator lint and the 1000-job deterministic differential regression:
 
-## MMIO Register Map
+```bash
+make lint
+make verilator-diff
+```
 
-Base Address: **0xFFEE0000**
+The differential test compares GEMM, vector add, and hardware Conv2D against
+C++ reference models while applying 0-15 cycles of memory backpressure. It
+also writes Verilator coverage data under `build/coverage/`.
 
-| Offset | Register | Access | Description |
-|--------|----------|--------|-------------|
-| 0x00 | CTRL | R/W | Control (START, RESET, IRQ_EN) |
-| 0x04 | STATUS | R | Status (BUSY, DONE, ERROR) |
-| 0x10 | SRC0ADDR | R/W | Matrix A base address |
-| 0x14 | SRC1ADDR | R/W | Matrix B base address |
-| 0x1C | DSTADDR | R/W | Output matrix address |
-| 0x20 | DIM_M | R/W | M dimension (rows) |
-| 0x24 | DIM_N | R/W | N dimension (cols) |
-| 0x28 | DIM_K | R/W | K dimension (inner) |
+Formal project files are under [`formal/`](formal/):
 
-See full register map in `../TinyGPU_ML_RTL_Implementation_Spec.md`
+```bash
+make formal
+```
 
-## Integration into NEORV32
+This requires SymbiYosys, Yosys, and Z3. GHDL remains the NEORV32 firmware and
+MMIO regression using the behavioral VHDL model; Icarus and Verilator verify
+the real SystemVerilog accelerator.
 
-### Changes to neorv32_top.vhd:
-1. Added `tinygpu_mem_req` / `tinygpu_mem_rsp` bus signals
-2. Added `sys2a` intermediate bus signals
-3. Modified DMA arbiter to output to `sys2a` instead of `sys2`
-4. Added TinyGPU bus arbiter between `sys2a` and `sys2`
-5. Connected TinyGPU memory master to bus arbiter
+## Source Synchronization
 
-### Bus Hierarchy: 
-CPU + DMA → sys2a → TinyGPU arbiter → sys2 → Memory
-↑
-TinyGPU DMA
+The NEORV32 SystemVerilog directories are generated mirrors of `rtl/`:
 
-## How to Use
+```bash
+make sync-rtl
+make check-rtl-sync
+```
 
-1. Copy this entire `SoC/` folder into your NEORV32 project.
-2. Add `neorv32_top.vhd`, `tinygpu_ml/tinygpu_regs.vhd`, and every `tinygpu_ml/*.sv` file to the synthesis project explicitly.
-   You can use `tinygpu_ml/files.f` as the source manifest for the SystemVerilog side.
-3. Enable TinyGPU in your design: `IO_TINYGPU_EN => true`
-4. Synthesize with mixed-language support enabled in your FPGA tool.
-5. Program registers at 0xFFEE0000 from software
+Gowin and mixed-language project manifests must import every file in
+[`rtl/files.f`](rtl/files.f) in order.
 
-## Important Integration Note
+## Synthesis
 
-The SoC integration uses the uniquely named VHDL wrapper `neorv32_tinygpu_wrapper`, which then instantiates the real SystemVerilog `tinygpu_top`.
-Do not rely on the legacy `neorv32_tinygpu.vhd` stub for the actual accelerator path.
+The primary target is a Tang Mega 60K-class Gowin FPGA at 50 MHz. Project
+scaffolding and closure criteria are in
+[`synthesis/tang-mega-60k`](synthesis/tang-mega-60k). The exact
+`GOWIN_PART_NUMBER` must come from the installed Gowin device database; no
+post-route 60K result is claimed in this repository yet.
 
-## Tested Configuration
-
-- **FPGA**: Sipeed Tang Nano 9K (Gowin GW1NR-9C)
-- **Clock**: 27 MHz
-- **Tool**: Gowin EDA v1.9.12.02
-- **Status**: ✅ Synthesis, Place & Route, Bitstream generation successful
-
-## Timing Note
-
-The local `neorv32_top.vhd` copy now defaults `IMEM_OUTREG_EN` and `DMEM_OUTREG_EN` to `true` to help timing closure on the SoC side.
-If your board-level NEORV32 instantiation explicitly overrides these generics, that external generic map still wins.
+The archived Tang Nano 20K `2x2x8` result remains a historical area/timing
+comparison, not the primary architecture.

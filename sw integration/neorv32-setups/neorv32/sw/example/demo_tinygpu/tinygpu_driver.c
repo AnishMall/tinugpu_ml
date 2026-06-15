@@ -1,6 +1,6 @@
 // =============================================================================
 // tinygpu_driver.c
-// Driver implementation for TinyGPU-ML on NEORV32 / Tang Nano 20K
+// Driver implementation for TinyGPU-ML on NEORV32
 // =============================================================================
 
 #include "tinygpu_driver.h"
@@ -186,6 +186,46 @@ tgpu_status_t tgpu_run_descriptor(uint32_t desc_addr) {
   if (ret != TGPU_OK) return ret;
 
   return tgpu_check_status();
+}
+
+tgpu_status_t tgpu_conv2d(
+  uint32_t input_addr,
+  uint32_t weight_addr,
+  uint32_t bias_addr,
+  uint32_t output_addr,
+  uint16_t input_h,
+  uint16_t input_w,
+  uint16_t input_c,
+  uint16_t output_c,
+  uint8_t kernel_h,
+  uint8_t kernel_w,
+  uint8_t stride_h,
+  uint8_t stride_w,
+  uint8_t pad_h,
+  uint8_t pad_w,
+  uint32_t flags
+) {
+  if ((tgpu_read(TGPU_REG_CAPS) & TGPU_CAP_CONV2D) == 0u) {
+    return TGPU_ERR_FMT;
+  }
+
+  tgpu_write(TGPU_REG_CONV_IN_HW, TGPU_PACK_CONV_IN_HW(input_h, input_w));
+  tgpu_write(TGPU_REG_CONV_CHANNELS,
+             TGPU_PACK_CONV_CHANNELS(output_c, input_c));
+  tgpu_write(TGPU_REG_CONV_CFG,
+             TGPU_PACK_CONV_CFG(kernel_h, kernel_w, stride_h, stride_w,
+                                pad_h, pad_w));
+
+  return tgpu_run_direct(
+    TGPU_OP_CONV2D,
+    flags,
+    input_addr,
+    weight_addr,
+    bias_addr,
+    output_addr,
+    0, 0, 0,
+    0, 0, 0
+  );
 }
 
 // =============================================================================

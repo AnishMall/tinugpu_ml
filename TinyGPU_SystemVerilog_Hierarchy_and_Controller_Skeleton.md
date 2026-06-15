@@ -220,6 +220,20 @@ The original architectural intent was a fully parallel `4x4x16` tile engine with
 
 This preserves the identity of the design as a `4x4` GEMM accelerator while cutting a large amount of replicated postprocess logic.
 
+The implemented epilogue also emits each serialized result directly into the
+16-word C buffer. There is no second tile-wide staging pass before DMA store.
+
+#### `tinygpu_im2col_loader.sv`
+
+Owns hardware Conv2D activation lowering. It walks NHWC coordinates for up to
+four output positions, suppresses reads for padded coordinates, writes the
+current `4x16` A tile, and then rejoins the normal B-load and MAC sequence.
+
+#### `tinygpu_mem_arbiter.sv`
+
+Selects descriptor, DMA, im2col, vector, or bias traffic and gates ready/read
+responses back to the active client. Only one read may be outstanding.
+
 #### `tinygpu_counters.sv`
 
 Owns:

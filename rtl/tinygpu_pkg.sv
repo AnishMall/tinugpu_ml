@@ -10,9 +10,9 @@ package tinygpu_pkg;
   parameter int TILE_K      = 16;
 
   parameter int NUM_PES     = TILE_M * TILE_N;
-  parameter int SPM_A_BYTES = 512;
-  parameter int SPM_B_BYTES = 512;
-  parameter int SPM_C_BYTES = 256;
+  parameter int SPM_A_BYTES = TILE_M * TILE_K;
+  parameter int SPM_B_BYTES = TILE_K * TILE_N;
+  parameter int SPM_C_BYTES = TILE_M * TILE_N * 4;
   parameter int MAX_BURST   = 16;
 
   localparam logic [7:0] OP_NOP     = 8'h00;
@@ -22,6 +22,9 @@ package tinygpu_pkg;
   localparam logic [7:0] OP_VEC_MUL = 8'h04;
   localparam logic [7:0] OP_RELU    = 8'h05;
   localparam logic [7:0] OP_CLAMP   = 8'h06;
+  localparam logic [7:0] OP_CONV2D  = 8'h07;
+
+  localparam logic [7:0] ABI_VERSION = 8'd1;
 
   localparam int FLAG_BIAS_EN      = 0;
   localparam int FLAG_RELU_EN      = 1;
@@ -53,6 +56,7 @@ package tinygpu_pkg;
     S_VEC_STORE,
     S_NEXT_TILE_N,
     S_NEXT_TILE_M,
+    S_CONV_LOAD_A,
     S_DONE,
     S_ERROR
   } cmd_state_e;

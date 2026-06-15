@@ -1,13 +1,13 @@
 // =============================================================================
 // tinygpu_driver.h
-// Driver for TinyGPU-ML accelerator on NEORV32 / Tang Nano 20K
+// Driver for TinyGPU-ML accelerator on NEORV32
 //
 // Hardware facts (from tinygpu_regs.sv + tinygpu_pkg.sv):
-//   Array  : 2x2 = 4 Processing Elements
-//   Tile   : M=2, N=2, K=8
+//   Array  : 4x4 = 16 Processing Elements
+//   Tile   : M=4, N=4, K=16
 //   Data   : INT8 inputs, INT32 accumulators
-//   SPM A  : 256 bytes   SPM B : 256 bytes   SPM C : 128 bytes
-//   Ops    : GEMM, GEMV, VEC_ADD, VEC_MUL, RELU, CLAMP
+//   SPM A  : 64 bytes   SPM B : 64 bytes   SPM C : 64 bytes
+//   Ops    : GEMM, GEMV, vector operations, and hardware Conv2D
 //
 // Base address : 0xFFEE0000
 //   --> Confirm by checking where neorv32_tinygpu_wrapper is instantiated
@@ -51,6 +51,10 @@
 #define TGPU_REG_STALL_CNT    0x4C  // RO: stall cycles of last command
 #define TGPU_REG_CMD_COUNT    0x50  // RO: total commands executed since reset
 #define TGPU_REG_IRQ_STATUS   0x54  // RW: write bit[0]=1 to clear IRQ pending
+#define TGPU_REG_CONV_IN_HW   0x58  // RW: [31:16]=input_h, [15:0]=input_w
+#define TGPU_REG_CONV_CHANNELS 0x5C // RW: [31:16]=output_c, [15:0]=input_c
+#define TGPU_REG_CONV_CFG     0x60  // RW: padding/stride/kernel fields
+#define TGPU_REG_CAPS         0x64  // RO: ABI, features, and tile dimensions
 
 // =============================================================================
 // CTRL register bits (offset 0x00)
@@ -90,6 +94,7 @@
 #define TGPU_OP_VEC_MUL  0x04u  // z = x * y  (element-wise)
 #define TGPU_OP_RELU     0x05u  // y = max(0, x)
 #define TGPU_OP_CLAMP    0x06u  // y = clamp(x, min, max)
+#define TGPU_OP_CONV2D   0x07u  // NHWC Conv2D lowered into tiled GEMM in hardware
 
 // =============================================================================
 // FLAGS register bits (offset 0x38)
@@ -105,14 +110,16 @@
 // =============================================================================
 // HARDWARE LIMITS  (from tinygpu_pkg.sv)
 // =============================================================================
-#define TGPU_TILE_M       2
-#define TGPU_TILE_N       2
-#define TGPU_TILE_K       8
-#define TGPU_NUM_PES      4          // TILE_M * TILE_N
-#define TGPU_SPM_A_BYTES  256
-#define TGPU_SPM_B_BYTES  256
-#define TGPU_SPM_C_BYTES  128
-#define TGPU_MAX_BURST    8
+#define TGPU_TILE_M       4
+#define TGPU_TILE_N       4
+#define TGPU_TILE_K       16
+#define TGPU_NUM_PES      16
+#define TGPU_SPM_A_BYTES  64
+#define TGPU_SPM_B_BYTES  64
+#define TGPU_SPM_C_BYTES  64
+#define TGPU_MAX_BURST    16
+#define TGPU_ABI_VERSION  1u
+#define TGPU_CAP_CONV2D   (1u << 16)
 
 // =============================================================================
 // TIMEOUT for polling (adjust if running at different clock speeds)
@@ -162,11 +169,30 @@ typedef struct __attribute__((aligned(4))) {
   uint32_t shift_zero_point; // word 13: [31:16]=shift, [15:0]=zero point
 } tgpu_descriptor_t;
 
+typedef struct __attribute__((aligned(4))) {
+  tgpu_descriptor_t base;   // words 0-13: unchanged base command descriptor
+  uint32_t abi_version;     // word 14: must be TGPU_ABI_VERSION
+  uint32_t conv_in_hw;      // word 15: input height/width
+  uint32_t conv_channels;   // word 16: output/input channels
+  uint32_t conv_cfg;        // word 17: padding/stride/kernel fields
+} tgpu_conv2d_descriptor_t;
+
 #define TGPU_PACK_SHIFT_ZP(shift, zero_point) \
   ((((uint32_t)(uint16_t)(shift)) << 16) | (uint32_t)(uint16_t)(zero_point))
 
 _Static_assert(sizeof(tgpu_descriptor_t) == 14u * sizeof(uint32_t),
                "TinyGPU descriptor must match the RTL 14-word ABI");
+_Static_assert(sizeof(tgpu_conv2d_descriptor_t) == 18u * sizeof(uint32_t),
+               "TinyGPU Conv2D descriptor must match the RTL 18-word ABI");
+
+#define TGPU_PACK_CONV_IN_HW(input_h, input_w) \
+  ((((uint32_t)(uint16_t)(input_h)) << 16) | (uint16_t)(input_w))
+#define TGPU_PACK_CONV_CHANNELS(output_c, input_c) \
+  ((((uint32_t)(uint16_t)(output_c)) << 16) | (uint16_t)(input_c))
+#define TGPU_PACK_CONV_CFG(kh, kw, sh, sw, ph, pw) \
+  ((((uint32_t)(ph) & 0xfu) << 20) | (((uint32_t)(pw) & 0xfu) << 16) | \
+   (((uint32_t)(sh) & 0xfu) << 12) | (((uint32_t)(sw) & 0xfu) << 8) | \
+   (((uint32_t)(kh) & 0xfu) << 4) | ((uint32_t)(kw) & 0xfu))
 
 // =============================================================================
 // API DECLARATIONS
@@ -217,6 +243,24 @@ tgpu_status_t tgpu_run_direct(
 // Indirect mode: point at a descriptor in memory and fire.
 tgpu_status_t tgpu_start_descriptor(uint32_t desc_addr, uint32_t ctrl_flags);
 tgpu_status_t tgpu_run_descriptor(uint32_t desc_addr);
+
+tgpu_status_t tgpu_conv2d(
+  uint32_t input_addr,
+  uint32_t weight_addr,
+  uint32_t bias_addr,
+  uint32_t output_addr,
+  uint16_t input_h,
+  uint16_t input_w,
+  uint16_t input_c,
+  uint16_t output_c,
+  uint8_t kernel_h,
+  uint8_t kernel_w,
+  uint8_t stride_h,
+  uint8_t stride_w,
+  uint8_t pad_h,
+  uint8_t pad_w,
+  uint32_t flags
+);
 
 // Convenience wrappers
 tgpu_status_t tgpu_gemm(

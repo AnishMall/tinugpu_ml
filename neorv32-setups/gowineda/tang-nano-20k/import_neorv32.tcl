@@ -42,9 +42,13 @@ foreach corefile $corefiles {
 set tinygpu_dir $import_neorv32_dir/rtl/core/tinygpu_ml
 set tinygpu_files {
     tinygpu_pkg.sv
+    tinygpu_shared_mul.sv
     tinygpu_pe.sv
     tinygpu_array4x4.sv
     tinygpu_spm.sv
+    tinygpu_mem_arbiter.sv
+    tinygpu_im2col_loader.sv
+    tinygpu_epilogue_shared.sv
     tinygpu_epilogue.sv
     tinygpu_dma.sv
     tinygpu_vec_alu.sv

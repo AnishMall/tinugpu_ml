@@ -230,7 +230,7 @@ tail -f /workspaces/lab_DHWA-main/neorv32-setups/neorv32/sim/ghdl.log
 Expected healthy output for the maintained GHDL path:
 ```
 [NEORV32] BOOT_MODE_SELECT 2 - booting IMEM image
-[TB:TGPU] Software integration result: pass=23 fail=0
+[TB:TGPU] Software integration result: pass=28 fail=0
 simulation stopped ...
 ```
 
@@ -242,33 +242,26 @@ For the maintained **GHDL self-check mode**, `sim/ghdl.log` should contain:
 
 ```text
 [NEORV32] BOOT_MODE_SELECT 2 - booting IMEM image
-[TB:TGPU] Software integration result: pass=23 fail=0
+[TB:TGPU] Software integration result: pass=28 fail=0
 ```
 
 If the GPIO result line does not appear, the firmware did not complete the self-check sequence.
 
-### im2col software path
+### Hardware Conv2D path
 
-The current accelerator still does not implement dedicated Conv2D hardware. The SW demo therefore maps convolution as:
-
-```text
-Conv2D -> software im2col transform -> hardware GEMM
-```
-
-The demo application includes a tiny example:
-
-- input image: `3x3`
-- kernel: `2x2`
-- stride: `1`
-- output: `2x2`
-
-Software flattens each `2x2` patch into one im2col row and flattens the kernel into one column vector, then launches:
+The canonical SystemVerilog accelerator implements streaming im2col in hardware. The demo issues:
 
 ```text
-GEMM M=4, N=1, K=4
+OP_CONV2D -> streaming im2col tile loader -> existing GEMM datapath
 ```
 
-This matches the project scope's "Conv2D via software im2col + hardware GEMM" requirement without adding dedicated convolution RTL.
+The demo uses a `3x3`, stride-1, padding-1 identity kernel over a `3x3x1`
+NHWC input and checks that the nine INT32 outputs equal the input values.
+
+GHDL does not execute the SystemVerilog implementation; it uses the VHDL MMIO
+behavioral model. In that regression, firmware builds the equivalent im2col
+reference matrices and launches GEMM. Icarus and Verilator are the authoritative
+tests for the hardware address generation, padding suppression, and Conv2D FSM.
 
 For **on-board UART0** at `19200` baud, the same banner and `[TEST ...]` / `[PASS]` lines should appear on the serial terminal. The exact counter values in TEST 7 can vary, but the pass/fail text should not.
 
@@ -380,7 +373,7 @@ Hardware (GowinEDA project):
 
 | Priority | Task |
 |---|---|
-| 1 | Regenerate and synthesize the 2x2x8 Gowin project from `create_project.tcl` |
-| 2 | Require zero setup/hold violations and confirm the hierarchy contains four PEs |
-| 3 | Flash the bitstream, upload `neorv32_exe.bin`, and check the UART transcript |
-| 4 | Keep `sim_ghdl_safe`, Verilator, and the RTL unit suite green while preparing the board demo |
+| 1 | Generate the Tang Mega 60K `4x4x16` projects with the exact installed Gowin part identifier |
+| 2 | Require zero setup/hold violations and confirm the hierarchy contains 16 PEs |
+| 3 | Compare standalone Conv2D-disabled/enabled and full NEORV32 utilization reports |
+| 4 | Keep GHDL firmware/MMIO, Verilator differential, and Icarus RTL regressions green |

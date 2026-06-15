@@ -10,6 +10,7 @@ module tinygpu_pe import tinygpu_pkg::*; (
   output logic signed [ACC_W-1:0]  acc_o
 );
 
+  (* use_dsp = "yes", syn_dspstyle = "dsp" *)
   logic signed [2*INT8_W-1:0] product;
   logic signed [ACC_W-1:0]    product_ext;
 

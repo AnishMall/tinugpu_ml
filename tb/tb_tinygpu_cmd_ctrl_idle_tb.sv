@@ -48,6 +48,7 @@ module tb_tinygpu_cmd_ctrl_idle_tb;
     .opcode(opcode), .flags(flags), .src0_addr(src0_addr), .src1_addr(src1_addr), .bias_addr(bias_addr),
     .dst_addr(dst_addr), .M(M), .N(N), .K(K), .stride0(stride0), .stride1(stride1), .stride_dst(stride_dst),
     .scale(scale), .shift(shift), .zero_point(zero_point),
+    .conv_in_hw(32'd0), .conv_channels(32'd0), .conv_cfg(32'd0),
     .busy(busy), .done(done), .illegal_opcode(illegal_opcode), .shape_error(shape_error),
     .memory_error(memory_error), .unsupported_format(unsupported_format),
     .cnt_cmd_start(cnt_cmd_start), .cnt_cmd_done(cnt_cmd_done), .cnt_busy(cnt_busy),

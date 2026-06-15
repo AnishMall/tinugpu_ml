@@ -30,15 +30,19 @@ verilator -Wall --Wno-fatal --cc --trace \
   -O3 \
   -Mdir "$OBJ_DIR" \
   rtl/core/tinygpu_ml/tinygpu_pkg.sv \
-  rtl/core/tinygpu_ml/tinygpu_spm.sv \
-  rtl/core/tinygpu_ml/tinygpu_dma.sv \
+  rtl/core/tinygpu_ml/tinygpu_shared_mul.sv \
+  rtl/core/tinygpu_ml/tinygpu_pe.sv \
   rtl/core/tinygpu_ml/tinygpu_array4x4.sv \
-  rtl/core/tinygpu_ml/tinygpu_vec_alu.sv \
+  rtl/core/tinygpu_ml/tinygpu_spm.sv \
+  rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv \
+  rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv \
+  rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv \
   rtl/core/tinygpu_ml/tinygpu_epilogue.sv \
-  rtl/core/tinygpu_ml/tinygpu_regs.sv \
+  rtl/core/tinygpu_ml/tinygpu_dma.sv \
+  rtl/core/tinygpu_ml/tinygpu_vec_alu.sv \
   rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv \
   rtl/core/tinygpu_ml/tinygpu_counters.sv \
-  rtl/core/tinygpu_ml/tinygpu_pe.sv \
+  rtl/core/tinygpu_ml/tinygpu_regs.sv \
   rtl/core/tinygpu_ml/tinygpu_top.sv \
   --top-module tinygpu_top \
   --exe sim/tb_tinygpu.cpp

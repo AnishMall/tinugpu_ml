@@ -1,6 +1,4 @@
-module tinygpu_vec_alu 
-import tinygpu_pkg::*;
- (
+module tinygpu_vec_alu import tinygpu_pkg::*; (
   input  logic [7:0]              opcode,
   input  logic signed [INT8_W-1:0] x_i,
   input  logic signed [INT8_W-1:0] y_i,

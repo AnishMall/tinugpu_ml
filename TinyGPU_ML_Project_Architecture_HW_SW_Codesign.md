@@ -26,11 +26,11 @@ The NEORV32 CPU remains the host processor. It prepares input/output buffers, co
 | Clamp | Epilogue or vector ALU | Min/max activation clipping |
 | Bias add | Epilogue stage | Adds per-output-channel bias |
 | Requantization | Epilogue stage | Converts int32 accumulations to int8 outputs |
-| Conv2D | Software im2col + hardware GEMM | Convolutional layers without dedicated convolution hardware |
+| Conv2D | Hardware streaming im2col + GEMM | NHWC `1x1`/`3x3` convolution without a full lowered matrix |
 
 ### Explicitly Out of Scope
 
-The architecture does not implement graphics rendering, CUDA/OpenCL compatibility, floating-point-first execution, training/backpropagation, virtual memory, hardware cache coherence, operating-system-level device drivers, dedicated direct Conv2D hardware, or reliability/fault-injection logic.
+The architecture does not implement graphics rendering, CUDA/OpenCL compatibility, floating-point-first execution, training/backpropagation, virtual memory, hardware cache coherence, operating-system-level device drivers, grouped/depthwise convolution, dilation above one, or reliability/fault-injection logic.
 
 ---
 
@@ -893,10 +893,10 @@ length 256
 length 512
 ```
 
-Conv2D via im2col:
+Hardware Conv2D via streaming im2col:
 
 ```text
-small TinyML-style layers lowered into GEMM
+packed NHWC `1x1` and `3x3` layers lowered tile-by-tile inside the RTL
 ```
 
 ---

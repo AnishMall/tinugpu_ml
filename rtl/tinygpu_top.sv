@@ -1,6 +1,7 @@
 module tinygpu_top #(
   parameter int ADDR_W = 32,
-  parameter int DATA_W = 32
+  parameter int DATA_W = 32,
+  parameter bit ENABLE_CONV = 1'b1
 )(
   input  logic                 clk,
   input  logic                 rst_n,
@@ -40,6 +41,7 @@ module tinygpu_top #(
   logic [31:0] reg_flags;
   logic [31:0] reg_scale;
   logic [15:0] reg_shift, reg_zero_point;
+  logic [31:0] reg_conv_in_hw, reg_conv_channels, reg_conv_cfg;
 
   logic        ctrl_busy;
   logic        ctrl_done;
@@ -74,7 +76,9 @@ module tinygpu_top #(
   logic                 mem_read_pending_q;
   logic                 mem_stage_ready;
 
-  tinygpu_regs u_regs (
+  tinygpu_regs #(
+    .ENABLE_CONV (ENABLE_CONV)
+  ) u_regs (
     .clk                (clk),
     .rst_n              (rst_n),
     .mmio_valid         (mmio_valid),
@@ -115,10 +119,15 @@ module tinygpu_top #(
     .flags_o            (reg_flags),
     .scale_o            (reg_scale),
     .shift_o            (reg_shift),
-    .zero_point_o       (reg_zero_point)
+    .zero_point_o       (reg_zero_point),
+    .conv_in_hw_o       (reg_conv_in_hw),
+    .conv_channels_o    (reg_conv_channels),
+    .conv_cfg_o         (reg_conv_cfg)
   );
 
-  tinygpu_cmd_ctrl u_cmd_ctrl (
+  tinygpu_cmd_ctrl #(
+    .ENABLE_CONV        (ENABLE_CONV)
+  ) u_cmd_ctrl (
     .clk                (clk),
     .rst_n              (rst_n),
     .start              (reg_start_pulse),
@@ -141,6 +150,9 @@ module tinygpu_top #(
     .scale              (reg_scale),
     .shift              (reg_shift),
     .zero_point         (reg_zero_point),
+    .conv_in_hw         (reg_conv_in_hw),
+    .conv_channels      (reg_conv_channels),
+    .conv_cfg           (reg_conv_cfg),
     .busy               (ctrl_busy),
     .done               (ctrl_done),
     .illegal_opcode     (ctrl_illegal_opcode),
