@@ -1,0 +1,9 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1781563833" />
+    <testcase name="test_soft_reset" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="203" time="0.0016794204711914062" sim_time_ns="120.0" ratio_time="71453.21976149915" />
+    <testcase name="test_vec_add_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="221" time="0.006474971771240234" sim_time_ns="1000.0" ratio_time="154440.82774872964" />
+    <testcase name="test_gemm_fixed" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="265" time="0.013168811798095703" sim_time_ns="2890.0" ratio_time="219457.91650070608" />
+    <testcase name="test_gemm_random" classname="test_tinygpu" file="/workspaces/lab_DHWA-main/neorv32-setups/neorv32/tinygpu_golden_verification/test_tinygpu.py" lineno="312" time="0.4529719352722168" sim_time_ns="113490.0" ratio_time="250545.32336931062" />
+  </testsuite>
+</testsuites>

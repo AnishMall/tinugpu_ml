@@ -1,0 +1,42 @@
+[tasks]
+arbiter
+counters
+dma
+im2col
+regs
+
+[options]
+mode prove
+depth 40
+
+[engines]
+smtbmc z3
+
+[script arbiter]
+read -formal -sv rtl/tinygpu_mem_arbiter.sv formal/tinygpu_formal.sv
+prep -top formal_mem_arbiter
+
+[script counters]
+read -formal -sv rtl/tinygpu_counters.sv formal/tinygpu_formal.sv
+prep -top formal_counters
+
+[script dma]
+read -formal -sv rtl/tinygpu_pkg.sv rtl/tinygpu_dma.sv formal/tinygpu_formal.sv
+prep -top formal_dma
+
+[script im2col]
+read -formal -sv rtl/tinygpu_pkg.sv rtl/tinygpu_im2col_loader.sv formal/tinygpu_formal.sv
+prep -top formal_im2col
+
+[script regs]
+read -formal -sv rtl/tinygpu_pkg.sv rtl/tinygpu_regs.sv formal/tinygpu_formal.sv
+prep -top formal_regs
+
+[files]
+rtl/tinygpu_pkg.sv
+rtl/tinygpu_mem_arbiter.sv
+rtl/tinygpu_counters.sv
+rtl/tinygpu_dma.sv
+rtl/tinygpu_im2col_loader.sv
+rtl/tinygpu_regs.sv
+formal/tinygpu_formal.sv

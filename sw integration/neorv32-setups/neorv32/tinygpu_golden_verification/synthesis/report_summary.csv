@@ -1,0 +1,5 @@
+configuration,device,logic,registers,dsp,bsram,fmax_mhz,worst_setup_ns,worst_hold_ns,tns_ns,setup_violations,hold_violations,status
+standalone_conv_off,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,not_run
+standalone_conv_on,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,not_run
+neorv32_conv_on,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,not_run
+tang_nano_20k_2x2x8,GW2AR-18,TBD,TBD,TBD,TBD,TBD,TBD,TBD,TBD,0,0,historical
