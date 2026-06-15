@@ -48,7 +48,7 @@ TB_NAMES := \
 
 TB_VVPS := $(addprefix $(BUILD_DIR)/,$(addsuffix .vvp,$(TB_NAMES)))
 
-.PHONY: all test lint verilator-diff formal sync-rtl check-rtl-sync clean list demo-rtl demo-sw coverage-report
+.PHONY: all test lint verilator-diff verilator-directed-cov formal sync-rtl check-rtl-sync clean list demo-rtl demo-sw coverage-report
 
 all: test
 
@@ -68,6 +68,9 @@ lint:
 
 verilator-diff:
 	bash scripts/run_verilator_diff.sh
+
+verilator-directed-cov:
+	bash scripts/run_verilator_directed_cov.sh
 
 coverage-report:
 	bash scripts/coverage_report.sh

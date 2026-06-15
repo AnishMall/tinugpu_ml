@@ -1278,76 +1278,16 @@ TinyGPU-ML is a small NEORV32-attached ML accelerator built around a 4x4 output-
 
 ## 29. Demo And Coverage Commands
 
-Current Verilator line coverage is `69.00% (1714/2456)`.
-
-The most useful commands to run locally are:
-
-```bash
-make test
-make verilator-diff
-make coverage-report
-make demo-rtl
-make demo-sw
-```
-
-What each command shows:
+The canonical runnable commands and demo transcripts are documented in the
+repository [`README.md`](README.md). Keep the README as the single source of
+truth for:
 
 1. `make test`
-   - Runs the full directed Icarus bench suite.
-   - Expected output is a series of `... PASS` lines for PE, array, DMA, im2col, epilogue, GEMM, regs, counters, top-level GEMM/vector/Conv2D/error/requant/demo, and random-latency benches.
-
 2. `make verilator-diff`
-   - Runs the randomized differential harness against the real `tinygpu_top` RTL with memory latency from `0` to `15` cycles.
-   - Expected output ends with:
+3. `make verilator-directed-cov`
+4. `make coverage-report`
+5. `make demo-rtl`
+6. `make demo-sw`
 
-```text
-Verilator differential PASS: 1000 jobs, memory latency 0-15 cycles
-job_counts gemm=250 vector=250 conv=250 error=250
-```
-
-3. `make coverage-report`
-   - Re-runs the Verilator differential flow and prints the current coverage summary and uncovered-file ranking.
-   - Expected output ends with a line like:
-
-```text
-Annotation Summary:
-  lines with all attached points covered : 69.00%  (1714/2456)
-```
-
-4. `make demo-rtl`
-   - Runs the deterministic top-level RTL demo bench and emits `build/tinygpu_top_demo.vcd` for waveform review.
-   - Expected transcript includes:
-
-```text
-TinyGPU-ML RTL demo
-Direct GEMM C = [[19, 22], [43, 50]]
-Descriptor GEMM C = [[19, 22], [43, 50]]
-Vector add z = {6, 4, -4, 12}
-Conv2D out row0 = {1, 2, 3}
-Conv2D out row1 = {4, 5, 6}
-Conv2D out row2 = {7, 8, 9}
-Cycles : 888
-Active : 27
-Stalls : 695
-tb_tinygpu_top_demo_tb PASS
-```
-
-5. `make demo-sw`
-   - Runs the maintained software/MMIO regression.
-   - Expected output ends with:
-
-```text
-[TB:TGPU] Software integration result: pass=28 fail=0
-```
-
-For presentation purposes, the strongest artifacts are:
-
-1. `make demo-rtl`
-   - console transcript for fixed GEMM, descriptor GEMM, vector, Conv2D, and counters
-   - waveform file `build/tinygpu_top_demo.vcd` for VaporView
-
-2. `make coverage-report`
-   - current quantitative verification-coverage snapshot
-
-3. `make test`
-   - broad directed verification closure evidence across unit, integration, and stress benches
+This avoids the implementation spec and top-level project documentation drifting
+out of sync.

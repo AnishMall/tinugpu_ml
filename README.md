@@ -65,8 +65,49 @@ make verilator-diff
 ```
 
 The differential test compares GEMM, vector add, and hardware Conv2D against
-C++ reference models while applying 0-15 cycles of memory backpressure. It
-also writes Verilator coverage data under `build/coverage/`.
+C++ reference models while applying 0-15 cycles of memory backpressure.
+
+Run the curated directed Verilator coverage subset:
+
+```bash
+make verilator-directed-cov
+```
+
+Run the merged coverage flow:
+
+```bash
+make coverage-report
+```
+
+This merges coverage from the randomized differential harness and the directed
+Verilator subset, then annotates the canonical RTL under `build/coverage/`.
+The printed headline is the RTL-only line coverage number.
+
+Run the deterministic hardware demo transcript:
+
+```bash
+make demo-rtl
+```
+
+Run the maintained software/MMIO demo transcript:
+
+```bash
+make demo-sw
+```
+
+The RTL demo prints:
+
+```text
+Direct GEMM C = [[19, 22], [43, 50]]
+Descriptor GEMM C = [[19, 22], [43, 50]]
+Vector add z = {6, 4, -4, 12}
+Conv2D out row0 = {1, 2, 3}
+Conv2D out row1 = {4, 5, 6}
+Conv2D out row2 = {7, 8, 9}
+Cycles : 888
+Active : 27
+Stalls : 695
+```
 
 Formal project files are under [`formal/`](formal/):
 
