@@ -10,7 +10,7 @@ VM_C11 = 1
 # Timing enabled?  0/1
 VM_TIMING = 0
 # Coverage output mode?  0/1 (from --coverage)
-VM_COVERAGE = 0
+VM_COVERAGE = 1
 # Parallel builds?  0/1 (from --output-split)
 VM_PARALLEL_BUILDS = 1
 # Tracing output mode?  0/1 (from --trace-fst/--trace-saif/--trace-vcd)
@@ -28,13 +28,14 @@ VM_CLASSES_FAST += \
   Vtop \
   Vtop___024root__0 \
   Vtop___024root__1 \
+  Vtop___024root__2 \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
 VM_CLASSES_SLOW += \
-  Vtop__ConstPool__0__Slow \
   Vtop___024root__Slow \
   Vtop___024root__0__Slow \
   Vtop_tinygpu_pkg__Slow \
+  Vtop_tinygpu_pkg__0__Slow \
 
 # Generated support classes, fast-path, compile with highest optimization
 VM_SUPPORT_FAST += \
@@ -49,6 +50,7 @@ VM_GLOBAL_FAST += \
   verilated \
   verilated_dpi \
   verilated_vpi \
+  verilated_cov \
   verilated_threads \
 
 # Global classes, need linked once per executable, non-fast-path, compile with low/medium optimization

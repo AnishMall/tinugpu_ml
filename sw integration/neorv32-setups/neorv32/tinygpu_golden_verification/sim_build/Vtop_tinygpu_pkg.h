@@ -6,6 +6,7 @@
 #define VERILATED_VTOP_TINYGPU_PKG_H_  // guard
 
 #include "verilated.h"
+#include "verilated_cov.h"
 
 
 class Vtop__Syms;
@@ -56,6 +57,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop_tinygpu_pkg final {
 
     // INTERNAL METHODS
     void __Vconfigure(bool first);
+    void __vlCoverInsert(uint32_t* countp, bool enable, const char* filenamep, int lineno, int column,
+        const char* hierp, const char* pagep, const char* commentp, const char* linescovp,
+        const char* fsmVarp, const char* fsmFromp, const char* fsmTop, const char* fsmTagp);
+    void __vlCoverToggleInsert(int begin, int end, bool ranged, uint32_t* countp, bool enable, const char* filenamep, int lineno, int column,
+        const char* hierp, const char* pagep, const char* commentp);
 };
 
 

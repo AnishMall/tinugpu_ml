@@ -11,7 +11,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
     , TOP{this, namep}
 {
     // Check resources
-    Verilated::stackCheck(1906);
+    Verilated::stackCheck(2098);
     // Setup sub module instances
     TOP__tinygpu_pkg.ctor(this, "tinygpu_pkg");
     // Configure time unit / time precision
@@ -828,6 +828,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
     __Vscopep_tinygpu_top__u_cmd_ctrl__u_dma->varInsert("mem_wstrb", &(TOP.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb), false, VLVT_UINT8, VLVD_NODIR|VLVF_PUB_RW, 0, 1 ,3,0);
     __Vscopep_tinygpu_top__u_cmd_ctrl__u_dma->varInsert("op_kind", &(TOP.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind), false, VLVT_UINT8, VLVD_NODIR|VLVF_PUB_RW, 0, 1 ,1,0);
     __Vscopep_tinygpu_top__u_cmd_ctrl__u_dma->varInsert("op_kind_q", &(TOP.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q), false, VLVT_UINT8, VLVD_NODIR|VLVF_PUB_RW, 0, 1 ,1,0);
+    __Vscopep_tinygpu_top__u_cmd_ctrl__u_dma->varInsert("read_outstanding_q", &(TOP.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__read_outstanding_q), false, VLVT_UINT8, VLVD_NODIR|VLVF_PUB_RW, 0, 0);
     __Vscopep_tinygpu_top__u_cmd_ctrl__u_dma->varInsert("row_d", &(TOP.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_d), false, VLVT_UINT16, VLVD_NODIR|VLVF_PUB_RW, 0, 1 ,15,0);
     __Vscopep_tinygpu_top__u_cmd_ctrl__u_dma->varInsert("row_q", &(TOP.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q), false, VLVT_UINT16, VLVD_NODIR|VLVF_PUB_RW, 0, 1 ,15,0);
     __Vscopep_tinygpu_top__u_cmd_ctrl__u_dma->varInsert("rows", &(TOP.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows), false, VLVT_UINT16, VLVD_NODIR|VLVF_PUB_RW, 0, 1 ,15,0);

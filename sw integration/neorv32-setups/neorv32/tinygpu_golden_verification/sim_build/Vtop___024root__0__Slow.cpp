@@ -9,14 +9,14 @@ VL_ATTR_COLD void Vtop___024root___eval_static(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data__0 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data;
-    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data__0 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data;
-    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data__1 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data;
-    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data__1 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data;
+    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr__0 
+        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr;
+    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr__0 
+        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr;
+    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr__1 
+        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr;
+    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr__1 
+        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr;
     vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__clk__0 
         = vlSelfRef.tinygpu_top__DOT__clk;
     vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__rst_n__0 
@@ -124,17 +124,24 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wstrb = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wstrb = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wdata = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_we = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_we = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wdata = 0U;
+    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT____Vtogcov__mmio_ready)))) {
+        VL_COV_TOGGLE_CHG_ST_I(1, vlSymsp->__Vcoverage + 208, 1U, vlSelfRef.tinygpu_top__DOT____Vtogcov__mmio_ready);
+        vlSelfRef.tinygpu_top__DOT____Vtogcov__mmio_ready = 1U;
+    }
     vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wstrb = 1U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_we = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_we = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wdata = 0U;
     vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_rd_addr = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wdata = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wstrb = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wstrb = 0U;
     vlSelfRef.mmio_ready = 1U;
     vlSelfRef.tinygpu_top__DOT__mmio_ready = 1U;
     vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_ready = 1U;
+    ++(vlSymsp->__Vcoverage[14354]);
+    ++(vlSymsp->__Vcoverage[14358]);
+    ++(vlSymsp->__Vcoverage[14359]);
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
@@ -142,17 +149,24 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wstrb = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wstrb = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wdata = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_we = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_we = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wdata = 0U;
+    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT____Vtogcov__mmio_ready)))) {
+        VL_COV_TOGGLE_CHG_ST_I(1, vlSymsp->__Vcoverage + 208, 1U, vlSelfRef.tinygpu_top__DOT____Vtogcov__mmio_ready);
+        vlSelfRef.tinygpu_top__DOT____Vtogcov__mmio_ready = 1U;
+    }
     vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wstrb = 1U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_we = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_we = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wdata = 0U;
     vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_rd_addr = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wdata = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wstrb = 0U;
+    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wstrb = 0U;
     vlSelfRef.mmio_ready = 1U;
     vlSelfRef.tinygpu_top__DOT__mmio_ready = 1U;
     vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_ready = 1U;
+    ++(vlSymsp->__Vcoverage[14354]);
+    ++(vlSymsp->__Vcoverage[14358]);
+    ++(vlSymsp->__Vcoverage[14359]);
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_final(Vtop___024root* vlSelf) {
@@ -197,11 +211,11 @@ VL_ATTR_COLD void Vtop___024root___eval_triggers_vec__stl(Vtop___024root* vlSelf
                                       & vlSelfRef.__VstlTriggered[1U]) 
                                      | (IData)((IData)(vlSelfRef.__VstlFirstIteration)));
     vlSelfRef.__VstlTriggered[0U] = (QData)((IData)(
-                                                    ((vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data__0.neq(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data) 
+                                                    ((vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr__0.neq(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr) 
                                                       << 1U) 
-                                                     | vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data__0.neq(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data))));
-    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data__0.assign(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data);
-    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data__0.assign(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data);
+                                                     | vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr__0.neq(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr))));
+    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr__0.assign(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr);
+    vlSelfRef.__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr__0.assign(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr);
     if (VL_UNLIKELY(((1U & (~ (IData)(vlSelfRef.__VstlDidInit)))))) {
         vlSelfRef.__VstlDidInit = 1U;
         vlSelfRef.__VstlTriggered[0U] = (1ULL | vlSelfRef.__VstlTriggered[0U]);
@@ -219,10 +233,10 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__stl(const VlUnpacked<QData/*63
         VL_DBG_MSGS("         No '" + tag + "' region triggers active\n");
     }
     if ((1U & (IData)(triggers[0U]))) {
-        VL_DBG_MSGS("         '" + tag + "' region trigger index 0 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.b_rd_data)\n");
+        VL_DBG_MSGS("         '" + tag + "' region trigger index 0 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.a_rd_addr)\n");
     }
     if ((1U & (IData)((triggers[0U] >> 1U)))) {
-        VL_DBG_MSGS("         '" + tag + "' region trigger index 1 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.a_rd_data)\n");
+        VL_DBG_MSGS("         '" + tag + "' region trigger index 1 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.b_rd_addr)\n");
     }
     if ((1U & (IData)(triggers[1U]))) {
         VL_DBG_MSGS("         '" + tag + "' region trigger index 64 is active: Internal 'stl' trigger - first iteration\n");
@@ -245,4041 +259,8 @@ VL_ATTR_COLD bool Vtop___024root___trigger_anySet__stl(const VlUnpacked<QData/*6
     return (0U);
 }
 
-VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__0\n"); );
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Locals
-    CData/*7:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_3__read_linear_byte;
-    CData/*7:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_2__read_linear_byte;
-    CData/*7:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_1__read_linear_byte;
-    CData/*7:0*/ tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_0__read_linear_byte;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__oldv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__oldv = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__newv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__newv = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__wstrb;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__wstrb = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__oldv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__oldv = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__newv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__newv = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__wstrb;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__wstrb = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__oldv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__oldv = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__newv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__newv = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__wstrb;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__wstrb = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__oldv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__oldv = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__newv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__newv = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__wstrb;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__wstrb = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__oldv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__oldv = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__newv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__newv = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__wstrb;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__wstrb = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__Vfuncout = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__oldv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__oldv = 0;
-    SData/*15:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__newv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__newv = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__wstrb;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__wstrb = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__oldv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__oldv = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__newv;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__newv = 0;
-    CData/*3:0*/ __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__wstrb;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__wstrb = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__region;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__region = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__offset;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__offset = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__region;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__region = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__offset;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__offset = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__region;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__region = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__offset;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__offset = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index = 0;
-    CData/*1:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__region;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__region = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__offset;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__offset = 0;
-    IData/*31:0*/ __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index = 0;
-    SData/*15:0*/ __VdfgRegularize_h6e95ff9d_0_10;
-    __VdfgRegularize_h6e95ff9d_0_10 = 0;
-    SData/*15:0*/ __VdfgRegularize_h6e95ff9d_0_11;
-    __VdfgRegularize_h6e95ff9d_0_11 = 0;
-    SData/*15:0*/ __VdfgRegularize_h6e95ff9d_0_12;
-    __VdfgRegularize_h6e95ff9d_0_12 = 0;
-    CData/*0:0*/ __VdfgRegularize_h6e95ff9d_0_17;
-    __VdfgRegularize_h6e95ff9d_0_17 = 0;
-    // Body
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_bias_regs = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_region_cmd_n = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_vec_store_cmd = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_base_cmd_n = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_vec_raw = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_vec_post = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_shadow_i32 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__c_out_i32;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_shadow_i8 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__c_out_i8;
-    vlSelfRef.tinygpu_top__DOT__mem_rdata = vlSelfRef.mem_rdata;
-    vlSelfRef.tinygpu_top__DOT__mem_ready = vlSelfRef.mem_ready;
-    vlSelfRef.tinygpu_top__DOT__mem_rvalid = vlSelfRef.mem_rvalid;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__base_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_base_addr_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__stride_bytes 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_stride_bytes_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_region_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_base 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_base_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__last_elem 
-        = ((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__row_q)) 
-           & (3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__col_q)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_dma_cmd = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__busy = 1U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__busy = 1U;
-    vlSelfRef.tinygpu_top__DOT__mem_req = vlSelfRef.tinygpu_top__DOT__mem_cmd_valid_q;
-    vlSelfRef.tinygpu_top__DOT__reg_cmd_addr = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cmd_addr_o;
-    vlSelfRef.tinygpu_top__DOT__reg_opcode = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__opcode_o;
-    vlSelfRef.tinygpu_top__DOT__reg_src0_addr = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__src0_addr_o;
-    vlSelfRef.tinygpu_top__DOT__reg_src1_addr = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__src1_addr_o;
-    vlSelfRef.tinygpu_top__DOT__reg_bias_addr = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__bias_addr_o;
-    vlSelfRef.tinygpu_top__DOT__reg_dst_addr = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dst_addr_o;
-    vlSelfRef.tinygpu_top__DOT__reg_dim_m = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_m_o;
-    vlSelfRef.tinygpu_top__DOT__reg_dim_n = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_n_o;
-    vlSelfRef.tinygpu_top__DOT__reg_dim_k = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_k_o;
-    vlSelfRef.tinygpu_top__DOT__reg_stride0 = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride0_o;
-    vlSelfRef.tinygpu_top__DOT__reg_stride1 = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride1_o;
-    vlSelfRef.tinygpu_top__DOT__reg_stride_dst = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride_dst_o;
-    vlSelfRef.tinygpu_top__DOT__reg_flags = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__flags_o;
-    vlSelfRef.tinygpu_top__DOT__reg_scale = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__scale_o;
-    vlSelfRef.tinygpu_top__DOT__reg_shift = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__shift_o;
-    vlSelfRef.tinygpu_top__DOT__reg_zero_point = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__zero_point_o;
-    vlSelfRef.tinygpu_top__DOT__reg_conv_in_hw = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__conv_in_hw_o;
-    vlSelfRef.tinygpu_top__DOT__reg_conv_channels = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__conv_channels_o;
-    vlSelfRef.tinygpu_top__DOT__reg_conv_cfg = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__conv_cfg_o;
-    vlSelfRef.tinygpu_top__DOT__mem_we = vlSelfRef.tinygpu_top__DOT__mem_cmd_we_q;
-    vlSelfRef.tinygpu_top__DOT__mem_addr = vlSelfRef.tinygpu_top__DOT__mem_cmd_addr_q;
-    vlSelfRef.tinygpu_top__DOT__mem_wdata = vlSelfRef.tinygpu_top__DOT__mem_cmd_wdata_q;
-    vlSelfRef.tinygpu_top__DOT__mem_wstrb = vlSelfRef.tinygpu_top__DOT__mem_cmd_wstrb_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_raw_q;
-    if (((vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q 
-          >> 1U) & VL_GTS_III(32, 0U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post))) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post = 0U;
-    }
-    if ((4U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)) {
-        vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__x 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post;
-        vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__Vfuncout 
-            = (VL_GTS_III(32, 0xffffff80U, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__x)
-                ? 0xffffff80U : (VL_LTS_III(32, 0x0000007fU, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__x)
-                                  ? 0x0000007fU : vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__x));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post 
-            = vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__Vfuncout;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_spm_wstrb 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wstrb;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_out_x 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__next_out_x;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_out_y 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__next_out_y;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_cmd_done = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__done = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_busy 
-        = ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)) 
-           & ((0x16U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)) 
-              & (0x17U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_active 
-        = ((7U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)) 
-           | ((0x0eU == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)) 
-              | ((0x0fU == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)) 
-                 | (0x10U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_product 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__product_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_ic 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__next_ic;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_kw 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__next_kw;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_kh 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__next_kh;
-    vlSelfRef.tinygpu_top__DOT__reg_irq_enable = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__irq_enable_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__shift 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shift_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wr_en = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wstrb = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wr_en = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__tile_out_x 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_x_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_index 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__out_index;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_busy 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__busy;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_store_base_addr 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_row_base_q 
-           + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_q);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start_ic 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_ic_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start_kw 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kw_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start_kh 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kh_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__tile_out_y 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_y_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__sample_q;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__irq_pending_o 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__irq_pending_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__zero_point 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__zero_point_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_i32 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__out_i32;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_i8 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__out_i8;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_rd_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_rd_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_op_kind_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_rows_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_cols_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__mul_a 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__post_elem_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__opcode 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_we_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_we;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_wdata_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wdata;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_wstrb_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_wstrb;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_we_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_we;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_wdata_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wdata;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_wstrb_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_wstrb;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__scale 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__scale_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_x_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__y_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_y_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_we = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__load_lane_sel 
-        = (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wstrb = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wdata = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_addr 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cmd_addr_q 
-           + ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_q) 
-              << 2U));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_we = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_req = 0U;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q) 
-                  >> 2U)))) {
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q)))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_req = 1U;
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_req = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_addr 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_base_q 
-           + ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_q) 
-              << 2U));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wdata = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_mul_start 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__mul_start;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__bias 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_vec;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__zero_point_ext 
-        = (((- (IData)((1U & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__zero_point_q) 
-                              >> 0x0000000fU)))) << 0x00000010U) 
-           | (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__zero_point_q));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__aligned_read_addr 
-        = (0xfffffffcU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__aligned_write_addr 
-        = (0xfffffffcU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_valid 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__out_valid;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__flags 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_rdata 
-        = vlSelfRef.tinygpu_top__DOT__mem_rdata_stage_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_base 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_addr_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_stride_bytes 
-        = ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_q))
-            ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_q)
-            : 1U);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__is_vector_opcode 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__is_vector_opcode_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_m_tiles 
-        = ((0x0000ffffU & ((IData)(4U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_q))) 
-           < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q));
-    vlSelfRef.tinygpu_top__DOT__ctrl_illegal_opcode 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__illegal_opcode;
-    vlSelfRef.tinygpu_top__DOT__ctrl_shape_error = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shape_error;
-    vlSelfRef.tinygpu_top__DOT__ctrl_memory_error = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__memory_error;
-    vlSelfRef.tinygpu_top__DOT__ctrl_unsupported_format 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unsupported_format;
-    vlSelfRef.tinygpu_top__DOT__cycle_count_last = vlSelfRef.tinygpu_top__DOT__u_counters__DOT__cycle_count_o;
-    vlSelfRef.tinygpu_top__DOT__active_count_last = vlSelfRef.tinygpu_top__DOT__u_counters__DOT__active_count_o;
-    vlSelfRef.tinygpu_top__DOT__stall_count_last = vlSelfRef.tinygpu_top__DOT__u_counters__DOT__stall_count_o;
-    vlSelfRef.tinygpu_top__DOT__cmd_count_total = vlSelfRef.tinygpu_top__DOT__u_counters__DOT__cmd_count_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[0U][0U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[0U][1U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[0U][2U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[0U][3U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[1U][0U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[1U][1U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[1U][2U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[1U][3U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[2U][0U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[2U][1U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[2U][2U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[2U][3U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[3U][0U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[3U][1U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[3U][2U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[3U][3U] 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__acc_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__busy = 1U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_words_expected 
-        = ((7U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q))
-            ? 0x12U : 0x0eU);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_done 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__done;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__array_clear_acc = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__error = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_busy 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__busy;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_done 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__done;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__done = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_o 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_addr 
-        = (0x000001ffU & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__k_q) 
-                          + (0x000001f0U & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__row_q) 
-                                            << 4U))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__done 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__done_q;
-    vlSelfRef.tinygpu_top__DOT__clk = vlSelfRef.clk;
-    vlSelfRef.tinygpu_top__DOT__rst_n = vlSelfRef.rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_start 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_start_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__is_conv_opcode 
-        = (7U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__error 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__error_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem 
-        = (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q))) 
-            >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows_q)) 
-           & ((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q))) 
-              >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols_q)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__use_dst_i8 
-        = (1U & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q 
-                 >> 4U));
-    __VdfgRegularize_h6e95ff9d_0_10 = (0x0000ffffU 
-                                       & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q) 
-                                          - (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_q)));
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_7 = (((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__direct_mode_o) 
-                                                 << 1U) 
-                                                | (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__irq_enable_o));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__array_mac_en = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_flags_ok 
-        = (1U & (~ (3U == (3U & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q 
-                                 >> 4U)))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_ok 
-        = ((7U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-           | ((5U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-              | ((4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-                 | ((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-                    | ((1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-                       | ((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-                          | (6U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q))))))));
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_9 = ((0U 
-                                                 != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q)) 
-                                                & (0U 
-                                                   != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__K_q)));
-    vlSelfRef.tinygpu_top__DOT__mmio_valid = vlSelfRef.mmio_valid;
-    vlSelfRef.tinygpu_top__DOT__mmio_we = vlSelfRef.mmio_we;
-    vlSelfRef.tinygpu_top__DOT__mmio_wstrb = vlSelfRef.mmio_wstrb;
-    vlSelfRef.tinygpu_top__DOT__reg_direct_mode = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__direct_mode_o;
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_8 = ((3U 
-                                                 == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-                                                | (4U 
-                                                   == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)));
-    vlSelfRef.tinygpu_top__DOT__mmio_addr = vlSelfRef.mmio_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_output_c 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_channels_q 
-           >> 0x00000010U);
-    vlSelfRef.tinygpu_top__DOT__mem_stage_ready = (1U 
-                                                   & (~ 
-                                                      ((IData)(vlSelfRef.tinygpu_top__DOT__mem_cmd_valid_q) 
-                                                       | (IData)(vlSelfRef.tinygpu_top__DOT__mem_read_pending_q))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_rvalid 
-        = vlSelfRef.tinygpu_top__DOT__mem_rvalid_stage_q;
-    __VdfgRegularize_h6e95ff9d_0_12 = (0x0000ffffU 
-                                       & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__K_q) 
-                                          - (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_q)));
-    vlSelfRef.tinygpu_top__DOT__mmio_wdata = vlSelfRef.mmio_wdata;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_h 
-        = (0x0000000fU & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_cfg_q 
-                          >> 0x0000000cU));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_w 
-        = (0x0000000fU & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_cfg_q 
-                          >> 8U));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_c 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_channels_q);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__effective_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__effective_n_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_bias 
-        = (9U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_vec 
-        = ((0x0dU == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)) 
-           | ((0x0cU == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)) 
-              | (0x12U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_desc 
-        = (2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_h 
-        = (0x0000000fU & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_cfg_q 
-                          >> 4U));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_h 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_in_hw_q 
-           >> 0x00000010U);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_pad_h 
-        = (0x0000000fU & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_cfg_q 
-                          >> 0x00000014U));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_w 
-        = (0x0000000fU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_cfg_q);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_pad_w 
-        = (0x0000000fU & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_cfg_q 
-                          >> 0x00000010U));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_w 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_in_hw_q);
-    if ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0_q))) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_stride_bytes 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0_q;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_row_stride 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0_q;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_stride_bytes = 1U;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_row_stride 
-            = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_c) 
-               * (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_w));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_conv 
-        = (0x15U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q));
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__busy = 0U;
-        }
-    } else if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q) 
-                         >> 1U)))) {
-        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q)))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__busy = 0U;
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_busy_status 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__busy;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__busy = 0U;
-        }
-    } else if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                         >> 1U)))) {
-        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q)))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__busy = 0U;
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_busy_status 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__busy;
-    vlSelfRef.mem_req = vlSelfRef.tinygpu_top__DOT__mem_req;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cmd_addr 
-        = vlSelfRef.tinygpu_top__DOT__reg_cmd_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode 
-        = vlSelfRef.tinygpu_top__DOT__reg_opcode;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_addr 
-        = vlSelfRef.tinygpu_top__DOT__reg_src0_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_addr 
-        = vlSelfRef.tinygpu_top__DOT__reg_src1_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_addr 
-        = vlSelfRef.tinygpu_top__DOT__reg_bias_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_addr 
-        = vlSelfRef.tinygpu_top__DOT__reg_dst_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__M 
-        = vlSelfRef.tinygpu_top__DOT__reg_dim_m;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__N 
-        = vlSelfRef.tinygpu_top__DOT__reg_dim_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__K 
-        = vlSelfRef.tinygpu_top__DOT__reg_dim_k;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0 
-        = vlSelfRef.tinygpu_top__DOT__reg_stride0;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1 
-        = vlSelfRef.tinygpu_top__DOT__reg_stride1;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst 
-        = vlSelfRef.tinygpu_top__DOT__reg_stride_dst;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags 
-        = vlSelfRef.tinygpu_top__DOT__reg_flags;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__scale 
-        = vlSelfRef.tinygpu_top__DOT__reg_scale;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shift 
-        = vlSelfRef.tinygpu_top__DOT__reg_shift;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__zero_point 
-        = vlSelfRef.tinygpu_top__DOT__reg_zero_point;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_in_hw 
-        = vlSelfRef.tinygpu_top__DOT__reg_conv_in_hw;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_channels 
-        = vlSelfRef.tinygpu_top__DOT__reg_conv_channels;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_cfg 
-        = vlSelfRef.tinygpu_top__DOT__reg_conv_cfg;
-    vlSelfRef.mem_we = vlSelfRef.tinygpu_top__DOT__mem_we;
-    vlSelfRef.mem_addr = vlSelfRef.tinygpu_top__DOT__mem_addr;
-    vlSelfRef.mem_wdata = vlSelfRef.tinygpu_top__DOT__mem_wdata;
-    vlSelfRef.mem_wstrb = vlSelfRef.tinygpu_top__DOT__mem_wstrb;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_x_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_x_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_y_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_y_q;
-    if ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_vec_store_cmd = 1U;
-                    }
-                }
-            }
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_d 
-                            = (0x0000ffffU & ((IData)(4U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_q)));
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_d = 0U;
-                    }
-                }
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_cmd_done = 1U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__done = 1U;
-                }
-            } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_d 
-                        = (0x0000ffffU & ((IData)(4U) 
-                                          + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_q)));
-                }
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__cnt_cmd_done = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_cmd_done;
-    } else {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_d = 0U;
-                    }
-                }
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__cnt_cmd_done = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_cmd_done;
-    }
-    vlSelfRef.tinygpu_top__DOT__ctrl_done = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__done;
-    vlSelfRef.tinygpu_top__DOT__cnt_busy = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_busy;
-    vlSelfRef.tinygpu_top__DOT__cnt_active = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_active;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_product 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_product;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__mul_product 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_product;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q) 
-                      >> 1U)))) {
-            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q)))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wr_en = 1U;
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_spm_wr_en 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wr_en;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                  >> 2U)))) {
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wstrb = 1U;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wr_en = 1U;
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wstrb 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wstrb;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wstrb 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wstrb;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wr_en 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wr_en;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_base_addr_cmd_n = 0U;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q) 
-                      >> 1U)))) {
-            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q)))) {
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__sample_valid_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wdata = 0U;
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_spm_wdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_wdata;
-    vlSelfRef.tinygpu_top__DOT__reg_irq_pending = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__irq_pending_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__zero_point_ext 
-        = (((- (IData)((1U & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__zero_point) 
-                              >> 0x0000000fU)))) << 0x00000010U) 
-           | (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__zero_point));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_rd_data 
-        = (VL_GTS_III(32, 0x00000010U, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_rd_addr))
-            ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-           [(0x0000000fU & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_rd_addr))]
-            : 0U);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_mul_a 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__mul_a;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__mul_b 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__scale;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_ext 
-        = (((- (IData)((1U & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_i) 
-                              >> 7U)))) << 8U) | (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_i));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__y_ext 
-        = (((- (IData)((1U & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__y_i) 
-                              >> 7U)))) << 8U) | (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__y_i));
-    if ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_we = 1U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wstrb 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wstrb_q;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wdata 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_q;
-                    }
-                }
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_we_i 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_we;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_wstrb_i 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wstrb;
-    } else {
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_we = 0U;
-                }
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_we_i 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_we;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_wstrb_i 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wstrb;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_wdata_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_wdata;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_bias_regs = 1U;
-                    }
-                }
-            }
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_q)))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req = 1U;
-                        }
-                    }
-                }
-            }
-        }
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_region_cmd_n = 2U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_base_cmd_n = 0U;
-                        if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                   & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q))))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_dma_cmd = 1U;
-                        }
-                    }
-                }
-            }
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_vec_raw = 1U;
-                    }
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_vec_post = 1U;
-                    }
-                }
-            }
-        } else if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_region_cmd_n = 1U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_base_cmd_n = 0U;
-                    if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                               & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q))))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_dma_cmd = 1U;
-                    }
-                }
-            } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_region_cmd_n = 0U;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_spm_base_cmd_n = 0U;
-                if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                           & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q))))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_dma_cmd = 1U;
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_req_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_req;
-    if ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
-                    }
-                }
-            }
-        }
-    } else if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 1U)))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
-                    }
-                } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req = 1U;
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_req_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_req;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_addr_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_addr;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((1U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)) {
-                            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_q)))) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req = 1U;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_req_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_req;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                      >> 1U)))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_we = 1U;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_req = 1U;
-                if ((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb = 0x0fU;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wdata 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__store_word_q;
-                } else if ((0U == (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb = 1U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wdata 
-                        = (0x000000ffU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__store_word_q);
-                } else if ((1U == (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb = 2U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wdata 
-                        = (0x0000ff00U & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__store_word_q 
-                                          << 8U));
-                } else if ((2U == (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb = 4U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wdata 
-                        = (0x00ff0000U & (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__store_word_q 
-                                          << 0x00000010U));
-                } else {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb = 8U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wdata 
-                        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__store_word_q 
-                           << 0x00000018U);
-                }
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_we 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_we;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_req 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_req;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_req;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wstrb 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_addr_mux 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_addr;
-    } else {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                      >> 1U)))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_we = 0U;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_req = 1U;
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_we 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_we;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_req 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_req;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_req;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wstrb 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wstrb;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_addr_mux 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_addr;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_wdata;
-    if ((8U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)) {
-        if (VL_LTES_III(32, 0U, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shift_q)))) {
-            vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__18__x 
-                = (VL_SHIFTRS_III(32,32,16, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_scaled_q, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shift_q)) 
-                   + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__zero_point_ext);
-            vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__18__Vfuncout 
-                = (VL_LTS_III(32, 0x0000007fU, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__18__x)
-                    ? 0x0000007fU : (VL_GTS_III(32, 0xffffff80U, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__18__x)
-                                      ? 0x00000080U
-                                      : (0x000000ffU 
-                                         & vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__18__x)));
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8 
-                = vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__18__Vfuncout;
-        } else {
-            vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__x 
-                = (VL_SHIFTL_III(32,32,16, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_scaled_q, 
-                                 (0x0000ffffU & (- (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shift_q)))) 
-                   + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__zero_point_ext);
-            vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__Vfuncout 
-                = (VL_LTS_III(32, 0x0000007fU, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__x)
-                    ? 0x0000007fU : (VL_GTS_III(32, 0xffffff80U, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__x)
-                                      ? 0x00000080U
-                                      : (0x000000ffU 
-                                         & vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__x)));
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8 
-                = vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__Vfuncout;
-        }
-    } else {
-        vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__20__x 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post_q;
-        vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__20__Vfuncout 
-            = (VL_LTS_III(32, 0x0000007fU, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__20__x)
-                ? 0x0000007fU : (VL_GTS_III(32, 0xffffff80U, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__20__x)
-                                  ? 0x00000080U : (0x000000ffU 
-                                                   & vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__20__x)));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8 
-            = vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__20__Vfuncout;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_addr = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_en = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_addr = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_rdata_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_rdata;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_addr_q 
-           + ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_stride_bytes) 
-              * (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_addr_q 
-           + ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_stride_bytes) 
-              * (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q)));
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__illegal_opcode_i 
-        = vlSelfRef.tinygpu_top__DOT__ctrl_illegal_opcode;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__shape_error_i 
-        = vlSelfRef.tinygpu_top__DOT__ctrl_shape_error;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__memory_error_i 
-        = vlSelfRef.tinygpu_top__DOT__ctrl_memory_error;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__unsupported_fmt_i 
-        = vlSelfRef.tinygpu_top__DOT__ctrl_unsupported_format;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cycle_count_i 
-        = vlSelfRef.tinygpu_top__DOT__cycle_count_last;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__active_count_i 
-        = vlSelfRef.tinygpu_top__DOT__active_count_last;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stall_count_i 
-        = vlSelfRef.tinygpu_top__DOT__stall_count_last;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cmd_count_i 
-        = vlSelfRef.tinygpu_top__DOT__cmd_count_total;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_tile 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile;
-    if ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__busy = 0U;
-                }
-            }
-        }
-    } else if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                         >> 3U)))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 2U)))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 1U)))) {
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__busy = 0U;
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__ctrl_busy = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__busy;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_start = 0U;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__array_clear_acc = 1U;
-                    }
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__array_clear_acc;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__error = 1U;
-            }
-            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q)))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__done = 1U;
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_error 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__error;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_busy 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_busy;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__mul_done 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_done;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_done 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_done;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_error 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__error;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_busy 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_busy;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__mul_done 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_done;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_done 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_done;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_done 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__done;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                      >> 1U)))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_o 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_q;
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_q;
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_region 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_o;
-    } else {
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_o 
-                    = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_q;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr 
-                    = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_q;
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_region 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_o;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_spm_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__spm_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__done;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__clk = vlSelfRef.tinygpu_top__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_counters__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_counters__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_start;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__error;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                      & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start = 1U;
-                            }
-                        }
-                    }
-                }
-            }
-        } else if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                  & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start = 1U;
-                        }
-                    }
-                }
-            } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                              & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start = 1U;
-                    }
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__start 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_start;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_op_kind_cmd_n = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_data = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_stride_bytes 
-        = ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_q))
-            ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_q)
-            : ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__use_dst_i8)
-                ? 1U : 4U));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m 
-        = ((4U <= (IData)(__VdfgRegularize_h6e95ff9d_0_10))
-            ? 4U : (IData)(__VdfgRegularize_h6e95ff9d_0_10));
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__array_mac_en = 1U;
-                    }
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__mac_en 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__array_mac_en;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_illegal_opcode = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_valid 
-        = vlSelfRef.tinygpu_top__DOT__mmio_valid;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_we 
-        = vlSelfRef.tinygpu_top__DOT__mmio_we;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb 
-        = vlSelfRef.tinygpu_top__DOT__mmio_wstrb;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__direct_mode 
-        = vlSelfRef.tinygpu_top__DOT__reg_direct_mode;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_needs_y 
-        = vlSelfRef.__VdfgRegularize_h6e95ff9d_0_8;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_addr 
-        = vlSelfRef.tinygpu_top__DOT__mmio_addr;
-    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__is_conv_opcode) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_eff 
-            = ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_q))
-                ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_q)
-                : (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_output_c));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_eff 
-            = (0x0000ffffU & ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_q))
-                               ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_q)
-                               : ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__use_dst_i8)
-                                   ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_output_c)
-                                   : VL_SHIFTL_III(16,16,32, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_output_c), 2U))));
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_eff 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_q;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_eff 
-            = (0x0000ffffU & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_q));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_ready 
-        = vlSelfRef.tinygpu_top__DOT__mem_stage_ready;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_rvalid_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_rvalid;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k 
-        = ((0x0010U <= (IData)(__VdfgRegularize_h6e95ff9d_0_12))
-            ? 0x0010U : (IData)(__VdfgRegularize_h6e95ff9d_0_12));
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata 
-        = vlSelfRef.tinygpu_top__DOT__mmio_wdata;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__stride_h 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_h;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__stride_w 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_w;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_c 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_c;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_n_tiles 
-        = ((0x0000ffffU & ((IData)(4U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_q))) 
-           < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__effective_n));
-    __VdfgRegularize_h6e95ff9d_0_11 = (0x0000ffffU 
-                                       & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__effective_n) 
-                                          - (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_q)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kernel_h 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_h;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_h 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_h;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__pad_h 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_pad_h;
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_16 = (((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_pad_h) 
-                                                  << 1U) 
-                                                 + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_h));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kernel_w 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_w;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_k_calc 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_h) 
-           * ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_c) 
-              * (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_w)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__pad_w 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_pad_w;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_w 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_w;
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_15 = (((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_pad_w) 
-                                                  << 1U) 
-                                                 + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_w));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_client_sel 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_desc)
-            ? 1U : ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_conv)
-                     ? 2U : ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_vec)
-                              ? 3U : (4U & (- (IData)((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_bias)))))));
-    vlSelfRef.tinygpu_top__DOT__u_counters__DOT__cmd_done_i 
-        = vlSelfRef.tinygpu_top__DOT__cnt_cmd_done;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cmd_done_i 
-        = vlSelfRef.tinygpu_top__DOT__ctrl_done;
-    vlSelfRef.tinygpu_top__DOT__u_counters__DOT__busy_i 
-        = vlSelfRef.tinygpu_top__DOT__cnt_busy;
-    vlSelfRef.tinygpu_top__DOT__u_counters__DOT__active_i 
-        = vlSelfRef.tinygpu_top__DOT__cnt_active;
-    vlSelfRef.tinygpu_top__DOT__irq = ((IData)(vlSelfRef.tinygpu_top__DOT__reg_irq_enable) 
-                                       & (IData)(vlSelfRef.tinygpu_top__DOT__reg_irq_pending));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__x_shifted 
-        = ((8U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__flags)
-            ? (VL_LTES_III(32, 0U, VL_EXTENDS_II(32,16, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__shift)))
-                ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__zero_point_ext 
-                   + VL_SHIFTRS_III(32,32,16, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__scaled_elem_q, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__shift)))
-                : (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__zero_point_ext 
-                   + VL_SHIFTL_III(32,32,16, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__scaled_elem_q, 
-                                   (0x0000ffffU & (- (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__shift))))))
-            : vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__post_elem_q);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_rd_data 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_rd_data;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_mul_b 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__mul_b;
-    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_mul_start) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_a 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_mul_a;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_b 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_mul_b;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_a 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post_q;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_b 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__scale_q;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__z_o = 0U;
-    if ((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__opcode))) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__z_o 
-            = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_ext 
-               + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__y_ext);
-    } else if ((4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__opcode))) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__z_o 
-            = VL_MULS_III(32, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_ext, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__y_ext);
-    } else if ((5U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__opcode))) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__z_o 
-            = (VL_GTS_III(32, 0U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_ext)
-                ? 0U : vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_ext);
-    } else if ((6U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__opcode))) {
-        vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__x 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_ext;
-        vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__Vfuncout 
-            = (VL_GTS_III(32, 0xffffff80U, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__x)
-                ? 0xffffff80U : (VL_LTS_III(32, 0x0000007fU, vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__x)
-                                  ? 0x0000007fU : vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__x));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__z_o 
-            = vlSelfRef.__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__Vfuncout;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__z_o = 0U;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_we_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_we;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__conv_req_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_req;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_req_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_req;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_wstrb_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wstrb;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_addr_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_addr_mux;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_wdata_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_wdata;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                      >> 1U)))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_addr 
-                    = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__aligned_write_addr;
-            }
-        }
-    } else if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                         >> 1U)))) {
-        if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_addr 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__aligned_read_addr;
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_addr;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_base_addr_cmd_n 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_store_base_addr;
-                    }
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_valid) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_en = 1U;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_addr 
-                                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_index;
-                        }
-                    }
-                }
-            }
-        } else if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_base_addr_cmd_n 
-                        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_q 
-                           + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_n_offset_q);
-                }
-            } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_base_addr_cmd_n 
-                    = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_row_base_q 
-                       + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_q));
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_wr_en 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_en;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_wr_en 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_en;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_wr_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__client_rdata_o 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_rdata_i;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_lane_sel 
-        = (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_read_addr 
-        = (0xfffffffcU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_elem_addr);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_lane_sel 
-        = (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_read_addr 
-        = (0xfffffffcU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_elem_addr);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__c_in 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_tile;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cmd_busy_i 
-        = vlSelfRef.tinygpu_top__DOT__ctrl_busy;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_busy)) 
-                                   & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_done))))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_start = 1U;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__start 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_start;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clear_acc 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_vec_scaled = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_start = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_ic_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_ic_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kw_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kw_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kh_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kh_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_region 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_region) 
-           & (- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_conv))))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_memory_error = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 0U;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_op_kind_cmd_n 
-                            = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__use_dst_i8)
-                                ? 3U : 2U);
-                    }
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_valid) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_data 
-                                = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__use_dst_i8)
-                                    ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_i8)
-                                    : vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_out_i32);
-                        }
-                    }
-                }
-            }
-        } else if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_op_kind_cmd_n = 0U;
-                }
-            } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_op_kind_cmd_n = 0U;
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_wr_data 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_wr_data;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_elem_addr 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_addr_q 
-           + ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_stride_bytes) 
-              * (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__active_rows 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__unused_mmio_addr 
-        = (1U & VL_REDXOR_32((vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_addr 
-                              >> 8U)));
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo 
-        = (0x000000ffU & vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_addr);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_stride_bytes_cmd_n = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_ready_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_ready;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_rows_cmd_n = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_k_tiles 
-        = ((0x0000ffffU & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_q) 
-                           + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k))) 
-           < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__K_q));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__active_k 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k;
-    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb))) {
-        vlSelfRef.tinygpu_top__DOT__u_regs__DOT__direct_op_next_w 
-            = (0x000000ffU & vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata);
-        vlSelfRef.tinygpu_top__DOT__u_regs__DOT__ctrl_mode_next_w 
-            = (3U & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata 
-                     >> 2U));
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_regs__DOT__direct_op_next_w 
-            = (0x000000ffU & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__opcode_o));
-        vlSelfRef.tinygpu_top__DOT__u_regs__DOT__ctrl_mode_next_w 
-            = (3U & (IData)(vlSelfRef.__VdfgRegularize_h6e95ff9d_0_7));
-    }
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__wstrb 
-        = (3U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb));
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__newv 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata);
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__oldv 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_m_o;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__Vfuncout 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__oldv;
-    if ((1U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__Vfuncout 
-            = ((0xff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__Vfuncout)) 
-               | (0x000000ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__newv)));
-    }
-    if ((2U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__Vfuncout 
-            = ((0x00ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__Vfuncout)) 
-               | (0x0000ff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__newv)));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_m_next_w 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__0__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__wstrb 
-        = (3U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb));
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__newv 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata);
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__oldv 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_n_o;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__Vfuncout 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__oldv;
-    if ((1U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__Vfuncout 
-            = ((0xff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__Vfuncout)) 
-               | (0x000000ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__newv)));
-    }
-    if ((2U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__Vfuncout 
-            = ((0x00ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__Vfuncout)) 
-               | (0x0000ff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__newv)));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_n_next_w 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__1__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__wstrb 
-        = (3U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb));
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__newv 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata);
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__oldv 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_k_o;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__Vfuncout 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__oldv;
-    if ((1U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__Vfuncout 
-            = ((0xff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__Vfuncout)) 
-               | (0x000000ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__newv)));
-    }
-    if ((2U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__Vfuncout 
-            = ((0x00ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__Vfuncout)) 
-               | (0x0000ff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__newv)));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_k_next_w 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__2__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__wstrb 
-        = (3U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb));
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__newv 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata);
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__oldv 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride0_o;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__Vfuncout 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__oldv;
-    if ((1U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__Vfuncout 
-            = ((0xff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__Vfuncout)) 
-               | (0x000000ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__newv)));
-    }
-    if ((2U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__Vfuncout 
-            = ((0x00ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__Vfuncout)) 
-               | (0x0000ff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__newv)));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride0_next_w 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__3__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__wstrb 
-        = (3U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb));
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__newv 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata);
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__oldv 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride1_o;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__Vfuncout 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__oldv;
-    if ((1U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__Vfuncout 
-            = ((0xff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__Vfuncout)) 
-               | (0x000000ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__newv)));
-    }
-    if ((2U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__Vfuncout 
-            = ((0x00ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__Vfuncout)) 
-               | (0x0000ff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__newv)));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride1_next_w 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__4__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__wstrb 
-        = (3U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb));
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__newv 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata);
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__oldv 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride_dst_o;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__Vfuncout 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__oldv;
-    if ((1U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__Vfuncout 
-            = ((0xff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__Vfuncout)) 
-               | (0x000000ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__newv)));
-    }
-    if ((2U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__Vfuncout 
-            = ((0x00ffU & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__Vfuncout)) 
-               | (0x0000ff00U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__newv)));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride_dst_next_w 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb16__5__Vfuncout;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__wstrb 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wstrb;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__newv 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata;
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__oldv 
-        = (((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__shift_o) 
-            << 0x00000010U) | (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__zero_point_o));
-    __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__oldv;
-    if ((1U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout 
-            = ((0xffffff00U & __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout) 
-               | (0x000000ffU & __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__newv));
-    }
-    if ((2U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout 
-            = ((0xffff00ffU & __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout) 
-               | (0x0000ff00U & __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__newv));
-    }
-    if ((4U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout 
-            = ((0xff00ffffU & __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout) 
-               | (0x00ff0000U & __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__newv));
-    }
-    if ((8U & (IData)(__Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__wstrb))) {
-        __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout 
-            = ((0x00ffffffU & __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout) 
-               | (0xff000000U & __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__newv));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__shiftzp_next_w 
-        = __Vfunc_tinygpu_top__DOT__u_regs__DOT__apply_wstrb32__6__Vfuncout;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_ic 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_ic 
-        = (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_q))) 
-            < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_c))
-            ? (0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_q)))
-            : 0U);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n 
-        = ((4U <= (IData)(__VdfgRegularize_h6e95ff9d_0_11))
-            ? 4U : (IData)(__VdfgRegularize_h6e95ff9d_0_11));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_y 
-        = (((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kh_q) 
-            + VL_MULS_III(32, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__stride_h), (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_y_q))) 
-           - (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__pad_h));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_h_calc 
-        = ((IData)(1U) + VL_SHIFTR_III(32,32,32, (vlSelfRef.__VdfgRegularize_h6e95ff9d_0_16 
-                                                  - (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_h)), 
-                                       (1U & (- (IData)(
-                                                        (2U 
-                                                         == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_h)))))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_kw 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_kh 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kh_q;
-    if (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_q))) 
-         >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_c))) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_kw 
-            = (((0x0000000fU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_q))) 
-                < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kernel_w))
-                ? (0x0000000fU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_q)))
-                : 0U);
-        if (((0x0000000fU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_q))) 
-             >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kernel_w))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_kh 
-                = (0x0000000fU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kh_q)));
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_x 
-        = (((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_q) 
-            + VL_MULS_III(32, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__stride_w), (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_x_q))) 
-           - (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__pad_w));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_row_stride 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_row_stride;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_w_calc 
-        = ((IData)(1U) + VL_SHIFTR_III(32,32,32, (vlSelfRef.__VdfgRegularize_h6e95ff9d_0_15 
-                                                  - (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_w)), 
-                                       (1U & (- (IData)(
-                                                        (2U 
-                                                         == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_w)))))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_client_sel;
-    vlSelfRef.irq = vlSelfRef.tinygpu_top__DOT__irq;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unused_c_rd_data 
-        = (1U & VL_REDXOR_32(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__c_rd_data));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_a;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_raw 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__z_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_addr_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__client_rdata_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_addr = 0U;
-    if ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_x_d 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_out_x;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_y_d 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_out_y;
-                    }
-                }
-            }
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if ((8U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)) {
-                            if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_busy)) 
-                                          & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_done)))))) {
-                                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_done) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_vec_scaled = 1U;
-                                }
-                            }
-                            if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_busy)) 
-                                       & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_done))))) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_start = 1U;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    } else if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                         >> 3U)))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 2U)))) {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_x_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_y_d = 0U;
-                }
-            } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_x_d = 0U;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_y_d = 0U;
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_start 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_mul_start) 
-           | (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_start));
-    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_conv) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_wstrb 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_spm_wstrb;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_wr_en 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_spm_wr_en;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_addr 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_spm_addr;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_wstrb 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wstrb;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_wr_en 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wr_en;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_addr 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_addr;
-    }
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr 
-        = ((IData)(3U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_addr));
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__region 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_region;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank = 0U;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__offset = 0U;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index = 0U;
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_0__read_linear_byte = 0U;
-    if ((0U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr, 4U);
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__offset 
-            = (0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr);
-        if (((0x00000040U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr) 
-             & (4U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_0__read_linear_byte 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_bank
-                [(3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank)]
-                [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__offset)];
-        }
-    } else if ((1U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank 
-            = (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr);
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__offset 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr, 2U);
-        if ((((0x00000040U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr) 
-              & (4U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank)) 
-             & (0x00000010U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__offset))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_0__read_linear_byte 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_bank
-                [(3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__bank)]
-                [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__offset)];
-        }
-    } else if ((2U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr, 2U);
-        if ((0x00000010U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index)) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_0__read_linear_byte 
-                = (0x000000ffU & ((0U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr))
-                                   ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                  [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index)]
-                                   : ((1U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr))
-                                       ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                          [(0x0000000fU 
-                                            & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index)] 
-                                          >> 8U) : 
-                                      ((2U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__addr))
-                                        ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                           [(0x0000000fU 
-                                             & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index)] 
-                                           >> 0x10U)
-                                        : (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                           [(0x0000000fU 
-                                             & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__21__word_index)] 
-                                           >> 0x18U)))));
-        }
-    } else {
-        tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_0__read_linear_byte = 0U;
-    }
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr 
-        = ((IData)(2U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_addr));
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__region 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_region;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank = 0U;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__offset = 0U;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index = 0U;
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_1__read_linear_byte = 0U;
-    if ((0U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr, 4U);
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__offset 
-            = (0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr);
-        if (((0x00000040U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr) 
-             & (4U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_1__read_linear_byte 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_bank
-                [(3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank)]
-                [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__offset)];
-        }
-    } else if ((1U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank 
-            = (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr);
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__offset 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr, 2U);
-        if ((((0x00000040U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr) 
-              & (4U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank)) 
-             & (0x00000010U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__offset))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_1__read_linear_byte 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_bank
-                [(3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__bank)]
-                [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__offset)];
-        }
-    } else if ((2U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr, 2U);
-        if ((0x00000010U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index)) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_1__read_linear_byte 
-                = (0x000000ffU & ((0U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr))
-                                   ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                  [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index)]
-                                   : ((1U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr))
-                                       ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                          [(0x0000000fU 
-                                            & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index)] 
-                                          >> 8U) : 
-                                      ((2U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__addr))
-                                        ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                           [(0x0000000fU 
-                                             & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index)] 
-                                           >> 0x10U)
-                                        : (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                           [(0x0000000fU 
-                                             & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__22__word_index)] 
-                                           >> 0x18U)))));
-        }
-    } else {
-        tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_1__read_linear_byte = 0U;
-    }
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr 
-        = ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_addr));
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__region 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_region;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank = 0U;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__offset = 0U;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index = 0U;
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_2__read_linear_byte = 0U;
-    if ((0U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr, 4U);
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__offset 
-            = (0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr);
-        if (((0x00000040U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr) 
-             & (4U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_2__read_linear_byte 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_bank
-                [(3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank)]
-                [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__offset)];
-        }
-    } else if ((1U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank 
-            = (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr);
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__offset 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr, 2U);
-        if ((((0x00000040U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr) 
-              & (4U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank)) 
-             & (0x00000010U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__offset))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_2__read_linear_byte 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_bank
-                [(3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__bank)]
-                [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__offset)];
-        }
-    } else if ((2U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr, 2U);
-        if ((0x00000010U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index)) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_2__read_linear_byte 
-                = (0x000000ffU & ((0U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr))
-                                   ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                  [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index)]
-                                   : ((1U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr))
-                                       ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                          [(0x0000000fU 
-                                            & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index)] 
-                                          >> 8U) : 
-                                      ((2U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__addr))
-                                        ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                           [(0x0000000fU 
-                                             & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index)] 
-                                           >> 0x10U)
-                                        : (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                           [(0x0000000fU 
-                                             & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__23__word_index)] 
-                                           >> 0x18U)))));
-        }
-    } else {
-        tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_2__read_linear_byte = 0U;
-    }
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_addr;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__region 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_region;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank = 0U;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__offset = 0U;
-    __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index = 0U;
-    tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_3__read_linear_byte = 0U;
-    if ((0U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr, 4U);
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__offset 
-            = (0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr);
-        if (((0x00000040U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr) 
-             & (4U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_3__read_linear_byte 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_bank
-                [(3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank)]
-                [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__offset)];
-        }
-    } else if ((1U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank 
-            = (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr);
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__offset 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr, 2U);
-        if ((((0x00000040U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr) 
-              & (4U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank)) 
-             & (0x00000010U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__offset))) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_3__read_linear_byte 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_bank
-                [(3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__bank)]
-                [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__offset)];
-        }
-    } else if ((2U == (IData)(__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__region))) {
-        __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index 
-            = VL_SHIFTR_III(32,32,32, __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr, 2U);
-        if ((0x00000010U > __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index)) {
-            tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_3__read_linear_byte 
-                = (0x000000ffU & ((0U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr))
-                                   ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                  [(0x0000000fU & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index)]
-                                   : ((1U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr))
-                                       ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                          [(0x0000000fU 
-                                            & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index)] 
-                                          >> 8U) : 
-                                      ((2U == (3U & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__addr))
-                                        ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                           [(0x0000000fU 
-                                             & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index)] 
-                                           >> 0x10U)
-                                        : (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words
-                                           [(0x0000000fU 
-                                             & __Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__read_linear_byte__24__word_index)] 
-                                           >> 0x18U)))));
-        }
-    } else {
-        tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_3__read_linear_byte = 0U;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_rdata 
-        = ((((IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_0__read_linear_byte) 
-             << 0x00000018U) | ((IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_1__read_linear_byte) 
-                                << 0x00000010U)) | 
-           (((IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_2__read_linear_byte) 
-             << 8U) | (IData)(tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____VlemCall_3__read_linear_byte)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clk 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__rst_n 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n;
-    if ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_done) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_ic_d 
-                                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_ic;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kw_d 
-                                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_kw;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kh_d 
-                                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_next_kh;
-                        }
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_q) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_error) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_d = 0U;
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_memory_error = 1U;
-                            } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_done) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_d = 0U;
-                            }
-                        } else {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_d = 1U;
-                        }
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                    } else {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_ic_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kw_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kh_d = 0U;
-                    }
-                }
-            } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_ic_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kw_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kh_d = 0U;
-                }
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                }
-            } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                if ((8U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                }
-            }
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-        }
-    } else {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_ic_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kw_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kh_d = 0U;
-                    }
-                } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_ic_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kw_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kh_d = 0U;
-                }
-            }
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_d = 0U;
-                    }
-                }
-            } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_d = 0U;
-                }
-            } else {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_d = 0U;
-            }
-        }
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                }
-            } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                               & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q))))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 1U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                    } else {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                        } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                        }
-                        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error)))) {
-                            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done)))) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                            }
-                        }
-                    }
-                    if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                  & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 1U;
-                        } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                        } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                        }
-                    }
-                } else {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                }
-            } else {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                }
-            }
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                      & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)))) {
-                                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_memory_error = 1U;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } else if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                } else {
-                    if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                               & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q))))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 1U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                    }
-                    if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                  & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 1U;
-                        } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                        } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                        }
-                    }
-                }
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                  & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)))) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_memory_error = 1U;
-                            }
-                        }
-                    }
-                    if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                               & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q))))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                    } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error)))) {
-                        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done)))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                        }
-                    }
-                }
-            } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                           & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q))))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 1U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                } else {
-                    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                    }
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error)))) {
-                        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done)))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                        }
-                    }
-                }
-                if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                              & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 1U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-                    }
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_memory_error = 1U;
-                        }
-                    }
-                }
-            } else {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-            }
-        } else {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-                }
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall = 1U;
-                }
-            } else {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_d = 0U;
-            }
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_d = 0U;
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__cnt_stall = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_stall;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wstrb_next = 0x0fU;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_next 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_post_q;
-    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__use_dst_i8) {
-        if ((0U == (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_elem_addr))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wstrb_next = 1U;
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_next 
-                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8;
-        } else if ((1U == (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_elem_addr))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wstrb_next = 2U;
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_next 
-                = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8) 
-                   << 8U);
-        } else if ((2U == (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_elem_addr))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wstrb_next = 4U;
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_next 
-                = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8) 
-                   << 0x00000010U);
-        } else {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wstrb_next = 8U;
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_wdata_next 
-                = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_result_i8) 
-                   << 0x00000018U);
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_aligned_addr 
-            = (0xfffffffcU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_elem_addr);
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_aligned_addr 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_dst_elem_addr;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__last_row 
-        = ((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__row_q))) 
-           >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__active_rows));
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_rdata 
-        = (((0x00000040U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-             ? ((0x00000020U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                 ? ((- (IData)((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                         >> 3U))))) 
-                    & (((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                         ? (0x011f1044U & ((- (IData)(
-                                                      (1U 
-                                                       & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                           & (- (IData)(
-                                                        (1U 
-                                                         & (~ 
-                                                            ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                             >> 1U)))))))
-                         : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                            & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__conv_cfg_o 
-                               & (- (IData)((1U & (~ 
-                                                   ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                    >> 1U)))))))) 
-                       & (- (IData)((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                              >> 4U)))))))
-                 : ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                     ? ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                         ? ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__conv_channels_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__conv_in_hw_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U))))))))
-                         : ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__irq_pending_q)))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cmd_count_i 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))))
-                     : ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                         ? ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stall_count_i 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__active_count_i 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U))))))))
-                         : ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cycle_count_i 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__shift_o) 
-                                     << 0x00000010U) 
-                                    | (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__zero_point_o)) 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))))))
-             : ((0x00000020U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                 ? ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                     ? ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                         ? ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__scale_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__flags_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U))))))))
-                         : ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride_dst_o)))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride1_o)))))
-                     : ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                         ? ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__stride0_o)))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_k_o))))
-                         : ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_n_o)))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dim_m_o))))))
-                 : ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                     ? ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                         ? ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__dst_addr_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__bias_addr_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U))))))))
-                         : ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__src1_addr_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__src0_addr_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U)))))))))
-                     : ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                         ? ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__opcode_o)))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cmd_addr_o 
-                                   & (- (IData)((1U 
-                                                 & (~ 
-                                                    ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                     >> 1U))))))))
-                         : ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))
-                             ? ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & (((((2U & ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cmd_busy_i)) 
-                                                << 1U)) 
-                                         | (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__unsupported_fmt_i)) 
-                                        << 5U) | (((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__memory_error_i) 
-                                                   << 4U) 
-                                                  | ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__shape_error_i) 
-                                                     << 3U))) 
-                                      | (((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__illegal_opcode_i) 
-                                          << 2U) | 
-                                         (((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__done_sticky_q) 
-                                           << 1U) | (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__cmd_busy_i))))))
-                             : ((- (IData)((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))))) 
-                                & ((- (IData)((1U & 
-                                               (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                                   >> 1U))))) 
-                                   & ((IData)(vlSelfRef.__VdfgRegularize_h6e95ff9d_0_7) 
-                                      << 2U)))))))) 
-           & (- (IData)((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo) 
-                                  >> 7U))))));
-    __VdfgRegularize_h6e95ff9d_0_17 = ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_valid) 
-                                       & ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_we) 
-                                          & (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__addr_lo))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__last_k 
-        = ((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__k_q))) 
-           >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__active_k));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_cols_cmd_n = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last 
-        = (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_q))) 
-            >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m)) 
-           & ((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_q))) 
-              >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__coord_valid 
-        = (VL_LTES_III(32, 0U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_y) 
-           & (VL_LTES_III(32, 0U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_x) 
-              & (VL_LTS_III(32, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_y, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_h)) 
-                 & VL_LTS_III(32, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_x, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_w)))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__elem_addr 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_base 
-           + ((vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_row_stride 
-               * vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_y) 
-              + ((vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_x 
-                  * (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_c)) 
-                 + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_q))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__output_w 
-        = (0x0000ffffU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_w_calc);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_m_calc 
-        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_h_calc 
-           * vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_out_w_calc);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_ready_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_ready_i) 
-           & (1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_ready_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_ready_i) 
-           & (4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_rvalid_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_rvalid_i) 
-           & (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__conv_ready_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_ready_i) 
-           & (2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__conv_rvalid_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_rvalid_i) 
-           & (2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_ready_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_ready_i) 
-           & (3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_rvalid_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_rvalid_i) 
-           & (3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_rvalid_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_rvalid_i) 
-           & (1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_rvalid_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_rvalid_i) 
-           & (4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_ready_o 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_ready_i) 
-           & (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_b;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_rdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_load_byte 
-        = (0x000000ffU & ((0x0dU == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))
-                           ? ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_lane_sel))
-                               ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata
-                               : ((1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_lane_sel))
-                                   ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata 
-                                      >> 8U) : ((2U 
-                                                 == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_lane_sel))
-                                                 ? 
-                                                (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata 
-                                                 >> 0x00000010U)
-                                                 : 
-                                                (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata 
-                                                 >> 0x00000018U))))
-                           : ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_lane_sel))
-                               ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata
-                               : ((1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_lane_sel))
-                                   ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata 
-                                      >> 8U) : ((2U 
-                                                 == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_lane_sel))
-                                                 ? 
-                                                (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata 
-                                                 >> 0x00000010U)
-                                                 : 
-                                                (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata 
-                                                 >> 0x00000018U))))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_rdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__client_mem_rdata;
-    if ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_d = 0U;
-                    }
-                }
-            } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_d = 0U;
-                }
-            }
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_addr 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_addr_q;
-                    }
-                }
-            }
-        }
-    } else {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_d 
-                            = (((0x0000ffffU & ((IData)(1U) 
-                                                + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_q))) 
-                                < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k))
-                                ? (0x0000ffffU & ((IData)(1U) 
-                                                  + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_q)))
-                                : 0U);
-                    }
-                } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_d = 0U;
-                }
-            } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_d = 0U;
-                }
-            } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_d = 0U;
-            }
-        }
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_addr 
-                        = ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))
-                            ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src1_read_addr
-                            : vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_src0_read_addr);
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_addr_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__start 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__shared_mul_start;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_rdata;
-    vlSelfRef.tinygpu_top__DOT__u_counters__DOT__stall_i 
-        = vlSelfRef.tinygpu_top__DOT__cnt_stall;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_addr_next 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_store_aligned_addr;
-    vlSelfRef.tinygpu_top__DOT__mmio_rdata = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_rdata;
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__soft_reset_o 
-        = ((vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata 
-            >> 1U) & (IData)(__VdfgRegularize_h6e95ff9d_0_17));
-    vlSelfRef.tinygpu_top__DOT__u_regs__DOT__start_pulse_o 
-        = (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__mmio_wdata 
-           & (IData)(__VdfgRegularize_h6e95ff9d_0_17));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__k_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__k_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__row_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__row_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kh_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kh_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__lane_sel 
-        = (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__elem_addr);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__aligned_addr 
-        = (0xfffffffcU & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__elem_addr);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_x_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_x_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_y_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_y_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_shape_ok 
-        = ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_h)) 
-           & ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_w)) 
-              & ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_input_c)) 
-                 & ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_output_c)) 
-                    & ((((1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_h)) 
-                         & (1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_w))) 
-                        | ((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_h)) 
-                           & (3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_w)))) 
-                       & (((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_h)) 
-                           | (1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_h))) 
-                          & (((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_w)) 
-                              | (1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_stride_w))) 
-                             & ((1U >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_pad_h)) 
-                                & ((1U >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_pad_w)) 
-                                   & ((0U == (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_cfg_q 
-                                              >> 0x00000018U)) 
-                                      & ((vlSelfRef.__VdfgRegularize_h6e95ff9d_0_16 
-                                          >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_h)) 
-                                         & ((vlSelfRef.__VdfgRegularize_h6e95ff9d_0_15 
-                                             >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_kernel_w)) 
-                                            & ((0U 
-                                                != vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_m_calc) 
-                                               & ((0x0000ffffU 
-                                                   >= vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_m_calc) 
-                                                  & ((0U 
-                                                      != vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_k_calc) 
-                                                     & ((0x0000ffffU 
-                                                         >= vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_k_calc) 
-                                                        & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__direct_mode) 
-                                                           | (1U 
-                                                              == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_desc_version_q)))))))))))))))))));
-    if ((1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_we_o 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_we_i;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_we 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_we_o;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_wdata_o 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_wdata_i;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_wdata 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_wdata_o;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_wstrb_o 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_wstrb_i;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_wstrb 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_wstrb_o;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_ready 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_ready_o;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_req_o 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_req_i;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_we_o 
-            = ((2U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)) 
-               & ((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                   ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_we_i)
-                   : ((4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                       ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_we_i)
-                       : (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_we_i))));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_we 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_we_o;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_wdata_o 
-            = (((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                 ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_wdata_i
-                 : ((4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                     ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_wdata_i
-                     : vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_wdata_i)) 
-               & (- (IData)((2U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)))));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_wdata 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_wdata_o;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_wstrb_o 
-            = (((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                 ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_wstrb_i)
-                 : ((4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                     ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_wstrb_i)
-                     : (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_wstrb_i))) 
-               & (- (IData)((2U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i)))));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_wstrb 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_wstrb_o;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_ready 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_ready_o;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_req_o 
-            = ((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__conv_req_i)
-                : ((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                    ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_req_i)
-                    : ((4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                        ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_req_i)
-                        : (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_req_i))));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_req 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_req_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_ready 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_ready_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_rvalid 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_rvalid_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_ready 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__conv_ready_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_rvalid 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__conv_rvalid_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_ready 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_ready_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_rvalid 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_rvalid_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_rvalid 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_rvalid_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_rvalid 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_rvalid_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_ready 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_ready_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__load_byte 
-        = (0x000000ffU & ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__load_lane_sel))
-                           ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_rdata
-                           : ((1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__load_lane_sel))
-                               ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_rdata 
-                                  >> 8U) : ((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__load_lane_sel))
-                                             ? (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_rdata 
-                                                >> 0x00000010U)
-                                             : (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_rdata 
-                                                >> 0x00000018U)))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_rdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_rdata;
-    vlSelfRef.mmio_rdata = vlSelfRef.tinygpu_top__DOT__mmio_rdata;
-    vlSelfRef.tinygpu_top__DOT__reg_soft_reset = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__soft_reset_o;
-    if (vlSelfRef.tinygpu_top__DOT__u_regs__DOT__start_pulse_o) {
-        vlSelfRef.tinygpu_top__DOT__u_regs__DOT__start_direct_mode_o 
-            = (1U & ((IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__ctrl_mode_next_w) 
-                     >> 1U));
-        vlSelfRef.tinygpu_top__DOT__reg_start_pulse = 1U;
-    } else {
-        vlSelfRef.tinygpu_top__DOT__u_regs__DOT__start_direct_mode_o 
-            = (1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_regs__DOT__direct_mode_o));
-        vlSelfRef.tinygpu_top__DOT__reg_start_pulse = 0U;
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__aligned_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok 
-        = ((1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q))
-            ? ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__N_q)) 
-               & (IData)(vlSelfRef.__VdfgRegularize_h6e95ff9d_0_9))
-            : ((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q))
-                ? (IData)(vlSelfRef.__VdfgRegularize_h6e95ff9d_0_9)
-                : ((7U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q))
-                    ? (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_shape_ok)
-                    : ((0U != (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q)) 
-                       & ((6U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-                          | ((5U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_q)) 
-                             | (IData)(vlSelfRef.__VdfgRegularize_h6e95ff9d_0_8)))))));
-    vlSelfRef.tinygpu_top__DOT__mem_we_raw = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_we;
-    vlSelfRef.tinygpu_top__DOT__mem_wdata_raw = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_wdata;
-    vlSelfRef.tinygpu_top__DOT__mem_wstrb_raw = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_wstrb;
-    vlSelfRef.tinygpu_top__DOT__mem_req_raw = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_req;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_rvalid 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_rvalid;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_ready 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_ready;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_rvalid 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_rvalid;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__load_vec_y_reg = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__load_vec_x_reg = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__load_desc_word = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__load_bias_reg = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_ready 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_mem_ready;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wdata = 0U;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                  >> 2U)))) {
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wdata 
-                    = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__load_byte;
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__soft_reset 
-        = vlSelfRef.tinygpu_top__DOT__reg_soft_reset;
-    vlSelfRef.tinygpu_top__DOT__reg_start_direct_mode 
-        = vlSelfRef.tinygpu_top__DOT__u_regs__DOT__start_direct_mode_o;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__start 
-        = vlSelfRef.tinygpu_top__DOT__reg_start_pulse;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_shape_error = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_unsupported_format = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_n_offset_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_n_offset_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_step_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_step_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_m_step_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_m_step_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_k_step_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_k_step_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_m_step_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_m_step_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_base_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_base_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_row_base_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_row_base_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_row_base_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_row_base_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q) 
-                      >> 1U)))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__last_k) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__k_d = 0U;
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__last_row)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__row_d 
-                            = (0x0000ffffU & ((IData)(1U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__row_q)));
-                    }
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kh_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__first_kh_q;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__first_kw_q;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__first_ic_q;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_x_d 
-                        = (((0x0000ffffU & ((IData)(1U) 
-                                            + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_x_q))) 
-                            < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__output_w))
-                            ? (0x0000ffffU & ((IData)(1U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_x_q)))
-                            : 0U);
-                    if (((0x0000ffffU & ((IData)(1U) 
-                                         + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_x_q))) 
-                         >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__output_w))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_y_d 
-                            = (0x0000ffffU & ((IData)(1U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_y_q)));
-                    }
-                } else {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__k_d 
-                        = (0x0000ffffU & ((IData)(1U) 
-                                          + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__k_q)));
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kh_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_kh;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_kw;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_ic;
-                }
-            }
-        }
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_d 
-            = ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))
-                ? 0U : ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))
-                         ? ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__last_k)
-                             ? ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__last_row)
-                                 ? 6U : 1U) : 1U) : 5U));
-    } else {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q) 
-                      >> 1U)))) {
-            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q)))) {
-                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__k_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__row_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kh_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start_kh;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kw_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start_kw;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__ic_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start_ic;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_x_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__tile_out_x;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__out_y_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__tile_out_y;
-                }
-            }
-        }
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_rvalid) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_d = 4U;
-                }
-            } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__mem_ready) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_d = 3U;
-            }
-        } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_q))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_d 
-                = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__coord_valid)
-                    ? 2U : 4U);
-        } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__state_d 
-                = (((((((((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__active_rows)) 
-                          | (4U < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__active_rows))) 
-                         | (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__active_k))) 
-                        | (0x0010U < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__active_k))) 
-                       | (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__output_w))) 
-                      | (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__input_c))) 
-                     | (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kernel_h))) 
-                    | (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__kernel_w)))
-                    ? 7U : 1U);
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 0U;
-    if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-        if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d = 0U;
-        } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_ready) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d 
-                    = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)
-                        ? 6U : 4U);
-            }
-        } else {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d = 5U;
-        }
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q) 
-                      >> 1U)))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_ready) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 1U;
-                    }
-                }
-            }
-        }
-    } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-        if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d 
-                = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)
-                    ? 6U : 1U);
-            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem)))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem = 1U;
-            }
-        } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_rvalid) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d = 3U;
-        }
-    } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q))) {
-        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__mem_ready) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d = 2U;
-        }
-    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__start) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_d 
-            = (((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows)) 
-                | (0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols)))
-                ? 6U : ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind))
-                         ? 1U : (((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind)) 
-                                  | (3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind)))
-                                  ? 4U : 7U)));
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wdata 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_wdata;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__dma_wdata 
-        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_is_conv)
-            ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_spm_wdata
-            : vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__spm_dma_wdata);
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__start_direct_mode 
-        = vlSelfRef.tinygpu_top__DOT__reg_start_direct_mode;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_cmd_addr = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_status = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_cmd_start = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__conv_addr_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_mem_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_addr_o 
-        = ((1U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-            ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__desc_addr_i
-            : ((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__conv_addr_i
-                : ((3U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                    ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_addr_i
-                    : ((4U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__select_i))
-                        ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_addr_i
-                        : vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__dma_addr_i))));
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q;
-    if (((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q)) 
-         & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__start))) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_d = 0U;
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_d = 0U;
-    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_d 
-            = (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q))) 
-                < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols_q))
-                ? (0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q)))
-                : 0U);
-        if (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q))) 
-             >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols_q))) {
-            if (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q))) 
-                 < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_d 
-                    = (0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q)));
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_row_base_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_row_base_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_q;
-    if ((1U & (~ ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__state_q)) 
-                  & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__start))))) {
-        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__advance_elem) {
-            if (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q))) 
-                 >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols_q))) {
-                if (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q))) 
-                     < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_row_base_d 
-                        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_row_base_q 
-                           + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__stride_bytes_q));
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_d 
-                        = (0x000001ffU & ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q))
-                                           ? ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_q))
-                                               ? ((IData)(0x0010U) 
-                                                  + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_q))
-                                               : ((IData)(4U) 
-                                                  + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_q)))
-                                           : ((IData)(0x0010U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_q))));
-                }
-            }
-            if (((0x0000ffffU & ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__col_q))) 
-                 < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__cols_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_d 
-                    = ((2U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q))
-                        ? ((IData)(4U) + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q)
-                        : ((IData)(1U) + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_q));
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_d 
-                    = (0x000001ffU & ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q))
-                                       ? ((IData)(1U) 
-                                          + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_q))
-                                       : ((IData)(4U) 
-                                          + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_q))));
-            } else if (((0x0000ffffU & ((IData)(1U) 
-                                        + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__row_q))) 
-                        < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rows_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_addr_d 
-                    = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__ext_row_base_q 
-                       + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__stride_bytes_q));
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_addr_d 
-                    = (0x000001ffU & ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__op_kind_q))
-                                       ? ((0U == (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_region_q))
-                                           ? ((IData)(0x0010U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_q))
-                                           : ((IData)(4U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_q)))
-                                       : ((IData)(0x0010U) 
-                                          + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__spm_row_base_q))));
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_cmd = 0U;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_cmd_fields = 0U;
-    if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                  >> 4U)))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_ok)))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_illegal_opcode = 1U;
-                        }
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_ok) {
-                            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok)))) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_shape_error = 1U;
-                            }
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok) {
-                                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_flags_ok)))) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__set_unsupported_format = 1U;
-                                }
-                            }
-                        }
-                        if ((((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_ok) 
-                              & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok)) 
-                             & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_flags_ok))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_d = 0x00000010U;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_step_d 
-                                = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__use_dst_i8)
-                                    ? 4U : 0x00000010U);
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_m_step_d 
-                                = VL_SHIFTL_III(32,32,32, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_eff), 2U);
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_k_step_d 
-                                = VL_SHIFTL_III(32,32,32, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_eff), 4U);
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_m_step_d 
-                                = VL_SHIFTL_III(32,32,32, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0_q), 2U);
-                        }
-                    } else {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_step_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_m_step_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_k_step_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_m_step_d = 0U;
-                    }
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__start) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_cmd_addr = 1U;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_cmd_start = 1U;
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__start_direct_mode) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__latch_cmd = 1U;
-                            }
-                            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__start_direct_mode)))) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_cmd_fields = 1U;
-                            }
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_status = 1U;
-                        } else {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__clear_status = 0U;
-                        }
-                    }
-                }
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_q) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_rvalid) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__load_desc_word = 1U;
-                            }
-                        }
-                    }
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_d = 0U;
-                    } else if (((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_q) 
-                                & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_rvalid))) {
-                        if (((0x0000001fU & ((IData)(1U) 
-                                             + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_q))) 
-                             < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_words_expected))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_d 
-                                = (0x0000001fU & ((IData)(1U) 
-                                                  + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_q)));
-                        }
-                    }
-                } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_d = 0U;
-                }
-            }
-        }
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_stride_bytes_cmd_n 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride_dst_eff;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_rows_cmd_n 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_cols_cmd_n 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n;
-                    }
-                }
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((1U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_q) {
-                                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_rvalid) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__load_bias_reg = 1U;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_rvalid) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__load_vec_y_reg = 1U;
-                            }
-                        }
-                    }
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_rvalid) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__load_vec_x_reg = 1U;
-                            }
-                        }
-                    }
-                }
-            }
-        } else if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_stride_bytes_cmd_n 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_eff;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_rows_cmd_n 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_cols_cmd_n 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n;
-                }
-            } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_stride_bytes_cmd_n 
-                    = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride0_q;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_rows_cmd_n 
-                    = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m;
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_cols_cmd_n 
-                    = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k;
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q;
-    if ((0x00000010U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_n_offset_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_base_d 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_addr_q;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_row_base_d 
-                            = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_row_base_q 
-                               + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_m_step_q);
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_row_base_d 
-                            = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_row_base_q 
-                               + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_m_step_q);
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_d 
-                            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_addr_q;
-                    }
-                }
-            } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_n_offset_d 
-                        = ((IData)(4U) + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_n_offset_q);
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_d 
-                        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_q 
-                           + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_step_q);
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_base_d 
-                        = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_base_q 
-                           + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_n_step_q);
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_d 
-                        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_addr_q;
-                } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_ready))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_d 
-                        = (((0x0000ffffU & ((IData)(1U) 
-                                            + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q))) 
-                            < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q))
-                            ? (0x0000ffffU & ((IData)(1U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q)))
-                            : 0U);
-                }
-            }
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d 
-                = ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                             >> 2U))) && ((1U & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                                                 >> 1U)) 
-                                          && ((1U & 
-                                               (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) 
-                                              && (1U 
-                                                  & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_ready))))));
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d = 0U;
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-        }
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0U;
-        } else if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0U;
-            } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_inflight_q) {
-                    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_error) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x17U;
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_done) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 6U;
-                    }
-                }
-            } else {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 4U;
-            }
-        } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 4U;
-            } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_ready) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                    = (((0x0000ffffU & ((IData)(1U) 
-                                        + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_q))) 
-                        < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q))
-                        ? 0x0cU : 0x16U);
-            }
-        } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x12U;
-        } else if ((8U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)) {
-            if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_busy)) 
-                          & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_done)))))) {
-                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mul_done) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x11U;
-                }
-            }
-        } else {
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x11U;
-        }
-    } else {
-        if ((8U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_k_tiles) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_d 
-                                = (0x0000ffffU & ((IData)(0x0010U) 
-                                                  + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_q)));
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_d 
-                                = (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_q 
-                                   + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__stride1_k_step_q);
-                        }
-                    }
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if (((vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q 
-                              & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_q)) 
-                             & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_rvalid))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d 
-                                = (((0x0000ffffU & 
-                                     ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_q))) 
-                                    < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n))
-                                    ? (0x0000ffffU 
-                                       & ((IData)(1U) 
-                                          + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_q)))
-                                    : 0U);
-                        }
-                    } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_k_tiles)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d = 0U;
-                    }
-                }
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_q)))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d 
-                                = (((0x0000ffffU & 
-                                     ((IData)(1U) + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_q))) 
-                                    < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n))
-                                    ? (0x0000ffffU 
-                                       & ((IData)(1U) 
-                                          + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_q)))
-                                    : 0U);
-                            if (((0x0000ffffU & ((IData)(1U) 
-                                                 + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_q))) 
-                                 >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n))) {
-                                if (((0x0000ffffU & 
-                                      ((IData)(1U) 
-                                       + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_q))) 
-                                     < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_m))) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d 
-                                        = (0x0000ffffU 
-                                           & ((IData)(1U) 
-                                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_q)));
-                                }
-                            }
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_last) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_d = 1U;
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d = 0U;
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d = 0U;
-                            }
-                        }
-                    }
-                } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_k_tiles)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d = 0U;
-                    }
-                }
-            }
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                        = ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))
-                            ? ((8U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)
-                                ? 0x10U : 0x11U) : 0x0fU);
-                } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_rvalid) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 0U;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x0eU;
-                        }
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_ready) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 1U;
-                    }
-                } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_q) {
-                    if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_rvalid) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                            = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_needs_y)
-                                ? 0x0dU : 0x0eU);
-                    }
-                } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_mem_ready) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 1U;
-                }
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-            } else {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 0U;
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-                    }
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                      & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)))) {
-                                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x17U;
-                                } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                                        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_n_tiles)
-                                            ? 0x13U
-                                            : ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_m_tiles)
-                                                ? 0x14U
-                                                : 0x16U));
-                                }
-                            }
-                        }
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__epi_done) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x0bU;
-                    }
-                } else if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_q) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_rvalid) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-                                if (((0x0000ffffU & 
-                                      ((IData)(1U) 
-                                       + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_q))) 
-                                     >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_n))) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x0aU;
-                                }
-                            }
-                        } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_mem_ready) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 1U;
-                        }
-                    } else {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x0aU;
-                    }
-                } else {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                        = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__more_k_tiles)
-                            ? ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__is_conv_opcode)
-                                ? 0x15U : 5U) : ((1U 
-                                                  & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__flags_q)
-                                                  ? 9U
-                                                  : 0x0aU));
-                }
-            }
-            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d = 0U;
-        } else {
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d = 0U;
-                    }
-                } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__k0_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_stage_done_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_col_d = 0U;
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__store_row_d = 0U;
-                }
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_ok) 
-                              & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok)) 
-                             & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_flags_ok))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_d 
-                                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_addr_q;
-                        }
-                    } else {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_k_base_d = 0U;
-                    }
-                }
-            }
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-                        if (((0x0000ffffU & ((IData)(1U) 
-                                             + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_q))) 
-                             >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__active_tile_k))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 8U;
-                        }
-                    } else if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                         & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                        if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)))) {
-                            if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x17U;
-                            } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 7U;
-                            }
-                        }
-                    }
-                } else {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-                    }
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((1U & (~ ((~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)) 
-                                      & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_inflight_q)))))) {
-                            if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_launch_pending_q)))) {
-                                if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_error) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 0x17U;
-                                } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dma_done) {
-                                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 6U;
-                                }
-                            }
-                        }
-                    } else {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                            = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__is_conv_opcode)
-                                ? 0x15U : 5U);
-                    }
-                }
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d = 0U;
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d = 0U;
-                    }
-                }
-            } else {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_inflight_d = 0U;
-                if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                            = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__is_vector_opcode)
-                                ? 0x0cU : 4U);
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_q) {
-                        if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_rvalid) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d = 0U;
-                            if (((0x0000001fU & ((IData)(1U) 
-                                                 + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_word_idx_q))) 
-                                 >= (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_words_expected))) {
-                                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d = 1U;
-                            }
-                        }
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_mem_ready) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d = 1U;
-                    }
-                } else {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_inflight_d = 0U;
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_col_d = 0U;
-                    }
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                            = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_ok)
-                                ? ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok)
-                                    ? ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_flags_ok)
-                                        ? 3U : 0x17U)
-                                    : 0x17U) : 0x17U);
-                    } else if (vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__start) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_d 
-                            = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__start_direct_mode)
-                                ? 1U : 2U);
-                    }
-                }
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_inflight_d = 0U;
-            }
-        }
-        if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                      >> 3U)))) {
-            if ((4U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_d = 0U;
-                    }
-                }
-            } else if ((2U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_d = 0U;
-                }
-            } else if ((1U & (~ (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q)))) {
-                vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__vec_idx_d = 0U;
-            }
-            if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                          >> 2U)))) {
-                if ((1U & (~ ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q) 
-                              >> 1U)))) {
-                    if ((1U & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__state_q))) {
-                        if ((((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__opcode_ok) 
-                              & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dims_ok)) 
-                             & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_flags_ok))) {
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_n_offset_d = 0U;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_d = 0U;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_base_d 
-                                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_addr_q;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_row_base_d 
-                                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_addr_q;
-                            vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_row_base_d 
-                                = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_addr_q;
-                        }
-                    } else {
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src1_n_offset_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_n_offset_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__bias_base_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__dst_row_base_d = 0U;
-                        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__src0_row_base_d = 0U;
-                    }
-                }
-            }
-        }
-    }
-    vlSelfRef.tinygpu_top__DOT__cnt_cmd_start = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__cnt_cmd_start;
-    vlSelfRef.tinygpu_top__DOT__u_counters__DOT__cmd_start_i 
-        = vlSelfRef.tinygpu_top__DOT__cnt_cmd_start;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__mem_addr_o;
-    vlSelfRef.tinygpu_top__DOT__mem_addr_raw = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__mem_addr;
-}
-
-VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__1(Vtop___024root* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__1\n"); );
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Body
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__b_rd_data 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data;
-}
-
-VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__2(Vtop___024root* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__2\n"); );
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Body
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__a_rd_data 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data;
-}
-
-VL_ATTR_COLD void Vtop___024root___stl_comb__TOP__0(Vtop___024root* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_comb__TOP__0\n"); );
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Body
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c = 0U;
-    while (VL_GTS_III(32, 4U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c)) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__col_mask 
-            = (((~ ((IData)(1U) << (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c))) 
-                & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__col_mask)) 
-               | (0x0fU & (((0x0000ffffU & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__n0_q) 
-                                            + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c)) 
-                            < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__effective_n)) 
-                           << (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c))));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__b_rd_addr[(3U 
-                                                                & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c)] 
-            = (0x000000ffU & (VL_SHIFTL_III(8,32,32, (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_q), 2U) 
-                              + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__b_vec[(3U 
-                                                            & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c)] 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__b_rd_data
-            [(3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c)];
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c 
-            = ((IData)(1U) + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk5__DOT__c);
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__b_rd_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__col_mask 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__col_mask;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__col_mask 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__col_mask;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__b_vec;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk8__DOT__c = 0U;
-    while (VL_GTS_III(32, 4U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk8__DOT__c)) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data[(3U 
-                                                                            & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk8__DOT__c)] 
-            = (VL_GTS_III(32, 0x00000040U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr
-                          [(3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk8__DOT__c)])
-                ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_bank
-               [(3U & VL_MODDIVS_III(32, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr
-                                     [(3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk8__DOT__c)], (IData)(4U)))]
-               [(0x0000000fU & VL_DIVS_III(32, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr
-                                           [(3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk8__DOT__c)], (IData)(4U)))]
-                : 0U);
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk8__DOT__c 
-            = ((IData)(1U) + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk8__DOT__c);
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[0U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[1U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[2U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[3U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[0U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[1U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[2U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[3U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[0U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[1U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[2U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[3U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[0U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[1U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[2U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__b_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__b_vec[3U];
-}
-
-VL_ATTR_COLD void Vtop___024root___stl_comb__TOP__1(Vtop___024root* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_comb__TOP__1\n"); );
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Body
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r = 0U;
-    while (VL_GTS_III(32, 4U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r)) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__row_mask 
-            = (((~ ((IData)(1U) << (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r))) 
-                & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__row_mask)) 
-               | (0x0fU & (((0x0000ffffU & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__m0_q) 
-                                            + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r)) 
-                            < (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__M_q)) 
-                           << (3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r))));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__a_rd_addr[(3U 
-                                                                & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r)] 
-            = (0x000000ffU & (VL_SHIFTL_III(8,32,32, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r, 4U) 
-                              + (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__kk_q)));
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__a_vec[(3U 
-                                                            & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r)] 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__a_rd_data
-            [(3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r)];
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r 
-            = ((IData)(1U) + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk4__DOT__r);
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__a_rd_addr;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__a_vec;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__row_mask 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__row_mask;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__row_mask 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__row_mask;
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk7__DOT__r = 0U;
-    while (VL_GTS_III(32, 4U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk7__DOT__r)) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data[(3U 
-                                                                            & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk7__DOT__r)] 
-            = (VL_GTS_III(32, 0x00000040U, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr
-                          [(3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk7__DOT__r)])
-                ? vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_bank
-               [(3U & VL_DIVS_III(32, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr
-                                  [(3U & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk7__DOT__r)], (IData)(0x00000010U)))]
-               [(0x0000000fU & VL_MODDIVS_III(32, vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr
-                                              [(3U 
-                                                & vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk7__DOT__r)], (IData)(0x00000010U)))]
-                : 0U);
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk7__DOT__r 
-            = ((IData)(1U) + vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk7__DOT__r);
-    }
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[0U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[0U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[0U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[0U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[1U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[1U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[1U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[1U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[2U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[2U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[2U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[2U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[3U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[3U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[3U];
-    vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__a_i 
-        = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__a_vec[3U];
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_3 = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__mac_en) 
-                                                & (IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__row_mask));
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_4 = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__mac_en) 
-                                                & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__row_mask) 
-                                                   >> 1U));
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_5 = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__mac_en) 
-                                                & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__row_mask) 
-                                                   >> 2U));
-    vlSelfRef.__VdfgRegularize_h6e95ff9d_0_6 = ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__mac_en) 
-                                                & ((IData)(vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__row_mask) 
-                                                   >> 3U));
-}
-
-void Vtop___024root___act_comb__TOP__0(Vtop___024root* vlSelf);
+void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf);
+void Vtop___024root___ico_comb__TOP__0(Vtop___024root* vlSelf);
 
 VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_stl\n"); );
@@ -4287,26 +268,11 @@ VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
     if ((1ULL & vlSelfRef.__VstlTriggered[1U])) {
-        Vtop___024root___stl_sequent__TOP__0(vlSelf);
-    }
-    if ((1ULL & vlSelfRef.__VstlTriggered[0U])) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__b_rd_data 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data;
-    }
-    if ((2ULL & vlSelfRef.__VstlTriggered[0U])) {
-        vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__a_rd_data 
-            = vlSelfRef.tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data;
-    }
-    if ((1ULL & (vlSelfRef.__VstlTriggered[1U] | vlSelfRef.__VstlTriggered[0U]))) {
-        Vtop___024root___stl_comb__TOP__0(vlSelf);
-    }
-    if (((1ULL & vlSelfRef.__VstlTriggered[1U]) | (2ULL 
-                                                   & vlSelfRef.__VstlTriggered[0U]))) {
-        Vtop___024root___stl_comb__TOP__1(vlSelf);
+        Vtop___024root___ico_sequent__TOP__0(vlSelf);
     }
     if (((1ULL & vlSelfRef.__VstlTriggered[1U]) | (3ULL 
                                                    & vlSelfRef.__VstlTriggered[0U]))) {
-        Vtop___024root___act_comb__TOP__0(vlSelf);
+        Vtop___024root___ico_comb__TOP__0(vlSelf);
     }
 }
 
@@ -4330,17 +296,23 @@ VL_ATTR_COLD bool Vtop___024root___eval_phase__stl(Vtop___024root* vlSelf) {
     return (__VstlExecute);
 }
 
-bool Vtop___024root___trigger_anySet__ico(const VlUnpacked<QData/*63:0*/, 1> &in);
+bool Vtop___024root___trigger_anySet__ico(const VlUnpacked<QData/*63:0*/, 2> &in);
 
 #ifdef VL_DEBUG
-VL_ATTR_COLD void Vtop___024root___dump_triggers__ico(const VlUnpacked<QData/*63:0*/, 1> &triggers, const std::string &tag) {
+VL_ATTR_COLD void Vtop___024root___dump_triggers__ico(const VlUnpacked<QData/*63:0*/, 2> &triggers, const std::string &tag) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___dump_triggers__ico\n"); );
     // Body
     if ((1U & (~ (IData)(Vtop___024root___trigger_anySet__ico(triggers))))) {
         VL_DBG_MSGS("         No '" + tag + "' region triggers active\n");
     }
     if ((1U & (IData)(triggers[0U]))) {
-        VL_DBG_MSGS("         '" + tag + "' region trigger index 0 is active: Internal 'ico' trigger - first iteration\n");
+        VL_DBG_MSGS("         '" + tag + "' region trigger index 0 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.a_rd_addr)\n");
+    }
+    if ((1U & (IData)((triggers[0U] >> 1U)))) {
+        VL_DBG_MSGS("         '" + tag + "' region trigger index 1 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.b_rd_addr)\n");
+    }
+    if ((1U & (IData)(triggers[1U]))) {
+        VL_DBG_MSGS("         '" + tag + "' region trigger index 64 is active: Internal 'ico' trigger - first iteration\n");
     }
 }
 #endif  // VL_DEBUG
@@ -4355,10 +327,10 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(const VlUnpacked<QData/*63
         VL_DBG_MSGS("         No '" + tag + "' region triggers active\n");
     }
     if ((1U & (IData)(triggers[0U]))) {
-        VL_DBG_MSGS("         '" + tag + "' region trigger index 0 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.b_rd_data)\n");
+        VL_DBG_MSGS("         '" + tag + "' region trigger index 0 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.a_rd_addr)\n");
     }
     if ((1U & (IData)((triggers[0U] >> 1U)))) {
-        VL_DBG_MSGS("         '" + tag + "' region trigger index 1 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.a_rd_data)\n");
+        VL_DBG_MSGS("         '" + tag + "' region trigger index 1 is active: @([hybrid] tinygpu_top.u_cmd_ctrl.u_spm.b_rd_addr)\n");
     }
     if ((1U & (IData)((triggers[0U] >> 2U)))) {
         VL_DBG_MSGS("         '" + tag + "' region trigger index 2 is active: @(posedge tinygpu_top.clk)\n");
@@ -4611,6 +583,78 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__mem_cmd_wstrb_q = VL_SCOPED_RAND_RESET_I(4, __VscopeHash, 4858292503708563402ull);
     vlSelf->tinygpu_top__DOT__mem_read_pending_q = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 18369927006525472251ull);
     vlSelf->tinygpu_top__DOT__mem_stage_ready = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1921542136879394931ull);
+    vlSelf->tinygpu_top__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mmio_valid = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mmio_we = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mmio_addr = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mmio_wdata = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mmio_wstrb = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mmio_rdata = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mmio_ready = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_req = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_we = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_addr = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_wdata = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_wstrb = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_rdata = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_ready = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__irq = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_start_pulse = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_start_direct_mode = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_soft_reset = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_irq_enable = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_direct_mode = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_irq_pending = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_cmd_addr = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_opcode = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_src0_addr = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_src1_addr = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_bias_addr = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_dst_addr = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_dim_m = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_dim_n = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_dim_k = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_stride0 = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_stride1 = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_stride_dst = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_flags = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_scale = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_shift = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_zero_point = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_conv_in_hw = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_conv_channels = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__reg_conv_cfg = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__ctrl_busy = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__ctrl_done = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__ctrl_illegal_opcode = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__ctrl_shape_error = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__ctrl_memory_error = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__ctrl_unsupported_format = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__cnt_cmd_start = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__cnt_cmd_done = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__cnt_busy = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__cnt_active = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__cnt_stall = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__cycle_count_last = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__active_count_last = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__stall_count_last = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__cmd_count_total = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_req_raw = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_we_raw = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_addr_raw = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_wdata_raw = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_wstrb_raw = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_rdata_stage_q = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_rvalid_stage_q = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_cmd_valid_q = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_cmd_we_q = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_cmd_addr_q = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_cmd_wdata_q = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_cmd_wstrb_q = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_read_pending_q = 0;
+    vlSelf->tinygpu_top__DOT____Vtogcov__mem_stage_ready = 0;
     vlSelf->tinygpu_top__DOT__u_regs__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 5438652484111493384ull);
     vlSelf->tinygpu_top__DOT__u_regs__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 5522456512585873751ull);
     vlSelf->tinygpu_top__DOT__u_regs__DOT__mmio_valid = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 17001874115137382546ull);
@@ -4669,6 +713,62 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_regs__DOT__stride_dst_next_w = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 12791596759506273853ull);
     vlSelf->tinygpu_top__DOT__u_regs__DOT__shiftzp_next_w = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 12272509086824038790ull);
     vlSelf->tinygpu_top__DOT__u_regs__DOT__unused_mmio_addr = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 14789822281994581030ull);
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__mmio_valid = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__mmio_we = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__mmio_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__mmio_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__mmio_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__mmio_rdata = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__cmd_busy_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__cmd_done_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__illegal_opcode_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__shape_error_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__memory_error_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__unsupported_fmt_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__cycle_count_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__active_count_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__stall_count_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__cmd_count_i = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__start_pulse_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__start_direct_mode_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__soft_reset_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__irq_enable_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__direct_mode_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__irq_pending_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__cmd_addr_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__opcode_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__src0_addr_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__src1_addr_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__bias_addr_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__dst_addr_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__dim_m_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__dim_n_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__dim_k_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__stride0_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__stride1_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__stride_dst_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__flags_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__scale_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__shift_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__zero_point_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__conv_in_hw_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__conv_channels_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__conv_cfg_o = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__done_sticky_q = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__irq_pending_q = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__addr_lo = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__ctrl_mode_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__direct_op_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__dim_m_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__dim_n_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__dim_k_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__stride0_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__stride1_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__stride_dst_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__shiftzp_next_w = 0;
+    vlSelf->tinygpu_top__DOT__u_regs__DOT____Vtogcov__unused_mmio_addr = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 9570182567395578717ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 14929794636913748618ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__start = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 12898280409598919855ull);
@@ -5024,6 +1124,351 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__conv_shape_ok = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 8135543602773303446ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__desc_words_expected = VL_SCOPED_RAND_RESET_I(5, __VscopeHash, 11546777261676398730ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__unused_c_rd_data = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 18213503518714380729ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__start_direct_mode = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__soft_reset = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__direct_mode = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__cmd_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__opcode = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__flags = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src0_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src1_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__M = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__N = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__K = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride0 = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride1 = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride_dst = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__scale = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shift = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__zero_point = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_in_hw = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_channels = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_cfg = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__illegal_opcode = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shape_error = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__memory_error = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__unsupported_format = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__cnt_cmd_start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__cnt_cmd_done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__cnt_busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__cnt_active = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__cnt_stall = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_req = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_we = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_rdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_ready = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__state_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__state_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__opcode_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__flags_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__cmd_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src0_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src1_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__M_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__N_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__K_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride0_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride1_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride_dst_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__scale_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shift_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__zero_point_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_in_hw_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_channels_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_cfg_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_desc_version_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__m0_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__m0_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__n0_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__n0_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__k0_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__k0_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__kk_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__kk_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__store_row_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__store_row_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__store_col_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__store_col_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_col_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_col_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_idx_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_idx_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_word_idx_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_word_idx_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__store_stage_done_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__store_stage_done_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_inflight_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_inflight_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_inflight_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_inflight_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_inflight_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_inflight_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_inflight_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_inflight_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_out_y_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_out_y_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_out_x_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_out_x_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_kh_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_kh_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_kw_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_kw_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_ic_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_ic_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__active_tile_m = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__active_tile_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__active_tile_k = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__row_mask = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__col_mask = 0;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__a_rd_addr[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__a_rd_data[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__b_rd_addr[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__b_rd_data[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__a_vec[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__b_vec[__Vi0] = 0;
+    }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__array_clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__array_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__spm_dma_wr_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__spm_dma_region = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__spm_dma_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__spm_dma_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__spm_dma_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__spm_dma_rdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__c_wr_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__c_wr_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__c_wr_data = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__c_rd_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__c_rd_data = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_mul_start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_mul_a = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_mul_b = 0;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_vec[__Vi0] = 0;
+    }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_out_valid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_out_index = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_out_i32 = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_out_i8 = 0;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        for (int __Vi1 = 0; __Vi1 < 4; ++__Vi1) {
+            vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__epi_shadow_i8[__Vi0][__Vi1] = 0;
+        }
+    }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_x_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_y_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_result_raw = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_result_post = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_result_i8 = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__zero_point_ext = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_store_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_store_wdata_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_store_wstrb_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_result_raw_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_result_post_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_scaled_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mul_start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mul_busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mul_done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mul_product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shared_mul_start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shared_mul_busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shared_mul_done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shared_mul_product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shared_mul_a = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__shared_mul_b = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_busy_status = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_error = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_mem_req = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_mem_we = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_mem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_mem_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_mem_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_mem_req = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_mem_we = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_mem_addr_mux = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_mem_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_mem_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mem_req = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mem_we = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mem_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mem_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_mem_req = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_mem_we = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_mem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_mem_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_mem_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_launch_pending_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_launch_pending_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_op_kind_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_base_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_rows_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_cols_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_stride_bytes_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_spm_region_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_spm_base_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_start_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_busy_status = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_error = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_inflight_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_inflight_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_mem_req = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_mem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__mem_client_sel = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__client_mem_rdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_mem_ready = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_mem_ready = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_mem_ready = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mem_ready = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_mem_ready = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_spm_wr_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_spm_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_spm_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_spm_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_next_out_y = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_next_out_x = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_next_kh = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_next_kw = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_next_ic = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__latch_cmd = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__latch_cmd_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__clear_cmd_fields = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__load_desc_word = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__latch_vec_store_cmd = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__latch_dma_cmd = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__clear_status = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__set_illegal_opcode = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__set_shape_error = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__set_memory_error = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__set_unsupported_format = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__opcode_ok = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_flags_ok = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dims_ok = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__more_k_tiles = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__more_n_tiles = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__more_m_tiles = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__use_dst_i8 = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__store_stage_last = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__clear_bias_regs = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__load_bias_reg = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__load_vec_x_reg = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__load_vec_y_reg = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__is_vector_opcode = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__is_vector_opcode_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__is_conv_opcode = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_needs_y = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__latch_vec_raw = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__latch_vec_post = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__latch_vec_scaled = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__state_is_bias = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__state_is_vec = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__state_is_desc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__state_is_conv = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__effective_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__effective_n_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src0_row_base_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src0_row_base_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src1_k_base_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src1_k_base_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src1_n_offset_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src1_n_offset_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_row_base_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_row_base_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_n_offset_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_n_offset_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_base_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_base_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src0_m_step_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__src0_m_step_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride1_k_step_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride1_k_step_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_m_step_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_m_step_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_n_step_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dst_n_step_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_n_step_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_n_step_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_store_base_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__bias_mem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_src0_stride_bytes = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_src1_stride_bytes = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_dst_stride_bytes = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_src0_elem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_src1_elem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_dst_elem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_store_aligned_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_src0_read_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_src1_read_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_src0_lane_sel = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_src1_lane_sel = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_load_byte = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_store_addr_next = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_store_wdata_next = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__vec_store_wstrb_next = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_op_kind_cmd_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_base_addr_cmd_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_rows_cmd_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_cols_cmd_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_stride_bytes_cmd_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_spm_region_cmd_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__dma_spm_base_cmd_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_input_h = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_input_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_input_c = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_output_c = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_kernel_h = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_kernel_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_stride_h = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_stride_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_pad_h = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_pad_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_out_h_calc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_out_w_calc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_m_calc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_k_calc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_input_row_stride = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride1_eff = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__stride_dst_eff = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__conv_shape_ok = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__desc_words_expected = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT____Vtogcov__unused_c_rd_data = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk2__DOT__c = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk3__DOT__c = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__unnamedblk1__DOT__c = 0;
@@ -5067,6 +1512,31 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0 = 0; __Vi0 < 16; ++__Vi0) {
         vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__c_words[__Vi0] = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 7032522919842576306ull);
     }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__dma_wr_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__dma_region = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__dma_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__dma_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__dma_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__dma_rdata = 0;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__a_rd_addr[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__a_rd_data[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__b_rd_addr[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__b_rd_data[__Vi0] = 0;
+    }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__c_wr_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__c_wr_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__c_wr_data = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__c_rd_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT____Vtogcov__c_rd_data = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk6__DOT__byte_idx = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk1__DOT__r = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__unnamedblk1__DOT__unnamedblk2__DOT__k = 0;
@@ -5117,6 +1587,48 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__vec_rvalid_o = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 5103896433288448080ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_ready_o = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1587712730644884314ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT__bias_rvalid_o = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 13681130075158006165ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__select_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__dma_req_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__dma_we_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__dma_addr_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__dma_wdata_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__dma_wstrb_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__desc_req_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__desc_we_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__desc_addr_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__desc_wdata_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__desc_wstrb_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__conv_req_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__conv_addr_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__vec_req_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__vec_we_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__vec_addr_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__vec_wdata_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__vec_wstrb_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__bias_req_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__bias_we_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__bias_addr_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__bias_wdata_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__bias_wstrb_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__mem_req_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__mem_we_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__mem_addr_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__mem_wdata_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__mem_wstrb_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__mem_rdata_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__mem_ready_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__mem_rvalid_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__client_rdata_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__dma_ready_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__dma_rvalid_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__desc_ready_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__desc_rvalid_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__conv_ready_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__conv_rvalid_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__vec_ready_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__vec_rvalid_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__bias_ready_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_mem_arbiter__DOT____Vtogcov__bias_rvalid_o = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 3243829867903186970ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 9616383994653666186ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__start = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 7415523400332894254ull);
@@ -5189,6 +1701,78 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_kw = VL_SCOPED_RAND_RESET_I(4, __VscopeHash, 11061183059819396313ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__step_ic = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 1119658070702122094ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT__read_outstanding_q = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 3378589228527242724ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__error = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__input_base = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__input_h = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__input_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__input_c = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__input_row_stride = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__kernel_h = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__kernel_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__stride_h = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__stride_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__pad_h = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__pad_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__tile_out_y = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__tile_out_x = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__output_w = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__active_rows = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__active_k = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__start_kh = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__start_kw = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__start_ic = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__next_out_y = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__next_out_x = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__next_kh = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__next_kw = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__next_ic = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__mem_req = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__mem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__mem_rdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__mem_ready = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__spm_wr_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__spm_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__spm_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__spm_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__state_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__state_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__row_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__row_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__k_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__k_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__out_y_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__out_y_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__out_x_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__out_x_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__kh_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__kh_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__kw_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__kw_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__ic_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__ic_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__first_kh_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__first_kw_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__first_ic_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__sample_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__sample_valid_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__input_y = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__input_x = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__elem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__aligned_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__lane_sel = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__coord_valid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__last_k = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__last_row = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__step_kh = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__step_kw = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__step_ic = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_im2col__DOT____Vtogcov__read_outstanding_q = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 2284349846832572912ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 17835531657940721402ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__start = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 3046519989018862543ull);
@@ -5245,10 +1829,72 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__last_elem = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1698871590815499705ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__store_word_q = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 6639626231904262383ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__held_req_q = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 16433830427254661869ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__read_outstanding_q = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 12321557010679437567ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__held_we_q = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 946762924069349971ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__held_addr_q = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 6418366285393266440ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__held_wdata_q = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 11049583342634389775ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT__held_wstrb_q = VL_SCOPED_RAND_RESET_I(4, __VscopeHash, 13298076558280130227ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__error = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__op_kind = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__base_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__rows = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__cols = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__stride_bytes = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_region = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_base = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__mem_req = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__mem_we = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__mem_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__mem_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__mem_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__mem_rdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__mem_ready = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__mem_rvalid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_wr_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_region_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_wdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_wstrb = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_rdata = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__state_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__state_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__done_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__error_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__op_kind_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__rows_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__cols_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__stride_bytes_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_region_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__row_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__row_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__col_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__col_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__ext_row_base_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__ext_row_base_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__ext_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__ext_addr_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_row_base_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_row_base_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__spm_addr_d = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__aligned_read_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__aligned_write_addr = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__load_byte = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__load_lane_sel = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__advance_elem = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__last_elem = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__store_word_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__held_req_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__read_outstanding_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__held_we_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__held_addr_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__held_wdata_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_dma__DOT____Vtogcov__held_wstrb_q = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 4864327703362063104ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 7657553445388505558ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 15886167315153038123ull);
@@ -5266,6 +1912,34 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
             vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__c_tile[__Vi0][__Vi1] = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 12171230611859043160ull);
         }
     }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__mac_en = 0;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__a_vec[__Vi0] = 0;
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__b_vec[__Vi0] = 0;
+    }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__row_mask = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__col_mask = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET__pe_mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT____Vtogcov__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET__pe_mac_en = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__pe_mac_en = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1971976785167733456ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__pe_mac_en = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 10317212902039616182ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__pe_mac_en = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 10697824603262966741ull);
@@ -5291,6 +1965,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 9056613099490544939ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 5547717705680572301ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 16066392321507796499ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 4653408085034795727ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 14803994825253376493ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 3839975656121556605ull);
@@ -5300,6 +1983,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 18110663698943013145ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 6270610706080900945ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1547204374062135281ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 2966727481396288291ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 5182887913794677129ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1854780028707440803ull);
@@ -5309,6 +2001,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1355596162457232224ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 8278020986050100051ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 12635835726199024349ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 17461966477733241826ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 13205780413276894721ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 4872739051017302327ull);
@@ -5318,6 +2019,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 4929998537307050148ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 8318390506130076566ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 17361680170608303768ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__0__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 15984442368077417827ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 4583278330709168498ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 8851658110813168684ull);
@@ -5327,6 +2037,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 16990106725702579306ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 339389198715968207ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1576002859153238282ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 10963708267794933125ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 4798651109491528860ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 18314835757973108896ull);
@@ -5336,6 +2055,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 885621531609325670ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 1418800233888527696ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 15022073132944073575ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 14332588434185412263ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 13854430145552108272ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 11847929966264468703ull);
@@ -5345,6 +2073,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 7876778671882384219ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 3891921395862685253ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 16082501135066906726ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 2621923426612914267ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 17749339240317073047ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 13427800164298168197ull);
@@ -5354,6 +2091,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 4962725081369091733ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 5481126711525090763ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 4685927027951359529ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__1__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 333646174121114798ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 6849209561782619332ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1708462100835501055ull);
@@ -5363,6 +2109,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1912574027725201960ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 5425719439098529649ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 507039536408233394ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 15305527456875434355ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 15927594993278092627ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 10284218409556132427ull);
@@ -5372,6 +2127,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 17737393408570347165ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 18198267260899514084ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 2186104504754349729ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 947930005891681385ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 3831625527089272251ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 13396241857466170710ull);
@@ -5381,6 +2145,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 14358187495983994968ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 6439667386219914969ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 2247145661440380330ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1643442379225777693ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 173652287814370202ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 16434618798275135975ull);
@@ -5390,6 +2163,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 589145107311025923ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 3825986847465005423ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 8129866032930716725ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__2__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 889186036269049875ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 15114269716469677457ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 13847454504878288796ull);
@@ -5399,6 +2181,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 191623600953042565ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 8760842178804882189ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 15174301525982176373ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__0__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 14785730407043449366ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 834736242380527589ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 6537952095537717147ull);
@@ -5408,6 +2199,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 15857771364069879627ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 10934731608692533190ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 4198405515461378701ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__1__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 14113226262986118750ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 9238560699545111060ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 17266031905417535884ull);
@@ -5417,6 +2217,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 2674734368387740837ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 1853837129196349601ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 12548569116859667086ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__2__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1637024788833039100ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 10014188768081903869ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__clear_acc = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 5128251983850344826ull);
@@ -5426,6 +2235,15 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__acc_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 13914216186362566410ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__product = VL_SCOPED_RAND_RESET_I(16, __VscopeHash, 3005250276909076498ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT__product_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 4995808440434734378ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__clear_acc = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__mac_en = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__acc_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_array4x4__DOT__g_row__BRA__3__KET____DOT__g_col__BRA__3__KET____DOT__u_pe__DOT____Vtogcov__product_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 15424549660256973111ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 7960339091080099338ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__start = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 17711661975739450220ull);
@@ -5474,6 +2292,44 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__post_elem_n = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1805138432824570743ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__x_shifted = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 5109263121070057233ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__zero_point_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 10721323070216239950ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__flags = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__scale = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__shift = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__zero_point = 0;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__bias[__Vi0] = 0;
+    }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__row_mask = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__col_mask = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__mul_start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__mul_a = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__mul_b = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__mul_done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__mul_product = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__out_valid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__out_index = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__out_i32 = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__out_i8 = 0;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        for (int __Vi1 = 0; __Vi1 < 4; ++__Vi1) {
+            vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__c_out_i8[__Vi0][__Vi1] = 0;
+        }
+    }
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__state_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__row_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__col_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__post_elem_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__scaled_elem_q = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__elem_valid = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__last_elem = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__post_elem_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__x_shifted = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT____Vtogcov__zero_point_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk1__DOT__r = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__unnamedblk1__DOT__unnamedblk2__DOT__c = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__opcode = VL_SCOPED_RAND_RESET_I(8, __VscopeHash, 10853810768274754305ull);
@@ -5482,6 +2338,12 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__z_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 17292078673160077491ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__x_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 6115847773740766407ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__y_ext = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 5057806616050574406ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT____Vtogcov__opcode = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT____Vtogcov__x_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT____Vtogcov__y_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT____Vtogcov__z_o = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT____Vtogcov__x_ext = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT____Vtogcov__y_ext = 0;
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 5165462796299066912ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 7736809406443272674ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__start = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 18444429434695675506ull);
@@ -5490,6 +2352,14 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__busy = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 12405909206795439403ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__done = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 15953325315762629308ull);
     vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT__product_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 12464035754335889166ull);
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT____Vtogcov__start = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT____Vtogcov__a_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT____Vtogcov__b_i = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT____Vtogcov__busy = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT____Vtogcov__done = 0;
+    vlSelf->tinygpu_top__DOT__u_cmd_ctrl__DOT__u_shared_mul__DOT____Vtogcov__product_o = 0;
     vlSelf->tinygpu_top__DOT__u_counters__DOT__clk = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 13377705658170328766ull);
     vlSelf->tinygpu_top__DOT__u_counters__DOT__rst_n = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 1496877056666446015ull);
     vlSelf->tinygpu_top__DOT__u_counters__DOT__cmd_start_i = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 12269268432132103957ull);
@@ -5504,8 +2374,24 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->tinygpu_top__DOT__u_counters__DOT__cycle_cur_q = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 2479139575503990331ull);
     vlSelf->tinygpu_top__DOT__u_counters__DOT__active_cur_q = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 8929305317385526196ull);
     vlSelf->tinygpu_top__DOT__u_counters__DOT__stall_cur_q = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 15053586436749866150ull);
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__clk = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__rst_n = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__cmd_start_i = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__cmd_done_i = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__busy_i = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__active_i = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__stall_i = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__cycle_count_o = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__active_count_o = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__stall_count_o = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__cmd_count_o = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__cycle_cur_q = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__active_cur_q = 0;
+    vlSelf->tinygpu_top__DOT__u_counters__DOT____Vtogcov__stall_cur_q = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__Vfuncout = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__x = 0;
+    vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__lo = 0;
+    vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__clamp32__17__hi = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__18__Vfuncout = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__18__x = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__19__Vfuncout = 0;
@@ -5514,38 +2400,36 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__sat_i8__20__x = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__clamp32__26__Vfuncout = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__clamp32__26__x = 0;
+    vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__clamp32__26__lo = 0;
+    vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_epilogue__DOT__clamp32__26__hi = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__Vfuncout = 0;
     vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__x = 0;
-    vlSelf->__VdfgRegularize_h6e95ff9d_0_3 = 0;
-    vlSelf->__VdfgRegularize_h6e95ff9d_0_4 = 0;
-    vlSelf->__VdfgRegularize_h6e95ff9d_0_5 = 0;
+    vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__lo = 0;
+    vlSelf->__Vfunc_tinygpu_top__DOT__u_cmd_ctrl__DOT__u_vec_alu__DOT__clamp32__29__hi = 0;
     vlSelf->__VdfgRegularize_h6e95ff9d_0_6 = 0;
     vlSelf->__VdfgRegularize_h6e95ff9d_0_7 = 0;
-    vlSelf->__VdfgRegularize_h6e95ff9d_0_8 = 0;
-    vlSelf->__VdfgRegularize_h6e95ff9d_0_9 = 0;
-    vlSelf->__VdfgRegularize_h6e95ff9d_0_15 = 0;
-    vlSelf->__VdfgRegularize_h6e95ff9d_0_16 = 0;
     for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {
         vlSelf->__VstlTriggered[__Vi0] = 0;
     }
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
-        vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data__0[__Vi0] = 0;
+        vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr__0[__Vi0] = 0;
     }
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
-        vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data__0[__Vi0] = 0;
+        vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr__0[__Vi0] = 0;
     }
     vlSelf->__VstlDidInit = 0;
-    for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {
         vlSelf->__VicoTriggered[__Vi0] = 0;
     }
+    vlSelf->__VicoDidInit = 0;
     for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
         vlSelf->__VactTriggered[__Vi0] = 0;
     }
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
-        vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_data__1[__Vi0] = 0;
+        vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_addr__1[__Vi0] = 0;
     }
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
-        vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__a_rd_data__1[__Vi0] = 0;
+        vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__u_cmd_ctrl__DOT__u_spm__DOT__b_rd_addr__1[__Vi0] = 0;
     }
     vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__clk__0 = 0;
     vlSelf->__Vtrigprevexpr___TOP__tinygpu_top__DOT__rst_n__0 = 0;
@@ -5601,4 +2485,2070 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0 = 0; __Vi0 < 1; ++__Vi0) {
         vlSelf->__VnbaTriggered[__Vi0] = 0;
     }
+}
+
+VL_ATTR_COLD void Vtop___024root___configure_coverage(Vtop___024root* vlSelf, bool first) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___configure_coverage\n"); );
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    auto& vlSelfRef = std::ref(*vlSelf).get();
+    // Body
+    (void)first;  // Prevent unused variable warning
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[0]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 6, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 7, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 9, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mmio_valid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 10, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mmio_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 11, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mmio_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[72]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 12, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mmio_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[136]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 13, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mmio_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[144]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 14, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mmio_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[208]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 15, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mmio_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[210]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 17, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[212]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 18, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[214]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 19, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[278]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 20, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[342]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 21, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[350]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 22, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[414]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 23, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[416]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 24, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[418]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 26, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "irq");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[420]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 29, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_start_pulse");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[422]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 30, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_start_direct_mode");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[424]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 31, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_soft_reset");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[426]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 32, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_irq_enable");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[428]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 33, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_direct_mode");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[430]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 34, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_irq_pending");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[432]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 36, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_cmd_addr");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[496]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 37, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_opcode");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[512]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 38, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_src0_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[576]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 38, 31, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_src1_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[640]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 38, 46, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_bias_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[704]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 38, 61, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_dst_addr");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[768]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 39, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_dim_m");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[800]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 39, 27, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_dim_n");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[832]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 39, 38, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_dim_k");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[864]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 40, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_stride0");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[896]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 40, 29, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_stride1");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[928]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 40, 42, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_stride_dst");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[960]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 41, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_flags");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1024]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 42, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_scale");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[1088]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 43, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_shift");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[1120]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 43, 27, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_zero_point");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1152]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 44, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_conv_in_hw");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1216]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 44, 32, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_conv_channels");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1280]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 44, 51, ".tinygpu_top", "v_toggle/tinygpu_top", "reg_conv_cfg");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1344]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 46, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "ctrl_busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1346]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 47, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "ctrl_done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1348]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 48, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "ctrl_illegal_opcode");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1350]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 49, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "ctrl_shape_error");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1352]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 50, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "ctrl_memory_error");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1354]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 51, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "ctrl_unsupported_format");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1356]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 53, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "cnt_cmd_start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1358]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 54, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "cnt_cmd_done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1360]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 55, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "cnt_busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1362]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 56, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "cnt_active");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1364]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 57, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "cnt_stall");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1366]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 59, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "cycle_count_last");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1430]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 60, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "active_count_last");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1494]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 61, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "stall_count_last");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1558]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 62, 16, ".tinygpu_top", "v_toggle/tinygpu_top", "cmd_count_total");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1622]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 64, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_req_raw");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1624]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 65, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_we_raw");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1626]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 66, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_addr_raw");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1690]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 67, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_wdata_raw");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[1754]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 68, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_wstrb_raw");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1762]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 69, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_rdata_stage_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1826]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 70, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_rvalid_stage_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1828]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 71, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_cmd_valid_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1830]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 72, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_cmd_we_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1832]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 73, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_cmd_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[1896]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 74, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_cmd_wdata_q");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[1960]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 75, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_cmd_wstrb_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1968]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 76, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_read_pending_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1970]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 77, 25, ".tinygpu_top", "v_toggle/tinygpu_top", "mem_stage_ready");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1972]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 206, 7, ".tinygpu_top", "v_branch/tinygpu_top", "if", "206-211", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1973]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 206, 8, ".tinygpu_top", "v_branch/tinygpu_top", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1974]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 206, 27, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_stage_ready==1 && mem_req_raw==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1975]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 206, 27, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_req_raw==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1976]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 206, 27, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_stage_ready==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1977]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 217, 11, ".tinygpu_top", "v_branch/tinygpu_top", "if", "217-220", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1978]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 217, 12, ".tinygpu_top", "v_branch/tinygpu_top", "else", "221-222", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1979]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 216, 9, ".tinygpu_top", "v_branch/tinygpu_top", "if", "216", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1980]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 216, 10, ".tinygpu_top", "v_branch/tinygpu_top", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1981]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 216, 13, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_cmd_we_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1982]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 216, 13, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_cmd_we_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1983]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 214, 7, ".tinygpu_top", "v_branch/tinygpu_top", "if", "214-215", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1984]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 214, 8, ".tinygpu_top", "v_branch/tinygpu_top", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1985]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 214, 27, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_cmd_valid_q==1 && mem_ready==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1986]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 214, 27, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_ready==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1987]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 214, 27, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_cmd_valid_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1988]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 227, 7, ".tinygpu_top", "v_branch/tinygpu_top", "if", "227-230", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1989]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 227, 8, ".tinygpu_top", "v_branch/tinygpu_top", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1990]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 227, 30, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_read_pending_q==1 && mem_rvalid==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1991]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 227, 30, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_rvalid==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1992]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 227, 30, ".tinygpu_top", "v_expr/tinygpu_top", "(mem_read_pending_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1993]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 194, 5, ".tinygpu_top", "v_branch/tinygpu_top", "if", "194-202", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1994]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 194, 6, ".tinygpu_top", "v_branch/tinygpu_top", "else", "203-204", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1995]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 194, 9, ".tinygpu_top", "v_expr/tinygpu_top", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1996]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 194, 9, ".tinygpu_top", "v_expr/tinygpu_top", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[1997]), first, "../rtl/core/tinygpu_ml/tinygpu_top.sv", 193, 3, ".tinygpu_top", "v_line/tinygpu_top", "block", "193", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[1998]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 4, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2000]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 5, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2002]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 7, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "mmio_valid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2004]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 8, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "mmio_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2006]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 9, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "mmio_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2070]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 10, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "mmio_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[2134]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 11, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "mmio_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2142]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 12, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "mmio_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[208]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 13, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "mmio_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2206]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 15, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "cmd_busy_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2208]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 16, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "cmd_done_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2210]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 17, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "illegal_opcode_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2212]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 18, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "shape_error_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2214]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 19, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "memory_error_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2216]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 20, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "unsupported_fmt_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2218]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 22, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "cycle_count_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2282]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 23, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "active_count_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2346]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 24, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "stall_count_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2410]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 25, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "cmd_count_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2474]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 27, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "start_pulse_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2476]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 28, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "start_direct_mode_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2478]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 29, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "soft_reset_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2480]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 30, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "irq_enable_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2482]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 31, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "direct_mode_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[2484]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 32, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "irq_pending_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2486]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 34, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "cmd_addr_o");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[2550]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 35, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "opcode_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2566]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 36, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "src0_addr_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2630]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 37, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "src1_addr_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2694]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 38, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "bias_addr_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[2758]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 39, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "dst_addr_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[2822]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 40, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "dim_m_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[2854]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 41, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "dim_n_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[2886]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 42, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "dim_k_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[2918]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 43, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "stride0_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[2950]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 44, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "stride1_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[2982]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 45, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "stride_dst_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3014]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 46, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "flags_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3078]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 47, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "scale_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[3142]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 48, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "shift_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[3174]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 49, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "zero_point_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3206]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 50, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "conv_in_hw_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3270]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 51, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "conv_channels_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3334]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 52, 24, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "conv_cfg_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3398]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 88, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "done_sticky_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3400]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 89, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "irq_pending_q");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[3402]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 90, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "addr_lo");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[3418]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 91, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "ctrl_mode_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[3422]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 92, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "direct_op_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[3438]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 93, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "dim_m_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[3470]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 94, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "dim_n_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[3502]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 95, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "dim_k_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[3534]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 96, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "stride0_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[3566]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 97, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "stride1_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[3598]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 98, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "stride_dst_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3630]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 99, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "shiftzp_next_w");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3694]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 100, 16, ".tinygpu_top.u_regs", "v_toggle/tinygpu_regs", "unused_mmio_addr");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3696]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 110, 9, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "if", "110-111", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3697]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 110, 10, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3698]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 109, 7, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "block", "109", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3699]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 102, 29, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "block", "102,107-109", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3700]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 123, 7, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "if", "123", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3701]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 123, 8, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3702]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 124, 7, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "if", "124", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3703]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 124, 8, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3704]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 116, 29, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "block", "116,121-122", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3705]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 132, 64, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "cond_then", "132", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3706]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 132, 65, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "cond_else", "132", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3707]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 134, 55, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "cond_then", "134", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3708]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 134, 56, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "cond_else", "134", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3709]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 135, 55, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "cond_then", "135", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3710]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 135, 56, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "cond_else", "135", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3711]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 194, 7, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "if", "194-196", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3712]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 194, 8, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3713]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 199, 7, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "if", "199-200", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3714]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 199, 8, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3715]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 204, 19, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "204-206", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3716]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 208, 23, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "208", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3717]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 209, 24, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "209", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3718]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 210, 24, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "210", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3719]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 211, 24, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "211", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3720]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 212, 24, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "212", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3721]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 213, 23, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "213", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3722]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 214, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "214", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3723]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 215, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "215", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3724]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 216, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "216", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3725]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 217, 22, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "217", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3726]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 218, 22, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "218", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3727]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 219, 25, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "219", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3728]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 220, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "220", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3729]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 221, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "221", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3730]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 222, 23, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "222-224", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3731]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 226, 25, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "226", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3732]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 227, 24, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "227", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3733]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 228, 23, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "228", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3734]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 230, 13, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "if", "230-231", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3735]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 230, 14, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3736]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 229, 25, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "229", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3737]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 233, 11, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "233", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3738]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 202, 7, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "if", "202-203", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3739]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 202, 8, ".tinygpu_top.u_regs", "v_branch/tinygpu_regs", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3740]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 202, 22, ".tinygpu_top.u_regs", "v_expr/tinygpu_regs", "(mmio_valid==1 && mmio_we==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3741]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 202, 22, ".tinygpu_top.u_regs", "v_expr/tinygpu_regs", "(mmio_we==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3742]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 202, 22, ".tinygpu_top.u_regs", "v_expr/tinygpu_regs", "(mmio_valid==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3743]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 169, 14, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "if", "169-192", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3744]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 169, 15, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "else", "193", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3745]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 145, 5, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "elsif", "145-168", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3746]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 145, 9, ".tinygpu_top.u_regs", "v_expr/tinygpu_regs", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3747]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 145, 9, ".tinygpu_top.u_regs", "v_expr/tinygpu_regs", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3748]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 144, 3, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "block", "144", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3749]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 245, 15, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "245", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3750]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 246, 45, ".tinygpu_top.u_regs", "v_expr/tinygpu_regs", "(cmd_busy_i==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3751]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 246, 45, ".tinygpu_top.u_regs", "v_expr/tinygpu_regs", "(cmd_busy_i==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3752]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 246, 17, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "246", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3753]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 247, 19, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "247", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3754]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 248, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "248", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3755]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 249, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "249", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3756]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 250, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "250", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3757]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 251, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "251", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3758]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 252, 19, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "252", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3759]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 253, 16, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "253", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3760]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 254, 16, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "254", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3761]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 255, 16, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "255", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3762]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 256, 18, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "256", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3763]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 257, 18, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "257", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3764]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 258, 21, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "258", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3765]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 259, 16, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "259", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3766]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 260, 16, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "260", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3767]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 261, 19, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "261", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3768]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 262, 22, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "262", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3769]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 263, 21, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "263", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3770]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 264, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "264", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3771]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 265, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "265", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3772]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 266, 21, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "266", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3773]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 267, 21, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "267", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3774]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 268, 20, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "268", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3775]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 269, 19, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "269", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3776]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 270, 15, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "270", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3777]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 271, 7, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "case", "271", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[3778]), first, "../rtl/core/tinygpu_ml/tinygpu_regs.sv", 242, 3, ".tinygpu_top.u_regs", "v_line/tinygpu_regs", "block", "242-244", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3779]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 7, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3781]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 8, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3783]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 10, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3785]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 11, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "start_direct_mode");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3787]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 12, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "soft_reset");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[3789]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 13, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "direct_mode");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3791]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 14, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "cmd_addr");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[3855]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 16, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "opcode");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3871]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 17, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "flags");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3935]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 18, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src0_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[3999]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 19, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src1_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4063]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 20, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4127]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 21, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_addr");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[4191]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 22, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "M");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[4223]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 23, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "N");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[4255]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 24, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "K");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[4287]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 25, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride0");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[4319]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 26, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride1");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[4351]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 27, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride_dst");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4383]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 28, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "scale");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[4447]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 29, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shift");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[4479]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 30, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "zero_point");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4511]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 31, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_in_hw");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4575]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 32, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_channels");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4639]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 33, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_cfg");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4703]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 35, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4705]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 36, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4707]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 37, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "illegal_opcode");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4709]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 38, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shape_error");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4711]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 39, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "memory_error");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4713]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 40, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "unsupported_format");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4715]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 42, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "cnt_cmd_start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4717]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 43, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "cnt_cmd_done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4719]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 44, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "cnt_busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4721]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 45, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "cnt_active");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4723]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 46, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "cnt_stall");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4725]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 48, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4727]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 49, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4729]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 50, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4793]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 51, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[4857]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 52, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4865]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 53, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4929]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 54, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[4931]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 55, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 4, 1, &(vlSymsp->__Vcoverage[4933]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 74, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "state_q");
+    vlSelf->__vlCoverToggleInsert(0, 4, 1, &(vlSymsp->__Vcoverage[4943]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 74, 24, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "state_d");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[4953]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 76, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "opcode_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[4969]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 77, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "flags_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5033]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 78, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "cmd_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5097]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 79, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src0_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5161]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 79, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src1_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5225]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 79, 42, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5289]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 79, 55, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5353]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 80, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "M_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5385]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 80, 21, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "N_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5417]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 80, 26, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "K_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5449]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 81, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride0_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5481]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 81, 27, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride1_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5513]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 81, 38, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride_dst_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5545]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 82, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "scale_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5609]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 83, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shift_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5641]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 83, 25, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "zero_point_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5673]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 84, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_in_hw_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5737]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 84, 30, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_channels_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[5801]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 84, 47, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_cfg_q");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[5865]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 85, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_desc_version_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5881]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 87, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "m0_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5913]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 87, 22, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "m0_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5945]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 88, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "n0_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[5977]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 88, 22, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "n0_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6009]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 89, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "k0_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6041]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 89, 22, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "k0_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6073]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 90, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "kk_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6105]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 90, 22, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "kk_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6137]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 91, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "store_row_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6169]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 91, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "store_row_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6201]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 92, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "store_col_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6233]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 92, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "store_col_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6265]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 93, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_col_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6297]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 93, 28, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_col_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6329]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 94, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_idx_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6361]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 94, 27, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_idx_d");
+    vlSelf->__vlCoverToggleInsert(0, 4, 1, &(vlSymsp->__Vcoverage[6393]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 95, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_word_idx_q");
+    vlSelf->__vlCoverToggleInsert(0, 4, 1, &(vlSymsp->__Vcoverage[6403]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 95, 33, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_word_idx_d");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6413]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 97, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "store_stage_done_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6415]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 98, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "store_stage_done_d");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6417]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 99, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_inflight_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6419]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 100, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_inflight_d");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6421]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 101, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_inflight_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6423]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 102, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_inflight_d");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6425]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 103, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_inflight_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6427]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 104, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_inflight_d");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6429]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 105, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_inflight_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[6431]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 106, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_inflight_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6433]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 108, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_out_y_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6465]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 108, 30, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_out_y_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6497]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 109, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_out_x_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6529]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 109, 30, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_out_x_d");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[6561]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 110, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_kh_q");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[6569]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 110, 27, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_kh_d");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[6577]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 111, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_kw_q");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[6585]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 111, 27, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_kw_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6593]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 112, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_ic_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6625]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 112, 27, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_ic_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6657]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 114, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "active_tile_m");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6689]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 115, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "active_tile_n");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[6721]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 116, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "active_tile_k");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[6753]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 118, 22, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "row_mask");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[6761]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 119, 22, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "col_mask");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6769]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 121, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_rd_addr[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6785]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 121, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_rd_addr[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6801]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 121, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_rd_addr[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6817]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 121, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_rd_addr[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6833]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 122, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_rd_data[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6849]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 122, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_rd_data[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6865]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 122, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_rd_data[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6881]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 122, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_rd_data[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6897]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 123, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_rd_addr[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6913]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 123, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_rd_addr[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6929]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 123, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_rd_addr[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6945]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 123, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_rd_addr[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6961]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 124, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_rd_data[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6977]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 124, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_rd_data[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[6993]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 124, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_rd_data[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7009]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 124, 15, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_rd_data[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7025]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 126, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_vec[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7041]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 126, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_vec[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7057]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 126, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_vec[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7073]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 126, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "a_vec[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7089]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 127, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_vec[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7105]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 127, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_vec[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7121]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 127, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_vec[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7137]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 127, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "b_vec[3]");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7153]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 130, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "array_clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7155]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 131, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "array_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7157]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 133, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "spm_dma_wr_en");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[7159]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 134, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "spm_dma_region");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[7163]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 135, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "spm_dma_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7181]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 136, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "spm_dma_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[7245]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 137, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "spm_dma_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7253]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 138, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "spm_dma_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7317]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 140, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "c_wr_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7319]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 141, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "c_wr_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7335]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 142, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "c_wr_data");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7399]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 143, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "c_rd_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7415]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 144, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "c_rd_data");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7479]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 146, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7481]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 147, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7483]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 148, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7485]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 149, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_mul_start");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7487]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 150, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_mul_a");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7551]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 151, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_mul_b");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7615]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 152, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_vec[0]");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7679]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 152, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_vec[1]");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7743]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 152, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_vec[2]");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7807]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 152, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_vec[3]");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[7871]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 153, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_out_valid");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7873]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 154, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_out_index");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[7889]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 155, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_out_i32");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7953]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 156, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_out_i8");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7969]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[0][0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[7985]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[0][1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8001]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[0][2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8017]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[0][3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8033]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[1][0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8049]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[1][1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8065]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[1][2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8081]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[1][3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8097]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[2][0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8113]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[2][1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8129]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[2][2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8145]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[2][3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8161]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[3][0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8177]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[3][1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8193]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[3][2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8209]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 158, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "epi_shadow_i8[3][3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8225]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 159, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_x_q");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8241]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 160, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_y_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8257]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 161, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_result_raw");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8321]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 162, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_result_post");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[8385]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 163, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_result_i8");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8401]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 164, 30, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "zero_point_ext");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8465]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 165, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_store_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8529]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 166, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_store_wdata_q");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[8593]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 167, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_store_wstrb_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8601]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 168, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_result_raw_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8665]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 169, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_result_post_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8729]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 170, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_scaled_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[8793]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 171, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mul_start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[8795]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 172, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mul_busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[8797]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 173, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mul_done");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8799]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 174, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mul_product");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[8863]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 175, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shared_mul_start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[8865]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 176, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shared_mul_busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[8867]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 177, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shared_mul_done");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8869]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 178, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shared_mul_product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8933]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 179, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shared_mul_a");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[8997]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 180, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "shared_mul_b");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9061]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 182, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9063]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 183, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_busy_status");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9065]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 184, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9067]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 185, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_error");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9069]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 186, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9071]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 187, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_mem_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9073]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 188, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9137]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 189, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_mem_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[9201]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 190, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_mem_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9209]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 191, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9211]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 192, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_mem_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9213]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 193, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_mem_addr_mux");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9277]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 194, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_mem_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[9341]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 195, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_mem_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9349]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 196, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9351]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 197, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mem_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9353]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 198, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9417]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 199, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mem_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[9481]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 200, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mem_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9489]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 201, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9491]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 202, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_mem_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9493]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 203, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9557]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 204, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_mem_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[9621]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 205, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_mem_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9629]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 206, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_launch_pending_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9631]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 207, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_launch_pending_d");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[9633]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 208, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_op_kind_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9637]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 209, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_base_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[9701]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 210, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_rows_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[9733]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 211, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_cols_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[9765]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 212, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_stride_bytes_q");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[9797]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 213, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_spm_region_q");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[9801]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 214, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_spm_base_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9819]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 216, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9821]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 217, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_start_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9823]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 218, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_busy_status");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9825]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 219, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9827]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 220, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_error");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9829]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 221, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_inflight_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9831]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 222, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_inflight_d");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9833]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 223, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9835]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 224, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 2, 1, &(vlSymsp->__Vcoverage[9899]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 225, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "mem_client_sel");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[9905]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 226, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "client_mem_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9969]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 227, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9971]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 228, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9973]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 229, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9975]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 230, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9977]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 231, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9979]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 232, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9981]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 233, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9983]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 234, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9985]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 235, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9987]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 236, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[9989]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 237, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_spm_wr_en");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[9991]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 238, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_spm_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10009]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 239, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_spm_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[10073]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 240, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_spm_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[10081]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 241, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_next_out_y");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[10113]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 242, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_next_out_x");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[10145]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 243, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_next_kh");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[10153]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 244, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_next_kw");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[10161]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 245, 29, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_next_ic");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10193]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 247, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "latch_cmd");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10195]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 248, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "latch_cmd_addr");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10197]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 249, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "clear_cmd_fields");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10199]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 250, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "load_desc_word");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10201]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 251, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "latch_vec_store_cmd");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10203]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 252, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "latch_dma_cmd");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10205]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 253, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "clear_status");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10207]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 254, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "set_illegal_opcode");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10209]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 255, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "set_shape_error");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10211]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 256, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "set_memory_error");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10213]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 257, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "set_unsupported_format");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10215]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 259, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "opcode_ok");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10217]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 260, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_flags_ok");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10219]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 261, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dims_ok");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10221]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 262, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "more_k_tiles");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10223]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 263, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "more_n_tiles");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10225]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 264, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "more_m_tiles");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10227]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 265, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "use_dst_i8");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10229]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 266, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "store_stage_last");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10231]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 267, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "clear_bias_regs");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10233]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 268, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "load_bias_reg");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10235]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 269, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "load_vec_x_reg");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10237]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 270, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "load_vec_y_reg");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10239]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 271, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "is_vector_opcode");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10241]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 272, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "is_vector_opcode_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10243]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 273, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "is_conv_opcode");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10245]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 274, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_needs_y");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10247]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 275, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "latch_vec_raw");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10249]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 276, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "latch_vec_post");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10251]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 277, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "latch_vec_scaled");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10253]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 278, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "state_is_bias");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10255]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 279, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "state_is_vec");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10257]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 280, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "state_is_desc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[10259]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 281, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "state_is_conv");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[10261]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 282, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "effective_n");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[10293]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 283, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "effective_n_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10325]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 284, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src0_row_base_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10389]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 285, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src0_row_base_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10453]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 286, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src1_k_base_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10517]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 287, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src1_k_base_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10581]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 288, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src1_n_offset_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10645]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 289, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src1_n_offset_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10709]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 290, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_row_base_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10773]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 291, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_row_base_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10837]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 292, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_n_offset_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10901]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 293, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_n_offset_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[10965]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 294, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_base_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11029]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 295, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_base_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11093]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 296, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src0_m_step_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11157]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 297, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "src0_m_step_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11221]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 298, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride1_k_step_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11285]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 299, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride1_k_step_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11349]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 300, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_m_step_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11413]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 301, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_m_step_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11477]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 302, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_n_step_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11541]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 303, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dst_n_step_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11605]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 304, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_n_step_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11669]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 305, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_n_step_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11733]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 307, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_store_base_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11797]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 308, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "bias_mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[11861]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 309, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_src0_stride_bytes");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[11893]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 310, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_src1_stride_bytes");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[11925]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 311, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_dst_stride_bytes");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[11957]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 312, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_src0_elem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12021]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 313, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_src1_elem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12085]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 314, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_dst_elem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12149]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 315, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_store_aligned_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12213]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 316, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_src0_read_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12277]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 317, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_src1_read_addr");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[12341]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 318, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_src0_lane_sel");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[12345]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 319, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_src1_lane_sel");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[12349]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 320, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_load_byte");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12365]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 321, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_store_addr_next");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12429]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 322, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_store_wdata_next");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[12493]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 323, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "vec_store_wstrb_next");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[12501]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 324, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_op_kind_cmd_n");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12505]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 325, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_base_addr_cmd_n");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[12569]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 326, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_rows_cmd_n");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[12601]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 327, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_cols_cmd_n");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[12633]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 328, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_stride_bytes_cmd_n");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[12665]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 329, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_spm_region_cmd_n");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[12669]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 330, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "dma_spm_base_cmd_n");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[12687]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 332, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_input_h");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[12719]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 333, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_input_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[12751]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 334, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_input_c");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[12783]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 335, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_output_c");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[12815]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 336, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_kernel_h");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[12823]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 337, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_kernel_w");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[12831]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 338, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_stride_h");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[12839]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 339, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_stride_w");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[12847]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 340, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_pad_h");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[12855]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 341, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_pad_w");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12863]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 342, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_out_h_calc");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12927]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 343, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_out_w_calc");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[12991]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 344, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_m_calc");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[13055]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 345, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_k_calc");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[13119]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 346, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_input_row_stride");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[13183]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 347, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride1_eff");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[13215]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 348, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "stride_dst_eff");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[13247]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 349, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "conv_shape_ok");
+    vlSelf->__vlCoverToggleInsert(0, 4, 1, &(vlSymsp->__Vcoverage[13249]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 350, 16, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "desc_words_expected");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[13259]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 352, 9, ".tinygpu_top.u_cmd_ctrl", "v_toggle/tinygpu_cmd_ctrl", "unused_c_rd_data");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13261]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 358, 12, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "358-359", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13262]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 358, 13, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "361", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13263]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 356, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "356-357", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13264]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 354, 42, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "354-355", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13265]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 373, 12, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "373-374", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13266]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 373, 13, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "376", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13267]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 371, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "371-372", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13268]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 365, 36, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "365,370", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13269]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 402, 43, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "402", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13270]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 403, 43, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "403", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13271]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 404, 43, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "404", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13272]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 405, 43, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "405", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13273]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 405, 44, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "405", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13274]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 404, 44, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13275]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 403, 44, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13276]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 402, 44, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13277]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 406, 57, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "406", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13278]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 406, 58, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "406", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13279]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 407, 57, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "407", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13280]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 407, 58, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "407", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13281]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 408, 60, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "408", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13282]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 408, 89, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "408", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13283]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 408, 90, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "408", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13284]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 408, 61, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13285]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 412, 48, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "412", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13286]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 412, 49, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "412", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13287]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 434, 53, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "434", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13288]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 434, 54, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "434", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13289]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 435, 61, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "435", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13290]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 435, 62, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "435", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13291]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 435, 59, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "435", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13292]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 435, 60, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "435", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13293]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 436, 67, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "436", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13294]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 437, 41, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "437", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13295]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 437, 42, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "437", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13296]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 436, 68, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13297]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 436, 65, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "436", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13298]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 436, 66, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "437", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13299]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 438, 58, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "438", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13300]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 438, 59, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "438", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13301]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 461, 13, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "461-463", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13302]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 465, 13, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "465-467", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13303]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 469, 13, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "469-471", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13304]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 473, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "473-475", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13305]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 459, 5, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "459-460", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13306]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 459, 6, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13307]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 454, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "454-457", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13308]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 680, 45, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "680", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13309]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 680, 46, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "680", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13310]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 681, 45, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "681", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13311]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 681, 46, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "681", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13312]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 690, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "690", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13313]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 691, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "691", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13314]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 692, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "692", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13315]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 693, 11, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "693", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13316]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 688, 19, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "688-689", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13317]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 698, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "698", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13318]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 699, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "699", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13319]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 700, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "700", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13320]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 701, 11, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "701", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13321]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 696, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "696-697", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13322]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 686, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "686-687", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13323]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 710, 5, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "710-711", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13324]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 710, 6, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13325]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 710, 31, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_RELU_EN[4:0]+:1]==1 && (vec_result_post < 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13326]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 710, 31, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((vec_result_post < 32'sh0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13327]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 710, 31, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_RELU_EN[4:0]+:1]==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13328]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 713, 5, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "713-714", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13329]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 713, 6, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13330]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 717, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "717-718", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13331]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 717, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "720", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13332]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 716, 5, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "716", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13333]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 716, 6, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "721-722", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13334]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 707, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "707-708", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13335]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 799, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "799-800", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13336]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 874, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "874-875", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13337]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 905, 56, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_CONV_LOAD_A)==1 && conv_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13338]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 905, 56, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13339]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 905, 56, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_CONV_LOAD_A)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13340]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 913, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "913-914", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13341]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 913, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13342]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 916, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "916-935", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13343]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 916, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13344]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 938, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "938-957", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13345]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 938, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13346]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 962, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "962", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13347]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 963, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "963", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13348]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 964, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "964", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13349]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 965, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "965", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13350]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 966, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "966", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13351]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 967, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "967", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13352]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 968, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "968", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13353]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 969, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "969", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13354]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 970, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "970", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13355]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 971, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "971", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13356]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 972, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "972", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13357]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 973, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "973", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13358]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 974, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "974", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13359]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 975, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "975-977", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13360]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 979, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "979", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13361]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 980, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "980", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13362]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 981, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "981", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13363]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 982, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "982", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13364]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 983, 11, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "983", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13365]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 960, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "960-961", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13366]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 960, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13367]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 988, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "988-991", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13368]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 988, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13369]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 988, 53, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_VALIDATE)==1 && is_conv_opcode==1 && conv_shape_ok==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13370]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 988, 53, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_shape_ok==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13371]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 988, 53, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(is_conv_opcode==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13372]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 988, 53, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_VALIDATE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13373]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 995, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "995-996", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13374]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 998, 16, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "998-999", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13375]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 998, 17, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13376]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 994, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "994-995", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13377]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1002, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1002-1003", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13378]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1002, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13379]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1004, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1004-1005", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13380]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1004, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13381]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1006, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1006-1007", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13382]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1006, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13383]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1008, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1008-1009", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13384]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1008, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13385]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1010, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1010-1011", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13386]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1010, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13387]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1013, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((opcode_q == OP_CLAMP)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13388]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1013, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((opcode_q == OP_RELU)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13389]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1013, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((opcode_q == OP_VEC_MUL)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13390]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1013, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((opcode_q == OP_VEC_ADD)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13391]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1013, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((opcode_q == OP_VEC_ADD)==0 && (opcode_q == OP_VEC_MUL)==0 && (opcode_q == OP_RELU)==0 && (opcode_q == OP_CLAMP)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13392]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1014, 39, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((opcode_q == OP_GEMV)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13393]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1014, 39, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((opcode_q == OP_GEMV)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13394]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1014, 53, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "1014", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13395]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1014, 54, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "1014", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13396]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1016, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1016-1019", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13397]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1016, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13398]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1022, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1022-1029", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13399]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1022, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13400]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 802, 14, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "802-874", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13401]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 802, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "877-911,1012-1014", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13402]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 727, 5, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "727-799", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13403]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 727, 9, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13404]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 727, 9, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13405]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 726, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "726", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13406]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1046, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1046-1047", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13407]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1046, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13408]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1048, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1048-1049", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13409]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1048, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13410]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1050, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1050-1051", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13411]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1050, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13412]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1052, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1052-1053", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13413]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1052, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13414]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1040, 14, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "1040-1044", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13415]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1040, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "1045", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13416]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1040, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(clear_status==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13417]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1040, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(soft_reset==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13418]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1040, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(soft_reset==0 && clear_status==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13419]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1035, 5, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1035-1039", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13420]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1035, 9, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13421]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1035, 9, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13422]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1034, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1034", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13423]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1065, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1065", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13424]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1066, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1066", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13425]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1067, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1067", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13426]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1070, 20, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_DST_INT32[4:0]+:1]==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13427]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1070, 20, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_DST_INT8[4:0]+:1]==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13428]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1070, 20, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_DST_INT8[4:0]+:1]==1 && flags_q[FLAG_DST_INT32[4:0]+:1]==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13429]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1074, 59, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((M_q != 16'h0)==1 && (N_q != 16'h0)==1 && (K_q != 16'h0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13430]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1074, 59, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((K_q != 16'h0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13431]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1074, 59, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((N_q != 16'h0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13432]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1074, 59, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((M_q != 16'h0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13433]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1074, 14, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1074", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13434]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1075, 41, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((M_q != 16'h0)==1 && (K_q != 16'h0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13435]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1075, 41, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((K_q != 16'h0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13436]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1075, 41, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((M_q != 16'h0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13437]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1075, 14, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1075", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13438]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1076, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1076", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13439]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1080, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1080", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13440]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1081, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1081", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13441]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1057, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1057-1059,1070,1072-1073", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13442]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1086, 5, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1086-1087", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13443]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1086, 6, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1089", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13444]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1091, 5, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1091-1092", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13445]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1091, 6, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1094", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13446]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1096, 5, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1096-1097", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13447]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1096, 6, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1099", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13448]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1085, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1085", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13449]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1103, 5, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1103-1106", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13450]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1109, 5, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1109-1112", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13451]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1102, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1102-1103,1109", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13452]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1145, 13, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1145-1171", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13453]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1174, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1174-1187", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13454]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1201, 30, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(use_dst_i8==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13455]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1201, 30, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(use_dst_i8==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13456]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1201, 43, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "1201", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13457]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1201, 44, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "1201", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13458]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1191, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1191-1202", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13459]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1191, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13460]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1191, 34, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(opcode_ok==1 && dims_ok==1 && dst_flags_ok==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13461]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1191, 34, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dst_flags_ok==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13462]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1191, 34, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dims_ok==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13463]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1191, 34, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(opcode_ok==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13464]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1190, 17, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1190", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13465]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1208, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1208-1209", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13466]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1208, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13467]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1207, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1207", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13468]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1207, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13469]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1207, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(desc_inflight_q==1 && desc_mem_rvalid==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13470]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1207, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(desc_mem_rvalid==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13471]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1207, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(desc_inflight_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13472]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1206, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1206", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13473]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1213, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1213-1216", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13474]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1220, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1220-1221", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13475]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1220, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1223", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13476]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1219, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1219", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13477]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1227, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1227-1229", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13478]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1227, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1230-1234", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13479]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1226, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1226", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13480]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1240, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1240-1241", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13481]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1240, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1243", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13482]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1239, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1239", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13483]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1239, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13484]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1239, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_BIAS_EN[4:0]+:1]==1 && bias_inflight_q==1 && bias_mem_rvalid==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13485]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1239, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(bias_mem_rvalid==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13486]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1239, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(bias_inflight_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13487]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1239, 54, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_BIAS_EN[4:0]+:1]==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13488]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1238, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1238", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13489]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1248, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1248-1251", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13490]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1248, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13491]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1247, 20, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1247", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13492]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1257, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1257-1258", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13493]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1257, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1260", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13494]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1256, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1256", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13495]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1256, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13496]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1256, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_inflight_q==1 && vec_mem_ready==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13497]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1256, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_inflight_q==0 && vec_mem_ready==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13498]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1256, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_mem_ready==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13499]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1256, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_mem_ready==0 && vec_inflight_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13500]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1256, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_inflight_q==1 && vec_mem_ready==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13501]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1255, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1255", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13502]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1270, 13, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1270-1271", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13503]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1270, 14, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13504]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1266, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1266-1267", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13505]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1266, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1268-1269", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13506]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1274, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1274-1277", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13507]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1274, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13508]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1265, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1265", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13509]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1265, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13510]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1265, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(store_stage_done_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13511]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1265, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(store_stage_done_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13512]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1264, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1264", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13513]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1282, 20, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1282-1297", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13514]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1300, 20, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1300-1320", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13515]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1323, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1323", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13516]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1116, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1116-1142,1144", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13517]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1351, 64, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q != tinygpu_pkg::S_IDLE)==1 && (state_q != tinygpu_pkg::S_DONE)==1 && (state_q != tinygpu_pkg::S_ERROR)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13518]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1351, 64, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q != tinygpu_pkg::S_ERROR)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13519]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1351, 64, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q != tinygpu_pkg::S_DONE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13520]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1351, 64, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q != tinygpu_pkg::S_IDLE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13521]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1353, 46, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_VEC_EXEC3)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13522]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1353, 46, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_VEC_EXEC2)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13523]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1353, 46, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_VEC_EXEC)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13524]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1353, 46, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_COMPUTE_K)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13525]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1353, 46, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_COMPUTE_K)==0 && (state_q == tinygpu_pkg::S_VEC_EXEC)==0 && (state_q == tinygpu_pkg::S_VEC_EXEC2)==0 && (state_q == tinygpu_pkg::S_VEC_EXEC3)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13526]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1412, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1412-1414", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13527]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1412, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1415-1417", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13528]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1409, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1409-1411", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13529]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1409, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13530]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1400, 13, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1400-1408", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13531]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1430, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1430-1431", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13532]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1430, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13533]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1435, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1435-1436", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13534]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1435, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13535]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1432, 18, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1432-1434", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13536]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1432, 19, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13537]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1428, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1428-1429", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13538]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1428, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(desc_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13539]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1428, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(desc_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13540]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1422, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1422-1426", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13541]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1453, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "1453-1455", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13542]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1453, 19, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "1456-1457", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13543]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1453, 22, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dst_flags_ok==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13544]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1453, 22, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dst_flags_ok==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13545]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1450, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1450-1452", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13546]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1450, 22, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dims_ok==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13547]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1450, 22, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dims_ok==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13548]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1447, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1447-1449", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13549]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1447, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(opcode_ok==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13550]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1447, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(opcode_ok==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13551]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1440, 17, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1440-1446", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13552]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1468, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1468-1469", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13553]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1468, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1471", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13554]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1461, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1461-1467", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13555]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1483, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1483-1484", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13556]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1483, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1486", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13557]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1474, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1474-1482", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13558]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1503, 18, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1503-1505", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13559]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1503, 19, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13560]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1499, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1499-1502", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13561]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1497, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1497-1498", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13562]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1497, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13563]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1497, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13564]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1489, 20, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1489-1495", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13565]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1533, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "1533-1536", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13566]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1533, 19, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "1537-1538", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13567]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1528, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1528-1532", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13568]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1523, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1523-1527", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13569]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1519, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1519-1522", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13570]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1519, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==0 && dma_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13571]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1519, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13572]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1519, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13573]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1509, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1509-1517", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13574]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1566, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "1566-1569", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13575]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1566, 19, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "1570-1571", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13576]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1561, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1561-1565", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13577]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1556, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1556-1560", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13578]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1552, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1552-1555", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13579]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1552, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==0 && dma_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13580]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1552, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13581]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1552, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13582]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1542, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1542-1550", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13583]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1582, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1582-1583", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13584]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1582, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13585]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1575, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1575-1581", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13586]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1593, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1593-1594", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13587]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1593, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1596", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13588]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1598, 14, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "1598-1599", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13589]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1598, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "1601", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13590]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1592, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1592", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13591]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1586, 15, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1586-1591", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13592]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1616, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1616-1617", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13593]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1616, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13594]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1621, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1621-1622", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13595]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1621, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13596]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1618, 18, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1618-1620", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13597]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1618, 19, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13598]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1614, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1614-1615", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13599]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1614, 22, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(bias_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13600]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1614, 22, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(bias_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13601]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1611, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1611-1613", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13602]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1611, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_BIAS_EN[4:0]+:1]==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13603]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1611, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(flags_q[FLAG_BIAS_EN[4:0]+:1]==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13604]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1604, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1604-1609", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13605]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1632, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1632-1633", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13606]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1632, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13607]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1632, 23, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(epi_busy==0 && epi_done==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13608]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1632, 23, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(epi_done==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13609]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1632, 23, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(epi_busy==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13610]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1638, 23, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(use_dst_i8==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13611]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1638, 23, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(use_dst_i8==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13612]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1638, 36, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "1638", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13613]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1638, 37, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "1638", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13614]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1635, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1635-1638", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13615]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1635, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13616]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1641, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1641-1642", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13617]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1641, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13618]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1626, 17, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1626-1631", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13619]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1648, 34, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(use_dst_i8==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13620]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1648, 34, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(use_dst_i8==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13621]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1648, 47, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_then", "1648", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13622]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1648, 48, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "cond_else", "1648", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13623]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1675, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "1675-1676", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13624]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1675, 17, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "1678", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13625]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1673, 11, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1673-1674", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13626]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1670, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "if", "1670-1672", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13627]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1670, 19, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "else", "1679-1680", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13628]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1665, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1665-1669", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13629]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1660, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1660-1664", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13630]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1656, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1656-1659", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13631]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1656, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==0 && dma_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13632]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1656, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13633]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1656, 35, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13634]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1645, 16, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1645-1654", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13635]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1696, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1696-1697", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13636]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1696, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13637]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1701, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1701-1702", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13638]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1701, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1704", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13639]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1698, 18, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1698-1700", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13640]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1698, 19, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13641]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1694, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1694-1695", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13642]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1694, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13643]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1694, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13644]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1684, 19, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1684-1689,1691-1692", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13645]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1720, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1720-1721", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13646]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1720, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13647]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1722, 18, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1722-1725", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13648]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1722, 19, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13649]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1718, 9, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1718-1719", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13650]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1718, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13651]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1718, 13, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13652]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1708, 19, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1708-1713,1715-1716", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13653]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1729, 17, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1729-1736", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13654]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1746, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1746-1747", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13655]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1746, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1749", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13656]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1739, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1739-1745", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13657]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1762, 20, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1762-1764", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13658]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1762, 21, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13659]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1760, 11, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1760-1761", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13660]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1760, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_mul_busy==0 && vec_mul_done==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13661]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1760, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_mul_done==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13662]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1760, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(vec_mul_busy==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13663]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1758, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1758-1759", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13664]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1758, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1766-1767", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13665]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1752, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1752-1757", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13666]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1771, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1771-1778", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13667]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1796, 11, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1796-1797", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13668]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1796, 12, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1799", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13669]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1794, 9, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1794-1795", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13670]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1794, 10, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "1800-1801", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13671]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1781, 18, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1781-1786,1788-1792", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13672]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1805, 20, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1805-1811", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13673]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1814, 20, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1814-1820", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13674]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1823, 13, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1823-1832", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13675]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1835, 14, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1835-1844", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13676]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1847, 7, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "case", "1847-1848", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13677]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1328, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1328-1344,1346-1347,1349-1363,1365-1367,1369-1370,1372-1375,1377-1397,1399", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13678]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1864, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_COMPUTE_K)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13679]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1864, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(array_mac_en==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13680]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1864, 29, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(array_mac_en==1 && (state_q == tinygpu_pkg::S_COMPUTE_K)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13681]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1865, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(state_is_conv==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13682]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1865, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_spm_wr_en==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13683]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1865, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_spm_wr_en==1 && state_is_conv==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13684]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1866, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13685]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1866, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_inflight_q==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13686]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1866, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_busy_status==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13687]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1866, 50, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_busy_status==1 && dma_inflight_q==0 && dma_launch_pending_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13688]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1867, 33, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_inflight_q==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13689]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1867, 33, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_busy_status==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13690]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1867, 33, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(conv_busy_status==1 && conv_inflight_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13691]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1868, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_inflight_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13692]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1868, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13693]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1868, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(dma_launch_pending_q==1 && dma_inflight_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13694]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1869, 44, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_ERROR)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13695]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1869, 44, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "((state_q == tinygpu_pkg::S_DONE)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13696]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1869, 44, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(done==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13697]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1869, 44, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(done==1 && (state_q == tinygpu_pkg::S_DONE)==0 && (state_q == tinygpu_pkg::S_ERROR)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13698]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1870, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(busy==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13699]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1870, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(done==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13700]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1870, 15, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(done==1 && busy==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13701]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1871, 7, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1871-1873", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13702]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1871, 8, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13703]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1859, 14, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "if", "1859-1870", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13704]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1859, 15, ".tinygpu_top.u_cmd_ctrl", "v_branch/tinygpu_cmd_ctrl", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13705]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1859, 18, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(soft_reset==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13706]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1859, 18, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(soft_reset==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13707]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1858, 5, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "elsif", "1858", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13708]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1858, 9, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13709]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1858, 9, ".tinygpu_top.u_cmd_ctrl", "v_expr/tinygpu_cmd_ctrl", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[13710]), first, "../rtl/core/tinygpu_ml/tinygpu_cmd_ctrl.sv", 1857, 3, ".tinygpu_top.u_cmd_ctrl", "v_line/tinygpu_cmd_ctrl", "block", "1857", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[13711]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 6, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[13713]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 7, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[13715]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 9, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "dma_wr_en");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[13717]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 10, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "dma_region");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[13721]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 11, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "dma_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[13739]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 12, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "dma_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[13803]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 13, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "dma_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[13811]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 14, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "dma_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[13875]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 16, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "a_rd_addr[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[13891]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 16, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "a_rd_addr[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[13907]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 16, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "a_rd_addr[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[13923]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 16, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "a_rd_addr[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[13939]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 17, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "a_rd_data[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[13955]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 17, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "a_rd_data[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[13971]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 17, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "a_rd_data[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[13987]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 17, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "a_rd_data[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14003]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 19, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "b_rd_addr[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14019]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 19, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "b_rd_addr[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14035]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 19, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "b_rd_addr[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14051]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 19, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "b_rd_addr[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14067]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 20, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "b_rd_data[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14083]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 20, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "b_rd_data[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14099]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 20, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "b_rd_data[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14115]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 20, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "b_rd_data[3]");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14131]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 22, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "c_wr_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14133]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 23, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "c_wr_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14149]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 24, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "c_wr_data");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[14213]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 25, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "c_rd_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14229]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 26, 38, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_toggle/tinygpu_spm", "c_rd_data");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14293]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 56, 11, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "56-57", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14294]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 56, 12, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14295]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 56, 35, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((addr < A_CAPACITY)==1 && (bank < TILE_M)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14296]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 56, 35, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((bank < TILE_M)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14297]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 56, 35, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((addr < A_CAPACITY)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14298]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 53, 17, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "53-55", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14299]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 62, 11, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "62-63", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14300]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 62, 12, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14301]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 62, 54, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((addr < B_CAPACITY)==1 && (bank < TILE_N)==1 && (offset < TILE_K)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14302]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 62, 54, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((offset < TILE_K)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14303]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 62, 54, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((bank < TILE_N)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14304]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 62, 54, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((addr < B_CAPACITY)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14305]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 59, 17, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "59-61", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14306]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 69, 19, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "69", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14307]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 70, 19, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "70", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14308]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 71, 19, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "71", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14309]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 72, 15, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "72", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14310]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 67, 11, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "67-68", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14311]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 67, 12, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14312]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 65, 17, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "65-66", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14313]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 76, 9, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "76", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14314]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 43, 34, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "43,47-52", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14315]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 84, 9, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "84-85", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14316]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 83, 7, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "83-84", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14317]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 87, 9, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "87-88", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14318]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 86, 7, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "86-87", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14319]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 89, 7, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "89-90", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14320]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 97, 17, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "97-100", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14321]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 97, 18, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14322]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 96, 23, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "96", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14323]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 103, 17, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "103-106", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14324]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 103, 18, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14325]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 102, 23, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "102", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14326]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 109, 17, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "109-112", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14327]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 109, 18, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14328]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 108, 23, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "108", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14329]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 114, 15, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "case", "114", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14330]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 94, 11, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "94-95", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14331]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 94, 12, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14332]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 93, 9, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "93", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14333]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 92, 7, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "92-93", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14334]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 92, 8, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14335]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 121, 7, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "121-122", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14336]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 121, 8, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14337]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 121, 19, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "(c_wr_en==1 && (c_wr_addr < C_WORDS)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14338]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 121, 19, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((c_wr_addr < C_WORDS)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14339]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 121, 19, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "(c_wr_en==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14340]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 82, 5, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "82-83,86,89", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14341]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 82, 6, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "91", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14342]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 82, 9, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14343]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 82, 9, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14344]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 81, 3, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "81", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14345]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 135, 7, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "135-137", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14346]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 135, 8, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "139", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14347]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 134, 5, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "134", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14348]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 143, 7, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "143-145", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14349]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 143, 8, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "147", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14350]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 142, 5, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "142", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14351]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 150, 5, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "if", "150-151", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14352]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 150, 6, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_branch/tinygpu_spm", "else", "153", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14353]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 126, 3, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "126-131,134,142", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14354]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 157, 6, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14355]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 157, 58, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((C_BYTES < (C_WORDS * 32'sh4))==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14356]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 157, 58, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((B_BYTES < B_CAPACITY)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14357]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 157, 58, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((A_BYTES < A_CAPACITY)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14358]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 157, 58, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_expr/tinygpu_spm", "((A_BYTES < A_CAPACITY)==0 && (B_BYTES < B_CAPACITY)==0 && (C_BYTES < (C_WORDS * 32'sh4))==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[14359]), first, "../rtl/core/tinygpu_ml/tinygpu_spm.sv", 156, 3, ".tinygpu_top.u_cmd_ctrl.u_spm", "v_line/tinygpu_spm", "block", "156", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 2, 1, &(vlSymsp->__Vcoverage[14360]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 2, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "select_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14366]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 4, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "dma_req_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14368]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 5, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "dma_we_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14370]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 6, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "dma_addr_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14434]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 7, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "dma_wdata_i");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[14498]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 8, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "dma_wstrb_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14506]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 10, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "desc_req_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14508]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 11, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "desc_we_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14510]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 12, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "desc_addr_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14574]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 13, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "desc_wdata_i");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[14638]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 14, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "desc_wstrb_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14646]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 16, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "conv_req_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14648]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 17, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "conv_addr_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14712]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 19, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "vec_req_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14714]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 20, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "vec_we_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14716]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 21, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "vec_addr_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14780]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 22, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "vec_wdata_i");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[14844]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 23, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "vec_wstrb_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14852]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 25, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "bias_req_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14854]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 26, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "bias_we_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14856]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 27, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "bias_addr_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14920]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 28, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "bias_wdata_i");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[14984]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 29, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "bias_wstrb_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14992]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 31, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "mem_req_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[14994]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 32, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "mem_we_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[14996]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 33, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "mem_addr_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[15060]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 34, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "mem_wdata_o");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15124]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 35, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "mem_wstrb_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[15132]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 36, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "mem_rdata_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15196]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 37, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "mem_ready_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15198]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 38, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "mem_rvalid_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[15200]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 40, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "client_rdata_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15264]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 41, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "dma_ready_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15266]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 42, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "dma_rvalid_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15268]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 43, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "desc_ready_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15270]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 44, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "desc_rvalid_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15272]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 45, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "conv_ready_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15274]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 46, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "conv_rvalid_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15276]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 47, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "vec_ready_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15278]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 48, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "vec_rvalid_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15280]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 49, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "bias_ready_o");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15282]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 50, 23, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_toggle/tinygpu_mem_arbiter", "bias_rvalid_o");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15284]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 59, 50, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "59", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15285]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 60, 50, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "60", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15286]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 61, 50, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "61", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15287]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 62, 50, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "62", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15288]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 62, 51, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "62", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15289]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 61, 51, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15290]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 60, 51, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15291]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 59, 51, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15292]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 63, 49, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "63", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15293]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 64, 49, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "64", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15294]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 65, 49, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "65", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15295]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 66, 49, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "66", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15296]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 66, 50, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "66", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15297]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 65, 50, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15298]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 64, 50, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15299]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 63, 50, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15300]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 67, 51, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "67", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15301]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 68, 51, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "68", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15302]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 69, 51, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "69", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15303]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 70, 51, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "70", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15304]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 70, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "70", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15305]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 69, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15306]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 68, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15307]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 67, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15308]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 71, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "71", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15309]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 72, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "72", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15310]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 73, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "73", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15311]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 74, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "74", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15312]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 74, 53, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "74", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15313]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 73, 53, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15314]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 72, 53, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15315]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 71, 53, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15316]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 75, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "75", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15317]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 76, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "76", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15318]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 77, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "77", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15319]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 78, 52, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_then", "78", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15320]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 78, 53, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "78", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15321]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 77, 53, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15322]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 76, 53, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15323]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 75, 53, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "cond_else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15324]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 95, 15, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_expr/tinygpu_mem_arbiter", "(mem_we_o==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15325]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 95, 15, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_expr/tinygpu_mem_arbiter", "(mem_we_o==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15326]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 94, 5, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "if", "94-95", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15327]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 94, 6, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_branch/tinygpu_mem_arbiter", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15328]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 94, 35, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_expr/tinygpu_mem_arbiter", "((select_i == CLIENT_CONV)==1 && conv_req_i==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15329]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 94, 35, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_expr/tinygpu_mem_arbiter", "(conv_req_i==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15330]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 94, 35, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_expr/tinygpu_mem_arbiter", "((select_i == CLIENT_CONV)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[15331]), first, "../rtl/core/tinygpu_ml/tinygpu_mem_arbiter.sv", 93, 3, ".tinygpu_top.u_cmd_ctrl.u_mem_arbiter", "v_line/tinygpu_mem_arbiter", "block", "93", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15332]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 4, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15334]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 5, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15336]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 6, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15338]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 7, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15340]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 8, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15342]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 9, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "error");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[15344]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 11, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "input_base");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15408]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 12, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "input_h");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15440]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 13, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "input_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15472]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 14, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "input_c");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[15504]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 15, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "input_row_stride");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15568]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 16, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "kernel_h");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15576]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 17, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "kernel_w");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15584]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 18, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "stride_h");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15592]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 19, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "stride_w");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15600]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 20, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "pad_h");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15608]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 21, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "pad_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15616]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 22, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "tile_out_y");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15648]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 23, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "tile_out_x");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15680]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 24, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "output_w");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15712]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 25, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "active_rows");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15744]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 26, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "active_k");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15776]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 27, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "start_kh");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15784]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 28, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "start_kw");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15792]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 29, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "start_ic");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15824]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 31, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "next_out_y");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15856]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 32, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "next_out_x");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15888]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 33, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "next_kh");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[15896]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 34, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "next_kw");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[15904]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 35, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "next_ic");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[15936]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 37, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[15938]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 38, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[16002]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 39, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "mem_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[16066]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 40, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[16068]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 41, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[16070]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 43, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "spm_wr_en");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[16072]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 44, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "spm_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[16090]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 45, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "spm_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16154]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 46, 24, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "spm_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 2, 1, &(vlSymsp->__Vcoverage[16162]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 60, 18, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "state_q");
+    vlSelf->__vlCoverToggleInsert(0, 2, 1, &(vlSymsp->__Vcoverage[16168]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 60, 27, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "state_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16174]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 61, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "row_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16206]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 61, 23, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "row_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16238]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 62, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "k_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16270]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 62, 21, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "k_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16302]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 63, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "out_y_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16334]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 63, 25, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "out_y_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16366]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 64, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "out_x_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16398]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 64, 25, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "out_x_d");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16430]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 65, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "kh_q");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16438]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 65, 22, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "kh_d");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16446]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 66, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "kw_q");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16454]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 66, 22, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "kw_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16462]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 67, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "ic_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16494]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 67, 22, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "ic_d");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16526]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 68, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "first_kh_q");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16534]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 69, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "first_kw_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16542]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 70, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "first_ic_q");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[16574]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 71, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "sample_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[16590]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 72, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "sample_valid_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[16592]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 74, 23, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "input_y");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[16656]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 75, 23, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "input_x");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[16720]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 76, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "elem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[16784]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 77, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "aligned_addr");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[16848]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 78, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "lane_sel");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[16852]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 79, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "coord_valid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[16854]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 80, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "last_k");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[16856]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 81, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "last_row");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16858]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 82, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "step_kh");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[16866]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 83, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "step_kw");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[16874]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 84, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "step_ic");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16906]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 108, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "108-109", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16907]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 108, 8, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "110-112", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16908]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 104, 5, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "104-105", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16909]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 104, 6, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "106-107", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16910]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 100, 3, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "block", "100-103", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16911]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 148, 11, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "148,151", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16912]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 148, 12, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "153", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16913]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((kernel_w == 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16914]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((kernel_h == 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16915]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((input_c == 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16916]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((output_w == 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16917]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((active_k > TILE_K[15:0])==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16918]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((active_k == 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16919]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((active_rows > TILE_M[15:0])==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16920]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((active_rows == 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16921]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 150, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((active_rows == 32'sh0)==0 && (active_rows > TILE_M[15:0])==0 && (active_k == 32'sh0)==0 && (active_k > TILE_K[15:0])==0 && (output_w == 32'sh0)==0 && (input_c == 32'sh0)==0 && (kernel_h == 32'sh0)==0 && (kernel_w == 32'sh0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16922]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 140, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "140-147", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16923]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 140, 10, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16924]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 138, 18, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "138-139", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16925]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 158, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "158-159", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16926]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 158, 10, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "161", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16927]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 157, 18, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "157", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16928]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 166, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "166-167", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16929]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 166, 10, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16930]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 164, 19, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "164-165", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16931]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 171, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "171-172", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16932]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 171, 10, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16933]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 170, 18, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "170", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16934]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 177, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "177-178", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16935]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 177, 10, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16936]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 177, 13, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(sample_valid_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16937]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 177, 13, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(sample_valid_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16938]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 175, 19, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "175-176,179", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16939]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 188, 11, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "188-189", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16940]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 188, 12, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "190-192", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16941]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 195, 11, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "195-196", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16942]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 195, 12, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "197-199", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16943]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 183, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "183-187", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16944]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 183, 10, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "201-206", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16945]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 182, 21, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "182", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16946]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 210, 18, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "210-213", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16947]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 216, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "216-219", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16948]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 117, 3, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "block", "117-125,127-135,137", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16949]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 254, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "254-257", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16950]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 254, 8, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16951]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 254, 34, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_IDLE)==1 && start==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16952]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 254, 34, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(start==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16953]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 254, 34, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_IDLE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16954]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 260, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "260-261", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16955]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 260, 8, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16956]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 265, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "265", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16957]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 266, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "266", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16958]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 267, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "267", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16959]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 268, 11, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "case", "268", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16960]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 270, 16, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "270-271", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16961]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 270, 17, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16962]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 270, 43, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_PREP)==1 && coord_valid==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16963]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 270, 43, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(coord_valid==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16964]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 270, 43, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_PREP)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16965]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 263, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "elsif", "263-264", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16966]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 263, 34, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_WAIT)==1 && mem_rvalid==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16967]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 263, 34, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_rvalid==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16968]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 263, 34, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_WAIT)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16969]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 274, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "274-277", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16970]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 274, 8, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16971]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 274, 51, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_ADVANCE)==1 && (row_q == 32'sh0)==1 && last_k==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16972]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 274, 51, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(last_k==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16973]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 274, 51, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((row_q == 32'sh0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16974]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 274, 51, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_ADVANCE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16975]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 280, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "280-282", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16976]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 280, 8, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16977]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 280, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_ADVANCE)==1 && last_row==1 && last_k==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16978]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 280, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(last_k==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16979]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 280, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(last_row==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16980]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 280, 49, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_ADVANCE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16981]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 225, 5, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "225-243", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16982]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 225, 6, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "244-252", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16983]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 225, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16984]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 225, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16985]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 224, 3, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "block", "224", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[16986]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 288, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_toggle/tinygpu_im2col_loader", "read_outstanding_q");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16988]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 294, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(coord_valid==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16989]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 294, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_req==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16990]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 294, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_req==1 && coord_valid==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16991]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 295, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(read_outstanding_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16992]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 295, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_ready==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16993]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 295, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_req==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16994]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 295, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_req==1 && mem_ready==1 && read_outstanding_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16995]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 296, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "296-297", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16996]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 296, 8, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16997]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 296, 19, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_req==1 && mem_ready==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16998]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 296, 19, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_ready==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[16999]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 296, 19, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_req==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17000]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 298, 7, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "298-299", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17001]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 298, 8, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17002]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 300, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(read_outstanding_q==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17003]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 300, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_rvalid==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17004]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 300, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(mem_rvalid==1 && read_outstanding_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17005]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 301, 26, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_WRITE)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17006]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 301, 26, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(spm_wr_en==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17007]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 301, 26, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(spm_wr_en==1 && (state_q == IM2COL_WRITE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17008]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 302, 21, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_DONE)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17009]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 302, 21, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(done==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17010]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 302, 21, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(done==1 && (state_q == IM2COL_DONE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17011]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 303, 22, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_ERROR)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17012]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 303, 22, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(error==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17013]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 303, 22, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(error==1 && (state_q == IM2COL_ERROR)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17014]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 304, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(error==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17015]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 304, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(done==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17016]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 304, 15, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(done==1 && error==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17017]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 305, 61, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_DONE)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17018]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 305, 61, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_IDLE)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17019]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 305, 61, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((row_q < TILE_M[15:0])==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17020]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 305, 61, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((row_q < TILE_M[15:0])==0 && (state_q == IM2COL_IDLE)==0 && (state_q == IM2COL_DONE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17021]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 306, 59, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_DONE)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17022]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 306, 59, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((state_q == IM2COL_IDLE)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17023]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 306, 59, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((k_q < TILE_K[15:0])==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17024]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 306, 59, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "((k_q < TILE_K[15:0])==0 && (state_q == IM2COL_IDLE)==0 && (state_q == IM2COL_DONE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17025]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 291, 5, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "if", "291-292", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17026]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 291, 6, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_branch/tinygpu_im2col_loader", "else", "293-295,300-306", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17027]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 291, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17028]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 291, 9, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_expr/tinygpu_im2col_loader", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[17029]), first, "../rtl/core/tinygpu_ml/tinygpu_im2col_loader.sv", 290, 3, ".tinygpu_top.u_cmd_ctrl.u_im2col", "v_line/tinygpu_im2col_loader", "block", "290", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17030]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 2, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17032]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 3, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17034]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 5, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17036]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 6, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17038]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 7, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "done");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17040]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 8, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "error");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[17042]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 10, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "op_kind");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17046]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 11, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "base_addr");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17110]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 12, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "rows");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17142]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 13, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "cols");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17174]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 14, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "stride_bytes");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[17206]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 15, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_region");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[17210]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 16, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_base");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17228]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 18, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "mem_req");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17230]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 19, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "mem_we");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17232]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 20, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "mem_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17296]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 21, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "mem_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[17360]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 22, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "mem_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17368]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 23, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "mem_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17432]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 24, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "mem_ready");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17434]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 25, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "mem_rvalid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17436]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 27, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_wr_en");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[17438]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 28, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_region_o");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[17442]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 29, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17460]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 30, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_wdata");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[17524]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 31, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_wstrb");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17532]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 32, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_rdata");
+    vlSelf->__vlCoverToggleInsert(0, 2, 1, &(vlSymsp->__Vcoverage[17596]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 50, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "state_q");
+    vlSelf->__vlCoverToggleInsert(0, 2, 1, &(vlSymsp->__Vcoverage[17602]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 50, 24, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "state_d");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17608]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 51, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "done_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[17610]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 52, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "error_q");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[17612]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 54, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "op_kind_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17616]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 55, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "rows_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17648]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 55, 24, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "cols_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17680]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 55, 32, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "stride_bytes_q");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[17712]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 56, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_region_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17716]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 58, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "row_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17748]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 58, 23, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "row_d");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17780]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 59, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "col_q");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[17812]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 59, 23, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "col_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17844]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 60, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "ext_row_base_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17908]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 60, 32, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "ext_row_base_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[17972]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 61, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "ext_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[18036]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 61, 28, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "ext_addr_d");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[18100]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 62, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_row_base_q");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[18118]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 62, 32, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_row_base_d");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[18136]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 63, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 8, 1, &(vlSymsp->__Vcoverage[18154]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 63, 28, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "spm_addr_d");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[18172]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 65, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "aligned_read_addr");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[18236]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 66, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "aligned_write_addr");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18300]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 67, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "load_byte");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[18316]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 68, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "load_lane_sel");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18320]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 70, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "advance_elem");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18322]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 71, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "last_elem");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[18324]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 72, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "store_word_q");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18388]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 84, 11, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "84", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18389]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 85, 11, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "85", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18390]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 86, 11, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "86", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18391]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 87, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "87", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18392]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 82, 3, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "block", "82-83", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18393]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 119, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "119-128", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18394]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 119, 8, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18395]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 119, 31, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((state_q == DMA_IDLE)==1 && start==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18396]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 119, 31, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(start==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18397]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 119, 31, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((state_q == DMA_IDLE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18398]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 131, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "131-132", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18399]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 131, 8, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18400]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 92, 5, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "92-107", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18401]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 92, 6, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "108-117", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18402]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 92, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18403]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 92, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18404]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 91, 3, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "block", "91", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18405]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 150, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "150-151", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18406]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 150, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "153", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18407]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 155, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "155-156", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18408]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 155, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "158", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18409]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 166, 13, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "166-167", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18410]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 166, 14, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "169", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18411]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 165, 11, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "165", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18412]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 165, 12, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "170-171", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18413]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 174, 13, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "174-175", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18414]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 174, 14, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "177", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18415]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 173, 11, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "173", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18416]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 173, 12, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "178-179", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18417]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 161, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "161-164", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18418]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 161, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18419]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 148, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "148-149", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18420]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 148, 8, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "159-160", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18421]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 147, 14, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "147", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18422]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 147, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18423]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 144, 5, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "elsif", "144-146", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18424]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 144, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((state_q == DMA_IDLE)==1 && start==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18425]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 144, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(start==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18426]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 144, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((state_q == DMA_IDLE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18427]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 136, 3, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "block", "136-142", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18428]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 211, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "if", "211-212", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18429]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 211, 17, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "else", "214", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18430]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 211, 50, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((op_kind == DMA_OP_STORE_I8)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18431]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 211, 50, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((op_kind == DMA_OP_STORE_I32)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18432]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 211, 50, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((op_kind == DMA_OP_STORE_I32)==0 && (op_kind == DMA_OP_STORE_I8)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18433]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 209, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "elsif", "209-210", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18434]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 207, 11, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "elsif", "207-208", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18435]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 207, 31, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((cols == 16'h0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18436]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 207, 31, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((rows == 16'h0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18437]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 207, 31, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((rows == 16'h0)==0 && (cols == 16'h0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18438]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 206, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "206", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18439]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 206, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18440]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 204, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "204-205", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18441]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 222, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "222-223", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18442]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 222, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18443]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 218, 21, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "218-221", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18444]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 227, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "227-228", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18445]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 227, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18446]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 226, 20, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "226", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18447]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 238, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "238-239", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18448]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 238, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "240-242", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18449]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 231, 20, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "231-236", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18450]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 246, 19, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "246-249", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18451]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 264, 17, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "264-266", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18452]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 268, 17, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "268-270", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18453]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 272, 17, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "272-274", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18454]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 276, 13, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "276-278", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18455]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 259, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "259-261", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18456]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 259, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "262-263", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18457]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 284, 11, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "284-285", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18458]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 284, 12, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "286-288", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18459]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 283, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "283", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18460]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 283, 10, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18461]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 252, 22, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "252-257", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18462]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 293, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "293-295", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18463]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 298, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "298-300", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18464]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 303, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "case", "303-304", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18465]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 186, 3, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "block", "186-189,191-195,197-201,203", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18466]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 310, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "held_req_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18468]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 311, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "read_outstanding_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18470]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 312, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "held_we_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[18472]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 313, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "held_addr_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[18536]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 314, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "held_wdata_q");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[18600]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 315, 16, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_toggle/tinygpu_dma", "held_wstrb_q");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18608]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 326, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "326-331", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18609]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 326, 8, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18610]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 333, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_req==1 && mem_ready==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18611]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 333, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_ready==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18612]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 333, 29, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_req==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18613]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 334, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "334-338", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18614]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 334, 8, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18615]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 334, 19, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_req==1 && mem_ready==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18616]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 334, 19, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_ready==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18617]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 334, 19, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_req==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18618]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 341, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "341-342", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18619]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 341, 8, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18620]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 341, 32, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_req==1 && mem_ready==1 && mem_we==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18621]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 341, 32, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_we==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18622]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 341, 32, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_ready==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18623]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 341, 32, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_req==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18624]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 343, 7, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "343-344", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18625]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 343, 8, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18626]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 346, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(read_outstanding_q==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18627]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 346, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_rvalid==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18628]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 346, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_rvalid==1 && read_outstanding_q==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18629]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 347, 26, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((state_q == DMA_WRITE_SPM)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18630]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 347, 26, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(spm_wr_en==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18631]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 347, 26, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(spm_wr_en==1 && (state_q == DMA_WRITE_SPM)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18632]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 348, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(error_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18633]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 348, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(done_q==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18634]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 348, 15, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(done_q==1 && error_q==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18635]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 349, 23, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "((state_q == DMA_ISSUE_WRITE)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18636]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 349, 23, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_we==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18637]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 349, 23, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(mem_we==1 && (state_q == DMA_ISSUE_WRITE)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18638]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 318, 5, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "if", "318-324", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18639]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 318, 6, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_branch/tinygpu_dma", "else", "325,333,346-350", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18640]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 318, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18641]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 318, 9, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_expr/tinygpu_dma", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[18642]), first, "../rtl/core/tinygpu_ml/tinygpu_dma.sv", 317, 3, ".tinygpu_top.u_cmd_ctrl.u_dma", "v_line/tinygpu_dma", "block", "317", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18643]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 2, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18645]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 3, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18647]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 5, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18649]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 6, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18651]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 8, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "a_vec[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18667]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 8, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "a_vec[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18683]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 8, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "a_vec[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18699]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 8, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "a_vec[3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18715]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 9, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "b_vec[0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18731]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 9, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "b_vec[1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18747]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 9, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "b_vec[2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18763]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 9, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "b_vec[3]");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[18779]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 11, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "row_mask");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[18787]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 12, 43, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "col_mask");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18795]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[0].g_col[0].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18797]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[0].g_col[1].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18799]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[0].g_col[2].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18801]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[0].g_col[3].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18803]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[1].g_col[0].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18805]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[1].g_col[1].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18807]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[1].g_col[2].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18809]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[1].g_col[3].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18811]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[2].g_col[0].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18813]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[2].g_col[1].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18815]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[2].g_col[2].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18817]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[2].g_col[3].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18819]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[3].g_col[0].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18821]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[3].g_col[1].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18823]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[3].g_col[2].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18825]), first, "../rtl/core/tinygpu_ml/tinygpu_array4x4.sv", 19, 13, ".tinygpu_top.u_cmd_ctrl.u_array4x4", "v_toggle/tinygpu_array4x4", "g_row[3].g_col[3].pe_mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18827]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18829]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18831]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[18833]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18835]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[18851]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[18867]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[18931]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[18963]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19027]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19028]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19029]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19030]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19031]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19032]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19033]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[0].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19034]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19036]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19038]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19040]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19042]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19058]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19074]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[19138]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19170]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19234]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19235]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19236]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19237]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19238]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19239]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19240]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[1].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19241]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19243]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19245]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19247]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19249]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19265]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19281]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[19345]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19377]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19441]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19442]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19443]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19444]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19445]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19446]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19447]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[2].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19448]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19450]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19452]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19454]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19456]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19472]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19488]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[19552]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19584]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19648]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19649]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19650]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19651]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19652]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19653]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19654]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[0].g_col[3].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19655]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19657]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19659]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19661]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19663]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19679]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19695]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[19759]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19791]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19855]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19856]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19857]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19858]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19859]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19860]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[19861]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[0].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19862]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19864]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19866]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[19868]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19870]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[19886]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19902]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[19966]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[19998]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20062]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20063]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20064]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20065]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20066]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20067]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20068]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[1].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20069]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20071]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20073]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20075]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20077]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20093]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20109]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[20173]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20205]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20269]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20270]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20271]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20272]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20273]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20274]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20275]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[2].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20276]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20278]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20280]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20282]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20284]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20300]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20316]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[20380]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20412]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20476]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20477]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20478]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20479]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20480]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20481]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20482]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[1].g_col[3].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20483]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20485]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20487]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20489]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20491]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20507]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20523]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[20587]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20619]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20683]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20684]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20685]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20686]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20687]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20688]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20689]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[0].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20690]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20692]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20694]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20696]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20698]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20714]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20730]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[20794]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20826]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20890]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20891]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20892]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20893]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20894]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20895]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[20896]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[1].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20897]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20899]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20901]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[20903]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20905]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[20921]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[20937]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[21001]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21033]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21097]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21098]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21099]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21100]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21101]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21102]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21103]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[2].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21104]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21106]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21108]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21110]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21112]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21128]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21144]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[21208]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21240]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21304]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21305]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21306]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21307]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21308]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21309]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21310]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[2].g_col[3].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21311]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21313]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21315]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21317]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21319]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21335]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21351]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[21415]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21447]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21511]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21512]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21513]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21514]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21515]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21516]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21517]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[0].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21518]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21520]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21522]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21524]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21526]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21542]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21558]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[21622]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21654]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21718]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21719]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21720]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21721]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21722]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21723]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21724]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[1].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21725]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21727]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21729]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21731]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21733]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21749]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21765]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[21829]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21861]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21925]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21926]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21927]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21928]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21929]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21930]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[21931]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[2].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21932]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 2, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21934]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21936]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "clear_acc");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[21938]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 6, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "mac_en");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21940]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 7, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[21956]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 8, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[21972]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 10, 36, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "acc_o");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[22036]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 14, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "product");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22068]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 15, 31, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_toggle/tinygpu_pe", "product_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[22132]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_branch/tinygpu_pe", "if", "25-26", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[22133]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 25, 11, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_branch/tinygpu_pe", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[22134]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 23, 10, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_line/tinygpu_pe", "elsif", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[22135]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 5, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_line/tinygpu_pe", "elsif", "21-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[22136]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_expr/tinygpu_pe", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[22137]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 21, 9, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_expr/tinygpu_pe", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[22138]), first, "../rtl/core/tinygpu_ml/tinygpu_pe.sv", 20, 3, ".tinygpu_top.u_cmd_ctrl.u_array4x4.g_row[3].g_col[3].u_pe", "v_line/tinygpu_pe", "block", "20", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[22139]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 4, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[22141]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 5, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[22143]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 7, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "start");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[22145]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 8, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[22147]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 9, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "done");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22149]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 11, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "flags");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22213]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 12, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "scale");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[22277]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 13, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "shift");
+    vlSelf->__vlCoverToggleInsert(0, 15, 1, &(vlSymsp->__Vcoverage[22309]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 14, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "zero_point");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22341]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 17, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "bias[0]");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22405]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 17, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "bias[1]");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22469]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 17, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "bias[2]");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22533]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 17, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "bias[3]");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[22597]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 18, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "row_mask");
+    vlSelf->__vlCoverToggleInsert(0, 3, 1, &(vlSymsp->__Vcoverage[22605]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 19, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "col_mask");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[22613]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 21, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "mul_start");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22615]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 22, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "mul_a");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22679]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 23, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "mul_b");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[22743]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 24, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "mul_done");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22745]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 25, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "mul_product");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[22809]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 27, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "out_valid");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[22811]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 28, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "out_index");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[22827]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 29, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "out_i32");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[22891]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 30, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "out_i8");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[22907]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[0][0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[22923]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[0][1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[22939]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[0][2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[22955]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[0][3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[22971]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[1][0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[22987]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[1][1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23003]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[1][2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23019]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[1][3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23035]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[2][0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23051]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[2][1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23067]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[2][2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23083]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[2][3]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23099]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[3][0]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23115]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[3][1]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23131]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[3][2]");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23147]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 33, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "c_out_i8[3][3]");
+    vlSelf->__vlCoverToggleInsert(0, 2, 1, &(vlSymsp->__Vcoverage[23163]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 50, 15, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "state_q");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[23169]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 51, 25, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "row_q");
+    vlSelf->__vlCoverToggleInsert(0, 1, 1, &(vlSymsp->__Vcoverage[23173]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 52, 25, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "col_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23177]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 53, 28, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "post_elem_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23241]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 54, 28, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "scaled_elem_q");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[23305]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 55, 28, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "elem_valid");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[23307]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 56, 28, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "last_elem");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23309]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 57, 28, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "post_elem_n");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23373]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 58, 28, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "x_shifted");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23437]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 59, 28, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_toggle/tinygpu_epilogue_shared", "zero_point_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23501]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 65, 12, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "if", "65-66", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23502]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 65, 13, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "else", "68", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23503]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 63, 7, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "elsif", "63-64", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23504]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 61, 42, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "block", "61-62", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23505]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 80, 12, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "if", "80-81", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23506]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 80, 13, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "else", "83", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23507]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 78, 7, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "elsif", "78-79", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23508]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 72, 36, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "block", "72,77", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23509]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 98, 9, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "98-99", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23510]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 98, 10, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23511]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 101, 9, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "101-102", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23512]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 101, 10, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23513]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 101, 36, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_expr/tinygpu_epilogue_shared", "(flags_in[FLAG_RELU_EN[4:0]+:1]==1 && (x < 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23514]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 101, 36, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_expr/tinygpu_epilogue_shared", "((x < 32'sh0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23515]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 101, 36, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_expr/tinygpu_epilogue_shared", "(flags_in[FLAG_RELU_EN[4:0]+:1]==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23516]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 104, 9, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "104-105", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23517]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 104, 10, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23518]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 97, 7, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "97", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23519]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 97, 8, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "106-107", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23520]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 87, 36, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "block", "87,93-95,110", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23521]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 123, 7, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "123-124", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23522]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 123, 8, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "126", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23523]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 122, 5, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "122", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23524]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 122, 6, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "127-128", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23525]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 121, 3, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "block", "121", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23526]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 147, 9, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "block", "147-149", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23527]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 146, 7, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "block", "146-147", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23528]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 160, 11, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "160-164", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23529]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 160, 12, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23530]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 158, 17, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "case", "158-159", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23531]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 171, 11, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "171-173", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23532]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 171, 12, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "174-176", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23533]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 168, 17, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "case", "168-170", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23534]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 180, 24, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "case", "180-181", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23535]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 185, 11, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "185-187", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23536]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 185, 12, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23537]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 184, 23, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "case", "184", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23538]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 191, 18, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "case", "191-197", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23539]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 206, 13, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "206-208", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23540]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 206, 14, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "209-210", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23541]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 201, 11, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "201-204", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23542]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 201, 12, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "205,212", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23543]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 200, 17, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "case", "200", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23544]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 216, 9, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "case", "216-218", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23545]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 133, 5, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "if", "133-146", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23546]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 133, 6, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_branch/tinygpu_epilogue_shared", "else", "152-155,157", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23547]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 133, 9, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_expr/tinygpu_epilogue_shared", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23548]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 133, 9, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_expr/tinygpu_epilogue_shared", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23549]), first, "../rtl/core/tinygpu_ml/tinygpu_epilogue_shared.sv", 132, 3, ".tinygpu_top.u_cmd_ctrl.u_epilogue", "v_line/tinygpu_epilogue_shared", "block", "132", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23550]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 2, 35, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_toggle/tinygpu_vec_alu", "opcode");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23566]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 3, 36, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_toggle/tinygpu_vec_alu", "x_i");
+    vlSelf->__vlCoverToggleInsert(0, 7, 1, &(vlSymsp->__Vcoverage[23582]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 4, 36, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_toggle/tinygpu_vec_alu", "y_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23598]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 5, 36, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_toggle/tinygpu_vec_alu", "z_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23662]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 8, 28, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_toggle/tinygpu_vec_alu", "x_ext");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23726]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 9, 28, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_toggle/tinygpu_vec_alu", "y_ext");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23790]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 22, 12, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "if", "22-23", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23791]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 22, 13, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "else", "25", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23792]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 20, 7, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "elsif", "20-21", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23793]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 14, 36, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "block", "14,19", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23794]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 32, 17, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "case", "32", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23795]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 33, 17, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "case", "33", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23796]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 34, 32, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_expr/tinygpu_vec_alu", "((x_ext < 32'sh0)==1) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23797]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 34, 32, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_expr/tinygpu_vec_alu", "((x_ext < 32'sh0)==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23798]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 34, 39, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_branch/tinygpu_vec_alu", "cond_then", "34", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23799]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 34, 40, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_branch/tinygpu_vec_alu", "cond_else", "34", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23800]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 34, 14, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "case", "34", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23801]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 35, 15, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "case", "35", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23802]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 36, 7, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "case", "36", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[23803]), first, "../rtl/core/tinygpu_ml/tinygpu_vec_alu.sv", 29, 3, ".tinygpu_top.u_cmd_ctrl.u_vec_alu", "v_line/tinygpu_vec_alu", "block", "29-31", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[23804]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 8, 38, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_toggle/tinygpu_shared_mul__A20_O20", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[23806]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 9, 38, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_toggle/tinygpu_shared_mul__A20_O20", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[23808]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 10, 38, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_toggle/tinygpu_shared_mul__A20_O20", "start");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23810]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 11, 38, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_toggle/tinygpu_shared_mul__A20_O20", "a_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23874]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 12, 38, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_toggle/tinygpu_shared_mul__A20_O20", "b_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[23938]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 13, 38, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_toggle/tinygpu_shared_mul__A20_O20", "busy");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[23940]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 14, 38, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_toggle/tinygpu_shared_mul__A20_O20", "done");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[23942]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 15, 38, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_toggle/tinygpu_shared_mul__A20_O20", "product_o");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24006]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 29, 16, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_branch/tinygpu_shared_mul__A20_O20", "if", "29-31", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24007]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 29, 17, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_branch/tinygpu_shared_mul__A20_O20", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24008]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 26, 7, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_line/tinygpu_shared_mul__A20_O20", "elsif", "26-28", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24009]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 26, 17, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_expr/tinygpu_shared_mul__A20_O20", "(start==1 && busy==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24010]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 26, 17, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_expr/tinygpu_shared_mul__A20_O20", "(busy==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24011]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 26, 17, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_expr/tinygpu_shared_mul__A20_O20", "(start==0) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24012]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 19, 5, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_branch/tinygpu_shared_mul__A20_O20", "if", "19-22", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24013]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 19, 6, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_branch/tinygpu_shared_mul__A20_O20", "else", "23-24", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24014]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 19, 9, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_expr/tinygpu_shared_mul__A20_O20", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24015]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 19, 9, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_expr/tinygpu_shared_mul__A20_O20", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24016]), first, "../rtl/core/tinygpu_ml/tinygpu_shared_mul.sv", 18, 3, ".tinygpu_top.u_cmd_ctrl.u_shared_mul", "v_line/tinygpu_shared_mul__A20_O20", "block", "18", "", "", "", "");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[24017]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 2, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "clk");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[24019]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 3, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "rst_n");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[24021]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 4, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "cmd_start_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[24023]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 5, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "cmd_done_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[24025]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 6, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "busy_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[24027]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 7, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "active_i");
+    vlSelf->__vlCoverToggleInsert(0, 0, 0, &(vlSymsp->__Vcoverage[24029]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 8, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "stall_i");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[24031]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 9, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "cycle_count_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[24095]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 10, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "active_count_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[24159]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 11, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "stall_count_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[24223]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 12, 23, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "cmd_count_o");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[24287]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 15, 16, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "cycle_cur_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[24351]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 16, 16, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "active_cur_q");
+    vlSelf->__vlCoverToggleInsert(0, 31, 1, &(vlSymsp->__Vcoverage[24415]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 17, 16, ".tinygpu_top.u_counters", "v_toggle/tinygpu_counters", "stall_cur_q");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24479]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 34, 9, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "if", "34-35", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24480]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 34, 10, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24481]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 36, 9, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "if", "36-37", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24482]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 36, 10, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24483]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 38, 9, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "if", "38-39", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24484]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 38, 10, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24485]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 29, 7, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "if", "29-32", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24486]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 29, 8, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "else", "33", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24487]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 42, 7, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "if", "42-46", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24488]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 42, 8, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "else", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24489]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 20, 5, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "if", "20-27", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24490]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 20, 6, ".tinygpu_top.u_counters", "v_branch/tinygpu_counters", "else", "28", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24491]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 20, 9, ".tinygpu_top.u_counters", "v_expr/tinygpu_counters", "(rst_n==0) => 1", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24492]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 20, 9, ".tinygpu_top.u_counters", "v_expr/tinygpu_counters", "(rst_n==1) => 0", "", "", "", "", "");
+    vlSelf->__vlCoverInsert(&(vlSymsp->__Vcoverage[24493]), first, "../rtl/core/tinygpu_ml/tinygpu_counters.sv", 19, 3, ".tinygpu_top.u_counters", "v_line/tinygpu_counters", "block", "19", "", "", "", "");
 }

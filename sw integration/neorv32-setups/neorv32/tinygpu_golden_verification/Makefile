@@ -36,7 +36,7 @@ include $(shell cocotb-config --makefiles)/Makefile.sim
 coverage:
 	@echo "Generating coverage report..."
 	@mkdir -p coverage_annotated
-	verilator_coverage --annotate coverage_annotated sim_build/coverage.dat
+	verilator_coverage --annotate coverage_annotated coverage.dat
 	@echo "Coverage report written to coverage_annotated/"
 	@echo ""
 	@echo "Top uncovered files:"

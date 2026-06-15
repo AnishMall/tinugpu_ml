@@ -377,3 +377,217 @@ async def test_gemm_random(dut):
 
     dut._log.info(f"Random GEMM: {passed}/50 passed, {failed} failed")
     assert failed == 0, f"{failed} random GEMM tests failed!"
+
+
+# =============================================
+# TEST 5: RELU Fixed
+# =============================================
+@cocotb.test()
+async def test_relu_fixed(dut):
+    """RELU y[4] = max(0, {-5,3,-1,7})"""
+    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+    cocotb.start_soon(memory_responder(dut))
+    memory[:] = bytearray(65536)
+    await reset_dut(dut)
+
+    # Write INT32 inputs
+    inputs = [-5, 3, -1, 7]
+    for i, v in enumerate(inputs):
+        mem_write32(SRC0_ADDR + i * 4, v & 0xFFFFFFFF)
+
+    # Golden model
+    golden = golden_relu(inputs)
+
+    # Program hardware
+    await mmio_write(dut, REG_DIRECT_OP, OP_RELU)
+    await mmio_write(dut, REG_SRC0, SRC0_ADDR)
+    await mmio_write(dut, REG_SRC1, 0)
+    await mmio_write(dut, REG_DST, DST_ADDR)
+    await mmio_write(dut, REG_M, 4)
+    await mmio_write(dut, REG_N, 1)
+    await mmio_write(dut, REG_K, 1)
+    await mmio_write(dut, REG_STRIDE0, 4)
+    await mmio_write(dut, REG_STRIDE1, 4)
+    await mmio_write(dut, REG_STRIDE_DST, 4)
+    await mmio_write(dut, REG_FLAGS, FLAG_DST_INT32 | FLAG_SIGNED)
+    await mmio_write(dut, REG_CTRL, CTRL_DIRECT | CTRL_START)
+
+    done = await wait_done(dut)
+    assert done, "TIMEOUT waiting for RELU"
+
+    for i in range(4):
+        hw = mem_read32s(DST_ADDR + i * 4)
+        exp = golden[i]
+        assert hw == exp, f"y[{i}]: got {hw}, expected {exp}"
+        dut._log.info(f"[PASS] y[{i}] = {hw}")
+
+
+# =============================================
+# TEST 6: Conv2D Fixed (1x1 kernel)
+# =============================================
+@cocotb.test()
+async def test_conv2d_fixed(dut):
+    """Conv2D: 4x4 input, 1x1 kernel, 1 channel in, 1 channel out"""
+    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+    cocotb.start_soon(memory_responder(dut))
+    memory[:] = bytearray(65536)
+    await reset_dut(dut)
+
+    # Input: 4x4x1 INT8 (NHWC layout)
+    input_h, input_w, input_c, output_c = 4, 4, 1, 1
+    kernel_size = 1
+
+    inputs = list(range(1, 17))  # 1..16
+    weights = [3]  # 1x1x1x1 weight = 3
+
+    for i, v in enumerate(inputs):
+        mem_write8(SRC0_ADDR + i, v)
+    for i, v in enumerate(weights):
+        mem_write8(SRC1_ADDR + i, v)
+
+    # Golden model: output[y][x] = input[y][x] * weight
+    golden_flat = [v * 3 for v in inputs]
+
+    # Program Conv2D registers
+    await mmio_write(dut, REG_CONV_IN_HW, (input_h << 16) | input_w)
+    await mmio_write(dut, REG_CONV_CHANNELS, (output_c << 16) | input_c)
+    await mmio_write(
+        dut,
+        REG_CONV_CFG,
+        (0 << 20)
+        | (0 << 16)  # pad_h=0, pad_w=0
+        | (1 << 12)
+        | (1 << 8)  # stride_h=1, stride_w=1
+        | (1 << 4)
+        | 1,
+    )  # kernel=1x1
+
+    # Program main registers (M=N=K=0 for Conv2D, strides=0 for auto)
+    await mmio_write(dut, REG_DIRECT_OP, OP_CONV2D)
+    await mmio_write(dut, REG_SRC0, SRC0_ADDR)
+    await mmio_write(dut, REG_SRC1, SRC1_ADDR)
+    await mmio_write(dut, REG_BIAS, 0)
+    await mmio_write(dut, REG_DST, DST_ADDR)
+    await mmio_write(dut, REG_M, 0)
+    await mmio_write(dut, REG_N, 0)
+    await mmio_write(dut, REG_K, 0)
+    await mmio_write(dut, REG_STRIDE0, 0)
+    await mmio_write(dut, REG_STRIDE1, 0)
+    await mmio_write(dut, REG_STRIDE_DST, 0)
+    await mmio_write(dut, REG_FLAGS, FLAG_DST_INT32 | FLAG_SIGNED)
+    await mmio_write(dut, REG_CTRL, CTRL_DIRECT | CTRL_START)
+
+    done = await wait_done(dut)
+    assert done, "TIMEOUT waiting for Conv2D"
+
+    output_h = (input_h + 0 + 0 - kernel_size) // 1 + 1
+    output_w = (input_w + 0 + 0 - kernel_size) // 1 + 1
+
+    dut._log.info(f"Conv2D output size: {output_h}x{output_w}")
+    all_pass = True
+    for i in range(output_h * output_w * output_c):
+        hw = mem_read32s(DST_ADDR + i * 4)
+        exp = golden_flat[i]
+        if hw == exp:
+            dut._log.info(f"[PASS] out[{i}] = {hw}")
+        else:
+            dut._log.error(f"[FAIL] out[{i}]: got {hw}, expected {exp}")
+            all_pass = False
+
+    assert all_pass, "Conv2D fixed test failed!"
+
+
+# =============================================
+# TEST 7: Conv2D Random (10 cases, 1x1 kernel)
+# =============================================
+@cocotb.test()
+async def test_conv2d_random(dut):
+    """Conv2D with 10 random cases (1x1 kernel, 1 channel)"""
+    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+    cocotb.start_soon(memory_responder(dut))
+    await reset_dut(dut)
+
+    passed = 0
+    failed = 0
+
+    for trial in range(10):
+        memory[:] = bytearray(65536)
+
+        # Random dimensions
+        input_h = random.randint(2, 6)
+        input_w = random.randint(2, 6)
+        input_c = 1
+        output_c = 1
+        kernel_size = 1
+
+        # Random INT8 inputs and weights
+        num_inputs = input_h * input_w * input_c
+        num_weights = kernel_size * kernel_size * input_c * output_c
+
+        inputs = [random.randint(-8, 7) for _ in range(num_inputs)]
+        weights = [random.randint(-8, 7) for _ in range(num_weights)]
+
+        for i, v in enumerate(inputs):
+            mem_write8(SRC0_ADDR + i, v & 0xFF)
+        for i, v in enumerate(weights):
+            mem_write8(SRC1_ADDR + i, v & 0xFF)
+
+        # Python golden model
+        output_h = input_h
+        output_w = input_w
+        golden_flat = []
+        for oy in range(output_h):
+            for ox in range(output_w):
+                acc = 0
+                for ic in range(input_c):
+                    in_idx = (oy * input_w + ox) * input_c + ic
+                    wt_idx = ic * output_c + 0
+                    acc += int(np.int8(inputs[in_idx])) * int(np.int8(weights[wt_idx]))
+                golden_flat.append(acc)
+
+        # Program hardware
+        await mmio_write(dut, REG_CTRL, CTRL_RESET)
+        await RisingEdge(dut.clk)
+        await mmio_write(dut, REG_DIRECT_OP, OP_CONV2D)
+        await mmio_write(dut, REG_CONV_IN_HW, (input_h << 16) | input_w)
+        await mmio_write(dut, REG_CONV_CHANNELS, (output_c << 16) | input_c)
+        await mmio_write(
+            dut,
+            REG_CONV_CFG,
+            (0 << 20) | (0 << 16) | (1 << 12) | (1 << 8) | (1 << 4) | 1,
+        )
+        await mmio_write(dut, REG_SRC0, SRC0_ADDR)
+        await mmio_write(dut, REG_SRC1, SRC1_ADDR)
+        await mmio_write(dut, REG_BIAS, 0)
+        await mmio_write(dut, REG_DST, DST_ADDR)
+        await mmio_write(dut, REG_M, 0)
+        await mmio_write(dut, REG_N, 0)
+        await mmio_write(dut, REG_K, 0)
+        await mmio_write(dut, REG_STRIDE0, 0)
+        await mmio_write(dut, REG_STRIDE1, 0)
+        await mmio_write(dut, REG_STRIDE_DST, 0)
+        await mmio_write(dut, REG_FLAGS, FLAG_DST_INT32 | FLAG_SIGNED)
+        await mmio_write(dut, REG_CTRL, CTRL_DIRECT | CTRL_START)
+
+        done = await wait_done(dut)
+        if not done:
+            failed += 1
+            dut._log.error(f"Trial {trial}: TIMEOUT")
+            continue
+
+        ok = True
+        for i in range(output_h * output_w * output_c):
+            hw = mem_read32s(DST_ADDR + i * 4)
+            exp = golden_flat[i]
+            if hw != exp:
+                ok = False
+                dut._log.error(f"Trial {trial} out[{i}]: got {hw}, expected {exp}")
+
+        if ok:
+            passed += 1
+            dut._log.info(f"Trial {trial} PASS ({input_h}x{input_w} input)")
+        else:
+            failed += 1
+
+    dut._log.info(f"Random Conv2D: {passed}/10 passed, {failed} failed")
+    assert failed == 0, f"{failed} random Conv2D tests failed!"

@@ -1,39 +1,161 @@
 # TinyGPU-ML — Python Golden Verification Suite
 
-## Overview
+---
 
-This folder contains the **Python-based Golden Reference Model and cocotb testbench** for verifying the TinyGPU-ML hardware accelerator.
+## 🛠️ Tools & Versions
 
-The verification suite runs alongside the Verilator RTL simulation and confirms that the hardware produces mathematically correct outputs for all supported operations.
+| Tool | Version | Purpose |
+|------|---------|---------|
+| **Python** | 3.10.12 | Golden reference model + cocotb tests |
+| **NumPy** | 2.2.6 | INT8/INT32 arithmetic model |
+| **cocotb** | 2.0.1 | Python-to-RTL interface |
+| **cocotb-test** | 0.2.6 | Test runner framework |
+| **Verilator** | 5.048 | RTL simulator (SystemVerilog) |
+| **pip** | 24.0 | Package manager |
+| **Git** | — | Version control |
+| **VS Code** | — | Development environment |
+| **Docker** | Dev Container: Hardware Dev | Isolated build environment |
+
+Install dependencies:
+```bash
+pip3 install cocotb cocotb-test numpy
+```
 
 ---
 
-## Project Context
+## ✅ What We Achieved
 
-**TinyGPU-ML** is an INT8 ML accelerator integrated with the NEORV32 RISC-V SoC on the Tang Nano 20K FPGA. The accelerator supports:
+### cocotb Test Results (7/7 PASS)
 
-- GEMM (matrix multiply): INT8 inputs, INT32 accumulation
-- VEC_ADD: element-wise vector addition
-- RELU: activation function
-- CLAMP: value clamping
-- Conv2D: hardware convolution via streaming im2col
+```
+*******************************************************************************
+** TEST                             STATUS   OPERATIONS VERIFIED             **
+*******************************************************************************
+** test_tinygpu.test_soft_reset      PASS    MMIO + control logic            **
+** test_tinygpu.test_vec_add_fixed   PASS    z = {11, 22, 33, 44}           **
+** test_tinygpu.test_gemm_fixed      PASS    C = [[16,20],[4,4]]            **
+** test_tinygpu.test_gemm_random     PASS    50/50 random INT8 cases        **
+** test_tinygpu.test_relu_fixed      PASS    y = {0, 3, 0, 7}              **
+** test_tinygpu.test_conv2d_fixed    PASS    16/16 output elements          **
+** test_tinygpu.test_conv2d_random   PASS    10/10 random cases             **
+*******************************************************************************
+** TESTS=7  PASS=7  FAIL=0  SKIP=0                                         **
+*******************************************************************************
+```
 
-This verification suite focuses on the **software verification side** of the HW/SW co-design boundary. The hardware RTL is verified by the team using Icarus Verilog and Verilator. This Python suite provides an independent golden reference model and a Level 4 industry-standard cocotb testbench.
+### Coverage Results
 
----
+```
+Python cocotb suite alone:
+  line     : 69.5%   (214/308)
+  branch   : 74.1%   (304/410)
+  expr     : 75.3%   (216/287)
+  overall  : 65.0%   (1614/2478)
 
-## Verification Levels
+Full team (cocotb + Icarus + Verilator diff):
+  line             : 89.83%
+  functional cov   : 100%
+```
+
+### Python Verification Levels Completed
 
 | Level | Method | Status |
 |-------|--------|--------|
-| 1 | Pure Python loops (basic concept) | ✅ Done |
-| 2 | NumPy-based golden model | ✅ Done |
+| 1 | Pure Python loops — convolution concept | ✅ Done |
+| 2 | NumPy-based im2col + GEMM | ✅ Done |
 | 3 | Randomized test generation | ✅ Done |
-| 4 | cocotb — Python drives real RTL | ✅ Done |
+| 4 | **cocotb — Python drives real RTL** | ✅ Done |
 
 ---
 
-## Folder Structure
+## 🏗️ Where This Fits in the Architecture Verification Plan
+
+The project defines 5 hardware verification levels (from Architecture Spec v2, Section 9.1).
+This Python suite covers **L4 — Kernel-level verification**.
+
+```
+L1  Arithmetic unit    Single PE: signed multiply, accumulate, reset, overflow
+    ─────────────────  Method: Verilator unit tests (RTL team)
+    Status: COMPLETE
+
+L2  Array              4×4 array against software model, full + partial tiles
+    ─────────────────  Method: Verilator array tests (RTL team)
+    Status: COMPLETE
+
+L3  Scratchpad + DMA   Bank select, load/store ordering, burst, stride handling
+    ─────────────────  Method: Verilator DMA tests (RTL team)
+    Status: COMPLETE
+
+L4  Kernel-level  ◄─── THIS SUITE
+    ─────────────────  Method: Python Golden Reference Model + cocotb
+    Operations:
+      ✅ GEMM    — 50 randomized INT8 cases
+      ✅ VEC_ADD — fixed + random
+      ✅ RELU    — fixed values
+      ✅ Conv2D  — fixed + 10 randomized cases
+    Status: PASSING (7/7 tests)
+    Line coverage: 69.5% (Python alone)
+    Team total:    89.83% line, 100% functional
+
+L5  SoC-level          NEORV32 firmware launches kernels, checks vs C reference
+    ─────────────────  Method: GHDL firmware simulation
+    Status: IN PROGRESS (Zfinx fix pending)
+```
+
+### What "Golden Reference Model at L4" Means
+
+At L4, the Python golden model acts as the **independent mathematical reference**:
+
+```
+L4 Kernel Verification Flow:
+
+  Software (Python)               Hardware (RTL)
+  ─────────────────               ──────────────
+  1. Generate random INT8         1. Same inputs written
+     inputs (A, B matrices)          to memory model
+
+  2. Compute expected output      2. tinygpu_top.sv runs
+     using Python golden model       GEMM/VEC_ADD/RELU/Conv2D
+
+  3. Golden result stored         3. Hardware result stored
+     (correct answer)                in output memory
+
+                  ↓ cocotb compares both ↓
+
+            PASS if they match
+            FAIL if they differ → bug found in RTL
+```
+
+This is called **"Golden Model Verification"** or **"Reference Model Verification"** — the standard industry methodology for kernel-level hardware verification.
+
+---
+
+## 📋 Overview
+
+This folder contains the **Python-based Golden Reference Model and cocotb testbench** for verifying the TinyGPU-ML hardware accelerator.
+
+**TinyGPU-ML** is an INT8 ML accelerator integrated with the NEORV32 RISC-V SoC on the Tang Nano 20K FPGA. It supports:
+
+- GEMM: INT8 inputs, INT32 accumulation
+- VEC_ADD: element-wise vector addition
+- RELU: activation function
+- CLAMP: value clamping
+- Conv2D: hardware convolution via streaming im2col engine
+
+This suite provides the **software verification side** of the HW/SW co-design boundary:
+
+```
+Python Golden Model              Real RTL (.sv files)
+      |                                |
+      | cocotb + Verilator 5.048       |
+      └──────── compare ───────────────┘
+                      |
+                PASS / FAIL
+```
+
+---
+
+## 📁 Folder Structure
 
 ```
 tinygpu_golden_verification/
@@ -44,42 +166,24 @@ tinygpu_golden_verification/
 ├── step4_compare_hardware.py   ← Python vs hardware output comparison
 │
 ├── test_tinygpu.py             ← cocotb Level 4 testbench (main)
-├── Makefile                    ← cocotb build system with coverage
+├── Makefile                    ← cocotb build + coverage reporting
 │
 └── README.md                   ← This file
 ```
 
 ---
 
-## Requirements
+## 🚀 How to Run
 
+### Step-by-step Python (beginner to advanced):
 ```bash
-# Already installed in Docker container
-Python      3.10.12
-NumPy       2.2.6
-cocotb      2.0.1
-cocotb-test 0.2.6
-Verilator   5.048
+python3 step1_convolution.py      # What is convolution
+python3 step2_im2col.py           # im2col + GEMM
+python3 step3_golden_model.py     # INT8/INT32 golden model
+python3 step4_compare_hardware.py # Compare vs hardware
 ```
 
-Install if needed:
-```bash
-pip3 install cocotb cocotb-test numpy
-```
-
----
-
-## How to Run
-
-### Step-by-step Python learning (beginner):
-```bash
-python3 step1_convolution.py
-python3 step2_im2col.py
-python3 step3_golden_model.py
-python3 step4_compare_hardware.py
-```
-
-### cocotb testbench (drives real RTL):
+### cocotb testbench (Python drives real RTL):
 ```bash
 make
 ```
@@ -91,102 +195,80 @@ make coverage
 
 ---
 
-## cocotb Test Results
+## 🔍 How cocotb Works
 
-```
-** test_tinygpu.test_soft_reset      PASS
-** test_tinygpu.test_vec_add_fixed   PASS   z = {11, 22, 33, 44}
-** test_tinygpu.test_gemm_fixed      PASS   C = [[16,20],[4,4]]
-** test_tinygpu.test_gemm_random     PASS   50/50 random INT8 cases
+Unlike a standard C++ Verilator testbench, cocotb allows Python to:
 
-** TESTS=4 PASS=4 FAIL=0 SKIP=0
-```
-
----
-
-## What cocotb Does
-
-```
-Python Golden Model          Real RTL (.sv files)
-      |                            |
-      |   via cocotb + Verilator   |
-      └──────── compare ───────────┘
-                    |
-              PASS / FAIL
-```
-
-Unlike a standard Verilator C++ testbench, cocotb allows Python to:
 - Drive clock and reset signals directly
 - Write to MMIO registers cycle-accurately
 - Respond to hardware memory requests in real time
 - Run randomized test cases automatically
-- Compare hardware output against Python golden values
+- Compare hardware output against Python golden values independently
+
+```python
+# Python drives real RTL register directly
+await mmio_write(dut, REG_CTRL, CTRL_DIRECT | CTRL_START)
+
+# Python golden model computes expected answer
+golden = golden_gemm(A, B)
+
+# Compare hardware output vs Python expected
+assert hw == exp, f"C[{r}][{c}]: got {hw}, expected {exp}"
+```
 
 ---
 
-## How to Read the cocotb Output
+## 🧮 Golden Reference Model
 
-```
-120.00ns  INFO  [PASS] Soft reset STATUS = 0x40
-1120.00ns INFO  [PASS] z[0] = 11
-1120.00ns INFO  [PASS] z[1] = 22
-1120.00ns INFO  [PASS] z[2] = 33
-1120.00ns INFO  [PASS] z[3] = 44
-```
+Python mirrors hardware arithmetic exactly:
 
-- **ns** = simulation time (not real time)
-- **INFO** = passing result
-- **WARNING/ERROR** = failing result
-
----
-
-## Golden Reference Model
-
-The Python golden model (`step3_golden_model.py`) mirrors the hardware exactly:
-
-| Hardware | Python equivalent |
-|----------|-------------------|
-| INT8 input (signed, -128 to +127) | `np.clip(value, -128, 127)` |
+| Hardware (RTL) | Python equivalent |
+|----------------|-------------------|
+| INT8 signed input (-128 to +127) | `np.clip(value, -128, 127)` |
 | INT8 × INT8 multiply | `int(a) * int(b)` |
-| INT32 accumulation | `np.int32` accumulator |
+| INT32 accumulation | `acc += a * b` (int32) |
 | ReLU epilogue | `max(0, value)` |
 | GEMM: C = A × B | `A.astype(int32) @ B.astype(int32)` |
+| Conv2D (1x1) | nested loop over patches |
 
 ---
 
-## Conv2D Approach
+## 🆕 Conv2D Hardware Support
 
-The TinyGPU hardware supports **hardware Conv2D** using a streaming im2col engine (`tinygpu_im2col_loader.sv`). Software does NOT need to perform im2col — the hardware does it internally.
+The TinyGPU hardware uses a streaming im2col engine (`tinygpu_im2col_loader.sv`). Software does NOT perform im2col — hardware does it internally via opcode `OP_CONV2D = 0x07`.
 
-New registers for Conv2D:
+New registers:
 
 | Register | Offset | Description |
 |----------|--------|-------------|
-| REG_CONV_IN_HW | 0x58 | Input height and width |
-| REG_CONV_CHANNELS | 0x5c | Output and input channels |
-| REG_CONV_CFG | 0x60 | Padding, stride, kernel size |
+| REG_CONV_IN_HW | 0x58 | Input height \| width |
+| REG_CONV_CHANNELS | 0x5c | Output channels \| input channels |
+| REG_CONV_CFG | 0x60 | pad \| stride \| kernel size |
 
-Input layout: `[H][W][Cin]` (NHWC, INT8)
-Weight layout: `[KH][KW][Cin][Cout]` (INT8)
-Output layout: `[OH][OW][Cout]` (INT32 or INT8)
+Data layout:
+```
+Input   : [H][W][Cin]          (NHWC, INT8)
+Weights : [KH][KW][Cin][Cout]  (INT8)
+Output  : [OH][OW][Cout]       (INT32 or INT8)
+```
 
 ---
 
-## Team Split
+## 👥 Team Split
 
 | Person | Task |
 |--------|------|
-| RTL teammate | Conv2D hardware (`tinygpu_im2col_loader.sv`), coverage improvement |
-| This person | Python golden model + cocotb testbench |
+| RTL teammate | Conv2D hardware, coverage (89.83% line, 100% functional) |
+| This person | Python golden model + cocotb testbench (L4, 7/7 PASS) |
 
 ---
 
-## Reference Papers
+## 📚 Reference Papers
 
-1. **Gemmini** — RISC-V systolic array with im2col+GEMM (DAC 2021)
+1. **Gemmini** — RISC-V systolic array + im2col+GEMM (DAC 2021)
    `https://arxiv.org/abs/1911.09925`
 
-2. **Energy-Efficient GeMM-Based Convolution Accelerator With On-the-Fly im2col**
+2. **Energy-Efficient GeMM-Based Conv Accelerator With On-the-Fly im2col**
    IEEE TVLSI 2023 — `https://ieeexplore.ieee.org/document/10167453`
 
 3. **TinyVers** — Python golden model for RISC-V ML inference verification
@@ -194,15 +276,17 @@ Output layout: `[OH][OW][Cout]` (INT32 or INT8)
 
 ---
 
-## Platform
+## 💻 Platform
 
-- **FPGA:** Tang Nano 20K (GW2AR-18)
-- **SoC:** NEORV32 RISC-V
-- **PE Array:** 2×2 (4 PEs), INT8 input, INT32 accumulation
-- **Clock:** 27 MHz
-- **MMIO Base:** 0xFFEE0000
+| Parameter | Value |
+|-----------|-------|
+| FPGA | Tang Nano 20K (GW2AR-18) |
+| SoC | NEORV32 RISC-V |
+| PE Array | 2×2 (4 PEs) |
+| Data type | INT8 input, INT32 accumulation |
+| Clock | 27 MHz |
+| MMIO Base | 0xFFEE0000 |
 
 ---
 
-*TinyGPU-ML — Hardware/Software Co-Design Project*
-*June 2026*
+*TinyGPU-ML — Hardware/Software Co-Design Project — June 2026*

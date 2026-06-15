@@ -31,6 +31,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop__Syms final : public VerilatedSyms {
     Vtop___024root                 TOP;
     Vtop_tinygpu_pkg               TOP__tinygpu_pkg;
 
+    // COVERAGE
+    uint32_t __Vcoverage[24494];
+
     // SCOPE NAMES
     VerilatedScope* __Vscopep_TOP;
     VerilatedScope* __Vscopep_tinygpu_pkg;

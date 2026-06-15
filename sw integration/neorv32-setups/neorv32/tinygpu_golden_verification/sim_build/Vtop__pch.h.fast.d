@@ -8,4 +8,5 @@ Vtop__pch.h.fast.gch: Vtop__pch.h \
  /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilated_sym_props.h \
  /usr/local/share/verilator/include/vltstd/svdpi.h Vtop__Syms.h Vtop.h \
- Vtop___024root.h Vtop_tinygpu_pkg.h
+ /usr/local/share/verilator/include/verilated_cov.h Vtop___024root.h \
+ Vtop_tinygpu_pkg.h
