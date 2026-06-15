@@ -19,7 +19,9 @@ if [[ $# -gt 0 ]]; then
   TB_NAMES=("$@")
 else
   TB_NAMES=(
+    tb_tinygpu_top_directed_tb
     tb_tinygpu_top_error_paths_tb
+    tb_tinygpu_top_controller_cov_tb
     tb_tinygpu_regs_extended_tb
     tb_tinygpu_top_requant_tb
     tb_tinygpu_top_conv2d_corners_tb

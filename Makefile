@@ -39,6 +39,7 @@ TB_NAMES := \
 	tb_tinygpu_top_clamp_tb \
 	tb_tinygpu_top_conv2d_tb \
 	tb_tinygpu_top_conv2d_corners_tb \
+	tb_tinygpu_top_controller_cov_tb \
 	tb_tinygpu_top_error_paths_tb \
 	tb_tinygpu_top_requant_tb \
 	tb_tinygpu_top_demo_tb \

@@ -4,10 +4,11 @@ counters
 dma
 im2col
 regs
+cmd_ctrl_vector
 
 [options]
 mode prove
-depth 40
+depth 80
 
 [engines]
 smtbmc z3
@@ -32,6 +33,22 @@ prep -top formal_im2col
 read -formal -sv rtl/tinygpu_pkg.sv rtl/tinygpu_regs.sv formal/tinygpu_formal.sv
 prep -top formal_regs
 
+[script cmd_ctrl_vector]
+read -formal -sv rtl/tinygpu_pkg.sv \
+  rtl/tinygpu_shared_mul.sv \
+  rtl/tinygpu_pe.sv \
+  rtl/tinygpu_array4x4.sv \
+  rtl/tinygpu_spm.sv \
+  rtl/tinygpu_mem_arbiter.sv \
+  rtl/tinygpu_im2col_loader.sv \
+  rtl/tinygpu_epilogue_shared.sv \
+  rtl/tinygpu_epilogue.sv \
+  rtl/tinygpu_dma.sv \
+  rtl/tinygpu_vec_alu.sv \
+  rtl/tinygpu_cmd_ctrl.sv \
+  formal/tinygpu_formal.sv
+prep -top formal_cmd_ctrl_vector
+
 [files]
 rtl/tinygpu_pkg.sv
 rtl/tinygpu_mem_arbiter.sv
@@ -39,4 +56,12 @@ rtl/tinygpu_counters.sv
 rtl/tinygpu_dma.sv
 rtl/tinygpu_im2col_loader.sv
 rtl/tinygpu_regs.sv
+rtl/tinygpu_shared_mul.sv
+rtl/tinygpu_pe.sv
+rtl/tinygpu_array4x4.sv
+rtl/tinygpu_spm.sv
+rtl/tinygpu_epilogue_shared.sv
+rtl/tinygpu_epilogue.sv
+rtl/tinygpu_vec_alu.sv
+rtl/tinygpu_cmd_ctrl.sv
 formal/tinygpu_formal.sv

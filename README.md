@@ -99,15 +99,26 @@ The RTL demo prints:
 
 ```text
 Direct GEMM C = [[19, 22], [43, 50]]
+Direct GEMM perf: cycles=124 active=2 stalls=65 work=8 ops/cycle=0.064 stall=52%
 Descriptor GEMM C = [[19, 22], [43, 50]]
+Descriptor GEMM perf: cycles=194 active=2 stalls=135 work=8 ops/cycle=0.041 stall=69%
 Vector add z = {6, 4, -4, 12}
+Vector add perf: cycles=61 active=8 stalls=47 work=4 ops/cycle=0.065 stall=77%
 Conv2D out row0 = {1, 2, 3}
 Conv2D out row1 = {4, 5, 6}
 Conv2D out row2 = {7, 8, 9}
-Cycles : 888
-Active : 27
-Stalls : 695
+Conv2D perf: cycles=888 active=27 stalls=695 work=81 ops/cycle=0.091 stall=78%
+Last command cycles : 888
+Last command active : 27
+Last command stalls : 695
+Commands completed : 4
 ```
+
+Current merged Verilator metrics from `make coverage-report` are:
+
+- RTL-only line coverage: `94.35% (2338/2478)`
+- RTL-only branch coverage: `24.59% (35025/142452)`
+- functional coverage: `100.00% (32/32 bins)`
 
 Formal project files are under [`formal/`](formal/):
 
