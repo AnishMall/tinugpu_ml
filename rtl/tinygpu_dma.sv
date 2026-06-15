@@ -308,6 +308,7 @@ module tinygpu_dma import tinygpu_pkg::*; (
 
 `ifndef SYNTHESIS
   logic        held_req_q;
+  logic        read_outstanding_q;
   logic        held_we_q;
   logic [31:0] held_addr_q;
   logic [31:0] held_wdata_q;
@@ -316,6 +317,7 @@ module tinygpu_dma import tinygpu_pkg::*; (
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       held_req_q <= 1'b0;
+      read_outstanding_q <= 1'b0;
       held_we_q <= 1'b0;
       held_addr_q <= '0;
       held_wdata_q <= '0;
@@ -335,6 +337,17 @@ module tinygpu_dma import tinygpu_pkg::*; (
         held_wdata_q <= mem_wdata;
         held_wstrb_q <= mem_wstrb;
       end
+
+      if (mem_req && mem_ready && !mem_we)
+        read_outstanding_q <= 1'b1;
+      if (mem_rvalid)
+        read_outstanding_q <= 1'b0;
+
+      assert (!(mem_rvalid && !read_outstanding_q));
+      assert (!spm_wr_en || state_q == DMA_WRITE_SPM);
+      assert (!(done_q && error_q));
+      assert (!mem_we || state_q == DMA_ISSUE_WRITE);
+      assert (spm_region_o == spm_region_q);
     end
   end
 `endif

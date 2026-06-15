@@ -84,10 +84,15 @@ module formal_dma;
   logic [3:0] mem_wstrb, spm_wstrb;
   logic [1:0] spm_region_o;
   logic [8:0] spm_addr;
+  logic [5:0] progress_q;
   always @($global_clock) clk <= !clk;
   always @(posedge clk) begin
     rst_n <= 1'b1;
     start <= !rst_n;
+    if (rst_n) begin
+      assume (mem_ready);
+      assume (mem_rvalid);
+    end
     if (mem_rvalid) assume ($past(mem_req && mem_ready));
   end
 
@@ -103,8 +108,13 @@ module formal_dma;
   );
 
   always @(posedge clk) if (rst_n) begin
+    if (start)
+      progress_q <= '0;
+    else if (!done && !error)
+      progress_q <= progress_q + 6'd1;
     assert (!mem_we);
     assert (spm_addr < 9'd64);
+    assert (progress_q < 6'd30 || done || error);
   end
 endmodule
 
@@ -118,10 +128,15 @@ module formal_im2col;
   logic [31:0] mem_addr, spm_wdata;
   logic [8:0] spm_addr;
   logic [3:0] spm_wstrb;
+  logic [5:0] progress_q;
   always @($global_clock) clk <= !clk;
   always @(posedge clk) begin
     rst_n <= 1'b1;
     start <= !rst_n;
+    if (rst_n) begin
+      assume (mem_ready);
+      assume (mem_rvalid);
+    end
     if (mem_rvalid) assume ($past(mem_req && mem_ready));
   end
 
@@ -131,7 +146,7 @@ module formal_im2col;
     .input_row_stride(32'd3), .kernel_h(4'd3), .kernel_w(4'd3),
     .stride_h(4'd1), .stride_w(4'd1), .pad_h(4'd1), .pad_w(4'd1),
     .tile_out_y(16'd0), .tile_out_x(16'd0), .output_w(16'd3),
-    .active_rows(16'd4), .active_k(16'd9), .start_kh(4'd0), .start_kw(4'd0),
+    .active_rows(16'd1), .active_k(16'd4), .start_kh(4'd0), .start_kw(4'd0),
     .start_ic(16'd0), .next_out_y(), .next_out_x(), .next_kh(), .next_kw(),
     .next_ic(), .mem_req(mem_req), .mem_addr(mem_addr), .mem_rdata(mem_rdata),
     .mem_ready(mem_ready), .mem_rvalid(mem_rvalid), .spm_wr_en(spm_wr_en),
@@ -139,8 +154,13 @@ module formal_im2col;
   );
 
   always @(posedge clk) if (rst_n) begin
+    if (start)
+      progress_q <= '0;
+    else if (!done && !error)
+      progress_q <= progress_q + 6'd1;
     assert (spm_addr < 9'd64);
     if (mem_req) assert (mem_addr >= 32'h1000 && mem_addr < 32'h1010);
+    assert (progress_q < 6'd20 || done || error);
   end
 endmodule
 

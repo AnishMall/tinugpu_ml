@@ -1865,6 +1865,9 @@ import tinygpu_pkg::*;
       assert (!(conv_spm_wr_en && !state_is_conv));
       assert (!dma_busy_status || dma_inflight_q || dma_launch_pending_q);
       assert (!conv_busy_status || conv_inflight_q);
+      assert (!(dma_launch_pending_q && dma_inflight_q));
+      assert (!done || (state_q == S_DONE) || (state_q == S_ERROR));
+      assert (!(done && busy));
       if (epi_out_valid) begin
         assert (epi_shadow_i32[int'(epi_out_index) / TILE_N][int'(epi_out_index) % TILE_N] == epi_out_i32);
         assert (epi_shadow_i8[int'(epi_out_index) / TILE_N][int'(epi_out_index) % TILE_N] == epi_out_i8);

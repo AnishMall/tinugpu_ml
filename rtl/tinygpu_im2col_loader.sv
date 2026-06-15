@@ -297,6 +297,11 @@ module tinygpu_im2col_loader
         read_outstanding_q <= 1'b1;
       if (mem_rvalid)
         read_outstanding_q <= 1'b0;
+      assert (!(mem_rvalid && !read_outstanding_q));
+      assert (!spm_wr_en || state_q == IM2COL_WRITE);
+      assert (!done || state_q == IM2COL_DONE);
+      assert (!error || state_q == IM2COL_ERROR);
+      assert (!(done && error));
       assert (row_q < 16'(TILE_M) || state_q == IM2COL_IDLE || state_q == IM2COL_DONE);
       assert (k_q < 16'(TILE_K) || state_q == IM2COL_IDLE || state_q == IM2COL_DONE);
     end

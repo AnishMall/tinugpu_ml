@@ -89,4 +89,11 @@ module tinygpu_mem_arbiter (
   assign bias_ready_o = (select_i == CLIENT_BIAS) && mem_ready_i;
   assign bias_rvalid_o = (select_i == CLIENT_BIAS) && mem_rvalid_i;
 
+`ifndef SYNTHESIS
+  always @* begin
+    if ((select_i == CLIENT_CONV) && conv_req_i)
+      assert (!mem_we_o);
+  end
+`endif
+
 endmodule
