@@ -1,0 +1,15 @@
+Reading netlist file: "C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v4\impl\gwsynthesis\tang-nano-20k.vg"
+Parsing netlist file "C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v4\impl\gwsynthesis\tang-nano-20k.vg" completed
+ERROR  (PA2122) : Not support 'spram_spram_0_0_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_1_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_0_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_1_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_0_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_1_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_0_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_1_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_0_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_0_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_0_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+ERROR  (PA2122) : Not support 'spram_spram_0_0_s'(SP) WRITE_MODE = 2'b10, please change write mode WRITE_MODE = 2'b00 or 2'b01.
+NOTE  (PA0005) : Processing netlist completed with errors

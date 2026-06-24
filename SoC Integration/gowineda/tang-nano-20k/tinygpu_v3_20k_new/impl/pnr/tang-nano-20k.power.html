@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ENhttp://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Power Analysis Report</title>
+<style type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
+div#main_wrapper { width: 100%; }
+div#content { margin-left: 350px; margin-right: 30px; }
+div#catalog_wrapper {position: fixed; top: 30px; width: 350px; float: left; }
+div#catalog ul { list-style-type: none; }
+div#catalog li { text-align: left; list-style-type:circle; color: #0084ff; margin-top: 3px; margin-bottom: 3px; }
+div#catalog a { display:inline-block; text-decoration: none; color: #0084ff; font-weight: bold; padding: 3px; }
+div#catalog a:visited { color: #0084ff; }
+div#catalog a:hover { color: #fff; background: #0084ff; }
+hr { margin-top: 30px; margin-bottom: 30px; }
+h1, h3 { text-align: center; }
+h1 {margin-top: 50px; }
+table, th, td {white-space:pre;  border: 1px solid #aaa; }
+table { border-collapse:collapse; margin-top: 10px; margin-bottom: 20px; width: 100%; }
+th, td { padding: 5px 5px 5px 5px; }
+th { color: #fff; font-weight: bold; background-color: #0084ff; }
+table.summary_table td.label { width: 24%; min-width: 200px; background-color: #dee8f4; }
+table.thermal_table td.label { width: 24%; min-width: 200px; background-color: #dee8f4; }
+table.Configure_table td.label { width: 24%; min-width: 200px; background-color: #dee8f4; }
+table.detail_table th.label {  min-width: 8%; width: 8%; }
+</style>
+</head>
+<body>
+<div id="main_wrapper">
+<div id="catalog_wrapper">
+<div id="catalog">
+<ul>
+<li><a href="#Message" style=" font-size: 16px;">Power Messages</a>
+<ul>
+<li><a href="#Configure_Info" style=" font-size: 14px;">Configure Information</a></li>
+</ul>
+</li>
+<li><a href="#Summary" style=" font-size: 16px;">Power Summary</a>
+<ul>
+<li><a href="#Power_Info" style=" font-size: 14px;">Power Information</a></li>
+<li><a href="#Thermal_Info" style=" font-size: 14px;">Thermal Information</a></li>
+<li><a href="#Supply_Summary" style=" font-size: 14px;">Supply Information</a></li>
+</ul>
+</li>
+<li><a href="#Detail" style=" font-size: 16px;">Power Details</a>
+<ul>
+<li><a href="#By_Block_Type" style=" font-size: 14px;">Power By Block Type</a></li>
+<li><a href="#By_Hierarchy" style=" font-size: 14px;">Power By Hierarchy</a></li>
+<li><a href="#By_Clock_Domain" style=" font-size: 14px;">Power By Clock Domain</a></li>
+</ul>
+</li>
+</ul>
+</div><!-- catalog -->
+</div><!-- catalog_wrapper -->
+<div id="content">
+<h1><a name="Message">Power Messages</a></h1>
+<table class="summary_table">
+<tr>
+<td class="label">Report Title</td>
+<td>Power Analysis Report</td>
+</tr>
+<tr>
+<td class="label">Design File</td>
+<td>C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v3_20k_new\impl\gwsynthesis\tang-nano-20k.vg</td>
+</tr>
+<tr>
+<td class="label">Physical Constraints File</td>
+<td>C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v3_20k_new\src\tang-nano-20k_test_setup_bootloader.cst</td>
+</tr>
+<tr>
+<td class="label">Timing Constraints File</td>
+<td>C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v3_20k_new\src\tinygpu_20k.sdc</td>
+</tr>
+<tr>
+<td class="label">Tool Version</td>
+<td>V1.9.12.02 (64-bit)</td>
+</tr>
+<tr>
+<td class="label">Part Number</td>
+<td>GW2AR-LV18QN88C8/I7</td>
+</tr>
+<tr>
+<td class="label">Device</td>
+<td>GW2AR-18</td>
+</tr>
+<tr>
+<td class="label">Device Version</td>
+<td>C</td>
+</tr>
+<tr>
+<td class="label">Created Time</td>
+<td>Thu May 28 23:22:40 2026
+</td>
+</tr>
+<tr>
+<td class="label">Legal Announcement</td>
+<td>Copyright (C)2014-2026 Gowin Semiconductor Corporation. All rights reserved.</td>
+</tr>
+</table>
+<h2><a name="Configure_Info">Configure Information:</a></h2>
+<table class="summary_table">
+<tr>
+<td class="label">Grade</td>
+<td>Commercial</td>
+</tr>
+<tr>
+<td class="label">Process</td>
+<td>Typical</td>
+</tr>
+<tr>
+<td class="label">Ambient Temperature</td>
+<td>25.000
+</tr>
+<tr>
+<td class="label">Use Custom Theta JA</td>
+<td>false</td>
+</tr>
+<tr>
+<td class="label">Heat Sink</td>
+<td>None</td>
+</tr>
+<tr>
+<td class="label">Air Flow</td>
+<td>LFM_0</td>
+</tr>
+<tr>
+<td class="label">Use Custom Theta SA</td>
+<td>false</td>
+</tr>
+<tr>
+<td class="label">Board Thermal Model</td>
+<td>None</td>
+</tr>
+<tr>
+<td class="label">Use Custom Theta JB</td>
+<td>false</td>
+</tr>
+<tr>
+<td class="label">Related Vcd File</td>
+<td></td>
+</tr>
+<tr>
+<td class="label">Related Saif File</td>
+<td></td>
+</tr>
+<tr>
+<td class="label">Filter Glitches</td>
+<td>false</td>
+</tr>
+<tr>
+<td class="label">Default IO Toggle Rate</td>
+<td>0.125</td>
+</tr>
+<tr>
+<td class="label">Default Remain Toggle Rate</td>
+<td>0.125</td>
+</tr>
+</table>
+<h1><a name="Summary">Power Summary</a></h1>
+<h2><a name="Power_Info">Power Information:</a></h2>
+<table class="summary_table">
+<tr>
+<td class="label">Total Power (mW)</td>
+<td>135.962</td>
+</tr>
+<tr>
+<td class="label">Quiescent Power (mW)</td>
+<td>122.800</td>
+</tr>
+<tr>
+<td class="label">Dynamic Power (mW)</td>
+<td>13.162</td>
+</tr>
+</table>
+<h2><a name="Thermal_Info">Thermal Information:</a></h2>
+<table class="summary_table">
+<tr>
+<td class="label">Junction Temperature</td>
+<td>29.057</td>
+</tr>
+<tr>
+<td class="label">Theta JA</td>
+<td>29.840</td>
+</tr>
+<tr>
+<td class="label">Max Allowed Ambient Temperature</td>
+<td>80.943</td>
+</tr>
+</table>
+<h2><a name="Supply_Summary">Supply Information:</a></h2>
+<table class="summary_table">
+<tr>
+<th class="label">Voltage Source</th>
+<th class="label">Voltage</th>
+<th class="label">Dynamic Current(mA)</th>
+<th class="label">Quiescent Current(mA)</th>
+<th class="label">Power(mW)</th>
+</tr>
+<tr>
+<td>VCC</td>
+<td>1.000</td>
+<td>11.138</td>
+<td>70.000</td>
+<td>81.138</td>
+</tr>
+<tr>
+<td>VCCX</td>
+<td>3.300</td>
+<td>0.307</td>
+<td>15.000</td>
+<td>50.512</td>
+</tr>
+<tr>
+<td>VCCIO33</td>
+<td>3.300</td>
+<td>0.307</td>
+<td>1.000</td>
+<td>4.312</td>
+</tr>
+</table>
+<h1><a name="Detail">Power Details</a></h1>
+<h2><a name="By_Block_Type">Power By Block Type:</a></h2>
+<table class="detail_table">
+<tr>
+<th class="label">Block Type</th>
+<th class="label">Total Power(mW)</th>
+<th class="label">Static Power(mW)</th>
+<th class="label">Average Toggle Rate(millions of transitions/sec)</th>
+</tr>
+<tr>
+<td>Logic</td>
+<td>1.449</td>
+<td>NA</td>
+<td>3.375</td>
+</tr>
+<tr>
+<td>IO</td>
+<td>7.250
+<td>4.919
+<td>5.738
+</tr>
+<tr>
+<td>BSRAM</td>
+<td>9.375
+<td>NA</td>
+<td>NA</td>
+</tr>
+</table>
+<h2><a name="By_Hierarchy">Power By Hierarchy:</a></h2>
+<table class="detail_table">
+<tr>
+<th class="label">Hierarchy Entity</th>
+<th class="label">Total Power(mW)</th>
+<th class="label">Block Dynamic Power(mW)</th>
+</tr>
+<tr>
+<td>neorv32_test_setup_bootloader</td>
+<td>10.824</td>
+<td>10.824(10.822)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/</td>
+<td>10.822</td>
+<td>10.822(10.822)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_core_bus_switch_inst/</td>
+<td>0.009</td>
+<td>0.009(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/</td>
+<td>5.740</td>
+<td>5.740(5.638)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/cnts_enabled.neorv32_cpu_counters_inst/</td>
+<td>0.101</td>
+<td>0.101(0.099)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/cnts_enabled.neorv32_cpu_counters_inst/base_enabled.cycle_inst/</td>
+<td>0.049</td>
+<td>0.049(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/cnts_enabled.neorv32_cpu_counters_inst/base_enabled.instret_inst/</td>
+<td>0.050</td>
+<td>0.050(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_alu_inst/</td>
+<td>0.397</td>
+<td>0.397(0.242)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_alu_inst/neorv32_cpu_alu_muldiv_enabled.neorv32_cpu_alu_muldiv_inst/</td>
+<td>0.215</td>
+<td>0.215(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_alu_inst/neorv32_cpu_alu_shifter_inst/</td>
+<td>0.027</td>
+<td>0.027(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_control_inst/</td>
+<td>0.277</td>
+<td>0.277(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/</td>
+<td>0.110</td>
+<td>0.110(0.020)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/issue_enabled.neorv32_cpu_decompressor_inst/</td>
+<td>0.005</td>
+<td>0.005(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[0].ipb_inst/</td>
+<td>0.007</td>
+<td>0.007(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_frontend_inst/prefetch_buffer[1].ipb_inst/</td>
+<td>0.007</td>
+<td>0.007(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_lsu_inst/</td>
+<td>0.041</td>
+<td>0.041(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/core_complex_gen[0].neorv32_cpu_inst/neorv32_cpu_regfile_inst/</td>
+<td>4.711</td>
+<td>4.711(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_bootrom_enabled.neorv32_boot_rom_inst/</td>
+<td>0.759</td>
+<td>0.759(0.758)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_bootrom_enabled.neorv32_boot_rom_inst/bootrom_rom_inst/</td>
+<td>0.758</td>
+<td>0.758(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_bus_io_switch_inst/</td>
+<td>0.030</td>
+<td>0.030(0.012)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_bus_io_switch_inst/neorv32_bus_reg_inst/</td>
+<td>0.012</td>
+<td>0.012(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_clint_enabled.neorv32_clint_inst/</td>
+<td>0.228</td>
+<td>0.228(0.193)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_clint_enabled.neorv32_clint_inst/neorv32_clint_mtime_inst/</td>
+<td>0.049</td>
+<td>0.049(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_clint_enabled.neorv32_clint_inst/neorv32_clint_mtimecmp_gen[0].neorv32_clint_mtimecmp_inst/</td>
+<td>0.144</td>
+<td>0.144(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_gpio_enabled.neorv32_gpio_inst/</td>
+<td>0.020</td>
+<td>0.020(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_sysinfo_inst/</td>
+<td>0.019</td>
+<td>0.019(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_uart0_enabled.neorv32_uart0_inst/</td>
+<td>0.052</td>
+<td>0.052(0.006)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_uart0_enabled.neorv32_uart0_inst/rx_engine_fifo_inst/</td>
+<td>0.003</td>
+<td>0.003(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/io_system.neorv32_uart0_enabled.neorv32_uart0_inst/tx_engine_fifo_inst/</td>
+<td>0.002</td>
+<td>0.002(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/</td>
+<td>1.382</td>
+<td>1.382(1.380)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/</td>
+<td>1.380</td>
+<td>1.380(1.380)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/ram_gen[0].ram_inst/</td>
+<td>0.345</td>
+<td>0.345(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/ram_gen[1].ram_inst/</td>
+<td>0.345</td>
+<td>0.345(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/ram_gen[2].ram_inst/</td>
+<td>0.345</td>
+<td>0.345(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_dmem_enabled.neorv32_dmem_inst/dmem_ram_inst/ram_gen[3].ram_inst/</td>
+<td>0.345</td>
+<td>0.345(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_imem_enabled.neorv32_imem_inst/</td>
+<td>2.533</td>
+<td>2.533(2.527)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_imem_enabled.neorv32_imem_inst/imem_ram.imem_ram_inst/</td>
+<td>2.527</td>
+<td>2.527(2.527)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_imem_enabled.neorv32_imem_inst/imem_ram.imem_ram_inst/ram_gen[0].ram_inst/</td>
+<td>0.632</td>
+<td>0.632(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_imem_enabled.neorv32_imem_inst/imem_ram.imem_ram_inst/ram_gen[1].ram_inst/</td>
+<td>0.632</td>
+<td>0.632(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_imem_enabled.neorv32_imem_inst/imem_ram.imem_ram_inst/ram_gen[2].ram_inst/</td>
+<td>0.632</td>
+<td>0.632(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/memory_system.neorv32_imem_enabled.neorv32_imem_inst/imem_ram.imem_ram_inst/ram_gen[3].ram_inst/</td>
+<td>0.632</td>
+<td>0.632(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/neorv32_bus_gateway_inst/</td>
+<td>0.024</td>
+<td>0.024(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/soc_generators.neorv32_sys_clock_inst/</td>
+<td>0.025</td>
+<td>0.025(0.000)</td>
+<tr>
+<td>neorv32_test_setup_bootloader/neorv32_top_inst/soc_generators.neorv32_sys_reset_inst/</td>
+<td>0.001</td>
+<td>0.001(0.000)</td>
+</table>
+<h2><a name="By_Clock_Domain">Power By Clock Domain:</a></h2>
+<table class="detail_table">
+<tr>
+<th class="label">Clock Domain</th>
+<th class="label">Clock Frequency(Mhz)</th>
+<th class="label">Total Dynamic Power(mW)</th>
+</tr>
+<tr>
+<td>clk_i</td>
+<td>27.000</td>
+<td>10.831</td>
+</tr>
+</table>
+</div><!-- content -->
+</div><!-- main_wrapper -->
+</body>
+</html>

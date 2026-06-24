@@ -1,0 +1,18 @@
+-d C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v5\impl\gwsynthesis\tang-nano-20k.vg
+-p GW5A-25B-MBGA121N-2
+-pn GW5A-LV25MG121NC2/I1
+-cst C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v5\src\tang-nano-20k_test_setup_bootloader.cst
+-cfg C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v5\impl\pnr\device.cfg
+-sdc C:\Users\Dell\Desktop\neorv32-setups\gowineda\tang-nano-20k\tinygpu_v5\src\tinygpu_20k.sdc
+-bit
+-tr
+-ph
+-timing
+-cst_error
+-convert_sdp32_36_to_sdp16_18
+-place_option 0
+-route_option 0
+-clock_route_order 0
+-correct_hold 1
+-route_maxfan 23
+-global_freq 100.000
