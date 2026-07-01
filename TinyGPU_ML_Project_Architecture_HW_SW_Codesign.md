@@ -28,6 +28,27 @@ The NEORV32 CPU remains the host processor. It prepares input/output buffers, co
 | Requantization | Epilogue stage | Converts int32 accumulations to int8 outputs |
 | Conv2D | Hardware streaming im2col + GEMM | NHWC `1x1`/`3x3` convolution without a full lowered matrix |
 
+### Current Implementation Baseline
+
+The current repository baseline is the canonical `4x4x16` RTL:
+
+| Item | Current value |
+|---|---|
+| PE array | 4x4 signed INT8 MAC array |
+| Accumulation | signed INT32 |
+| A scratchpad tile | `4x16` int8, 64 bytes |
+| B scratchpad tile | `16x4` int8, 64 bytes |
+| C scratchpad tile | `4x4` int32, 64 bytes |
+| Conv2D path | RTL streaming im2col into GEMM datapath |
+| Routed SoC target | Tang Primer 25K, `GW5A-LV25MG121NC2/I1` |
+| Clock target used for routed report | `27 MHz` |
+
+The latest reported Tang Primer 25K build closes timing at `47.462 MHz`
+post-route with zero setup and hold violations. Resource use is `78%` logic,
+`31%` registers, `25%` BSRAM, and `100%` DSP. Verification currently reports
+`94.35%` RTL-only line coverage, `24.59%` RTL-only branch coverage, and
+`100.00%` functional coverage over 32 defined bins.
+
 ### Explicitly Out of Scope
 
 The architecture does not implement graphics rendering, CUDA/OpenCL compatibility, floating-point-first execution, training/backpropagation, virtual memory, hardware cache coherence, operating-system-level device drivers, grouped/depthwise convolution, dilation above one, or reliability/fault-injection logic.
@@ -676,7 +697,7 @@ tb_tinygpu_gemm.v
 Tests:
 
 1. `1x1 * 1x1`
-2. `2x2 * 2x2`
+2. small partial-tile GEMM below `4x4`
 3. `4x4 * 4x4`
 4. `4x16 * 16x4`
 5. `7x10 * 10x5`
@@ -955,8 +976,8 @@ packed NHWC `1x1` and `3x3` layers lowered tile-by-tile inside the RTL
 
 ## 19. Final Technical Summary
 
-TinyGPU-ML is a NEORV32-attached ML accelerator built around a 4x4 output-stationary signed int8 MAC array with signed int32 accumulation. The hardware is controlled through MMIO registers, moves matrix/vector tiles through a DMA/address-generator into banked scratchpad memory, executes tiled GEMM/GEMV/vector kernels, applies optional epilogue operations, and writes outputs back to shared memory.
+TinyGPU-ML is a NEORV32-attached ML accelerator built around a 4x4 output-stationary signed int8 MAC array with signed int32 accumulation. The hardware is controlled through MMIO registers, moves matrix/vector tiles through a DMA/address-generator into tile-sized scratchpad memory, executes tiled GEMM/GEMV/vector kernels, applies optional serialized epilogue operations, and writes outputs back to shared memory. Conv2D is handled in RTL by streaming im2col lowering into the same GEMM datapath.
 
 The software layer provides a low-level register driver, kernel wrappers, C golden reference functions, and benchmark programs. The co-design boundary is defined by the MMIO register map, memory layout, command flags, and shared SRAM buffers.
 
-The verification plan requires unit-level RTL testbenches, top-level randomized accelerator simulations, memory-latency stress tests, invalid-command tests, and NEORV32 firmware-level simulations.
+The verification plan is implemented through unit-level RTL testbenches, top-level randomized accelerator simulations, memory-latency stress tests, invalid-command tests, Verilator differential testing, focused formal checks, Python golden-model checks, and NEORV32 firmware-level simulations.

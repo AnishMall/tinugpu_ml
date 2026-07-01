@@ -66,9 +66,9 @@ parameter int TILE_N       = 4;
 parameter int TILE_K       = 16;
 
 parameter int NUM_PES      = TILE_M * TILE_N; // 16
-parameter int SPM_A_BYTES  = 512;  // two banks of 256 bytes
-parameter int SPM_B_BYTES  = 512;  // two banks of 256 bytes
-parameter int SPM_C_BYTES  = 256;  // output staging
+parameter int SPM_A_BYTES  = TILE_M * TILE_K;     // 4x16 int8 A tile = 64 bytes
+parameter int SPM_B_BYTES  = TILE_K * TILE_N;     // 16x4 int8 B tile = 64 bytes
+parameter int SPM_C_BYTES  = TILE_M * TILE_N * 4; // 4x4 int32 C tile = 64 bytes
 parameter int MAX_BURST    = 16;
 ```
 
@@ -412,9 +412,9 @@ At the end of all K tiles, `c_tile` contains the output tile before epilogue.
 
 ```systemverilog
 module tinygpu_spm #(
-    parameter int A_BYTES = 512,
-    parameter int B_BYTES = 512,
-    parameter int C_BYTES = 256
+    parameter int A_BYTES = TILE_M * TILE_K,
+    parameter int B_BYTES = TILE_K * TILE_N,
+    parameter int C_BYTES = TILE_M * TILE_N * 4
 )(
     input logic clk,
     input logic rst_n,
@@ -428,11 +428,11 @@ module tinygpu_spm #(
     output logic [31:0] dma_rdata,
 
     // Compute read side for A and B
-    input  logic [7:0]  a_rd_addr [0:3],
-    output logic [7:0]  a_rd_data [0:3],
+    input  logic [7:0]  a_rd_addr [0:TILE_M-1],
+    output logic [7:0]  a_rd_data [0:TILE_M-1],
 
-    input  logic [7:0]  b_rd_addr [0:3],
-    output logic [7:0]  b_rd_data [0:3],
+    input  logic [7:0]  b_rd_addr [0:TILE_N-1],
+    output logic [7:0]  b_rd_data [0:TILE_N-1],
 
     // C write/read side
     input  logic        c_wr_en,
@@ -948,7 +948,7 @@ Purpose: validate complete GEMM execution through `tinygpu_top`.
 Directed tests:
 
 1. `1x1 * 1x1`
-2. `2x2 * 2x2`
+2. small partial-tile GEMM below `4x4`
 3. `4x4 * 4x4`
 4. `4x16 * 16x4`, exactly one full tile
 5. `7x10 * 10x5`, edge rows/columns
@@ -1270,13 +1270,46 @@ After this passes, add in this order:
 
 ---
 
-## 28. Final Architecture Summary
+## 28. Current Implementation And Closure Status
 
-TinyGPU-ML is a small NEORV32-attached ML accelerator built around a 4x4 output-stationary int8 MAC array. The host CPU launches kernels through MMIO registers. A command controller sequences DMA tile loads, scratchpad access, MAC execution, epilogue processing, and output stores. GEMM is the primary kernel, GEMV reuses the same datapath, vector operations use a small vector ALU, and Conv2D is executed by a hardware im2col-style streaming loader that feeds the existing GEMM path. Extensive verification must cover individual arithmetic units, tile-level execution, memory movement, register behavior, edge masking, quantization, convolution lowering, and full accelerator operation under randomized memory latency and randomized valid workloads.
+The repository implementation is the canonical `4x4x16` RTL. The scratchpad is
+sized for one active tile: 64 bytes for A, 64 bytes for B, and 64 bytes for C.
+Conv2D is implemented in RTL by a streaming im2col loader that feeds the GEMM
+datapath; software im2col remains only as a golden/reference model.
+
+The latest routed SoC result targets Tang Primer 25K / `GW5A-LV25MG121NC2/I1`
+with Gowin EDA `V1.9.12.02`. The reported 27 MHz implementation has:
+
+| Metric | Current result |
+|---|---:|
+| Post-route Fmax | `47.462 MHz` |
+| Setup violations | `0` |
+| Hold violations | `0` |
+| Worst setup slack | `+15.968 ns` |
+| Worst hold slack | `+0.180 ns` |
+| Logic utilization | `17,921 / 23,040 = 78%` |
+| Register utilization | `7,099 / 23,280 = 31%` |
+| BSRAM utilization | `14 / 56 = 25%` |
+| DSP utilization | `28 / 28 = 100%` |
+
+Current verification metrics are:
+
+| Metric | Current result |
+|---|---:|
+| RTL-only line coverage | `94.35% (2338 / 2478)` |
+| RTL-only branch coverage | `24.59% (35025 / 142452)` |
+| Functional coverage | `100.00% (32 / 32 bins)` |
+| Verilator standalone regression | `18 passed, 0 failed` |
 
 ---
 
-## 29. Demo And Coverage Commands
+## 29. Final Architecture Summary
+
+TinyGPU-ML is a small NEORV32-attached ML accelerator built around a 4x4 output-stationary int8 MAC array with 16 parallel PEs and int32 accumulation. The host CPU launches kernels through MMIO registers. A command controller sequences DMA tile loads, tile-sized scratchpad access, MAC execution, serialized epilogue processing, and output stores. GEMM is the primary kernel, GEMV reuses the same datapath, vector operations use a small vector ALU, and Conv2D is executed by a hardware streaming-im2col loader that feeds the existing GEMM path. Extensive verification covers individual arithmetic units, tile-level execution, memory movement, register behavior, edge masking, quantization, convolution lowering, and full accelerator operation under randomized memory latency and randomized valid workloads.
+
+---
+
+## 30. Demo And Coverage Commands
 
 The canonical runnable commands and demo transcripts are documented in the
 repository [`README.md`](README.md). Keep the README as the single source of

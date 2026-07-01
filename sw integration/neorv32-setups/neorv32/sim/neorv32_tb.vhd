@@ -497,6 +497,10 @@ begin
         report "[TB:TGPU] value=" &
                integer'image(to_integer(unsigned(status_word_v(15 downto 8)))) &
                " data=" & integer'image(to_integer(signed(status_word_v(7 downto 0)))) severity note;
+      elsif (status_word_v /= prev_status_v) and (status_word_v(31 downto 20) = x"545") then
+        report "[TB:TGPU] metric=" &
+               integer'image(to_integer(unsigned(status_word_v(19 downto 16)))) &
+               " data=" & integer'image(to_integer(unsigned(status_word_v(15 downto 0)))) severity note;
       elsif status_word_v(31 downto 16) = x"5447" then
         pass_count_v := to_integer(unsigned(status_word_v(15 downto 8)));
         fail_count_v := to_integer(unsigned(status_word_v(7 downto 0)));

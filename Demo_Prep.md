@@ -213,10 +213,19 @@ What this demo proves:
 - Conv2D mapping works
 - counters are alive and observable
 
-### Performance story from the deterministic demo
+### RTL performance story from the deterministic demo
 
-The per-command counters are for the last completed command, not cumulative
-from reset. That makes them good for a compact per-kernel performance table.
+These numbers come from the real SystemVerilog RTL demo:
+
+```bash
+make demo-rtl
+```
+
+That target runs `tb/tb_tinygpu_top_demo_tb.sv` against the actual
+`rtl/tinygpu_top.sv` hierarchy and writes `build/tinygpu_top_demo.vcd` for
+waveform review. The per-command counters are for the last completed command,
+not cumulative from reset. That makes them good for a compact per-kernel
+performance table.
 
 | Kernel | Math result shown in demo | Scalar work reference | Cycles | Active | Stalls | Ops/cycle | Stall % | First-order read |
 |---|---|---:|---:|---:|---:|---:|---:|---|
@@ -235,6 +244,34 @@ How to explain this in the presentation:
 
 That gives you a credible performance story without overselling these toy-sized
 demo jobs as peak-throughput measurements.
+
+### CPU-only NEORV32 baseline from firmware simulation
+
+The software demo now also runs pure-C reference kernels on NEORV32 and measures
+them with the CPU `mcycle` counter. The same firmware then reads TinyGPU command
+counters from the behavioral GHDL TinyGPU model used for software/MMIO
+integration. This table is useful for a first speedup narrative, but it should
+be labeled as a firmware/MMIO simulation baseline, not as post-route RTL
+throughput.
+
+| Kernel | CPU-only cycles | TinyGPU model cycles | Speedup | Notes |
+|---|---:|---:|---:|---|
+| Vector add, 4 elements | 239 | 132 | 1.81x | Small vector workload; launch overhead is still visible |
+| GEMM `2x2x8` | 2,839 | 1,079 | 2.63x | Descriptor-mode matrix multiply path |
+| Conv2D `3x3`, center kernel | 7,308 | 2,226 | 3.28x | Hardware Conv2D command in real RTL; GHDL uses the behavioral integration model |
+
+Run command:
+
+```bash
+cd "sw integration/neorv32-setups/neorv32/sw/example/demo_tinygpu"
+make sim_ghdl_safe
+```
+
+The simulation should end with:
+
+```text
+[TB:TGPU] Software integration result: pass=31 fail=0
+```
 
 ## 10. Verification Story
 

@@ -10,6 +10,7 @@
 //   5. RELU: y[4] = max(0, x[4])
 //   6. Hardware Conv2D (GHDL uses an equivalent reference lowering)
 //   7. Performance counter readback
+//   8. CPU-only baseline cycle counts for speedup estimates
 // =============================================================================
 
 #include <neorv32.h>
@@ -32,6 +33,7 @@
 static volatile int8_t  vec_x[4]  = { 1,  2,  3,  4 };
 static volatile int8_t  vec_y[4]  = { 10, 20, 30, 40 };
 static volatile int32_t vec_z[4]  = { 0,  0,  0,  0 };  // output
+static volatile int32_t vec_z_cpu[4] = { 0, 0, 0, 0 };
 
 // --- GEMM test: A[2][8] * B[8][2] = C[2][2] ---
 // A is 2 rows x 8 cols of INT8
@@ -53,6 +55,7 @@ static volatile int8_t mat_b[8][2] = {
 // C is 2 rows x 2 cols of INT32 (output)
 static volatile int32_t mat_c[2][2] = { {0,0}, {0,0} };
 static volatile int32_t mat_c_desc[2][2] = { {0,0}, {0,0} };
+static volatile int32_t mat_c_cpu[2][2] = { {0,0}, {0,0} };
 
 // --- RELU test ---
 static volatile int8_t  relu_in[4]  = { -5, 3, -1, 7 };
@@ -71,6 +74,7 @@ static volatile int8_t conv_weight[3][3][1][1] = {
   {{{0}}, {{0}}, {{0}}}
 };
 static volatile int32_t conv_out[3][3] = { {0,0,0}, {0,0,0}, {0,0,0} };
+static volatile int32_t conv_out_cpu[3][3] = { {0,0,0}, {0,0,0}, {0,0,0} };
 #ifdef TGPU_GHDL_SIM
 static volatile int8_t conv_im2col_ref[9][9];
 static volatile int8_t conv_weight_ref[9][1];
@@ -80,6 +84,19 @@ static volatile tgpu_descriptor_t gemm_desc;
 
 static volatile uint32_t tgpu_irq_count = 0;
 static volatile uint32_t tgpu_irq_seen  = 0;
+
+static uint32_t tgpu_vec_cycles  = 0;
+static uint32_t tgpu_gemm_cycles = 0;
+static uint32_t tgpu_conv_cycles = 0;
+static uint32_t tgpu_vec_active  = 0;
+static uint32_t tgpu_gemm_active = 0;
+static uint32_t tgpu_conv_active = 0;
+static uint32_t tgpu_vec_stalls  = 0;
+static uint32_t tgpu_gemm_stalls = 0;
+static uint32_t tgpu_conv_stalls = 0;
+static uint32_t cpu_vec_cycles   = 0;
+static uint32_t cpu_gemm_cycles  = 0;
+static uint32_t cpu_conv_cycles  = 0;
 
 #ifndef TGPU_SW_SIM_DISABLE_IRQ_TEST
 #define TGPU_SW_SIM_DISABLE_IRQ_TEST 0
@@ -97,6 +114,12 @@ static void sim_report_value(uint32_t index, int32_t value) {
   neorv32_gpio_port_set(0x54450000u |
                         ((index & 0xffu) << 8) |
                         ((uint32_t)value & 0xffu));
+}
+
+static void sim_report_metric(uint32_t index, uint32_t value) {
+  neorv32_gpio_port_set(0x54500000u |
+                        ((index & 0x0fu) << 16) |
+                        (value & 0xffffu));
 }
 #endif
 
@@ -175,6 +198,79 @@ static void tinygpu_firq_handler(void) {
   tgpu_irq_count++;
   tgpu_irq_seen = 1;
   tgpu_irq_ack();
+}
+
+static void cpu_vec_add_ref(void) {
+  int i;
+
+  for (i = 0; i < 4; i++) {
+    vec_z_cpu[i] = (int32_t)vec_x[i] + (int32_t)vec_y[i];
+  }
+}
+
+static void cpu_gemm_ref(void) {
+  int m, n, k;
+
+  for (m = 0; m < 2; m++) {
+    for (n = 0; n < 2; n++) {
+      int32_t acc = 0;
+      for (k = 0; k < 8; k++) {
+        acc += (int32_t)mat_a[m][k] * (int32_t)mat_b[k][n];
+      }
+      mat_c_cpu[m][n] = acc;
+    }
+  }
+}
+
+static void cpu_conv2d_ref(void) {
+  int oy, ox, ky, kx;
+
+  for (oy = 0; oy < 3; oy++) {
+    for (ox = 0; ox < 3; ox++) {
+      int32_t acc = 0;
+      for (ky = 0; ky < 3; ky++) {
+        for (kx = 0; kx < 3; kx++) {
+          int iy = oy + ky - 1;
+          int ix = ox + kx - 1;
+          if ((iy >= 0) && (iy < 3) && (ix >= 0) && (ix < 3)) {
+            acc += (int32_t)conv_in[iy][ix] * (int32_t)conv_weight[ky][kx][0][0];
+          }
+        }
+      }
+      conv_out_cpu[oy][ox] = acc;
+    }
+  }
+}
+
+static uint32_t measure_cpu_cycles(void (*kernel)(void)) {
+  neorv32_cpu_set_mcycle(0);
+  kernel();
+  return (uint32_t)neorv32_cpu_get_cycle();
+}
+
+static void print_speedup_row(const char *name, uint32_t cpu_cycles, uint32_t tgpu_cycles) {
+#ifndef TGPU_GHDL_SIM
+  uint32_t speedup_x100 = (tgpu_cycles != 0u) ? ((cpu_cycles * 100u) / tgpu_cycles) : 0u;
+
+  uart_puts("  ");
+  uart_puts(name);
+  uart_puts(": CPU=");
+  uart_print_u32(cpu_cycles);
+  uart_puts(" cyc, TinyGPU=");
+  uart_print_u32(tgpu_cycles);
+  uart_puts(" cyc, speedup=");
+  uart_print_u32(speedup_x100 / 100u);
+  uart_putc('.');
+  if ((speedup_x100 % 100u) < 10u) {
+    uart_putc('0');
+  }
+  uart_print_u32(speedup_x100 % 100u);
+  uart_putln("x");
+#else
+  (void)name;
+  (void)cpu_cycles;
+  (void)tgpu_cycles;
+#endif
 }
 
 #ifdef TGPU_GHDL_SIM
@@ -300,6 +396,7 @@ int main(void) {
     check("VEC_ADD z[1]==22", vec_z[1] == 22);
     check("VEC_ADD z[2]==33", vec_z[2] == 33);
     check("VEC_ADD z[3]==44", vec_z[3] == 44);
+    tgpu_get_perf(&tgpu_vec_cycles, &tgpu_vec_active, &tgpu_vec_stalls);
   }
 #else
   uart_putln("");
@@ -359,6 +456,7 @@ int main(void) {
       check("VEC_ADD z[1]==22", vec_z[1] == 22);
       check("VEC_ADD z[2]==33", vec_z[2] == 33);
       check("VEC_ADD z[3]==44", vec_z[3] == 44);
+      tgpu_get_perf(&tgpu_vec_cycles, &tgpu_vec_active, &tgpu_vec_stalls);
     }
   }
 #endif
@@ -424,6 +522,7 @@ int main(void) {
     check("DESC GEMM C[0][1]==20", mat_c_desc[0][1] == 20);
     check("DESC GEMM C[1][0]==4",  mat_c_desc[1][0] == 4);
     check("DESC GEMM C[1][1]==4",  mat_c_desc[1][1] == 4);
+    tgpu_get_perf(&tgpu_gemm_cycles, &tgpu_gemm_active, &tgpu_gemm_stalls);
   }
 
   // ====================================================================
@@ -529,6 +628,7 @@ int main(void) {
     check("CONV y[2][0]==7", conv_out[2][0] == 7);
     check("CONV y[2][1]==8", conv_out[2][1] == 8);
     check("CONV y[2][2]==9", conv_out[2][2] == 9);
+    tgpu_get_perf(&tgpu_conv_cycles, &tgpu_conv_active, &tgpu_conv_stalls);
   }
 
   // ====================================================================
@@ -562,6 +662,85 @@ int main(void) {
   check("IRQ count == 0 in polling build", tgpu_irq_count == 0u);
 #else
   check("IRQ count >= 1", tgpu_irq_count >= 1u);
+#endif
+
+  // ====================================================================
+  // TEST 8: CPU-only software baselines
+  //
+  // These run the same tiny workloads as plain C on NEORV32 and measure
+  // mcycle. The comparison is intentionally small and demo-oriented: it
+  // gives a reproducible first speedup table, not a full benchmark suite.
+  // ====================================================================
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("[TEST 8] CPU-only baseline cycle counts");
+#endif
+
+  cpu_vec_cycles  = measure_cpu_cycles(cpu_vec_add_ref);
+  cpu_gemm_cycles = measure_cpu_cycles(cpu_gemm_ref);
+  cpu_conv_cycles = measure_cpu_cycles(cpu_conv2d_ref);
+
+  check("CPU VEC_ADD matches TinyGPU", 
+        (vec_z_cpu[0] == vec_z[0]) && (vec_z_cpu[1] == vec_z[1]) &&
+        (vec_z_cpu[2] == vec_z[2]) && (vec_z_cpu[3] == vec_z[3]));
+  check("CPU GEMM matches TinyGPU",
+        (mat_c_cpu[0][0] == mat_c_desc[0][0]) &&
+        (mat_c_cpu[0][1] == mat_c_desc[0][1]) &&
+        (mat_c_cpu[1][0] == mat_c_desc[1][0]) &&
+        (mat_c_cpu[1][1] == mat_c_desc[1][1]));
+  check("CPU Conv2D matches TinyGPU",
+        (conv_out_cpu[0][0] == conv_out[0][0]) &&
+        (conv_out_cpu[0][1] == conv_out[0][1]) &&
+        (conv_out_cpu[0][2] == conv_out[0][2]) &&
+        (conv_out_cpu[1][0] == conv_out[1][0]) &&
+        (conv_out_cpu[1][1] == conv_out[1][1]) &&
+        (conv_out_cpu[1][2] == conv_out[1][2]) &&
+        (conv_out_cpu[2][0] == conv_out[2][0]) &&
+        (conv_out_cpu[2][1] == conv_out[2][1]) &&
+        (conv_out_cpu[2][2] == conv_out[2][2]));
+
+#ifndef TGPU_GHDL_SIM
+  uart_putln("");
+  uart_putln("  CPU-only vs TinyGPU accelerator cycles");
+  print_speedup_row("VEC_ADD", cpu_vec_cycles, tgpu_vec_cycles);
+  print_speedup_row("GEMM 2x2x8", cpu_gemm_cycles, tgpu_gemm_cycles);
+  print_speedup_row("Conv2D 3x3", cpu_conv_cycles, tgpu_conv_cycles);
+  uart_putln("");
+  uart_putln("  TinyGPU command details");
+  uart_puts("  VEC_ADD: cycles=");
+  uart_print_u32(tgpu_vec_cycles);
+  uart_puts(" active=");
+  uart_print_u32(tgpu_vec_active);
+  uart_puts(" stalls=");
+  uart_print_u32(tgpu_vec_stalls);
+  uart_putln("");
+  uart_puts("  GEMM   : cycles=");
+  uart_print_u32(tgpu_gemm_cycles);
+  uart_puts(" active=");
+  uart_print_u32(tgpu_gemm_active);
+  uart_puts(" stalls=");
+  uart_print_u32(tgpu_gemm_stalls);
+  uart_putln("");
+  uart_puts("  Conv2D : cycles=");
+  uart_print_u32(tgpu_conv_cycles);
+  uart_puts(" active=");
+  uart_print_u32(tgpu_conv_active);
+  uart_puts(" stalls=");
+  uart_print_u32(tgpu_conv_stalls);
+  uart_putln("");
+#else
+  sim_report_metric(0, cpu_vec_cycles);
+  sim_report_metric(1, tgpu_vec_cycles);
+  sim_report_metric(2, cpu_gemm_cycles);
+  sim_report_metric(3, tgpu_gemm_cycles);
+  sim_report_metric(4, cpu_conv_cycles);
+  sim_report_metric(5, tgpu_conv_cycles);
+  sim_report_metric(6, tgpu_vec_active);
+  sim_report_metric(7, tgpu_vec_stalls);
+  sim_report_metric(8, tgpu_gemm_active);
+  sim_report_metric(9, tgpu_gemm_stalls);
+  sim_report_metric(10, tgpu_conv_active);
+  sim_report_metric(11, tgpu_conv_stalls);
 #endif
 
   // ====================================================================

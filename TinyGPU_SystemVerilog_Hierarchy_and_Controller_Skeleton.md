@@ -1,11 +1,14 @@
-# TinyGPU SystemVerilog Hierarchy and Controller Skeleton
+# TinyGPU SystemVerilog Hierarchy and Controller Notes
 
-This note turns the implementation spec into a practical SystemVerilog design scaffold. It has two goals:
+This note records the implemented SystemVerilog hierarchy and the controller
+structure used by the current TinyGPU-ML RTL. It has two goals:
 
-1. Define a clean RTL hierarchy and module boundary breakdown.
-2. Provide a more concrete `tinygpu_cmd_ctrl.sv` skeleton with the key counters, masks, FSM, and DMA launch structure.
+1. Define the current RTL hierarchy and module boundary breakdown.
+2. Summarize the command-controller states, datapath ownership, and memory-flow structure.
 
-The intent is not to fully implement every module here, but to establish a sane architecture that can be coded incrementally and verified module-by-module.
+The current implementation is the canonical `4x4x16` configuration: a 4x4
+signed INT8 MAC array, `TILE_K=16`, tile-sized scratchpads, serialized epilogue,
+and hardware Conv2D through a streaming im2col loader.
 
 ---
 
@@ -18,15 +21,16 @@ tinygpu_top
 ├─ tinygpu_pkg
 ├─ tinygpu_regs
 ├─ tinygpu_cmd_ctrl
-│  ├─ tinygpu_dma
 │  ├─ tinygpu_spm
+│  ├─ tinygpu_mem_arbiter
+│  ├─ tinygpu_im2col_loader
+│  ├─ tinygpu_dma
 │  ├─ tinygpu_array4x4
 │  │  └─ 16x tinygpu_pe
 │  ├─ tinygpu_epilogue_shared
-│  │  └─ tinygpu_shared_mul
 │  ├─ tinygpu_vec_alu
-│  ├─ tinygpu_shared_mul
-│  └─ tinygpu_counters
+│  └─ tinygpu_shared_mul
+├─ tinygpu_counters
 └─ irq/status glue
 ```
 
@@ -57,9 +61,10 @@ package tinygpu_pkg;
   parameter int TILE_K      = 16;
 
   parameter int NUM_PES     = TILE_M * TILE_N;
-  parameter int SPM_A_BYTES = 512;
-  parameter int SPM_B_BYTES = 512;
-  parameter int SPM_C_BYTES = 256;
+  parameter int SPM_A_BYTES = TILE_M * TILE_K;
+  parameter int SPM_B_BYTES = TILE_K * TILE_N;
+  parameter int SPM_C_BYTES = TILE_M * TILE_N * 4;
+  parameter int MAX_BURST   = 16;
 
   localparam logic [7:0] OP_NOP     = 8'h00;
   localparam logic [7:0] OP_GEMM    = 8'h01;
@@ -68,6 +73,9 @@ package tinygpu_pkg;
   localparam logic [7:0] OP_VEC_MUL = 8'h04;
   localparam logic [7:0] OP_RELU    = 8'h05;
   localparam logic [7:0] OP_CLAMP   = 8'h06;
+  localparam logic [7:0] OP_CONV2D  = 8'h07;
+
+  localparam logic [7:0] ABI_VERSION = 8'd1;
 
   localparam int FLAG_BIAS_EN      = 0;
   localparam int FLAG_RELU_EN      = 1;
@@ -77,32 +85,32 @@ package tinygpu_pkg;
   localparam int FLAG_DST_INT32    = 5;
   localparam int FLAG_SIGNED_MODE  = 6;
 
-  typedef enum logic [3:0] {
+  typedef enum logic [4:0] {
     S_IDLE,
     S_VALIDATE,
+    S_DESC_LOAD,
     S_INIT_TILE,
+    S_CLEAR_ACC,
     S_LOAD_A,
     S_LOAD_B,
-    S_CLEAR_ACC,
     S_COMPUTE_K,
+    S_NEXT_K,
+    S_LOAD_BIAS,
     S_EPILOGUE,
     S_STORE_C,
+    S_VEC_LOAD_X,
+    S_VEC_LOAD_Y,
+    S_VEC_EXEC,
+    S_VEC_EXEC2,
+    S_VEC_EXEC3,
+    S_VEC_EXEC4,
+    S_VEC_STORE,
     S_NEXT_TILE_N,
     S_NEXT_TILE_M,
+    S_CONV_LOAD_A,
     S_DONE,
     S_ERROR
   } cmd_state_e;
-
-  typedef enum logic [2:0] {
-    DMA_IDLE,
-    DMA_ISSUE_READ,
-    DMA_WAIT_READ,
-    DMA_WRITE_SPM,
-    DMA_READ_SPM,
-    DMA_ISSUE_WRITE,
-    DMA_DONE,
-    DMA_ERROR
-  } dma_state_e;
 
 endpackage
 ```
@@ -190,6 +198,9 @@ Owns:
 - int8 saturation
 
 This block is intentionally multi-cycle and processes one output element at a time with a shared multiplier instead of running 16 requant lanes in parallel.
+
+The block emits each completed element directly into the 16-word C buffer. This
+keeps the epilogue area small and avoids a separate tile-wide staging pass.
 
 #### `tinygpu_shared_mul.sv`
 
@@ -514,9 +525,12 @@ The key architectural rule is that `tinygpu_cmd_ctrl` owns the sequencing and th
 
 ---
 
-## 6. More Concrete `tinygpu_cmd_ctrl` Skeleton
+## 6. Current `tinygpu_cmd_ctrl` Structure
 
-This section is the controller scaffold I would actually code first.
+This section summarizes the controller structure implemented by the current
+RTL. The controller latches command fields on launch, validates the operation,
+arbitrates memory clients, sequences tile movement, drives the MAC array, and
+serializes post-processing and stores.
 
 ### 6.1 Internal State and Latched Command Fields
 
@@ -1140,7 +1154,25 @@ That order matches the dependency graph and keeps bugs localized.
 
 ---
 
-## 10. Closing Notes
+## 10. Current Closure Notes
+
+The current `4x4x16` implementation is integrated with NEORV32 and has a routed
+Tang Primer 25K result. The reported build uses `GW5A-LV25MG121NC2/I1` at a
+27 MHz constraint and closes with:
+
+| Metric | Current result |
+|---|---:|
+| Post-route Fmax | `47.462 MHz` |
+| Setup violations | `0` |
+| Hold violations | `0` |
+| Logic utilization | `78%` |
+| Register utilization | `31%` |
+| BSRAM utilization | `25%` |
+| DSP utilization | `100%` |
+
+Verification currently reports `94.35%` RTL-only line coverage, `24.59%`
+RTL-only branch coverage, and `100.00%` functional coverage over the defined
+functional bins.
 
 The most important design choices here are:
 
@@ -1149,5 +1181,3 @@ The most important design choices here are:
 - let `tinygpu_cmd_ctrl` own all execution sequencing
 - make the compute blocks simple and deterministic
 - keep edge-tile masks explicit
-
-If this were my project, the very next step would be to convert the controller skeleton above into a compilable `tinygpu_cmd_ctrl.sv` stub with complete port declarations, typed enums, reset logic, and TODO-marked sections for DMA/store details.

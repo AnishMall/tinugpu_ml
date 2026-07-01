@@ -83,19 +83,15 @@ This merges coverage from the randomized differential harness and the directed
 Verilator subset, then annotates the canonical RTL under `build/coverage/`.
 The printed headline is the RTL-only line coverage number.
 
-Run the deterministic hardware demo transcript:
+Run the deterministic SystemVerilog RTL demo transcript:
 
 ```bash
 make demo-rtl
 ```
 
-Run the maintained software/MMIO demo transcript:
-
-```bash
-make demo-sw
-```
-
-The RTL demo prints:
+This runs the real `rtl/tinygpu_top.sv` hierarchy with
+`tb/tb_tinygpu_top_demo_tb.sv`, prints result/counter lines, and writes the
+waveform file `build/tinygpu_top_demo.vcd`. The RTL demo prints:
 
 ```text
 Direct GEMM C = [[19, 22], [43, 50]]
@@ -113,6 +109,40 @@ Last command active : 27
 Last command stalls : 695
 Commands completed : 4
 ```
+
+Run the maintained software/MMIO demo through the repository target:
+
+```bash
+make demo-sw
+```
+
+Or run the NEORV32 firmware/GHDL regression directly from the software example:
+
+```bash
+cd "sw integration/neorv32-setups/neorv32/sw/example/demo_tinygpu"
+make sim_ghdl_safe
+```
+
+That flow uses the NEORV32 CPU model plus the behavioral TinyGPU VHDL
+integration model. It is the right place to show firmware execution, MMIO
+register access, CPU-only reference kernels, and the software-side pass/fail
+signature. The current firmware baseline table is:
+
+| Kernel | CPU-only cycles | TinyGPU model cycles | Speedup |
+|---|---:|---:|---:|
+| Vector add, 4 elements | `239` | `132` | `1.81x` |
+| GEMM `2x2x8` | `2,839` | `1,079` | `2.63x` |
+| Conv2D `3x3`, center kernel | `7,308` | `2,226` | `3.28x` |
+
+The direct GHDL run should end with:
+
+```text
+[TB:TGPU] Software integration result: pass=31 fail=0
+```
+
+Use `make demo-rtl` for real RTL microarchitectural counters. Use
+`make sim_ghdl_safe` for NEORV32 firmware/MMIO and CPU-only baseline numbers.
+Do not mix these two timing sources into one rigorous speedup equation.
 
 Current merged Verilator metrics from `make coverage-report` are:
 

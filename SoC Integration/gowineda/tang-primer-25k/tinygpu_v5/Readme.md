@@ -29,7 +29,7 @@
 
 ## 1. Project Overview
 
-This project integrates the **TinyGPU-ML** hardware accelerator into the **NEORV32 RISC-V SoC** as a memory-mapped custom IO peripheral. TinyGPU-ML implements a 2×2 systolic processing element (PE) array supporting INT8 matrix operations with INT32 accumulation, targeting ultra-low-power ML inference at the edge.
+This project integrates the **TinyGPU-ML** hardware accelerator into the **NEORV32 RISC-V SoC** as a memory-mapped custom IO peripheral. TinyGPU-ML implements a `4x4x16` tiled INT8 compute engine: a 4×4 systolic processing-element (PE) array performs signed INT8 multiply-accumulate operations into INT32, with shared epilogue, vector, DMA, and hardware Conv2D support.
 
 The integration is wrapped in a VHDL bridge (`neorv32_tinygpu_wrapper.vhd`) that connects NEORV32's internal IO bus to TinyGPU's 32-bit register interface. The complete SoC is synthesised and placed-and-routed on the **Gowin GW5A-25** device mounted on the **Tang Primer 25K** development board.
 
@@ -451,12 +451,12 @@ Timing was analysed by Gowin PnR against the 27 MHz SDC constraint. All results 
 
 ## 14. Verilator Simulation Results
 
-Standalone RTL simulation was run using Verilator targeting the 2×2 PE array configuration.
+Standalone RTL simulation was run using Verilator against the canonical `4x4x16` TinyGPU RTL configuration.
 
-```
+ ```
 ========================================
  TinyGPU-ML Verilator Simulation
- Array: 2x2 PEs, INT8 in, INT32 acc
+ Array: 4x4 PEs, TILE_K=16, INT8 in, INT32 acc
 ========================================
 [TEST 1] Register read/write      [PASS] SRC0_ADDR == 0xDEADBEEF
 [TEST 2] Soft reset               [PASS] STATUS[BUSY]=0, STATUS[READY]=1
