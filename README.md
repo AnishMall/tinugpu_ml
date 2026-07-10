@@ -5,6 +5,11 @@ the NEORV32 RISC-V SoC. The canonical implementation is a `4x4x16` tiled
 engine: 16 signed INT8 processing elements run in parallel, accumulate into
 INT32, and feed a serialized bias/activation/requantization epilogue.
 
+Final verification transcripts, coverage files, and the demo waveform are
+collected in [`results/`](results/). A project retrospective covering the main
+debugging, verification, integration, area, and timing challenges is available
+in [`Project_Challenges.md`](Project_Challenges.md).
+
 ## Hardware
 
 The canonical source tree is [`rtl/`](rtl/). It implements:
@@ -81,7 +86,10 @@ make coverage-report
 
 This merges coverage from the randomized differential harness and the directed
 Verilator subset, then annotates the canonical RTL under `build/coverage/`.
-The printed headline is the RTL-only line coverage number.
+The report prints canonical top-level line and logical branch coverage,
+controller logical branch coverage, and a secondary multi-binary branch score.
+The canonical score avoids counting the same RTL branch repeatedly under
+independently compiled testbench hierarchies.
 
 Run the deterministic SystemVerilog RTL demo transcript:
 
@@ -108,6 +116,25 @@ Last command cycles : 888
 Last command active : 27
 Last command stalls : 695
 Commands completed : 4
+```
+
+Run the matching Python golden reference for the same fixed demo inputs:
+
+```bash
+make demo-golden
+```
+
+Expected output:
+
+```text
+TinyGPU-ML Python golden demo
+Direct GEMM C = [[19, 22], [43, 50]]
+Descriptor GEMM C = [[19, 22], [43, 50]]
+Vector add z = {6, 4, -4, 12}
+Conv2D out row0 = {1, 2, 3}
+Conv2D out row1 = {4, 5, 6}
+Conv2D out row2 = {7, 8, 9}
+demo_golden PASS
 ```
 
 Run the maintained software/MMIO demo through the repository target:
@@ -144,11 +171,25 @@ Use `make demo-rtl` for real RTL microarchitectural counters. Use
 `make sim_ghdl_safe` for NEORV32 firmware/MMIO and CPU-only baseline numbers.
 Do not mix these two timing sources into one rigorous speedup equation.
 
-Current merged Verilator metrics from `make coverage-report` are:
+Current Verilator metrics from `make coverage-report` are:
 
-- RTL-only line coverage: `94.35% (2338/2478)`
-- RTL-only branch coverage: `24.59% (35025/142452)`
-- functional coverage: `100.00% (32/32 bins)`
+- canonical top RTL line coverage: `96.45% (1740/1804)`
+- canonical top RTL logical branch coverage: `92.17% (753/817)`
+- canonical controller logical branch coverage: `95.66% (353/369)`
+- coarse functional coverage: `100.00% (33/33 bins)`
+- valid controller cross-product coverage: `100.00% (169/169 bins)`
+- merged multi-binary RTL branch coverage: `74.68% (15139/20271)`
+
+The 169 controller crosses cover legal GEMM, GEMV, vector, Conv2D, and error
+combinations. Meaningless `INT32 + requant` crosses and the impossible
+direct-mode descriptor-ABI error are excluded from the denominator.
+
+Branch coverage closure notes and waiver rationale are documented in
+[`Branch_Coverage_Closure.md`](Branch_Coverage_Closure.md). Defensive FSM
+default branches are kept in the RTL as fault-containment paths and justified
+with simulation/formal assertions that prove legal state encodings after reset.
+The change from the historical `26%` metric to the current methodology is
+documented in [`Branch_Coverage_Methodology.md`](Branch_Coverage_Methodology.md).
 
 Formal project files are under [`formal/`](formal/):
 

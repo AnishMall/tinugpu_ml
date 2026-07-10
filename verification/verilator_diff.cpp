@@ -82,6 +82,7 @@ struct JobCounts {
 
 struct FunctionalCoverage {
   bool op_gemm = false;
+  bool op_gemv = false;
   bool op_vec_add = false;
   bool op_vec_mul = false;
   bool op_relu = false;
@@ -114,7 +115,7 @@ struct FunctionalCoverage {
   bool sat_neg = false;
   bool mmio_protocol = false;
 
-  static constexpr unsigned total_bins() { return 32; }
+  static constexpr unsigned total_bins() { return 33; }
   void print_missing() const {
     struct NamedBin {
       const char *name;
@@ -122,6 +123,7 @@ struct FunctionalCoverage {
     };
     const NamedBin bins[] = {
       {"op_gemm", op_gemm},
+      {"op_gemv", op_gemv},
       {"op_vec_add", op_vec_add},
       {"op_vec_mul", op_vec_mul},
       {"op_relu", op_relu},
@@ -166,7 +168,7 @@ struct FunctionalCoverage {
   }
   unsigned hit_bins() const {
     const bool bins[] = {
-      op_gemm, op_vec_add, op_vec_mul, op_relu, op_clamp, op_conv2d,
+      op_gemm, op_gemv, op_vec_add, op_vec_mul, op_relu, op_clamp, op_conv2d,
       mode_direct, mode_descriptor, dst_int8, dst_int32,
       feat_bias, feat_relu, feat_clamp, feat_requant,
       conv_kernel_1x1, conv_kernel_3x3, conv_stride_11, conv_stride_21,
@@ -182,11 +184,178 @@ struct FunctionalCoverage {
   }
 };
 
+struct ControllerCrossCoverage {
+  bool gemm[2][2][2][2][2][2] = {};
+  bool gemv[2][2][2][2][2] = {};
+  bool vector[4][2][2][2] = {};
+  bool conv[2][2][2][2][2][2] = {};
+  bool error[5][2] = {};
+
+  static constexpr unsigned total_bins() {
+    // Requantization is meaningful only for INT8 destinations. A malformed
+    // descriptor ABI also has no direct-mode counterpart.
+    return 48 + 24 +
+           24 +
+           (2 * 2 * 2 * 2 * 2 * 2) +
+           9;
+  }
+
+  static bool valid_dst_requant(bool int8_dst, bool requant) {
+    return int8_dst || !requant;
+  }
+
+  void hit_gemm(bool descriptor, bool int8_dst, bool bias, bool relu,
+                bool requant, bool edge_or_multik) {
+    if (valid_dst_requant(int8_dst, requant))
+      gemm[descriptor][int8_dst][bias][relu][requant][edge_or_multik] = true;
+  }
+
+  void hit_gemv(bool descriptor, bool int8_dst, bool bias, bool relu,
+                bool requant) {
+    if (valid_dst_requant(int8_dst, requant))
+      gemv[descriptor][int8_dst][bias][relu][requant] = true;
+  }
+
+  void hit_vector(unsigned opcode_index, bool descriptor, bool int8_dst,
+                  bool requant) {
+    if (opcode_index < 4 && valid_dst_requant(int8_dst, requant))
+      vector[opcode_index][descriptor][int8_dst][requant] = true;
+  }
+
+  void hit_conv(bool descriptor, bool int8_dst, bool kernel3,
+                bool stride2_any, bool pad_any, bool bias_or_requant) {
+    conv[descriptor][int8_dst][kernel3][stride2_any][pad_any][bias_or_requant] = true;
+  }
+
+  void hit_error(unsigned kind, bool descriptor) {
+    if (kind < 5 && !(kind == 2 && !descriptor))
+      error[kind][descriptor] = true;
+  }
+
+  unsigned hit_bins() const {
+    unsigned hits = 0;
+    for (unsigned a = 0; a < 2; ++a)
+      for (unsigned b = 0; b < 2; ++b)
+        for (unsigned c = 0; c < 2; ++c)
+          for (unsigned d = 0; d < 2; ++d)
+            for (unsigned e = 0; e < 2; ++e)
+              for (unsigned f = 0; f < 2; ++f)
+                if (valid_dst_requant(b, e))
+                  hits += gemm[a][b][c][d][e][f] ? 1u : 0u;
+
+    for (unsigned a = 0; a < 2; ++a)
+      for (unsigned b = 0; b < 2; ++b)
+        for (unsigned c = 0; c < 2; ++c)
+          for (unsigned d = 0; d < 2; ++d)
+            for (unsigned e = 0; e < 2; ++e)
+              if (valid_dst_requant(b, e))
+                hits += gemv[a][b][c][d][e] ? 1u : 0u;
+
+    for (unsigned op = 0; op < 4; ++op)
+      for (unsigned mode = 0; mode < 2; ++mode)
+        for (unsigned dst = 0; dst < 2; ++dst)
+          for (unsigned rq = 0; rq < 2; ++rq)
+            if (valid_dst_requant(dst, rq))
+              hits += vector[op][mode][dst][rq] ? 1u : 0u;
+
+    for (unsigned a = 0; a < 2; ++a)
+      for (unsigned b = 0; b < 2; ++b)
+        for (unsigned c = 0; c < 2; ++c)
+          for (unsigned d = 0; d < 2; ++d)
+            for (unsigned e = 0; e < 2; ++e)
+              for (unsigned f = 0; f < 2; ++f)
+                hits += conv[a][b][c][d][e][f] ? 1u : 0u;
+
+    for (unsigned kind = 0; kind < 5; ++kind)
+      for (unsigned mode = 0; mode < 2; ++mode)
+        if (!(kind == 2 && mode == 0))
+          hits += error[kind][mode] ? 1u : 0u;
+
+    return hits;
+  }
+
+  void print_missing() const {
+    for (unsigned mode = 0; mode < 2; ++mode)
+      for (unsigned dst = 0; dst < 2; ++dst)
+        for (unsigned bias = 0; bias < 2; ++bias)
+          for (unsigned relu = 0; relu < 2; ++relu)
+            for (unsigned rq = 0; rq < 2; ++rq)
+              for (unsigned edge = 0; edge < 2; ++edge)
+                if (valid_dst_requant(dst, rq) &&
+                    !gemm[mode][dst][bias][relu][rq][edge])
+                  std::printf("missing_cross gemm mode=%u int8=%u bias=%u relu=%u rq=%u edge=%u\n",
+                              mode, dst, bias, relu, rq, edge);
+
+    for (unsigned mode = 0; mode < 2; ++mode)
+      for (unsigned dst = 0; dst < 2; ++dst)
+        for (unsigned bias = 0; bias < 2; ++bias)
+          for (unsigned relu = 0; relu < 2; ++relu)
+            for (unsigned rq = 0; rq < 2; ++rq)
+              if (valid_dst_requant(dst, rq) &&
+                  !gemv[mode][dst][bias][relu][rq])
+                std::printf("missing_cross gemv mode=%u int8=%u bias=%u relu=%u rq=%u\n",
+                            mode, dst, bias, relu, rq);
+
+    for (unsigned op = 0; op < 4; ++op)
+      for (unsigned mode = 0; mode < 2; ++mode)
+        for (unsigned dst = 0; dst < 2; ++dst)
+          for (unsigned rq = 0; rq < 2; ++rq)
+            if (valid_dst_requant(dst, rq) && !vector[op][mode][dst][rq])
+              std::printf("missing_cross vector op=%u mode=%u int8=%u rq=%u\n",
+                          op, mode, dst, rq);
+
+    for (unsigned mode = 0; mode < 2; ++mode)
+      for (unsigned dst = 0; dst < 2; ++dst)
+        for (unsigned kernel3 = 0; kernel3 < 2; ++kernel3)
+          for (unsigned stride2 = 0; stride2 < 2; ++stride2)
+            for (unsigned pad = 0; pad < 2; ++pad)
+              for (unsigned post = 0; post < 2; ++post)
+                if (!conv[mode][dst][kernel3][stride2][pad][post])
+                  std::printf("missing_cross conv mode=%u int8=%u kernel3=%u stride2=%u pad=%u post=%u\n",
+                              mode, dst, kernel3, stride2, pad, post);
+
+    for (unsigned kind = 0; kind < 5; ++kind)
+      for (unsigned mode = 0; mode < 2; ++mode)
+        if (!(kind == 2 && mode == 0) && !error[kind][mode])
+          std::printf("missing_cross error kind=%u mode=%u\n", kind, mode);
+  }
+};
+
+struct MatrixCase {
+  uint8_t opcode;
+  bool descriptor;
+  bool int8_dst;
+  bool bias;
+  bool relu;
+  bool clamp;
+  bool requant;
+  bool edge_or_multik;
+};
+
+struct VectorCase {
+  unsigned opcode_index;
+  bool descriptor;
+  bool int8_dst;
+  bool relu;
+  bool clamp;
+  bool requant;
+};
+
+struct ConvCase {
+  bool descriptor;
+  bool int8_dst;
+  bool kernel3;
+  bool stride2_any;
+  bool pad_any;
+  bool postprocess;
+};
+
 uint8_t memory[MEM_SIZE];
 uint64_t sim_time = 0;
 uint32_t random_state = 0x31415926u;
 uint32_t expected_cmd_count = 0;
 FunctionalCoverage fcov;
+ControllerCrossCoverage xcov;
 
 uint32_t random_u32() {
   random_state = random_state * 1664525u + 1013904223u;
@@ -195,6 +364,10 @@ uint32_t random_u32() {
 
 int8_t random_i8() {
   return static_cast<int8_t>(static_cast<int>(random_u32() % 17u) - 8);
+}
+
+bool random_bool() {
+  return ((random_u32() >> 16) & 1u) != 0;
 }
 
 int32_t random_i32_small() {
@@ -537,10 +710,11 @@ bool run_mmio_protocol_checks(Vtinygpu_top *top) {
   return true;
 }
 
-bool run_vector_job(Vtinygpu_top *top) {
-  const unsigned length = 1 + random_u32() % 12;
+bool run_vector_job(Vtinygpu_top *top, const VectorCase *forced = nullptr) {
+  const unsigned length = forced ? 5u : (1 + random_u32() % 12);
+  unsigned opcode_index = forced ? forced->opcode_index : (random_u32() % 4u);
   const uint8_t opcode = [=]() {
-    switch (random_u32() % 4u) {
+    switch (opcode_index) {
       case 0: return OP_VEC_ADD;
       case 1: return OP_VEC_MUL;
       case 2: return OP_RELU;
@@ -548,11 +722,11 @@ bool run_vector_job(Vtinygpu_top *top) {
     }
   }();
   uint32_t flags = FLAG_SIGNED;
-  const bool use_int8 = (random_u32() & 1u) != 0;
-  const bool use_descriptor = (random_u32() & 1u) != 0;
-  const bool use_relu = (random_u32() & 1u) != 0;
-  const bool use_clamp = (random_u32() & 1u) != 0;
-  const bool use_requant = use_int8 && ((random_u32() & 1u) != 0);
+  const bool use_int8 = forced ? forced->int8_dst : random_bool();
+  const bool use_descriptor = forced ? forced->descriptor : random_bool();
+  const bool use_relu = forced ? forced->relu : random_bool();
+  const bool use_clamp = forced ? forced->clamp : random_bool();
+  const bool use_requant = forced ? forced->requant : (use_int8 && random_bool());
   const int32_t scale = use_requant ? (1 + static_cast<int32_t>(random_u32() % 3u)) : 0;
   const int16_t shift = use_requant ? random_shift() : 0;
   const int16_t zero_point = use_requant ? static_cast<int16_t>((random_u32() % 9u) - 4u) : 0;
@@ -577,6 +751,7 @@ bool run_vector_job(Vtinygpu_top *top) {
     case OP_CLAMP: fcov.op_clamp = true; break;
     default: break;
   }
+  xcov.hit_vector(opcode_index, use_descriptor, use_int8, use_requant);
 
   std::memset(memory + SRC0, 0, 128);
   std::memset(memory + SRC1, 0, 128);
@@ -616,17 +791,23 @@ bool run_vector_job(Vtinygpu_top *top) {
   return true;
 }
 
-bool run_gemm_job(Vtinygpu_top *top) {
-  const unsigned m = 1 + random_u32() % 5;
-  const unsigned n = 1 + random_u32() % 5;
-  const unsigned k = 1 + random_u32() % 20;
+bool run_gemm_job(Vtinygpu_top *top, const MatrixCase *forced = nullptr) {
+  const uint8_t opcode = forced ? forced->opcode : OP_GEMM;
+  const bool is_gemv = (opcode == OP_GEMV);
+  const unsigned m = forced ? (forced->edge_or_multik ? 5u : 4u) :
+                              (1 + random_u32() % 5);
+  const unsigned n = is_gemv ? 1u :
+                     (forced ? (forced->edge_or_multik ? 5u : 4u) :
+                               (1 + random_u32() % 5));
+  const unsigned k = forced ? (forced->edge_or_multik ? 17u : 4u) :
+                              (1 + random_u32() % 20);
   uint32_t flags = FLAG_SIGNED;
-  const bool use_bias = (random_u32() & 1u) != 0;
-  const bool use_descriptor = (random_u32() & 1u) != 0;
-  const bool use_relu = (random_u32() & 1u) != 0;
-  const bool use_clamp = (random_u32() & 1u) != 0;
-  const bool use_int8 = (random_u32() & 1u) != 0;
-  const bool use_requant = use_int8 && ((random_u32() & 1u) != 0);
+  const bool use_bias = forced ? forced->bias : random_bool();
+  const bool use_descriptor = forced ? forced->descriptor : random_bool();
+  const bool use_relu = forced ? forced->relu : random_bool();
+  const bool use_clamp = forced ? forced->clamp : random_bool();
+  const bool use_int8 = forced ? forced->int8_dst : random_bool();
+  const bool use_requant = forced ? forced->requant : (use_int8 && random_bool());
   const int32_t scale = use_requant ? (1 + static_cast<int32_t>(random_u32() % 3u)) : 0;
   const int16_t shift = use_requant ? random_shift() : 0;
   const int16_t zero_point = use_requant ? static_cast<int16_t>((random_u32() % 9u) - 4u) : 0;
@@ -638,7 +819,8 @@ bool run_gemm_job(Vtinygpu_top *top) {
   if (use_int8) flags |= FLAG_DST_INT8;
   else flags |= FLAG_DST_INT32;
 
-  fcov.op_gemm = true;
+  fcov.op_gemm |= !is_gemv;
+  fcov.op_gemv |= is_gemv;
   fcov.mode_descriptor |= use_descriptor;
   fcov.mode_direct |= !use_descriptor;
   fcov.dst_int8 |= use_int8;
@@ -647,6 +829,11 @@ bool run_gemm_job(Vtinygpu_top *top) {
   fcov.feat_relu |= use_relu;
   fcov.feat_clamp |= use_clamp;
   fcov.feat_requant |= use_requant;
+  if (is_gemv)
+    xcov.hit_gemv(use_descriptor, use_int8, use_bias, use_relu, use_requant);
+  else
+    xcov.hit_gemm(use_descriptor, use_int8, use_bias, use_relu, use_requant,
+                  (m % 4u) != 0u || (n % 4u) != 0u || k > 16u);
 
   std::vector<int8_t> a(m * k), b(k * n);
   std::vector<int32_t> bias(n, 0), expected_i32(m * n, 0);
@@ -678,10 +865,10 @@ bool run_gemm_job(Vtinygpu_top *top) {
   for (unsigned i = 0; i < bias.size(); ++i) write32(BIAS + 4 * i, static_cast<uint32_t>(bias[i]));
 
   const uint32_t status = use_descriptor ?
-    run_descriptor_command(top, OP_GEMM, flags, m, n, k, k, n,
+    run_descriptor_command(top, opcode, flags, m, n, k, k, n,
                            use_int8 ? n : n * 4, scale, shift, zero_point,
                            SRC0, SRC1, use_bias ? BIAS : 0, DST) :
-    run_direct_command(top, OP_GEMM, flags, m, n, k, k, n,
+    run_direct_command(top, opcode, flags, m, n, k, k, n,
                        use_int8 ? n : n * 4, scale, shift, zero_point,
                        SRC0, SRC1, use_bias ? BIAS : 0, DST);
   if (!finalize_command(top, status, 0)) return false;
@@ -696,19 +883,24 @@ bool run_gemm_job(Vtinygpu_top *top) {
   return true;
 }
 
-bool run_conv_job(Vtinygpu_top *top) {
+bool run_conv_job(Vtinygpu_top *top, const ConvCase *forced = nullptr) {
   static unsigned conv_job_count = 0;
-  unsigned input_h = 2 + random_u32() % 4;
-  unsigned input_w = 2 + random_u32() % 4;
-  unsigned input_c = 1 + random_u32() % 3;
-  unsigned output_c = 1 + random_u32() % 5;
-  unsigned kernel = (random_u32() & 1u) ? 1u : 3u;
-  unsigned stride_h = 1 + (random_u32() & 1u);
-  unsigned stride_w = 1 + (random_u32() & 1u);
-  unsigned pad_h = (kernel == 3u) ? (random_u32() & 1u) : 0u;
-  unsigned pad_w = (kernel == 3u) ? (random_u32() & 1u) : 0u;
+  unsigned input_h = forced ? 4u : (2 + random_u32() % 4);
+  unsigned input_w = forced ? 4u : (2 + random_u32() % 4);
+  unsigned input_c = forced ? 2u : (1 + random_u32() % 3);
+  unsigned output_c = forced ? 3u : (1 + random_u32() % 5);
+  unsigned kernel = forced ? (forced->kernel3 ? 3u : 1u) :
+                             (random_bool() ? 1u : 3u);
+  unsigned stride_h = forced ? ((forced->stride2_any && !forced->descriptor) ? 2u : 1u) :
+                               (1 + (random_bool() ? 1u : 0u));
+  unsigned stride_w = forced ? ((forced->stride2_any && forced->descriptor) ? 2u : 1u) :
+                               (1 + (random_bool() ? 1u : 0u));
+  unsigned pad_h = forced ? ((forced->pad_any && !forced->int8_dst) ? 1u : 0u) :
+                            ((kernel == 3u) ? (random_bool() ? 1u : 0u) : 0u);
+  unsigned pad_w = forced ? ((forced->pad_any && forced->int8_dst) ? 1u : 0u) :
+                            ((kernel == 3u) ? (random_bool() ? 1u : 0u) : 0u);
 
-  switch (conv_job_count++) {
+  switch (forced ? 3u : conv_job_count++) {
     case 0:
       input_h = 4; input_w = 4; input_c = 2; output_c = 3;
       kernel = 1; stride_h = 1; stride_w = 1; pad_h = 0; pad_w = 0;
@@ -731,13 +923,15 @@ bool run_conv_job(Vtinygpu_top *top) {
   const unsigned output_w = (input_w + 2 * pad_w - kernel) / stride_w + 1;
   const unsigned flat_k = kernel * kernel * input_c;
   uint32_t flags = FLAG_SIGNED;
-  const bool use_bias = (random_u32() & 1u) != 0;
-  const bool use_descriptor = (random_u32() & 1u) != 0;
-  const bool use_relu = (random_u32() & 1u) != 0;
-  const bool use_clamp = (random_u32() & 1u) != 0;
-  const bool use_int8 = (random_u32() & 1u) != 0;
-  const bool use_requant = use_int8 && ((random_u32() & 1u) != 0);
-  const bool use_explicit_stride = (random_u32() & 1u) != 0;
+  const bool use_bias = forced ? forced->postprocess : random_bool();
+  const bool use_descriptor = forced ? forced->descriptor : random_bool();
+  const bool use_relu = forced ? forced->postprocess : random_bool();
+  const bool use_clamp = forced ? forced->postprocess : random_bool();
+  const bool use_int8 = forced ? forced->int8_dst : random_bool();
+  const bool use_requant = forced ? (forced->postprocess && forced->int8_dst) :
+                                    (use_int8 && random_bool());
+  const bool use_explicit_stride = forced ?
+    (forced->descriptor != forced->stride2_any) : random_bool();
   const int32_t scale = use_requant ? (1 + static_cast<int32_t>(random_u32() % 3u)) : 0;
   const int16_t shift = use_requant ? random_shift() : 0;
   const int16_t zero_point = use_requant ? static_cast<int16_t>((random_u32() % 9u) - 4u) : 0;
@@ -768,6 +962,10 @@ bool run_conv_job(Vtinygpu_top *top) {
   fcov.conv_pad_10 |= (pad_h == 1u && pad_w == 0u);
   fcov.conv_pad_01 |= (pad_h == 0u && pad_w == 1u);
   fcov.conv_pad_11 |= (pad_h == 1u && pad_w == 1u);
+  xcov.hit_conv(use_descriptor, use_int8, kernel == 3u,
+                stride_h == 2u || stride_w == 2u,
+                pad_h != 0u || pad_w != 0u,
+                use_bias || use_requant);
 
   std::vector<int8_t> input(input_h * input_w * input_c);
   std::vector<int8_t> weights(flat_k * output_c);
@@ -863,10 +1061,12 @@ bool run_error_job(Vtinygpu_top *top) {
   switch (mode) {
     case 0:
       fcov.err_illegal_opcode = true;
+      xcov.hit_error(0, false);
       status = run_direct_command(top, 0xff, FLAG_I32_SIGNED, 1, 1, 1, 1, 1, 4);
       return finalize_command(top, status, STATUS_ERR_OPCODE);
     case 1:
       fcov.err_invalid_conv_cfg = true;
+      xcov.hit_error(1, false);
       mmio_write(top, REG_CONV_IN_HW, (3u << 16) | 3u);
       mmio_write(top, REG_CONV_CHANNELS, (1u << 16) | 1u);
       mmio_write(top, REG_CONV_CFG, 0x00001122u);
@@ -874,14 +1074,17 @@ bool run_error_job(Vtinygpu_top *top) {
       return finalize_command(top, status, STATUS_ERR_SHAPE);
     case 2:
       fcov.err_invalid_desc_version = true;
+      xcov.hit_error(2, true);
       status = run_invalid_conv_descriptor(top, 2);
       return finalize_command(top, status, STATUS_ERR_SHAPE);
     case 3:
       fcov.err_zero_dim = true;
+      xcov.hit_error(3, false);
       status = run_direct_command(top, OP_GEMM, FLAG_I32_SIGNED, 0, 2, 2, 2, 2, 8);
       return finalize_command(top, status, STATUS_ERR_SHAPE);
     default:
       fcov.err_conflicting_dst = true;
+      xcov.hit_error(4, false);
       status = run_direct_command(top, OP_GEMM, FLAG_DST_INT8 | FLAG_DST_INT32, 2, 2, 2, 2, 2, 8);
       return finalize_command(top, status, STATUS_ERR_FMT);
   }
@@ -903,17 +1106,47 @@ bool run_forced_saturation_job(Vtinygpu_top *top, bool positive) {
   return static_cast<int8_t>(memory[DST]) == expected;
 }
 
+bool run_vector_extreme_suite(Vtinygpu_top *top) {
+  std::memset(memory + SRC0, 0, 32);
+  std::memset(memory + SRC1, 0, 32);
+  std::memset(memory + DST, 0, 32);
+  memory[SRC0 + 0] = static_cast<uint8_t>(static_cast<int8_t>(127));
+  memory[SRC0 + 1] = static_cast<uint8_t>(static_cast<int8_t>(-128));
+  memory[SRC1 + 0] = static_cast<uint8_t>(static_cast<int8_t>(127));
+  memory[SRC1 + 1] = static_cast<uint8_t>(static_cast<int8_t>(127));
+  uint32_t status = run_direct_command(top, OP_VEC_MUL,
+                                       FLAG_I32_SIGNED | FLAG_CLAMP_EN,
+                                       2, 1, 1, 1, 1, 4);
+  if (!finalize_command(top, status, 0)) return false;
+  if (static_cast<int32_t>(read32(DST + 0)) != 127 ||
+      static_cast<int32_t>(read32(DST + 4)) != -128)
+    return false;
+
+  memory[SRC0 + 0] = static_cast<uint8_t>(static_cast<int8_t>(-10));
+  memory[SRC0 + 1] = static_cast<uint8_t>(static_cast<int8_t>(10));
+  memory[SRC1 + 0] = static_cast<uint8_t>(static_cast<int8_t>(1));
+  memory[SRC1 + 1] = static_cast<uint8_t>(static_cast<int8_t>(-1));
+  status = run_descriptor_command(top, OP_VEC_ADD,
+                                  FLAG_I32_SIGNED | FLAG_RELU_EN,
+                                  2, 1, 1, 1, 1, 4);
+  if (!finalize_command(top, status, 0)) return false;
+  return static_cast<int32_t>(read32(DST + 0)) == 0 &&
+         static_cast<int32_t>(read32(DST + 4)) == 9;
+}
+
 bool run_forced_error_suite(Vtinygpu_top *top) {
   for (unsigned mode = 0; mode < 5; ++mode) {
     uint32_t status = 0;
     switch (mode) {
       case 0:
         fcov.err_illegal_opcode = true;
+        xcov.hit_error(0, false);
         status = run_direct_command(top, 0xff, FLAG_I32_SIGNED, 1, 1, 1, 1, 1, 4);
         if (!finalize_command(top, status, STATUS_ERR_OPCODE)) return false;
         break;
       case 1:
         fcov.err_invalid_conv_cfg = true;
+        xcov.hit_error(1, false);
         mmio_write(top, REG_CONV_IN_HW, (3u << 16) | 3u);
         mmio_write(top, REG_CONV_CHANNELS, (1u << 16) | 1u);
         mmio_write(top, REG_CONV_CFG, 0x00001122u);
@@ -922,22 +1155,127 @@ bool run_forced_error_suite(Vtinygpu_top *top) {
         break;
       case 2:
         fcov.err_invalid_desc_version = true;
+        xcov.hit_error(2, true);
         status = run_invalid_conv_descriptor(top, 2);
         if (!finalize_command(top, status, STATUS_ERR_SHAPE)) return false;
         break;
       case 3:
         fcov.err_zero_dim = true;
+        xcov.hit_error(3, false);
         status = run_direct_command(top, OP_GEMM, FLAG_I32_SIGNED, 0, 2, 2, 2, 2, 8);
         if (!finalize_command(top, status, STATUS_ERR_SHAPE)) return false;
         break;
       default:
         fcov.err_conflicting_dst = true;
+        xcov.hit_error(4, false);
         status = run_direct_command(top, OP_GEMM, FLAG_DST_INT8 | FLAG_DST_INT32, 2, 2, 2, 2, 2, 8);
         if (!finalize_command(top, status, STATUS_ERR_FMT)) return false;
         break;
     }
   }
   return true;
+}
+
+bool run_descriptor_error_suite(Vtinygpu_top *top) {
+  uint32_t status = 0;
+
+  xcov.hit_error(0, true);
+  status = run_descriptor_command(top, 0xff, FLAG_I32_SIGNED,
+                                  1, 1, 1, 1, 1, 4);
+  if (!finalize_command(top, status, STATUS_ERR_OPCODE)) return false;
+
+  xcov.hit_error(1, true);
+  write_descriptor_common(OP_CONV2D, FLAG_I32_SIGNED, 0, 0, 0, 0, 0, 0,
+                          0, 0, 0, SRC0, SRC1, 0, DST);
+  write32(DESC + 14 * 4, 1u);
+  write32(DESC + 15 * 4, (3u << 16) | 3u);
+  write32(DESC + 16 * 4, (1u << 16) | 1u);
+  write32(DESC + 17 * 4, 0x00001122u);
+  mmio_write(top, REG_CMD_ADDR, DESC);
+  mmio_write(top, REG_CTRL, CTRL_IRQ_EN | CTRL_START);
+  status = wait_for_completion(top);
+  if (!finalize_command(top, status, STATUS_ERR_SHAPE)) return false;
+
+  xcov.hit_error(3, true);
+  status = run_descriptor_command(top, OP_GEMM, FLAG_I32_SIGNED,
+                                  0, 2, 2, 2, 2, 8);
+  if (!finalize_command(top, status, STATUS_ERR_SHAPE)) return false;
+
+  xcov.hit_error(4, true);
+  status = run_descriptor_command(top, OP_GEMM,
+                                  FLAG_DST_INT8 | FLAG_DST_INT32,
+                                  2, 2, 2, 2, 2, 8);
+  if (!finalize_command(top, status, STATUS_ERR_FMT)) return false;
+
+  return true;
+}
+
+bool run_controller_cross_suite(Vtinygpu_top *top) {
+  for (unsigned mode = 0; mode < 2; ++mode) {
+    for (unsigned dst = 0; dst < 2; ++dst) {
+      for (unsigned bias = 0; bias < 2; ++bias) {
+        for (unsigned relu = 0; relu < 2; ++relu) {
+          for (unsigned rq = 0; rq < 2; ++rq) {
+            if (!ControllerCrossCoverage::valid_dst_requant(dst, rq))
+              continue;
+            for (unsigned edge = 0; edge < 2; ++edge) {
+              const MatrixCase test_case = {
+                OP_GEMM, mode != 0, dst != 0, bias != 0, relu != 0,
+                ((mode + dst + bias + relu + rq + edge) & 1u) != 0,
+                rq != 0, edge != 0
+              };
+              if (!run_gemm_job(top, &test_case)) return false;
+            }
+
+            const MatrixCase gemv_case = {
+              OP_GEMV, mode != 0, dst != 0, bias != 0, relu != 0,
+              ((mode + dst + bias + relu + rq) & 1u) != 0,
+              rq != 0, ((mode + dst + bias + relu + rq) & 1u) != 0
+            };
+            if (!run_gemm_job(top, &gemv_case)) return false;
+          }
+        }
+      }
+    }
+  }
+
+  for (unsigned op = 0; op < 4; ++op) {
+    for (unsigned mode = 0; mode < 2; ++mode) {
+      for (unsigned dst = 0; dst < 2; ++dst) {
+        for (unsigned rq = 0; rq < 2; ++rq) {
+          if (!ControllerCrossCoverage::valid_dst_requant(dst, rq))
+            continue;
+          const VectorCase test_case = {
+            op, mode != 0, dst != 0,
+            ((op + mode + dst + rq) & 1u) != 0,
+            ((op + mode + dst + rq) & 1u) == 0,
+            rq != 0
+          };
+          if (!run_vector_job(top, &test_case)) return false;
+        }
+      }
+    }
+  }
+
+  for (unsigned mode = 0; mode < 2; ++mode) {
+    for (unsigned dst = 0; dst < 2; ++dst) {
+      for (unsigned kernel3 = 0; kernel3 < 2; ++kernel3) {
+        for (unsigned stride2 = 0; stride2 < 2; ++stride2) {
+          for (unsigned pad = 0; pad < 2; ++pad) {
+            for (unsigned post = 0; post < 2; ++post) {
+              const ConvCase test_case = {
+                mode != 0, dst != 0, kernel3 != 0,
+                stride2 != 0, pad != 0, post != 0
+              };
+              if (!run_conv_job(top, &test_case)) return false;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return run_descriptor_error_suite(top);
 }
 
 }  // namespace
@@ -969,8 +1307,14 @@ int main(int argc, char **argv) {
   }
   if (!run_forced_saturation_job(top, true) ||
       !run_forced_saturation_job(top, false) ||
+      !run_vector_extreme_suite(top) ||
       !run_forced_error_suite(top)) {
     std::fprintf(stderr, "forced functional coverage prelude failed\n");
+    delete top;
+    return 1;
+  }
+  if (!run_controller_cross_suite(top)) {
+    std::fprintf(stderr, "directed controller cross suite failed\n");
     delete top;
     return 1;
   }
@@ -1005,7 +1349,7 @@ int main(int argc, char **argv) {
   }
 
   top->final();
-  Verilated::threadContextp()->coveragep()->write("build/coverage.dat");
+  Verilated::threadContextp()->coveragep()->write("build/cov/diff.dat");
   delete top;
   std::printf("Verilator differential PASS: %u jobs, memory latency 0-15 cycles\n", jobs);
   std::printf("job_counts gemm=%u vector=%u conv=%u error=%u\n",
@@ -1016,6 +1360,12 @@ int main(int argc, char **argv) {
               100.0 * static_cast<double>(func_hits) / static_cast<double>(func_total),
               func_hits, func_total);
   fcov.print_missing();
-  std::printf("coverage written to build/coverage.dat (use make coverage-report for ranking)\n");
+  const unsigned cross_hits = xcov.hit_bins();
+  const unsigned cross_total = ControllerCrossCoverage::total_bins();
+  std::printf("controller_cross_coverage %.2f%% (%u/%u bins)\n",
+              100.0 * static_cast<double>(cross_hits) / static_cast<double>(cross_total),
+              cross_hits, cross_total);
+  xcov.print_missing();
+  std::printf("coverage written to build/cov/diff.dat (use make coverage-report for ranking)\n");
   return 0;
 }

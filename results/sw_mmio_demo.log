@@ -1,0 +1,14 @@
+TinyGPU-ML SW/MMIO demo (canonical 4x4x16)
+main.c:251:13: warning: 'print_speedup_row' defined but not used [-Wunused-function]
+  251 | static void print_speedup_row(const char *name, uint32_t cpu_cycles, uint32_t tgpu_cycles) {
+      |             ^~~~~~~~~~~~~~~~~
+main.c:197:13: warning: 'tinygpu_firq_handler' defined but not used [-Wunused-function]
+  197 | static void tinygpu_firq_handler(void) {
+      |             ^~~~~~~~~~~~~~~~~~~~
+main.c:154:13: warning: 'uart_print_u32' defined but not used [-Wunused-function]
+  154 | static void uart_print_u32(uint32_t value) {
+      |             ^~~~~~~~~~~~~~
+main.c:126:13: warning: 'uart_putc' defined but not used [-Wunused-function]
+  126 | static void uart_putc(char c) {
+      |             ^~~~~~~~~
+../sim/neorv32_tb.vhd:507:9:@1140537005102fs:(report note): [TB:TGPU] Software integration result: pass=31 fail=0

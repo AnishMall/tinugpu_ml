@@ -46,8 +46,9 @@ The current repository baseline is the canonical `4x4x16` RTL:
 The latest reported Tang Primer 25K build closes timing at `47.462 MHz`
 post-route with zero setup and hold violations. Resource use is `78%` logic,
 `31%` registers, `25%` BSRAM, and `100%` DSP. Verification currently reports
-`94.35%` RTL-only line coverage, `24.59%` RTL-only branch coverage, and
-`100.00%` functional coverage over 32 defined bins.
+`96.45%` canonical RTL line coverage, `92.17%` canonical RTL logical branch
+coverage, `95.66%` controller logical branch coverage, `100.00%` functional
+coverage over 33 bins, and `100.00%` coverage of 169 valid controller crosses.
 
 ### Explicitly Out of Scope
 

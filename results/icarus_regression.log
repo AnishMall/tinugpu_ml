@@ -1,0 +1,117 @@
+[run] tb_tinygpu_pe_tb
+tb_tinygpu_pe_tb PASS
+tb/tb_tinygpu_pe_tb.sv:63: $finish called at 70 (1s)
+[run] tb_tinygpu_array4x4_tb
+tb_tinygpu_array4x4_tb PASS
+tb/tb_tinygpu_array4x4_tb.sv:81: $finish called at 70 (1s)
+[run] tb_tinygpu_dma_tb
+tb_tinygpu_dma_tb PASS
+tb/tb_tinygpu_dma_tb.sv:268: $finish called at 410 (1s)
+[run] tb_tinygpu_dma_lane_and_error_tb
+tb_tinygpu_dma_lane_and_error_tb PASS
+tb/tb_tinygpu_dma_lane_and_error_tb.sv:236: $finish called at 450 (1s)
+[run] tb_tinygpu_dma_branch_tb
+tb_tinygpu_dma_branch_tb PASS
+tb/tb_tinygpu_dma_branch_tb.sv:211: $finish called at 1370 (1s)
+[run] tb_tinygpu_im2col_loader_tb
+tb_tinygpu_im2col_loader_tb PASS
+tb/tb_tinygpu_im2col_loader_tb.sv:84: $finish called at 1715 (1s)
+[run] tb_tinygpu_im2col_loader_resume_tb
+tb_tinygpu_im2col_loader_resume_tb PASS
+tb/tb_tinygpu_im2col_loader_resume_tb.sv:187: $finish called at 745 (1s)
+[run] tb_tinygpu_im2col_branch_tb
+tb_tinygpu_im2col_branch_tb PASS
+tb/tb_tinygpu_im2col_branch_tb.sv:255: $finish called at 3640 (1s)
+[run] tb_tinygpu_epilogue_tb
+tb_tinygpu_epilogue_tb PASS
+tb/tb_tinygpu_epilogue_tb.sv:114: $finish called at 1000 (1s)
+[run] tb_tinygpu_epilogue_branch_tb
+tb_tinygpu_epilogue_branch_tb PASS
+tb/tb_tinygpu_epilogue_branch_tb.sv:162: $finish called at 3710 (1s)
+[run] tb_tinygpu_gemm_tile_tb
+tb_tinygpu_gemm_tile_tb PASS
+tb/tb_tinygpu_gemm_tile_tb.sv:423: $finish called at 1150 (1s)
+[run] tb_tinygpu_regs_tb
+tb_tinygpu_regs_tb PASS
+tb/tb_tinygpu_regs_tb.sv:123: $finish called at 130 (1s)
+[run] tb_tinygpu_regs_extended_tb
+tb_tinygpu_regs_extended_tb PASS
+tb/tb_tinygpu_regs_extended_tb.sv:213: $finish called at 530 (1s)
+[run] tb_tinygpu_regs_branch_tb
+tb_tinygpu_regs_branch_tb PASS
+tb/tb_tinygpu_regs_branch_tb.sv:292: $finish called at 1126 (1s)
+[run] tb_tinygpu_counters_tb
+tb_tinygpu_counters_tb PASS
+tb/tb_tinygpu_counters_tb.sv:79: $finish called at 120 (1s)
+[run] tb_tinygpu_mem_arbiter_branch_tb
+tb_tinygpu_mem_arbiter_branch_tb PASS
+tb/tb_tinygpu_mem_arbiter_branch_tb.sv:129: $finish called at 8 (1s)
+[run] tb_tinygpu_cmd_ctrl_idle_tb
+tb_tinygpu_cmd_ctrl_idle_tb PASS
+tb/tb_tinygpu_cmd_ctrl_idle_tb.sv:92: $finish called at 120 (1s)
+[run] tb_tinygpu_top_gemm_tb
+tb_tinygpu_top_gemm_tb PASS
+tb/tb_tinygpu_top_gemm_tb.sv:254: $finish called at 1670 (1s)
+[run] tb_tinygpu_top_edge_tiles_tb
+tb_tinygpu_top_edge_tiles_tb PASS
+tb/tb_tinygpu_top_edge_tiles_tb.sv:262: $finish called at 5920 (1s)
+[run] tb_tinygpu_top_dst_int8_tb
+tb_tinygpu_top_dst_int8_tb PASS
+tb/tb_tinygpu_top_dst_int8_tb.sv:264: $finish called at 2410 (1s)
+[run] tb_tinygpu_top_bias_relu_tb
+tb_tinygpu_top_bias_relu_tb PASS
+tb/tb_tinygpu_top_bias_relu_tb.sv:294: $finish called at 2060 (1s)
+[run] tb_tinygpu_top_clamp_tb
+tb_tinygpu_top_clamp_tb PASS
+tb/tb_tinygpu_top_clamp_tb.sv:196: $finish called at 1550 (1s)
+[run] tb_tinygpu_top_conv2d_tb
+tb_tinygpu_top_conv2d_tb PASS
+tb/tb_tinygpu_top_conv2d_tb.sv:159: $finish called at 12085 (1s)
+[run] tb_tinygpu_top_conv2d_corners_tb
+tb_tinygpu_top_conv2d_corners_tb PASS
+tb/tb_tinygpu_top_conv2d_corners_tb.sv:258: $finish called at 201335 (1s)
+[run] tb_tinygpu_top_branch_cov_tb
+tb_tinygpu_top_branch_cov_tb PASS
+tb/tb_tinygpu_top_branch_cov_tb.sv:480: $finish called at 79510 (1s)
+[run] tb_tinygpu_top_controller_cov_tb
+tb_tinygpu_top_controller_cov_tb PASS
+tb/tb_tinygpu_top_controller_cov_tb.sv:280: $finish called at 26710 (1s)
+[run] tb_tinygpu_top_error_paths_tb
+tb_tinygpu_top_error_paths_tb PASS
+tb/tb_tinygpu_top_error_paths_tb.sv:232: $finish called at 1310 (1s)
+[run] tb_tinygpu_top_requant_tb
+tb_tinygpu_top_requant_tb PASS
+tb/tb_tinygpu_top_requant_tb.sv:220: $finish called at 3140 (1s)
+[run] tb_tinygpu_top_demo_tb
+VCD info: dumpfile build/tinygpu_top_demo.vcd opened for output.
+TinyGPU-ML RTL demo
+Checkpoint IDs: 0x10 launch, 0x20 first read, 0x30 first MAC, 0x40 epilogue, 0x50 final store
+[CKPT] Direct GEMM launch
+Direct GEMM C = [[19, 22], [43, 50]]
+Direct GEMM perf: cycles=124 active=2 stalls=65 work=8 ops/cycle=0.064 stall=52%
+[CKPT] Descriptor GEMM launch
+Descriptor GEMM C = [[19, 22], [43, 50]]
+Descriptor GEMM perf: cycles=194 active=2 stalls=135 work=8 ops/cycle=0.041 stall=69%
+[CKPT] Vector add launch
+Vector add z = {6, 4, -4, 12}
+Vector add perf: cycles=61 active=8 stalls=47 work=4 ops/cycle=0.065 stall=77%
+[CKPT] Conv2D launch
+Conv2D out row0 = {1, 2, 3}
+Conv2D out row1 = {4, 5, 6}
+Conv2D out row2 = {7, 8, 9}
+Conv2D perf: cycles=888 active=27 stalls=695 work=81 ops/cycle=0.091 stall=78%
+Last command cycles : 888
+Last command active : 27
+Last command stalls : 695
+Commands completed : 4
+tb_tinygpu_top_demo_tb PASS
+tb/tb_tinygpu_top_demo_tb.sv:381: $finish called at 13940 (1s)
+[run] tb_tinygpu_top_vector_tb
+tb_tinygpu_top_vector_tb PASS
+tb/tb_tinygpu_top_vector_tb.sv:239: $finish called at 3550 (1s)
+[run] tb_tinygpu_top_directed_tb
+tb_tinygpu_top_directed_tb PASS
+tb/tb_tinygpu_top_directed_tb.sv:381: $finish called at 8550 (1s)
+[run] tb_tinygpu_top_random_latency_tb
+tb_tinygpu_top_random_latency_tb PASS
+tb/tb_tinygpu_top_random_latency_tb.sv:545: $finish called at 35860 (1s)

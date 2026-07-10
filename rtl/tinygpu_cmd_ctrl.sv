@@ -1857,6 +1857,9 @@ import tinygpu_pkg::*;
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
     end else if (!soft_reset) begin
+      // Branch-closure proof point: the FSM default branch is defensive only.
+      // After reset, legal transitions must keep state_q inside the declared
+      // command-state encoding.
       assert (state_q <= S_ERROR);
       assert (m0_q <= M_q);
       assert (n0_q <= effective_n);

@@ -332,11 +332,13 @@ This is block-level formal, not full-top formal closure.
 
 ## 11. Coverage: What the Numbers Mean
 
-Current merged Verilator coverage run:
+Current canonical Verilator top-level coverage run:
 
-- RTL-only line coverage: `94.35% (2338/2478)`
-- RTL-only branch coverage: `24.59% (35025/142452)`
-- functional coverage: `100.00% (32/32 bins)`
+- RTL line coverage: `96.45% (1740/1804)`
+- RTL logical branch coverage: `92.17% (753/817)`
+- controller logical branch coverage: `95.66% (353/369)`
+- functional coverage: `100.00% (33/33 bins)`
+- controller cross coverage: `100.00% (169/169 bins)`
 
 How to explain this clearly:
 
@@ -344,23 +346,16 @@ How to explain this clearly:
 - branch coverage asks: did both decision outcomes occur?
 - functional coverage asks: did we hit the behaviors we explicitly care about?
 
-Why branch coverage is much lower:
-
-- `tinygpu_cmd_ctrl.sv` has many states, flags, edge cases, and error paths
-- Verilator counts a very large number of decision branches
-- many branches are rare, intentionally defensive, or split into many implicit
-  outcomes by wide conditionals and state decoding
-- merged directed benches improved line execution a lot, but the controller
-  still dominates the remaining uncovered decision space
+The historical `24.59%` result mixed signal-toggle, expression, FSM, and
+duplicated multi-binary coverage records. The canonical logical branch metric
+disables signal-toggle coverage and counts one complete `tinygpu_top` hierarchy.
 
 Suggested wording for the presentation:
 
-- line coverage is strong and functional coverage is full for the planned bins
-- branch coverage is the weakest metric today
-- but functional coverage and directed behavior-level verification are much
-  stronger than the raw branch percentage alone suggests
-- the biggest remaining verification closure opportunity is controller branch
-  closure, not basic arithmetic correctness
+- line and logical branch coverage are both strong
+- all defined functional and valid controller cross bins are covered
+- remaining branches are concentrated in fault injection, assertion failures,
+  protocol interleavings, and defensive recovery paths
 
 ## 12. Why RTL Verification Logic Was Added
 

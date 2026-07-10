@@ -1,0 +1,16 @@
+# Branch coverage waivers for architecturally impossible branches.
+#
+# Format:
+#   rtl/path.sv:line  rationale
+#
+# These entries are intentionally conservative. They only remove branches that
+# cannot be reached through legal architectural behavior. Legal error paths,
+# lane-3 defaults, unsupported opcode/config paths, and im2col error handling
+# remain counted.
+
+rtl/tinygpu_cmd_ctrl.sv:983   Descriptor loader default: legal descriptors read only words 0-13 or 0-17.
+rtl/tinygpu_cmd_ctrl.sv:1323  Counter-update FSM default: legal controller states are covered by explicit cases.
+rtl/tinygpu_cmd_ctrl.sv:1847  Command FSM default: illegal state recovery, guarded by legal-state assertion.
+rtl/tinygpu_cmd_ctrl.sv:1848  Command FSM default assignment paired with line 1847.
+rtl/tinygpu_dma.sv:303        DMA FSM default: all eight 3-bit enum encodings are named states.
+rtl/tinygpu_dma.sv:304        DMA FSM default assignment paired with line 303.

@@ -1,0 +1,5 @@
+verilator --lint-only --timing -Wall -Wno-fatal -Wno-UNUSEDPARAM \
+	  --top-module tinygpu_top rtl/tinygpu_pkg.sv rtl/tinygpu_shared_mul.sv rtl/tinygpu_pe.sv rtl/tinygpu_array4x4.sv rtl/tinygpu_spm.sv rtl/tinygpu_mem_arbiter.sv rtl/tinygpu_im2col_loader.sv rtl/tinygpu_epilogue_shared.sv rtl/tinygpu_epilogue.sv rtl/tinygpu_dma.sv rtl/tinygpu_vec_alu.sv rtl/tinygpu_cmd_ctrl.sv rtl/tinygpu_counters.sv rtl/tinygpu_regs.sv rtl/tinygpu_top.sv
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.925 MB sources in 16 modules, into 0.913 MB in 4 C++ files needing 0.000 MB
+- Verilator: Walltime 0.109 s (elab=0.012, cvt=0.064, bld=0.000); cpu 0.092 s on 1 threads; allocated 29.531 MB

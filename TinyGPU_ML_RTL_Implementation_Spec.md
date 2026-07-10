@@ -1296,10 +1296,12 @@ Current verification metrics are:
 
 | Metric | Current result |
 |---|---:|
-| RTL-only line coverage | `94.35% (2338 / 2478)` |
-| RTL-only branch coverage | `24.59% (35025 / 142452)` |
-| Functional coverage | `100.00% (32 / 32 bins)` |
-| Verilator standalone regression | `18 passed, 0 failed` |
+| Canonical top RTL line coverage | `96.45% (1740 / 1804)` |
+| Canonical top RTL logical branch coverage | `92.17% (753 / 817)` |
+| Canonical controller logical branch coverage | `95.66% (353 / 369)` |
+| Functional coverage | `100.00% (33 / 33 bins)` |
+| Valid controller cross coverage | `100.00% (169 / 169 bins)` |
+| Verilator differential regression | `1000 / 1000 jobs passed` |
 
 ---
 

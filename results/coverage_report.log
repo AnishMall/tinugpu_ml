@@ -1,0 +1,203 @@
+bash scripts/coverage_report.sh
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.015 s (elab=0.000, cvt=0.000, bld=0.014); cpu 0.001 s on 1 threads; allocated 3.219 MB
+Verilator differential PASS: 1000 jobs, memory latency 0-15 cycles
+job_counts gemm=250 vector=250 conv=250 error=250
+functional_coverage 100.00% (33/33 bins)
+controller_cross_coverage 100.00% (169/169 bins)
+coverage written to build/cov/diff.dat (use make coverage-report for ranking)
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.015 s (elab=0.000, cvt=0.000, bld=0.014); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_top_directed_tb PASS
+- tb/tb_tinygpu_top_directed_tb.sv:381: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 9ns; walltime 0.003 s; speed 3.224 us/s
+- Verilator: cpu 0.003 s on 1 threads; allocated 3 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.016 s (elab=0.000, cvt=0.000, bld=0.015); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_top_error_paths_tb PASS
+- tb/tb_tinygpu_top_error_paths_tb.sv:232: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 1ns; walltime 0.002 s; speed 611.007 ns/s
+- Verilator: cpu 0.002 s on 1 threads; allocated 3 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.017 s (elab=0.000, cvt=0.000, bld=0.016); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_top_controller_cov_tb PASS
+- tb/tb_tinygpu_top_controller_cov_tb.sv:280: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 27ns; walltime 0.004 s; speed 7.556 us/s
+- Verilator: cpu 0.004 s on 1 threads; allocated 3 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.013 s (elab=0.000, cvt=0.000, bld=0.012); cpu 0.001 s on 1 threads; allocated 3.219 MB
+tb_tinygpu_regs_extended_tb PASS
+- tb/tb_tinygpu_regs_extended_tb.sv:213: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 530ps; walltime 0.000 s; speed 1.417 us/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.012 s (elab=0.000, cvt=0.000, bld=0.011); cpu 0.001 s on 1 threads; allocated 3.219 MB
+tb_tinygpu_regs_branch_tb PASS
+- tb/tb_tinygpu_regs_branch_tb.sv:292: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 1ns; walltime 0.000 s; speed 3.060 us/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.014 s (elab=0.000, cvt=0.000, bld=0.013); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_top_requant_tb PASS
+- tb/tb_tinygpu_top_requant_tb.sv:220: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 3ns; walltime 0.002 s; speed 1.408 us/s
+- Verilator: cpu 0.002 s on 1 threads; allocated 3 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.016 s (elab=0.000, cvt=0.000, bld=0.015); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_top_conv2d_corners_tb PASS
+- tb/tb_tinygpu_top_conv2d_corners_tb.sv:258: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 201ns; walltime 0.012 s; speed 17.045 us/s
+- Verilator: cpu 0.012 s on 1 threads; allocated 3 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.014 s (elab=0.000, cvt=0.000, bld=0.013); cpu 0.001 s on 1 threads; allocated 3.188 MB
+tb_tinygpu_top_branch_cov_tb PASS
+- tb/tb_tinygpu_top_branch_cov_tb.sv:480: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 80ns; walltime 0.007 s; speed 11.769 us/s
+- Verilator: cpu 0.007 s on 1 threads; allocated 4 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.012 s (elab=0.000, cvt=0.000, bld=0.012); cpu 0.001 s on 1 threads; allocated 3.219 MB
+tb_tinygpu_dma_lane_and_error_tb PASS
+- tb/tb_tinygpu_dma_lane_and_error_tb.sv:236: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 450ps; walltime 0.000 s; speed 933.610 ns/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.013 s (elab=0.000, cvt=0.000, bld=0.012); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_dma_branch_tb PASS
+- tb/tb_tinygpu_dma_branch_tb.sv:211: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 1ns; walltime 0.000 s; speed 3.224 us/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.012 s (elab=0.000, cvt=0.000, bld=0.011); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_im2col_loader_resume_tb PASS
+- tb/tb_tinygpu_im2col_loader_resume_tb.sv:187: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 745ps; walltime 0.000 s; speed 1.976 us/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.014 s (elab=0.000, cvt=0.000, bld=0.013); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_im2col_branch_tb PASS
+- tb/tb_tinygpu_im2col_branch_tb.sv:255: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 4ns; walltime 0.001 s; speed 6.816 us/s
+- Verilator: cpu 0.001 s on 1 threads; allocated 2 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.013 s (elab=0.000, cvt=0.000, bld=0.012); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_epilogue_branch_tb PASS
+- tb/tb_tinygpu_epilogue_branch_tb.sv:162: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 4ns; walltime 0.000 s; speed 10.000 us/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.012 s (elab=0.000, cvt=0.000, bld=0.011); cpu 0.001 s on 1 threads; allocated 3.203 MB
+tb_tinygpu_mem_arbiter_branch_tb PASS
+- tb/tb_tinygpu_mem_arbiter_branch_tb.sv:129: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 8ps; walltime 0.000 s; speed 27.682 ns/s
+- Verilator: cpu 0.000 s on 1 threads; allocated 2 MB
+make[1]: Nothing to be done for `default'.
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev vUNKNOWN-built20260426
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.015 s (elab=0.000, cvt=0.000, bld=0.014); cpu 0.001 s on 1 threads; allocated 3.219 MB
+-Info: tb/tb_tinygpu_top_demo_tb.sv:83: $dumpvar ignored, as Verilated without --trace
+TinyGPU-ML RTL demo
+Checkpoint IDs: 0x10 launch, 0x20 first read, 0x30 first MAC, 0x40 epilogue, 0x50 final store
+[CKPT] Direct GEMM launch
+Direct GEMM C = [[19, 22], [43, 50]]
+Direct GEMM perf: cycles=124 active=2 stalls=65 work=8 ops/cycle=0.064 stall=52%
+[CKPT] Descriptor GEMM launch
+Descriptor GEMM C = [[19, 22], [43, 50]]
+Descriptor GEMM perf: cycles=194 active=2 stalls=135 work=8 ops/cycle=0.041 stall=69%
+[CKPT] Vector add launch
+Vector add z = {6, 4, -4, 12}
+Vector add perf: cycles=61 active=8 stalls=47 work=4 ops/cycle=0.065 stall=77%
+[CKPT] Conv2D launch
+Conv2D out row0 = {1, 2, 3}
+Conv2D out row1 = {4, 5, 6}
+Conv2D out row2 = {7, 8, 9}
+Conv2D perf: cycles=888 active=27 stalls=695 work=81 ops/cycle=0.091 stall=78%
+Last command cycles : 888
+Last command active : 27
+Last command stalls : 695
+Commands completed : 4
+tb_tinygpu_top_demo_tb PASS
+- tb/tb_tinygpu_top_demo_tb.sv:381: Verilog $finish
+- S i m u l a t i o n   R e p o r t: Verilator 5.048 2026-04-26
+- Verilator: $finish at 14ns; walltime 0.003 s; speed 5.140 us/s
+- Verilator: cpu 0.003 s on 1 threads; allocated 3 MB
+Canonical top RTL line coverage: 96.45% (1740/1804)
+Canonical top RTL logical branch coverage: 92.17% (753/817)
+Canonical controller logical branch coverage: 95.66% (353/369)
+Merged multi-binary RTL line coverage: 97.41% (1766/1813)
+Merged multi-binary RTL branch coverage: 74.68% (15139/20271)
+Merged waiver-adjusted RTL branch coverage: 74.84% (15131/20219), waived architecturally impossible branches: 8/52
+Merged non-memory RTL branch coverage: 74.01% (11965/16167)
+  excludes tinygpu_dma.sv, tinygpu_spm.sv, tinygpu_mem_arbiter.sv
+Merged waiver-adjusted non-memory RTL branch coverage: 74.11% (11957/16135), waived architecturally impossible branches: 8/32
+Merged RTL branch coverage delta vs previous report: +0.00 points
+Merged RTL branch coverage by file:
+   41.88% (   67/  160)  tinygpu_vec_alu.sv
+   72.62% ( 7326/10088)  tinygpu_cmd_ctrl.sv
+   73.05% ( 1775/ 2430)  tinygpu_im2col_loader.sv
+   73.69% (  776/ 1053)  tinygpu_spm.sv
+   75.00% (  120/  160)  tinygpu_shared_mul.sv
+   75.70% (  838/ 1107)  tinygpu_epilogue_shared.sv
+   78.46% (  346/  441)  tinygpu_mem_arbiter.sv
+   78.62% ( 2052/ 2610)  tinygpu_dma.sv
+   78.91% ( 1160/ 1470)  tinygpu_regs.sv
+   83.75% (  335/  400)  tinygpu_top.sv
+   95.00% (   76/   80)  tinygpu_pe.sv
+   98.53% (  268/  272)  tinygpu_counters.sv
+RTL uncovered files (%00 markers):
+    186  tinygpu_cmd_ctrl.sv
+     47  tinygpu_regs.sv
+     28  tinygpu_dma.sv
+     19  tinygpu_im2col_loader.sv
+     15  tinygpu_epilogue_shared.sv
+     12  tinygpu_spm.sv
+      8  tinygpu_top.sv
+      7  tinygpu_counters.sv
+      3  tinygpu_vec_alu.sv
+      3  tinygpu_shared_mul.sv
+      2  tinygpu_array4x4.sv
+      0  tinygpu_pe.sv
+      0  tinygpu_mem_arbiter.sv

@@ -315,7 +315,8 @@ Current classes:
 
 Current functional coverage:
 
-- `100.00% (32/32 bins)`
+- `100.00% (33/33 bins)`
+- valid controller cross coverage: `100.00% (169/169 bins)`
 
 ### Python golden-model story
 
@@ -369,11 +370,13 @@ This is block-level formal, not full-top formal closure.
 
 ## 11. Coverage: What the Numbers Mean
 
-Current merged Verilator coverage run:
+Current canonical Verilator top-level coverage run:
 
-- RTL-only line coverage: `94.35% (2338/2478)`
-- RTL-only branch coverage: `24.59% (35025/142452)`
-- functional coverage: `100.00% (32/32 bins)`
+- RTL line coverage: `96.45% (1740/1804)`
+- RTL logical branch coverage: `92.17% (753/817)`
+- controller logical branch coverage: `95.66% (353/369)`
+- functional coverage: `100.00% (33/33 bins)`
+- valid controller cross coverage: `100.00% (169/169 bins)`
 
 How to explain this clearly:
 
@@ -381,23 +384,21 @@ How to explain this clearly:
 - branch coverage asks: did both decision outcomes occur?
 - functional coverage asks: did we hit the behaviors we explicitly care about?
 
-Why branch coverage is much lower:
+Why the secondary merged decision score is lower:
 
-- `tinygpu_cmd_ctrl.sv` has many states, flags, edge cases, and error paths
-- Verilator counts a very large number of decision branches
-- many branches are rare, intentionally defensive, or split into many implicit
-  outcomes by wide conditionals and state decoding
-- merged directed benches improved line execution a lot, but the controller
-  still dominates the remaining uncovered decision space
+- independently compiled benches instantiate the same RTL under distinct
+  testbench hierarchies, so equivalent decisions can appear multiple times
+- a branch hit in one binary does not necessarily close its duplicate in every
+  other binary
+- the canonical `tinygpu_top` harness avoids this duplication and is the
+  primary closure metric
 
 Suggested wording for the presentation:
 
-- line coverage is strong and functional coverage is full for the planned bins
-- branch coverage is the weakest metric today
-- but functional coverage and directed behavior-level verification are much
-  stronger than the raw branch percentage alone suggests
-- the biggest remaining verification closure opportunity is controller branch
-  closure, not basic arithmetic correctness
+- line, logical branch, and planned functional coverage are all strong
+- all 169 valid controller crosses have exact-output checks
+- the remaining decision gaps are mostly fault injection, assertion-failure,
+  and defensive recovery behavior rather than normal computation
 
 ## 12. Why RTL Verification Logic Was Added
 
@@ -542,15 +543,15 @@ scratchpad, epilogue, and store path, and made verification much more
 manageable. In this design, the lowering is done in RTL by
 `tinygpu_im2col_loader.sv`, so software does not build the full im2col matrix.
 
-#### Why is branch coverage low while functional coverage is high?
+#### Why is functional coverage 100% while logical branch coverage is 92.17%?
 
-Functional coverage is based on the behaviors we intentionally targeted:
-GEMM, vector ops, Conv2D modes, error paths, requantization, descriptor mode,
-and so on. That is why it can be high. Branch coverage is lower because
-`tinygpu_cmd_ctrl.sv` contains a lot of control decisions, defensive cases,
-state transitions, and flag combinations, and Verilator counts all of those
-branches very aggressively. So the design behavior is well covered at the
-feature level, but not every internal controller decision outcome has been hit.
+Functional coverage is based on 33 named feature bins and 169 valid controller
+crosses, all of which have been exercised. Logical branch coverage measures
+internal expression and FSM outcomes throughout the RTL. The remaining branch
+gaps are mainly injected memory-error exits, exact ready/valid interleavings,
+assertion-failure outcomes, and defensive state recovery. These are not extra
+functional features, so full functional coverage and 92.17% logical branch
+coverage describe different, complementary aspects of verification.
 
 #### What does the controller do versus the DMA?
 

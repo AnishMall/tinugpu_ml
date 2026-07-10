@@ -24,13 +24,18 @@ TB_NAMES := \
 	tb_tinygpu_array4x4_tb \
 	tb_tinygpu_dma_tb \
 	tb_tinygpu_dma_lane_and_error_tb \
+	tb_tinygpu_dma_branch_tb \
 	tb_tinygpu_im2col_loader_tb \
 	tb_tinygpu_im2col_loader_resume_tb \
+	tb_tinygpu_im2col_branch_tb \
 	tb_tinygpu_epilogue_tb \
+	tb_tinygpu_epilogue_branch_tb \
 	tb_tinygpu_gemm_tile_tb \
 	tb_tinygpu_regs_tb \
 	tb_tinygpu_regs_extended_tb \
+	tb_tinygpu_regs_branch_tb \
 	tb_tinygpu_counters_tb \
+	tb_tinygpu_mem_arbiter_branch_tb \
 	tb_tinygpu_cmd_ctrl_idle_tb \
 	tb_tinygpu_top_gemm_tb \
 	tb_tinygpu_top_edge_tiles_tb \
@@ -39,6 +44,7 @@ TB_NAMES := \
 	tb_tinygpu_top_clamp_tb \
 	tb_tinygpu_top_conv2d_tb \
 	tb_tinygpu_top_conv2d_corners_tb \
+	tb_tinygpu_top_branch_cov_tb \
 	tb_tinygpu_top_controller_cov_tb \
 	tb_tinygpu_top_error_paths_tb \
 	tb_tinygpu_top_requant_tb \
@@ -49,7 +55,7 @@ TB_NAMES := \
 
 TB_VVPS := $(addprefix $(BUILD_DIR)/,$(addsuffix .vvp,$(TB_NAMES)))
 
-.PHONY: all test lint verilator-diff verilator-directed-cov formal sync-rtl check-rtl-sync clean list demo-rtl demo-sw coverage-report
+.PHONY: all test lint verilator-diff verilator-directed-cov formal sync-rtl check-rtl-sync clean list demo-rtl demo-golden demo-sw coverage-report
 
 all: test
 
@@ -90,6 +96,9 @@ clean:
 
 demo-rtl: $(BUILD_DIR)/tb_tinygpu_top_demo_tb.vvp
 	$(VVP) $(BUILD_DIR)/tb_tinygpu_top_demo_tb.vvp
+
+demo-golden:
+	python3 verification/demo_golden.py
 
 demo-sw:
 	@set -e; \

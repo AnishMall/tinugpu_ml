@@ -197,6 +197,27 @@ def golden_conv2d(image, kernel):
     return out
 
 
+def golden_conv2d_same_pad(image, kernel):
+    ih, iw = len(image), len(image[0])
+    kh, kw = len(kernel), len(kernel[0])
+    pad_h = kh // 2
+    pad_w = kw // 2
+    out = [[0] * iw for _ in range(ih)]
+    for oy in range(ih):
+        for ox in range(iw):
+            acc = 0
+            for ky in range(kh):
+                for kx in range(kw):
+                    iy = oy + ky - pad_h
+                    ix = ox + kx - pad_w
+                    if 0 <= iy < ih and 0 <= ix < iw:
+                        acc += int(np.int8(image[iy][ix])) * int(
+                            np.int8(kernel[ky][kx])
+                        )
+            out[oy][ox] = acc
+    return out
+
+
 # =============================================
 # TEST 1: SOFT RESET
 # =============================================
@@ -213,6 +234,113 @@ async def test_soft_reset(dut):
     assert (status & 0x01) == 0, f"BUSY should be 0, got {status:#x}"
     assert (status & 0x40) != 0, f"READY should be 1, got {status:#x}"
     dut._log.info(f"[PASS] Soft reset STATUS = {status:#x}")
+
+
+# =============================================
+# TEST 1B: Demo vectors match Icarus RTL demo
+# =============================================
+@cocotb.test()
+async def test_demo_vectors_match_rtl_demo(dut):
+    """Mirror the fixed inputs used by tb_tinygpu_top_demo_tb.sv"""
+    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+    cocotb.start_soon(memory_responder(dut))
+    memory[:] = bytearray(65536)
+    await reset_dut(dut)
+
+    # Direct GEMM demo: A[2][2] x B[2][2] -> [[19,22],[43,50]].
+    A = [[1, 2], [3, 4]]
+    B = [[5, 6], [7, 8]]
+    golden = golden_gemm(A, B)
+
+    for r in range(2):
+        for c in range(2):
+            mem_write8(SRC0_ADDR + r * 2 + c, A[r][c])
+            mem_write8(SRC1_ADDR + r * 2 + c, B[r][c])
+
+    await mmio_write(dut, REG_DIRECT_OP, OP_GEMM)
+    await mmio_write(dut, REG_SRC0, SRC0_ADDR)
+    await mmio_write(dut, REG_SRC1, SRC1_ADDR)
+    await mmio_write(dut, REG_DST, DST_ADDR)
+    await mmio_write(dut, REG_M, 2)
+    await mmio_write(dut, REG_N, 2)
+    await mmio_write(dut, REG_K, 2)
+    await mmio_write(dut, REG_STRIDE0, 2)
+    await mmio_write(dut, REG_STRIDE1, 2)
+    await mmio_write(dut, REG_STRIDE_DST, 8)
+    await mmio_write(dut, REG_FLAGS, FLAG_DST_INT32 | FLAG_SIGNED)
+    await mmio_write(dut, REG_CTRL, CTRL_DIRECT | CTRL_START)
+
+    assert await wait_done(dut), "TIMEOUT waiting for demo GEMM"
+    for r in range(2):
+        for c in range(2):
+            hw = mem_read32s(DST_ADDR + (r * 2 + c) * 4)
+            exp = int(golden[r][c])
+            assert hw == exp, f"demo GEMM C[{r}][{c}]: got {hw}, expected {exp}"
+    dut._log.info(f"[PASS] Demo direct/descriptor GEMM golden = {golden}")
+
+    # Vector add demo: {1,-2,3,4} + {5,6,-7,8} -> {6,4,-4,12}.
+    await mmio_write(dut, REG_CTRL, CTRL_RESET)
+    await RisingEdge(dut.clk)
+    x = [1, -2, 3, 4]
+    y = [5, 6, -7, 8]
+    golden_vec = golden_vec_add(x, y)
+    for i, v in enumerate(x):
+        mem_write8(SRC0_ADDR + i, v)
+    for i, v in enumerate(y):
+        mem_write8(SRC1_ADDR + i, v)
+
+    await mmio_write(dut, REG_DIRECT_OP, OP_VEC_ADD)
+    await mmio_write(dut, REG_SRC0, SRC0_ADDR)
+    await mmio_write(dut, REG_SRC1, SRC1_ADDR)
+    await mmio_write(dut, REG_DST, DST_ADDR)
+    await mmio_write(dut, REG_M, 4)
+    await mmio_write(dut, REG_N, 1)
+    await mmio_write(dut, REG_K, 1)
+    await mmio_write(dut, REG_STRIDE0, 1)
+    await mmio_write(dut, REG_STRIDE1, 1)
+    await mmio_write(dut, REG_STRIDE_DST, 4)
+    await mmio_write(dut, REG_FLAGS, FLAG_DST_INT32 | FLAG_SIGNED)
+    await mmio_write(dut, REG_CTRL, CTRL_DIRECT | CTRL_START)
+
+    assert await wait_done(dut), "TIMEOUT waiting for demo VEC_ADD"
+    for i, exp in enumerate(golden_vec):
+        hw = mem_read32s(DST_ADDR + i * 4)
+        assert hw == exp, f"demo vector z[{i}]: got {hw}, expected {exp}"
+    dut._log.info(f"[PASS] Demo vector add golden = {golden_vec}")
+
+    # Conv2D demo: 3x3 input, center-only 3x3 kernel, pad 1 -> identity.
+    await mmio_write(dut, REG_CTRL, CTRL_RESET)
+    await RisingEdge(dut.clk)
+    image = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    kernel = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
+    golden_conv = golden_conv2d_same_pad(image, kernel)
+
+    for r in range(3):
+        for c in range(3):
+            mem_write8(SRC0_ADDR + r * 3 + c, image[r][c])
+            mem_write8(SRC1_ADDR + r * 3 + c, kernel[r][c])
+
+    await mmio_write(dut, REG_DIRECT_OP, OP_CONV2D)
+    await mmio_write(dut, REG_SRC0, SRC0_ADDR)
+    await mmio_write(dut, REG_SRC1, SRC1_ADDR)
+    await mmio_write(dut, REG_BIAS, 0)
+    await mmio_write(dut, REG_DST, DST_ADDR)
+    await mmio_write(dut, REG_STRIDE0, 3)
+    await mmio_write(dut, REG_STRIDE1, 1)
+    await mmio_write(dut, REG_STRIDE_DST, 4)
+    await mmio_write(dut, REG_FLAGS, FLAG_DST_INT32 | FLAG_SIGNED)
+    await mmio_write(dut, REG_CONV_IN_HW, (3 << 16) | 3)
+    await mmio_write(dut, REG_CONV_CHANNELS, (1 << 16) | 1)
+    await mmio_write(dut, REG_CONV_CFG, 0x00111133)
+    await mmio_write(dut, REG_CTRL, CTRL_DIRECT | CTRL_START)
+
+    assert await wait_done(dut, timeout=4000), "TIMEOUT waiting for demo Conv2D"
+    for r in range(3):
+        for c in range(3):
+            hw = mem_read32s(DST_ADDR + (r * 3 + c) * 4)
+            exp = int(golden_conv[r][c])
+            assert hw == exp, f"demo Conv2D out[{r}][{c}]: got {hw}, expected {exp}"
+    dut._log.info(f"[PASS] Demo Conv2D golden = {golden_conv}")
 
 
 # =============================================

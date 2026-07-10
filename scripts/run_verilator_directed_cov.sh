@@ -23,10 +23,16 @@ else
     tb_tinygpu_top_error_paths_tb
     tb_tinygpu_top_controller_cov_tb
     tb_tinygpu_regs_extended_tb
+    tb_tinygpu_regs_branch_tb
     tb_tinygpu_top_requant_tb
     tb_tinygpu_top_conv2d_corners_tb
+    tb_tinygpu_top_branch_cov_tb
     tb_tinygpu_dma_lane_and_error_tb
+    tb_tinygpu_dma_branch_tb
     tb_tinygpu_im2col_loader_resume_tb
+    tb_tinygpu_im2col_branch_tb
+    tb_tinygpu_epilogue_branch_tb
+    tb_tinygpu_mem_arbiter_branch_tb
     tb_tinygpu_top_demo_tb
   )
 fi
@@ -40,7 +46,10 @@ for tb in "${TB_NAMES[@]}"; do
     exit 1
   fi
 
-  verilator -Wall -Wno-fatal -Wno-UNUSEDPARAM --binary --timing --coverage \
+  verilator -Wall -Wno-fatal -Wno-UNUSEDPARAM -Wno-UNUSEDSIGNAL \
+    -Wno-WIDTHTRUNC -Wno-WIDTHEXPAND -Wno-PROCASSINIT -Wno-TIMESCALEMOD \
+    --binary --timing \
+    --coverage-line --coverage-expr --coverage-fsm --coverage-user \
     --top-module "$tb" \
     -Mdir "$obj_dir" \
     "${RTL_FILES[@]}" "$tb_src"

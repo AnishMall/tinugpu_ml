@@ -52,10 +52,12 @@ Python cocotb suite (independent contribution):
   expr     : 75.3%   (216/287)
   overall  : 65.0%   (1614/2478)
 
-Full team combined (cocotb + Icarus 26 tb + Verilator 1000 jobs):
-  line             : 94.35%  (2338/2478)
-  functional cov   : 100.00% (32/32 bins)
-  branch           : 24.59%  (controller paths dominate)
+Canonical repository flow (Icarus 32 tb + Verilator 1000 jobs):
+  RTL line coverage            : 96.45%  (1740/1804)
+  RTL logical branch coverage  : 92.17%  (753/817)
+  controller branch coverage   : 95.66%  (353/369)
+  functional coverage          : 100.00% (33/33 bins)
+  controller cross coverage    : 100.00% (169/169 bins)
 ```
 
 ### Coverage Progression
@@ -63,8 +65,13 @@ Full team combined (cocotb + Icarus 26 tb + Verilator 1000 jobs):
 ```
 Start (Python cocotb alone) : 69.2%
 After team L4 Icarus tests  : 89.83%
-After controller_cov_tb     : 94.35%  ← current
+After controller_cov_tb     : 94.35%  (historical line-coverage snapshot)
+Canonical top harness       : 96.45%  current line coverage
 ```
+
+The historical `24.59%` result mixed signal-toggle and logical branch records.
+See the repository root `Branch_Coverage_Methodology.md` for the corrected
+coverage definition.
 
 ### Python Verification Levels Completed
 

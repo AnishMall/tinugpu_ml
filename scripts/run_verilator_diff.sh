@@ -14,7 +14,8 @@ mapfile_compat() {
 
 RTL_FILES=()
 mapfile_compat
-verilator -Wall -Wno-fatal -Wno-UNUSEDPARAM --cc --exe --build --coverage \
+verilator -Wall -Wno-fatal -Wno-UNUSEDPARAM --cc --exe --build \
+  --coverage-line --coverage-expr --coverage-fsm --coverage-user \
   --top-module tinygpu_top \
   -Mdir build/obj_diff \
   "${RTL_FILES[@]}" verification/verilator_diff.cpp

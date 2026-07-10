@@ -1170,9 +1170,10 @@ Tang Primer 25K result. The reported build uses `GW5A-LV25MG121NC2/I1` at a
 | BSRAM utilization | `25%` |
 | DSP utilization | `100%` |
 
-Verification currently reports `94.35%` RTL-only line coverage, `24.59%`
-RTL-only branch coverage, and `100.00%` functional coverage over the defined
-functional bins.
+Verification currently reports `96.45%` canonical RTL line coverage, `92.17%`
+canonical RTL logical branch coverage, `95.66%` controller logical branch
+coverage, and `100.00%` functional coverage over 33 defined bins and 169 valid
+controller crosses.
 
 The most important design choices here are:
 
