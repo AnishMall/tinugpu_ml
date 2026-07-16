@@ -1,192 +1,423 @@
-# TinyGPU-ML Project Challenges
+# TinyGPU-ML: Engineering Challenges and Project Outcomes
 
-## Overview
+## 1. Project Evolution
 
-TinyGPU-ML evolved from a small SystemVerilog MAC-array exercise into a full
-hardware/software accelerator project with RTL simulation, NEORV32 integration,
-Conv2D support, verification closure, and FPGA implementation reports. The main
-challenge was not a single bug; it was keeping architecture, verification,
-software, and FPGA constraints aligned while the design scope changed.
+TinyGPU-ML began as a small SystemVerilog exercise built around a signed INT8
+processing element and a 4x4 MAC array. It developed into a complete accelerator
+project containing a tiled compute engine, DMA, memory arbitration, vector and
+post-processing units, hardware Conv2D support, an MMIO and descriptor command
+interface, NEORV32 software integration, coverage-driven verification, formal
+checks, and a routed FPGA implementation.
 
-## 1. SystemVerilog Tool Compatibility
+The hardest part was keeping four concerns aligned while the scope changed:
 
-Early unit tests exposed differences in how tools handled unpacked arrays and
-module ports. The 4x4 MAC array initially passed in one environment but produced
-unknown values in another Icarus Verilog setup. The fix was to make the array
-wrapper drive every output element explicitly and avoid relying on simulator
-behavior that was not robust across Icarus versions.
+- the architecture had to remain useful for machine-learning workloads;
+- the RTL had to be portable across simulators and synthesizable by Gowin tools;
+- verification had to distinguish feature coverage from structural code coverage;
+- the complete NEORV32 plus TinyGPU system had to fit and close timing on the
+  selected FPGA.
 
-This established an important rule for the project: the RTL should be written in
-a conservative, synthesis-friendly SystemVerilog style and checked on the same
-tool versions used by collaborators.
+The final canonical design is a `4x4x16` accelerator: 16 signed INT8 MAC
+processing elements produce a 4x4 output tile and accumulate into INT32 values,
+while the reduction dimension is processed in chunks of 16.
 
-## 2. Moving From Block Tests To Full Controller Tests
+## 2. Portable SystemVerilog RTL
 
-The individual PE, array, DMA, scratchpad, and epilogue blocks were easier to
-test than the full command controller. Once the datapath blocks worked, most of
-the remaining issues were in sequencing: when to load A and B tiles, when to
-clear accumulators, when to launch DMA, when to apply post-processing, and when
-to store results.
+### Challenge
 
-The solution was to add progressively stronger top-level tests:
+The first 4x4 array tests exposed simulator-dependent handling of unpacked array
+ports. A PE test could pass while `c_tile[0][0]` became unknown in the array test
+on another Icarus Verilog installation. The failure looked like an arithmetic or
+reset bug, but the real issue was the way array outputs were connected through
+the wrapper.
 
-- direct GEMM through MMIO registers;
-- descriptor-mode GEMM;
-- edge-tile masking;
-- INT8 and INT32 output modes;
-- bias, ReLU, clamp, and requantization;
-- vector operations;
-- randomized memory-latency stress;
-- Conv2D through hardware streaming im2col.
+### Resolution
 
-This moved verification from "the blocks work" to "the system works when the
-controller has to coordinate them."
+The wrapper was rewritten to drive each output element explicitly. The RTL also
+adopted a more conservative SystemVerilog style for generated arrays, signed
+arithmetic, reset values, widths, and module boundaries. Verilator lint was
+added alongside Icarus simulation so portability problems could be found before
+FPGA synthesis.
 
-## 3. DMA And Memory Handshake Correctness
+### Current outcome
 
-The first controller versions filled scratchpad data synthetically. That was
-useful for early bring-up, but it did not verify the actual memory interface.
-Replacing synthetic fills with DMA-fed loads exposed the usual accelerator
-integration problems: request hold behavior, delayed `mem_ready`, delayed
-`mem_rvalid`, byte-lane stores, and one-outstanding-read assumptions.
+The complete directed Icarus regression now passes `32/32` benches, and the
+Verilator lint flow completes successfully. Simulator portability remains a
+reason to avoid relying on ambiguous language behavior, but it is no longer a
+known functional blocker.
 
-The DMA and memory arbiter were separated from the controller so descriptor
-fetch, tensor loads, bias loads, im2col reads, vector operations, and stores
-could share one verified memory path.
+## 3. From Working Blocks to a Working Accelerator
 
-## 4. NEORV32 Integration Boundary
+### Challenge
 
-The accelerator is host-centric: NEORV32 configures the job through MMIO, starts
-the accelerator, and reads status/counters. TinyGPU performs the heavy compute
-and memory movement, but it remains a peripheral controlled by software.
+The PE, MAC array, scratchpad, DMA, and epilogue could each pass a unit test while
+the complete command still failed. Most system-level faults were sequencing
+errors rather than arithmetic errors: clearing an accumulator at the wrong
+time, launching a DMA request twice, advancing a tile counter before a response,
+or storing data before post-processing completed.
 
-The difficult part was the hardware/software boundary:
+The command controller also grew to support direct and descriptor operation,
+GEMM, GEMV, vector commands, Conv2D, edge masks, bias, ReLU, clamp,
+requantization, INT8 and INT32 stores, status reporting, and error exits. This
+made controller state transitions the central verification problem.
 
-- MMIO register addresses had to match software driver constants;
-- status, done, IRQ, and error bits had to be stable and clearable;
-- direct mode and descriptor mode had to remain compatible;
-- Conv2D needed extra configuration without breaking the existing descriptor ABI;
-- GHDL could simulate the VHDL firmware/MMIO environment, but not the real
-  SystemVerilog accelerator behavior.
+### Resolution
 
-The final approach uses GHDL for firmware/MMIO regression with a behavioral
-TinyGPU model, while Icarus and Verilator remain the source of truth for the
-real SystemVerilog RTL.
+Verification was built in layers:
 
-## 5. Conv2D Scope And Streaming Im2col
+- unit benches isolate the PE, array, DMA, registers, counters, memory arbiter,
+  im2col loader, and epilogue;
+- directed top-level benches exercise complete legal and error command flows;
+- randomized memory latency checks request and response sequencing;
+- a Verilator differential harness compares RTL results with software reference
+  calculations over 1000 deterministic jobs;
+- controller cross coverage exercises valid combinations of opcode, command
+  mode, destination format, post-processing options, and tile shape.
 
-The project requirement moved from GEMM/vector acceleration toward Conv2D
-support. A dedicated convolution datapath would have increased area
-substantially, so the RTL implements Conv2D by streaming im2col into the existing
-GEMM engine.
+### Current outcome
 
-The loader generates one activation tile at a time, injects zeros for padding,
-and never materializes a full lowered im2col matrix in memory. This preserved the
-main 4x4 MAC datapath while adding support for packed NHWC INT8 activations,
-KH-KW-Cin-Cout weights, 1x1 and 3x3 kernels, stride 1 or 2, and padding 0 or 1.
+All 1000 Verilator differential jobs pass. All 169 defined valid controller
+cross combinations have been exercised. Remaining controller coverage gaps are
+mainly injected memory faults, rare ready/valid interleavings, assertion-failure
+outcomes, and defensive recovery behavior rather than missing normal commands.
 
-The challenge was making Conv2D look like normal tiled GEMM internally without
-adding a second large compute engine.
+## 4. DMA and Shared-Memory Protocols
 
-## 6. FPGA Area Pressure
+### Challenge
 
-The original 4x4x16 design was too large for the smaller boards. The Tang Nano
-20K experiments showed that even reduced configurations could leave little room
-for routing and future features. The project temporarily moved to smaller
-configurations such as 1x1x4 and 2x2x8 to understand area and timing tradeoffs.
+Early controller versions used synthetic scratchpad data, which proved the local
+datapath but not the memory interface. Replacing those values with real DMA-fed
+loads exposed protocol requirements that are easy to miss in directed arithmetic
+tests:
 
-When the project goal shifted toward simulation, verification, and reportable
-closure rather than a physical 20K-board demo, the canonical RTL returned to
-4x4x16. The final Tang Primer 25K reports show the 4x4x16 hardware Conv2D design
-can place and route, but with meaningful resource pressure:
+- a request must remain stable until accepted;
+- read acceptance and read-data return are separate events;
+- only one read may be outstanding in the current architecture;
+- byte stores must select the correct lane and write strobe;
+- row and tile address progression must remain correct under stalls;
+- descriptor, DMA, bias, vector, and im2col clients must not corrupt one
+  another's transactions.
 
-- logic utilization is high;
-- CLS utilization is very high;
-- all DSPs are used;
-- the design closes timing for the configured 27 MHz target.
+### Resolution
 
-This is a strong design lesson: functional architecture and FPGA fit must be
-co-designed.
+Memory-client arbitration was separated from the main command FSM. Registered
+address pointers replaced large free-running address multipliers, and the DMA
+was tested with delayed `mem_ready`, delayed `mem_rvalid`, multi-row transfers,
+all INT8 byte lanes, and INT32 stores. Assertions check request stability and
+outstanding-read behavior.
+
+### Current outcome
+
+The memory protocol is verified for the bounded, one-outstanding-read model used
+by TinyGPU. It is intentionally not a cache-coherent, burst-capable, or
+multi-outstanding interconnect. Supporting those features would require a new
+protocol and performance-verification phase.
+
+## 5. Hardware Conv2D Without a Second Compute Engine
+
+### Challenge
+
+The project scope expanded from GEMM and vector operations to Conv2D. Adding a
+dedicated convolution datapath would have duplicated multipliers, accumulators,
+buffering, and post-processing, worsening an already tight FPGA area budget.
+Materializing a complete im2col matrix in memory would also add storage and
+external-memory traffic.
+
+### Resolution
+
+Conv2D is implemented in RTL through streaming im2col. The im2col loader derives
+the activation addresses for one `4x16` tile, injects zero values for padded
+coordinates, and sends the tile into the existing GEMM flow. Weights use the
+normal DMA path, and the MAC array, accumulator, epilogue, and output store are
+shared with GEMM.
+
+The implemented scope is:
+
+- packed NHWC signed INT8 input activations;
+- `KH-KW-Cin-Cout` weight layout;
+- batch size 1;
+- `1x1` and `3x3` kernels;
+- independent vertical and horizontal stride of 1 or 2;
+- independent vertical and horizontal padding of 0 or 1;
+- optional bias, ReLU, clamp, requantization, and INT8 or INT32 output.
+
+### Current outcome
+
+Conv2D is a real hardware-controlled path, not software im2col. Direct and
+18-word descriptor Conv2D commands are tested, including asymmetric stride and
+padding, partial output tiles, invalid configuration, and invalid descriptor ABI
+cases. Groups, dilation above one, larger kernels, and batch sizes above one are
+outside the implemented scope.
+
+## 6. Area Optimization and FPGA Selection
+
+### Challenge
+
+The original parallel architecture exceeded smaller Gowin device limits. During
+development, reduced `1x1x4` and `2x2x8` variants were used to separate RTL
+correctness from board-capacity problems. Restoring `4x4x16` with Conv2D made
+area optimization essential.
+
+The main costs were not only the 16 MACs. Scratchpad multiplexing, controller
+decode, parallel post-processing, address arithmetic, and SoC integration also
+consumed substantial LUT and routing resources.
+
+### Resolution
+
+The design moved to tile-sized banked buffers, a serialized shared epilogue, a
+single shared requantization multiplier, pointer-based DMA address generation,
+and a common memory arbiter. The Tang Primer 25K was selected for the final
+implementation evidence because smaller devices did not provide credible margin
+for the complete configuration.
+
+### Current outcome
+
+The complete NEORV32 plus TinyGPU implementation places, routes, and generates a
+bitstream on `GW5A-LV25MG121NC2/I1`. Resource use is:
+
+| Resource | Used | Utilization |
+|---|---:|---:|
+| Logic | `17,921 / 23,040` | `78%` |
+| Registers | `7,099 / 23,280` | `31%` |
+| CLS | `10,298 / 11,520` | `90%` |
+| BSRAM | `14 / 56` | `25%` |
+| DSP | `28 / 28` | `100%` |
+
+The design fits, but it has no DSP expansion margin and limited CLS margin.
+Adding more PEs or major arithmetic features would require further sharing, a
+larger device, or a different architecture.
 
 ## 7. Timing Closure
 
-Timing issues came mainly from long controller, DMA, memory, and post-processing
-paths. Fixes included:
+### Challenge
 
-- registering top-level memory command outputs;
-- replacing free-running address multiplications with pointer increments;
-- serializing epilogue work through a shared post-processing path;
-- separating memory arbitration from command sequencing;
-- adding pipeline boundaries around vector and requantization flows;
-- keeping one outstanding memory read to simplify timing and correctness.
+Early routed builds reported many failing paths. The longest paths crossed
+controller decode, DMA command generation, memory-master outputs, vector
+post-processing, and address calculations. Some reported problems were also
+confused by stale source copies and incomplete constraints.
 
-The final Tang Primer 25K report closes timing with zero setup and hold
-violations for the current project constraint.
+### Resolution
 
-## 8. Coverage Interpretation
+The important timing changes were:
 
-Coverage was one of the most subtle project challenges. An early Verilator
-number around 26% mixed signal-toggle records, expression records, FSM records,
-and duplicated RTL hierarchies from many separately compiled testbenches. That
-number was useful as a warning signal, but it was not a clean branch-coverage
-metric.
+- registered top-level memory-master commands;
+- registered DMA issue information;
+- pointer increments instead of combinational row and tile multiplication;
+- staged vector and requantization operations;
+- serialized epilogue processing;
+- a separate request/response arbiter;
+- explicit verification of the active project source list and clock constraint.
 
-The final reports distinguish:
+### Current outcome
 
-- canonical top RTL line coverage;
-- canonical top RTL logical branch coverage;
-- canonical controller logical branch coverage;
-- merged multi-binary RTL branch coverage;
-- functional coverage;
-- controller cross coverage.
+The final Tang Primer 25K route closes the 27 MHz target with zero setup and hold
+violations. Post-route Fmax is `47.462 MHz`, worst setup slack is `+15.968 ns`,
+worst hold slack is `+0.180 ns`, and both setup and hold total negative slack are
+zero. Timing is closed for the reported constraint; this does not imply that the
+same design is closed at 50 MHz.
 
-The canonical top-level logical branch metric is the main design-closure number,
-while the merged multi-binary number remains a secondary regression-breadth
-metric.
+## 8. SRAM Inference and Gowin Project Consistency
 
-## 9. Formal Verification Scope
+### Challenge
 
-Formal verification was added for focused properties rather than full SoC proof.
-This was the practical choice because proving the complete accelerator with
-memory, software-visible registers, DMA, Conv2D, and full controller progress is
-too broad for a small course project.
+One implementation attempt failed during PnR because an inferred single-port RAM
+used an unsupported `WRITE_MODE`. Multiple NEORV32 and TinyGPU source copies made
+it difficult to tell whether the active Gowin project contained the corrected
+memory template. This initially looked like a device-capacity problem, although
+the immediate cause was inference and project-source consistency.
 
-The formal folder targets block-level safety and progress properties for pieces
-such as the DMA pointer generator, memory arbiter, register protocol, counters,
-and im2col address generation. These checks complement simulation rather than
-replace it.
+### Resolution
 
-## 10. Documentation Drift
+The active Gowin project and source manifest were audited, and the NEORV32 memory
+process was changed to a pattern supported by the target primitive. Source-tree
+ownership and report locations were documented so synthesis results could be
+matched to the RTL that produced them.
 
-Because the architecture changed several times, the documentation occasionally
-lagged behind the RTL. Older files referred to 1x1x4 or 2x2x8 builds even after
-the canonical design returned to 4x4x16. Keeping the README, RTL spec,
-architecture spec, demo notes, and metrics summary consistent became a real
-maintenance task.
+### Current outcome
 
-The final documentation now uses the same story:
+The latest Tang Primer 25K flow completes synthesis, PnR, timing analysis, and
+bitstream generation. Future builds still need reproducible source manifests;
+copying RTL manually between board projects remains a maintenance risk.
 
-- canonical RTL is 4x4x16;
-- Conv2D is implemented in RTL using streaming im2col;
-- Tang Primer 25K is the latest routed FPGA result;
-- coverage metrics use corrected branch-coverage terminology;
-- software im2col remains a reference/demo concept, not the primary Conv2D
-  hardware path.
+## 9. NEORV32 Hardware/Software Boundary
 
-## 11. Final Project State
+### Challenge
 
-The project now has a coherent end-to-end story:
+The accelerator is host-centric: NEORV32 configures commands through MMIO,
+starts execution, and reads status and counters. The register map, descriptor
+layout, interrupt behavior, memory addresses, and data formats therefore have to
+agree across C, VHDL wrappers, SystemVerilog RTL, and testbenches.
 
-- 4x4x16 INT8 MAC accelerator with INT32 accumulation;
-- GEMM, GEMV, vector operations, post-processing, and hardware Conv2D;
-- direct MMIO and descriptor command paths;
-- Icarus directed RTL regression;
-- Verilator differential regression and coverage;
-- GHDL firmware/MMIO regression with behavioral TinyGPU model;
-- focused formal checks;
-- Tang Primer 25K synthesis, PnR, timing, power, and utilization reports;
-- presentation-ready demo, metrics, and methodology documents.
+GHDL introduced another boundary issue because it handles the VHDL NEORV32
+system but does not directly execute the real SystemVerilog accelerator in the
+maintained flow. Earlier UART corruption and instruction traps also made it
+necessary to distinguish a CPU/firmware simulation fault from an accelerator
+arithmetic fault.
 
-The remaining limitations are clear and defensible: batch size is fixed to 1,
-Conv2D supports only 1x1 and 3x3 kernels, memory behavior is intentionally
-simple, and the design is area-constrained on small Gowin devices.
+### Resolution
+
+The verification roles were separated:
+
+- Icarus and Verilator execute the real SystemVerilog accelerator;
+- GHDL executes NEORV32 firmware and MMIO behavior using a VHDL TinyGPU model;
+- the software driver, direct commands, descriptor commands, IRQ handling, and
+  completion signatures are checked through the software regression;
+- Python and C reference calculations provide independent expected results.
+
+### Current outcome
+
+The software/MMIO regression reports `pass=31 fail=0`. This demonstrates that
+the firmware-visible contract is internally consistent. It is not a mixed-VHDL/
+SystemVerilog full-SoC proof, so real RTL arithmetic remains supported by the
+Icarus and Verilator results rather than the behavioral GHDL model.
+
+## 10. Verification Coverage and Metric Interpretation
+
+### Challenge
+
+Coverage reporting initially produced a value around 26%. That figure combined
+different Verilator record types and duplicated RTL instances from separately
+compiled test binaries. It was useful for finding untouched code, but it was not
+a clean measure of logical branch closure. At the same time, reporting 100%
+functional coverage alone could be misleading because functional bins only
+measure the scenarios explicitly defined by the verification plan.
+
+### Resolution
+
+The coverage flow now reports distinct metrics with distinct meanings:
+
+| Metric | Current result | Meaning |
+|---|---:|---|
+| Canonical top RTL line coverage | `96.45% (1740/1804)` | Executed RTL source lines in one top-level hierarchy |
+| Canonical top logical branch coverage | `92.17% (753/817)` | Taken logical decisions without duplicated test-binary hierarchies |
+| Canonical controller logical branch coverage | `95.66% (353/369)` | Decision coverage inside the command controller |
+| Merged multi-binary RTL branch coverage | `74.68% (15139/20271)` | Breadth across independently compiled directed regressions |
+| Coarse functional coverage | `100% (33/33)` | Defined feature bins exercised |
+| Valid controller cross coverage | `100% (169/169)` | Defined legal controller combinations exercised |
+
+The increase from the old roughly 26% report to 92.17% should not be described
+as stimulus improvement alone because the denominator and classification method
+also changed. The current canonical logical-branch metric is the primary closure
+number. The merged score is retained as a secondary measure because separately
+compiled benches duplicate source decisions and include more expression-level
+branches.
+
+### Current outcome
+
+Verification is substantially stronger than the earlier report suggested. It is
+still not correct to call the design fully verified. The remaining canonical
+branch gaps are concentrated in fault injection, rare protocol interleavings,
+assertion-failure outcomes, and defensive state recovery. Architecturally
+impossible branches are narrowly documented or supported by formal reasoning;
+reachable legal and software-visible error paths remain part of the coverage
+target.
+
+## 11. Formal Verification Boundaries
+
+### Challenge
+
+Simulation can show that selected executions work, but it cannot exhaustively
+prove every arbitration, pointer, and protocol sequence. Conversely, proving the
+complete accelerator plus processor, memory, and software is not realistic for
+the available course-project time and compute budget.
+
+### Resolution
+
+Formal work was focused on bounded block-level safety and progress properties:
+
+- legal FSM states and bounded controller progress;
+- request stability and response routing in the memory arbiter;
+- DMA pointer and transfer bounds;
+- im2col address and padding invariants;
+- counter monotonicity and register-protocol behavior.
+
+Assertions are excluded from synthesis and complement, rather than replace, the
+directed and differential simulation flows.
+
+### Current outcome
+
+The formal suite provides useful proof points for critical control logic. Full
+SoC liveness, arbitrary external-memory behavior, and exhaustive end-to-end
+numerical proof remain outside the claimed closure scope.
+
+## 12. Performance and Architectural Efficiency
+
+### Challenge
+
+Correctness alone does not establish accelerator value. Small jobs can be
+dominated by MMIO setup, descriptor fetch, DMA latency, padding checks, and
+serialized post-processing. The deterministic RTL demo confirms that memory and
+control overhead are significant: measured stall rates range from 52% for its
+small direct GEMM to 78% for its Conv2D example.
+
+### Resolution
+
+The project now records controller cycle, active, and stall counters and reports
+both RTL microarchitectural measurements and NEORV32 software-reference cycle
+counts. This exposes overhead instead of presenting peak MAC throughput as
+realized application throughput.
+
+### Current outcome
+
+The design demonstrates acceleration concepts and correct tiled execution, but
+it is not yet bandwidth optimized. Burst transfers, double buffering, concurrent
+load/compute/store, and larger workloads would be the highest-value performance
+extensions.
+
+## 13. Documentation and Reproducibility
+
+### Challenge
+
+The architecture changed through `1x1x4`, `2x2x8`, and `4x4x16` configurations,
+while Conv2D moved from a software-im2col concept to a hardware streaming path.
+Documentation, duplicated RTL trees, software banners, board projects, and
+metrics could therefore describe different versions of the design.
+
+### Resolution
+
+The repository now identifies `rtl/` as the canonical accelerator source and
+uses a consistent final narrative across the README, implementation
+specification, architecture document, demo preparation, coverage methodology,
+and metrics summary. Final logs, LCOV data, annotated coverage files, and the
+demo waveform are preserved under `results/`, while the Tang Primer 25K
+implementation reports are retained with the Gowin project.
+
+### Current outcome
+
+The repository contains reproducible commands and report evidence for the final
+project state. The most important future maintenance improvement would be to
+generate every board manifest from the canonical RTL list and automatically
+check mirrored integration files for equality.
+
+## 14. Final Status and Remaining Risks
+
+The final project demonstrates:
+
+- a `4x4x16` signed INT8/INT32 tiled accelerator;
+- GEMM, GEMV, vector operations, bias, activation, clamp, and requantization;
+- hardware Conv2D through streaming im2col;
+- direct MMIO and descriptor command interfaces;
+- `32/32` passing directed Icarus benches;
+- `1000/1000` passing Verilator differential jobs;
+- `92.17%` canonical top logical branch coverage and `95.66%` controller
+  logical branch coverage;
+- complete defined functional and valid controller cross bins;
+- `pass=31 fail=0` in the NEORV32 software/MMIO regression;
+- focused formal safety and progress checks;
+- successful Tang Primer 25K PnR and bitstream generation with timing closure.
+
+The main limitations are equally important:
+
+- Conv2D is limited to batch 1, groups 1, dilation 1, and `1x1` or `3x3`
+  kernels;
+- the memory interface allows one outstanding read and no burst operation;
+- DSP utilization is 100% and CLS utilization is 90% on the final device;
+- the 27 MHz implementation is closed, but 50 MHz has not been demonstrated on
+  this routed SoC build;
+- GHDL validates the software/MMIO contract with a behavioral model, not the
+  real SystemVerilog accelerator;
+- remaining branch gaps and full-SoC liveness are not claimed as closed.
+
+These limits do not invalidate the result. They define an honest boundary around
+what has been implemented, measured, and verified, and they identify clear next
+steps for a larger accelerator or a production-quality integration.
