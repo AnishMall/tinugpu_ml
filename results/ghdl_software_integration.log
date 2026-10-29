@@ -1,0 +1,68 @@
+../rtl/core/neorv32_cpu.vhd:149:5:@0ms:(assertion note): [NEORV32] CPU ISA: rv32iabcmux_zaamo_zalrsc_zba_zbb_zbkb_zbkc_zbkx_zbs_zca_zcb_zfinx_zibi_zicntr_zicond_zicsr_zifencei_zihpm_zimop_zkn_zknd_zkne_zknh_zks_zksed_zksh_zkt_zmmul_sdext_sdtrig_smcntrpmf_smpmp_xcfu
+../rtl/core/neorv32_cpu.vhd:192:5:@0ms:(assertion note): [NEORV32] CPU tuning options: trace fast_mul fast_shift rf_arch=sram_sync 
+../rtl/core/neorv32_imem_rom.vhd:42:3:@0ms:(assertion note): [NEORV32] Using default IMEM ROM component (16384 bytes).
+../rtl/core/neorv32_dmem_ram.vhd:40:3:@0ms:(assertion note): [NEORV32] Using default DMEM RAM component (8192 bytes).
+../rtl/core/neorv32_trng.vhd:291:3:@0ms:(assertion note): [neoTRNG] The neoTRNG (v3.3) - A Tiny and Platform-Independent True Random Number Generator, https://github.com/stnolting/neoTRNG
+../rtl/core/neorv32_trng.vhd:301:3:@0ms:(assertion warning): [neoTRNG] Simulation-mode enabled (NO TRUE/PHYSICAL RANDOM)!
+../rtl/core/neorv32_debug_auth.vhd:67:3:@0ms:(assertion warning): [NEORV32] Using DEFAULT on-chip debugger authenticator. Replace by custom module.
+../rtl/core/neorv32_top.vhd:351:5:@0ms:(assertion note): [NEORV32] The NEORV32 RISC-V Processor (v01.12.08.07), github.com/stnolting/neorv32
+../rtl/core/neorv32_top.vhd:360:5:@0ms:(assertion note): [NEORV32] Processor Configuration: CPU (single-core) IMEM-ROM DMEM XBUS CLINT GPIO UART0 UART1 SPI SDI TWI TWD PWM WDT TRNG CFS NEOLED GPTMR ONEWIRE DMA SLINK SYSINFO TRACER OCD OCD-AUTH OCD-HWBP 
+../rtl/core/neorv32_top.vhd:396:5:@0ms:(assertion warning): [NEORV32] Assuming this is a simulation.
+../rtl/core/neorv32_top.vhd:408:5:@0ms:(assertion note): [NEORV32] BOOT_MODE_SELECT 2 - booting IMEM image
+../sim/neorv32_tb.vhd:493:9:@157277773374fs:(report note): [TB:TGPU] check=0 pass='1'
+../sim/neorv32_tb.vhd:493:9:@162425921378fs:(report note): [TB:TGPU] check=1 pass='1'
+../sim/neorv32_tb.vhd:493:9:@168611106390fs:(report note): [TB:TGPU] check=2 pass='1'
+../sim/neorv32_tb.vhd:493:9:@172944439602fs:(report note): [TB:TGPU] check=3 pass='1'
+../sim/neorv32_tb.vhd:497:9:@194203698266fs:(report note): [TB:TGPU] value=0 data=11
+../sim/neorv32_tb.vhd:497:9:@195981475994fs:(report note): [TB:TGPU] value=1 data=22
+../sim/neorv32_tb.vhd:497:9:@197759253722fs:(report note): [TB:TGPU] value=2 data=33
+../sim/neorv32_tb.vhd:497:9:@199537031450fs:(report note): [TB:TGPU] value=3 data=44
+../sim/neorv32_tb.vhd:493:9:@202833327654fs:(report note): [TB:TGPU] check=4 pass='1'
+../sim/neorv32_tb.vhd:493:9:@207388883082fs:(report note): [TB:TGPU] check=5 pass='1'
+../sim/neorv32_tb.vhd:493:9:@211944438510fs:(report note): [TB:TGPU] check=6 pass='1'
+../sim/neorv32_tb.vhd:493:9:@216499993938fs:(report note): [TB:TGPU] check=7 pass='1'
+../sim/neorv32_tb.vhd:497:9:@272055547938fs:(report note): [TB:TGPU] value=4 data=16
+../sim/neorv32_tb.vhd:497:9:@273833325666fs:(report note): [TB:TGPU] value=5 data=20
+../sim/neorv32_tb.vhd:497:9:@275611103394fs:(report note): [TB:TGPU] value=6 data=4
+../sim/neorv32_tb.vhd:497:9:@277388881122fs:(report note): [TB:TGPU] value=7 data=4
+../sim/neorv32_tb.vhd:493:9:@280685177326fs:(report note): [TB:TGPU] check=8 pass='1'
+../sim/neorv32_tb.vhd:493:9:@285240732754fs:(report note): [TB:TGPU] check=9 pass='1'
+../sim/neorv32_tb.vhd:493:9:@289796288182fs:(report note): [TB:TGPU] check=10 pass='1'
+../sim/neorv32_tb.vhd:493:9:@294351843610fs:(report note): [TB:TGPU] check=11 pass='1'
+../sim/neorv32_tb.vhd:497:9:@318685176262fs:(report note): [TB:TGPU] value=8 data=0
+../sim/neorv32_tb.vhd:497:9:@320462953990fs:(report note): [TB:TGPU] value=9 data=3
+../sim/neorv32_tb.vhd:497:9:@322240731718fs:(report note): [TB:TGPU] value=10 data=0
+../sim/neorv32_tb.vhd:497:9:@324018509446fs:(report note): [TB:TGPU] value=11 data=7
+../sim/neorv32_tb.vhd:493:9:@327240731578fs:(report note): [TB:TGPU] check=12 pass='1'
+../sim/neorv32_tb.vhd:493:9:@331796287006fs:(report note): [TB:TGPU] check=13 pass='1'
+../sim/neorv32_tb.vhd:493:9:@336277768362fs:(report note): [TB:TGPU] check=14 pass='1'
+../sim/neorv32_tb.vhd:493:9:@340833323790fs:(report note): [TB:TGPU] check=15 pass='1'
+../sim/neorv32_tb.vhd:493:9:@641055537606fs:(report note): [TB:TGPU] check=16 pass='1'
+../sim/neorv32_tb.vhd:493:9:@645611093034fs:(report note): [TB:TGPU] check=17 pass='1'
+../sim/neorv32_tb.vhd:493:9:@650166648462fs:(report note): [TB:TGPU] check=18 pass='1'
+../sim/neorv32_tb.vhd:493:9:@654722203890fs:(report note): [TB:TGPU] check=19 pass='1'
+../sim/neorv32_tb.vhd:493:9:@659277759318fs:(report note): [TB:TGPU] check=20 pass='1'
+../sim/neorv32_tb.vhd:493:9:@663833314746fs:(report note): [TB:TGPU] check=21 pass='1'
+../sim/neorv32_tb.vhd:493:9:@668388870174fs:(report note): [TB:TGPU] check=22 pass='1'
+../sim/neorv32_tb.vhd:493:9:@672944425602fs:(report note): [TB:TGPU] check=23 pass='1'
+../sim/neorv32_tb.vhd:493:9:@677499981030fs:(report note): [TB:TGPU] check=24 pass='1'
+../sim/neorv32_tb.vhd:493:9:@687574054822fs:(report note): [TB:TGPU] check=25 pass='1'
+../sim/neorv32_tb.vhd:493:9:@692499980610fs:(report note): [TB:TGPU] check=26 pass='1'
+../sim/neorv32_tb.vhd:493:9:@697055536038fs:(report note): [TB:TGPU] check=27 pass='1'
+../sim/neorv32_tb.vhd:493:9:@1097833302594fs:(report note): [TB:TGPU] check=28 pass='1'
+../sim/neorv32_tb.vhd:493:9:@1104499969074fs:(report note): [TB:TGPU] check=29 pass='1'
+../sim/neorv32_tb.vhd:493:9:@1113944413254fs:(report note): [TB:TGPU] check=30 pass='1'
+../sim/neorv32_tb.vhd:501:9:@1117129598350fs:(report note): [TB:TGPU] metric=0 data=239
+../sim/neorv32_tb.vhd:501:9:@1119129598294fs:(report note): [TB:TGPU] metric=1 data=132
+../sim/neorv32_tb.vhd:501:9:@1121055524166fs:(report note): [TB:TGPU] metric=2 data=2839
+../sim/neorv32_tb.vhd:501:9:@1123055524110fs:(report note): [TB:TGPU] metric=3 data=1079
+../sim/neorv32_tb.vhd:501:9:@1124981449982fs:(report note): [TB:TGPU] metric=4 data=7308
+../sim/neorv32_tb.vhd:501:9:@1126907375854fs:(report note): [TB:TGPU] metric=5 data=2226
+../sim/neorv32_tb.vhd:501:9:@1128907375798fs:(report note): [TB:TGPU] metric=6 data=132
+../sim/neorv32_tb.vhd:501:9:@1130907375742fs:(report note): [TB:TGPU] metric=7 data=0
+../sim/neorv32_tb.vhd:501:9:@1132907375686fs:(report note): [TB:TGPU] metric=8 data=1079
+../sim/neorv32_tb.vhd:501:9:@1134907375630fs:(report note): [TB:TGPU] metric=9 data=0
+../sim/neorv32_tb.vhd:501:9:@1136833301502fs:(report note): [TB:TGPU] metric=10 data=2226
+../sim/neorv32_tb.vhd:501:9:@1138759227374fs:(report note): [TB:TGPU] metric=11 data=0
+../sim/neorv32_tb.vhd:507:9:@1140537005102fs:(report note): [TB:TGPU] Software integration result: pass=31 fail=0
+simulation stopped @1140537005102fs
